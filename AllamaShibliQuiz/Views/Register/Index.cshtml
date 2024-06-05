@@ -1,0 +1,52 @@
+﻿<!-- Register Section -->
+<section id="result" class="section inside h-75">
+    <div class="container">
+        <form action="forms/contact.php" method="post" class="php-email-form">
+            <div class="card card-main mt-2">
+                <div class="card-header">
+                    <h4>Register Here to enroll in ASNBB-2024</h4>
+                </div>
+                <div class="card-body">
+                    <div class="row gy-4">
+                        <div class="col-md-6">
+                            <label for="name" class="pb-2">Full Name<i class="text-danger">*</i></label>
+                            <input type="text" name="name" id="name" class="form-control" placeholder="Enter Full Name" required>
+                        </div>
+                        <div class="col-md-6">
+                            <label for="father" class="pb-2">Father’s Name<i class="text-danger">*</i></label>
+                            <input type="text" class="form-control" name="father" id="father" placeholder="Enter Father’s Name" required>
+                        </div>
+                        <div class="col-md-6">
+                            <label for="class" class="pb-2">Class<i class="text-danger">*</i></label>
+                            <select class="form-select" id="class" required>
+                                <option selected>Select Class</option>
+                                <option value="6">Class 6</option>
+                                <option value="7">Class 7</option>
+                                <option value="8">Class 8</option>
+                                <option value="9">Class 9</option>
+                                <option value="10">Class 10</option>
+                            </select>
+                        </div>
+                        <div class="col-md-6">
+                            <label for="school" class="pb-2">School Name<i class="text-danger">*</i></label>
+                            <input type="text" class="form-control" name="school" id="school" placeholder="Enter School Name" required>
+                        </div>
+                        <div class="col-md-6">
+                            <label for="email" class="pb-2">Email<i class="text-danger">*</i></label>
+                            <input type="email" class="form-control" name="email" id="email" placeholder="Enter your/Guardin Email" required>
+                        </div>
+                        <div class="col-md-6">
+                            <label for="mobile" class="pb-2">Mobile Number<i class="text-danger">*</i></label>
+                            <input type="text" class="form-control" name="mobile" id="mobile" placeholder="Enter your/Guardin Mobile Number" required>
+                        </div>
+
+                        <div class="col-md-12">
+                            <button type="submit" class="btn btn-primary">Register</button>
+                            <a asp-controller="Home" asp-action="index" class="btn btn-secondary">Cancel</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </form>
+    </div>
+</section>

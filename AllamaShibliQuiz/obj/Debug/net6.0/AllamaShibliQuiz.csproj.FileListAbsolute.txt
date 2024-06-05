@@ -1,0 +1,60 @@
+C:\Users\Administrator\source\repos\AllamaShibliQuiz\AllamaShibliQuiz\bin\Debug\net6.0\appsettings.Development.json
+C:\Users\Administrator\source\repos\AllamaShibliQuiz\AllamaShibliQuiz\bin\Debug\net6.0\appsettings.json
+C:\Users\Administrator\source\repos\AllamaShibliQuiz\AllamaShibliQuiz\bin\Debug\net6.0\AllamaShibliQuiz.staticwebassets.runtime.json
+C:\Users\Administrator\source\repos\AllamaShibliQuiz\AllamaShibliQuiz\bin\Debug\net6.0\AllamaShibliQuiz.exe
+C:\Users\Administrator\source\repos\AllamaShibliQuiz\AllamaShibliQuiz\bin\Debug\net6.0\AllamaShibliQuiz.deps.json
+C:\Users\Administrator\source\repos\AllamaShibliQuiz\AllamaShibliQuiz\bin\Debug\net6.0\AllamaShibliQuiz.runtimeconfig.json
+C:\Users\Administrator\source\repos\AllamaShibliQuiz\AllamaShibliQuiz\bin\Debug\net6.0\AllamaShibliQuiz.dll
+C:\Users\Administrator\source\repos\AllamaShibliQuiz\AllamaShibliQuiz\bin\Debug\net6.0\AllamaShibliQuiz.pdb
+C:\Users\Administrator\source\repos\AllamaShibliQuiz\AllamaShibliQuiz\obj\Debug\net6.0\AllamaShibliQuiz.GeneratedMSBuildEditorConfig.editorconfig
+C:\Users\Administrator\source\repos\AllamaShibliQuiz\AllamaShibliQuiz\obj\Debug\net6.0\AllamaShibliQuiz.AssemblyInfoInputs.cache
+C:\Users\Administrator\source\repos\AllamaShibliQuiz\AllamaShibliQuiz\obj\Debug\net6.0\AllamaShibliQuiz.AssemblyInfo.cs
+C:\Users\Administrator\source\repos\AllamaShibliQuiz\AllamaShibliQuiz\obj\Debug\net6.0\AllamaShibliQuiz.csproj.CoreCompileInputs.cache
+C:\Users\Administrator\source\repos\AllamaShibliQuiz\AllamaShibliQuiz\obj\Debug\net6.0\AllamaShibliQuiz.MvcApplicationPartsAssemblyInfo.cache
+C:\Users\Administrator\source\repos\AllamaShibliQuiz\AllamaShibliQuiz\obj\Debug\net6.0\AllamaShibliQuiz.RazorAssemblyInfo.cache
+C:\Users\Administrator\source\repos\AllamaShibliQuiz\AllamaShibliQuiz\obj\Debug\net6.0\AllamaShibliQuiz.RazorAssemblyInfo.cs
+C:\Users\Administrator\source\repos\AllamaShibliQuiz\AllamaShibliQuiz\obj\Debug\net6.0\staticwebassets\msbuild.AllamaShibliQuiz.Microsoft.AspNetCore.StaticWebAssets.props
+C:\Users\Administrator\source\repos\AllamaShibliQuiz\AllamaShibliQuiz\obj\Debug\net6.0\staticwebassets\msbuild.build.AllamaShibliQuiz.props
+C:\Users\Administrator\source\repos\AllamaShibliQuiz\AllamaShibliQuiz\obj\Debug\net6.0\staticwebassets\msbuild.buildMultiTargeting.AllamaShibliQuiz.props
+C:\Users\Administrator\source\repos\AllamaShibliQuiz\AllamaShibliQuiz\obj\Debug\net6.0\staticwebassets\msbuild.buildTransitive.AllamaShibliQuiz.props
+C:\Users\Administrator\source\repos\AllamaShibliQuiz\AllamaShibliQuiz\obj\Debug\net6.0\staticwebassets.pack.json
+C:\Users\Administrator\source\repos\AllamaShibliQuiz\AllamaShibliQuiz\obj\Debug\net6.0\staticwebassets.build.json
+C:\Users\Administrator\source\repos\AllamaShibliQuiz\AllamaShibliQuiz\obj\Debug\net6.0\staticwebassets.development.json
+C:\Users\Administrator\source\repos\AllamaShibliQuiz\AllamaShibliQuiz\obj\Debug\net6.0\scopedcss\Views\Shared\_Layout.cshtml.rz.scp.css
+C:\Users\Administrator\source\repos\AllamaShibliQuiz\AllamaShibliQuiz\obj\Debug\net6.0\scopedcss\bundle\AllamaShibliQuiz.styles.css
+C:\Users\Administrator\source\repos\AllamaShibliQuiz\AllamaShibliQuiz\obj\Debug\net6.0\scopedcss\projectbundle\AllamaShibliQuiz.bundle.scp.css
+C:\Users\Administrator\source\repos\AllamaShibliQuiz\AllamaShibliQuiz\obj\Debug\net6.0\AllamaShibliQuiz.dll
+C:\Users\Administrator\source\repos\AllamaShibliQuiz\AllamaShibliQuiz\obj\Debug\net6.0\refint\AllamaShibliQuiz.dll
+C:\Users\Administrator\source\repos\AllamaShibliQuiz\AllamaShibliQuiz\obj\Debug\net6.0\AllamaShibliQuiz.pdb
+C:\Users\Administrator\source\repos\AllamaShibliQuiz\AllamaShibliQuiz\obj\Debug\net6.0\AllamaShibliQuiz.genruntimeconfig.cache
+C:\Users\Administrator\source\repos\AllamaShibliQuiz\AllamaShibliQuiz\obj\Debug\net6.0\ref\AllamaShibliQuiz.dll
+D:\My Work\AllamaShibliQuiz\AllamaShibliQuiz\bin\Debug\net6.0\appsettings.Development.json
+D:\My Work\AllamaShibliQuiz\AllamaShibliQuiz\bin\Debug\net6.0\appsettings.json
+D:\My Work\AllamaShibliQuiz\AllamaShibliQuiz\bin\Debug\net6.0\AllamaShibliQuiz.staticwebassets.runtime.json
+D:\My Work\AllamaShibliQuiz\AllamaShibliQuiz\bin\Debug\net6.0\AllamaShibliQuiz.exe
+D:\My Work\AllamaShibliQuiz\AllamaShibliQuiz\bin\Debug\net6.0\AllamaShibliQuiz.deps.json
+D:\My Work\AllamaShibliQuiz\AllamaShibliQuiz\bin\Debug\net6.0\AllamaShibliQuiz.runtimeconfig.json
+D:\My Work\AllamaShibliQuiz\AllamaShibliQuiz\bin\Debug\net6.0\AllamaShibliQuiz.dll
+D:\My Work\AllamaShibliQuiz\AllamaShibliQuiz\bin\Debug\net6.0\AllamaShibliQuiz.pdb
+D:\My Work\AllamaShibliQuiz\AllamaShibliQuiz\obj\Debug\net6.0\AllamaShibliQuiz.GeneratedMSBuildEditorConfig.editorconfig
+D:\My Work\AllamaShibliQuiz\AllamaShibliQuiz\obj\Debug\net6.0\AllamaShibliQuiz.AssemblyInfoInputs.cache
+D:\My Work\AllamaShibliQuiz\AllamaShibliQuiz\obj\Debug\net6.0\AllamaShibliQuiz.AssemblyInfo.cs
+D:\My Work\AllamaShibliQuiz\AllamaShibliQuiz\obj\Debug\net6.0\AllamaShibliQuiz.csproj.CoreCompileInputs.cache
+D:\My Work\AllamaShibliQuiz\AllamaShibliQuiz\obj\Debug\net6.0\AllamaShibliQuiz.MvcApplicationPartsAssemblyInfo.cache
+D:\My Work\AllamaShibliQuiz\AllamaShibliQuiz\obj\Debug\net6.0\AllamaShibliQuiz.RazorAssemblyInfo.cache
+D:\My Work\AllamaShibliQuiz\AllamaShibliQuiz\obj\Debug\net6.0\AllamaShibliQuiz.RazorAssemblyInfo.cs
+D:\My Work\AllamaShibliQuiz\AllamaShibliQuiz\obj\Debug\net6.0\staticwebassets\msbuild.AllamaShibliQuiz.Microsoft.AspNetCore.StaticWebAssets.props
+D:\My Work\AllamaShibliQuiz\AllamaShibliQuiz\obj\Debug\net6.0\staticwebassets\msbuild.build.AllamaShibliQuiz.props
+D:\My Work\AllamaShibliQuiz\AllamaShibliQuiz\obj\Debug\net6.0\staticwebassets\msbuild.buildMultiTargeting.AllamaShibliQuiz.props
+D:\My Work\AllamaShibliQuiz\AllamaShibliQuiz\obj\Debug\net6.0\staticwebassets\msbuild.buildTransitive.AllamaShibliQuiz.props
+D:\My Work\AllamaShibliQuiz\AllamaShibliQuiz\obj\Debug\net6.0\staticwebassets.pack.json
+D:\My Work\AllamaShibliQuiz\AllamaShibliQuiz\obj\Debug\net6.0\staticwebassets.build.json
+D:\My Work\AllamaShibliQuiz\AllamaShibliQuiz\obj\Debug\net6.0\staticwebassets.development.json
+D:\My Work\AllamaShibliQuiz\AllamaShibliQuiz\obj\Debug\net6.0\scopedcss\Views\Shared\_Layout.cshtml.rz.scp.css
+D:\My Work\AllamaShibliQuiz\AllamaShibliQuiz\obj\Debug\net6.0\scopedcss\bundle\AllamaShibliQuiz.styles.css
+D:\My Work\AllamaShibliQuiz\AllamaShibliQuiz\obj\Debug\net6.0\scopedcss\projectbundle\AllamaShibliQuiz.bundle.scp.css
+D:\My Work\AllamaShibliQuiz\AllamaShibliQuiz\obj\Debug\net6.0\AllamaShibliQuiz.dll
+D:\My Work\AllamaShibliQuiz\AllamaShibliQuiz\obj\Debug\net6.0\refint\AllamaShibliQuiz.dll
+D:\My Work\AllamaShibliQuiz\AllamaShibliQuiz\obj\Debug\net6.0\AllamaShibliQuiz.pdb
+D:\My Work\AllamaShibliQuiz\AllamaShibliQuiz\obj\Debug\net6.0\AllamaShibliQuiz.genruntimeconfig.cache
+D:\My Work\AllamaShibliQuiz\AllamaShibliQuiz\obj\Debug\net6.0\ref\AllamaShibliQuiz.dll

@@ -1,0 +1,31 @@
+.figure {
+    width: 100%;
+    height: 100%;
+}
+
+.card-header {
+    background: aliceblue;
+}
+
+.card-heading {
+    color: #37517e;
+    text-align: center;
+}
+
+.inside {
+    position: relative;
+    top: 40px;
+    min-height: 90vh;
+}
+
+.card-main {
+    box-shadow: rgba(0, 0, 0, 0.1) 0px 4px 12px;
+}
+
+.text-justify {
+    text-align: justify;
+}
+
+.text-green {
+    color: #00ff8e;
+}
