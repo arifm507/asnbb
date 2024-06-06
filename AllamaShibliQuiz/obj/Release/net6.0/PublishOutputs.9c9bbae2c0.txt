@@ -1,7 +1,0 @@
-D:\My Work\AllamaShibliQuiz\AllamaShibliQuiz\obj\Release\net6.0\PubTmp\Out\AllamaShibliQuiz.exe
-D:\My Work\AllamaShibliQuiz\AllamaShibliQuiz\obj\Release\net6.0\PubTmp\Out\appsettings.Development.json
-D:\My Work\AllamaShibliQuiz\AllamaShibliQuiz\obj\Release\net6.0\PubTmp\Out\appsettings.json
-D:\My Work\AllamaShibliQuiz\AllamaShibliQuiz\obj\Release\net6.0\PubTmp\Out\AllamaShibliQuiz.dll
-D:\My Work\AllamaShibliQuiz\AllamaShibliQuiz\obj\Release\net6.0\PubTmp\Out\AllamaShibliQuiz.deps.json
-D:\My Work\AllamaShibliQuiz\AllamaShibliQuiz\obj\Release\net6.0\PubTmp\Out\AllamaShibliQuiz.runtimeconfig.json
-D:\My Work\AllamaShibliQuiz\AllamaShibliQuiz\obj\Release\net6.0\PubTmp\Out\AllamaShibliQuiz.pdb
