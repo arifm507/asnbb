@@ -16,6 +16,10 @@ build_property.GenerateRazorMetadataSourceChecksumAttributes =
 build_property.MSBuildProjectDirectory = D:\My Work\AllamaShibliQuiz\asnbb\AllamaShibliQuiz
 build_property._RazorSourceGeneratorDebug = 
 
+[D:/My Work/AllamaShibliQuiz/asnbb/AllamaShibliQuiz/Views/Gallery/Index.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcR2FsbGVyeVxJbmRleC5jc2h0bWw=
+build_metadata.AdditionalFiles.CssScope = 
+
 [D:/My Work/AllamaShibliQuiz/asnbb/AllamaShibliQuiz/Views/Home/Index.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcSG9tZVxJbmRleC5jc2h0bWw=
 build_metadata.AdditionalFiles.CssScope = 
