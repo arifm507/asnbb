@@ -29,6 +29,7 @@
 </head>
 @{
     var controllerName = (string)ViewContext.RouteData.Values["controller"];
+    var methodName = (string)ViewContext.RouteData.Values["Method"];
     var dynamicClass = controllerName == "Home" ? "" : "blue";
 }
 
@@ -50,8 +51,14 @@
                 </ul>
                 <i class="mobile-nav-toggle d-xl-none bi bi-list"></i>
             </nav>
-
-            <a class="btn-getstarted" asp-controller="Result" asp-action="Index">Download Result</a>
+            @if (controllerName.Contains("Admin") && User.Identity.IsAuthenticated)
+            {
+                <a class="btn-getstarted" asp-controller="Admin" asp-action="Logout">Logout</a>
+            }
+            else if (!controllerName.Contains("Admin"))
+            {
+                <a class="btn-getstarted" asp-controller="Result" asp-action="Index">Download Result</a>                    
+            }
 
         </div>
     </header>
