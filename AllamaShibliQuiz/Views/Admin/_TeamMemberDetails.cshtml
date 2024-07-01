@@ -1,0 +1,73 @@
+﻿@model AllamaShibliQuiz.Models.ViewModels.TeamViewModel
+
+<div class="member-details">
+    <div class="wrapper">
+        <div class="left">
+            <img src="data:@Model.ContentType;base64,@Model.ImageBase64" alt="@Model.FullName" />
+            <h4 class="text-white">@Model.FullName</h4>
+            <p>@Model.Role</p>
+        </div>
+        <div class="right">
+            <div class="info">
+                <p class="close"><button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button></p>
+                <h4 class="heading">Team Member Details</h4>
+                <div class="info_data">
+                    <div class="data">
+                        <h6>Father's Name</h6>
+                        <p>@Model.FatherName</p>
+                    </div>
+                    <div class="data">
+                        <h6>Aadhar Number</h6>
+                        <p>@Model.AadharNumber</p>
+                    </div>
+                </div>
+                <div class="info_data">
+                    <div class="data">
+                        <h6>Mobile Number</h6>
+                        <p>@Model.MobileNumber</p>
+                    </div>
+                    <div class="data">
+                        <h6>Whatsapp Number</h6>
+                        <p>@Model.WhatsappNumber</p>
+                    </div>
+                </div>
+                <div class="info_data">
+                    <div class="data">
+                        <h6>Address</h6>
+                        <p>@Model.PermanentAddress</p>
+                    </div>
+                    <div class="data">
+                        <h6>Skills</h6>
+                        <p>@Model.OtherSkills</p>
+                    </div>
+                </div>
+                <div class="info_data">
+                    <div class="data">
+                        <h6>Higher Qualification</h6>
+                        <p>@Model.HigherQualification</p>
+                    </div>
+                    <div class="data">
+                        <h6>Additional Qualification</h6>
+                        <p>@Model.AdditionalQualification</p>
+                    </div>
+                </div>
+                <div class="info_data">
+                    <div class="data">
+                        <h6>Teaching Experience</h6>
+                        <p>@Model.TeachingExperience</p>
+                    </div>
+                    <div class="data">
+                        <h6>Current SchoolName</h6>
+                        <p>@Model.CurrentSchoolName</p>
+                    </div>
+                </div>
+                <div class="info_data">
+                    <div class="data">
+                        <h6>Joining Date</h6>
+                        <p>@Convert.ToDateTime(Model.JoiningDate).ToString("dd/MM/yyyy")</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

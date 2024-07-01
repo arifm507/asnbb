@@ -29,3 +29,122 @@
 .text-green {
     color: #00ff8e;
 }
+
+.table-header {
+    --bs-table-color: #fff;
+    --bs-table-bg: #3d4d6a;
+}
+
+.icon-shape {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    vertical-align: middle;
+    border-radius: .375rem;
+    width: 3rem;
+    height: 3rem;
+}
+
+.text-lg {
+    font-size: 1.25rem !important;
+}
+
+.member-details .wrapper {
+    display: flex;
+}
+
+#detailsModal .modal-body {
+    padding: 0;
+}
+
+.member-details .close {
+    position: absolute;
+    top: 12px;
+    right: 12px;
+}
+
+.member-details .left {
+    width: 35%;
+    background: linear-gradient(to right, #283a5a, #00b5d0);
+    padding: 30px 25px;
+    border-top-left-radius: 5px;
+    border-bottom-left-radius: 5px;
+    text-align: center;
+    color: #fff;
+}
+
+    .member-details .left img {
+        border-radius: 5px;
+        margin-bottom: 10px;
+        width:175px;
+        height:175px;
+    }
+@media only screen and (max-width: 995px) {
+    .member-details .left img {
+        width: 100px;
+        height: 100px;
+    }
+}
+
+
+    .member-details .left h4 {
+        margin: 12px 0;
+        font-size: 30px;
+        font-weight: 600;
+    }
+
+    .member-details .left p {
+        font-size: 15px;
+        font-weight: 500;
+    }
+
+.member-details .right {
+    width: 65%;
+    background: #fff;
+    padding: 30px 25px;
+    border-top-right-radius: 5px;
+    border-bottom-right-radius: 5px;
+}
+
+    .member-details .right .info,
+    .member-details .right .projects {
+        margin-bottom: 25px;
+    }
+
+        .member-details .right .info .heading,
+        .member-details .right .projects .heading {
+            margin-bottom: 15px;
+            padding-bottom: 5px;
+            border-bottom: 1px solid #e0e0e0;
+            color: #353c4e;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            font-weight: 600;
+        }
+
+    .member-details .right .info_data,
+    .member-details .right .projects_data {
+        display: flex;
+        justify-content: space-between;
+    }
+
+        .member-details .right .info_data .data,
+        .member-details .right .projects_data .data {
+            width: 45%;
+        }
+
+            .member-details .right .info_data .data h6,
+            .member-details .right .projects_data .data h6 {
+                color: #353c4e;
+                margin-bottom: 3px;
+                overflow-wrap: break-word;
+            }
+
+            .member-details .right .info_data .data p,
+            .member-details .right .projects_data .data p {
+                font-size: 13px;
+                margin-bottom: 10px;
+                color: #919aa3;
+            }
+

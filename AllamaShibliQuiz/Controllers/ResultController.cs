@@ -1,4 +1,4 @@
-﻿using AllamaShibliQuiz.Models;
+﻿using AllamaShibliQuiz.Models.ViewModels;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 

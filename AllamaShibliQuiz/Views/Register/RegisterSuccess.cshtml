@@ -1,0 +1,35 @@
+﻿@model AllamaShibliQuiz.Models.ViewModels.StudentViewModel
+<section id="success" class="section inside">
+    <div class="container">
+        <div class="row">
+            <div class="col-md-6 offset-md-3">
+                <div class="card card-main mt-2">
+                    <div class="card-header">
+                        <h4>Registration ASNBB-2024</h4>
+                    </div>
+                    <div class="card-body pb-5">
+                        <div class="row">
+                            <div class="col-md-12">
+                                <p>
+                                    Thank you <b>@Model.Name</b> for registering for the Allami Shibli Nomani Brainiac Battle 2024.
+                                </p>
+                                @if (Model.Status == 0)
+                                {
+                                    <p>
+                                        Please scan the QR code below to send the fee of Rs. 40 to Paytm/ PhonePe number <b> 7408840781 </b>.
+                                        Once the payment is completed, please send a screenshot of the transaction to WhatsApp number<b>7408840781 </b>.
+                                        <br />
+                                        After successful verification by our team, your registration will be confirmed.
+                                    </p>
+                                    <p>
+
+                                    </p>
+                                }
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>

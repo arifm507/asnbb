@@ -1,4 +1,4 @@
-﻿namespace AllamaShibliQuiz.Models
+﻿namespace AllamaShibliQuiz.Models.ViewModels
 {
     public class ResultViewModel
     {

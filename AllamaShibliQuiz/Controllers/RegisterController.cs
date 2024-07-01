@@ -1,24 +1,25 @@
-﻿using Microsoft.AspNetCore.Http;
+﻿using AllamaShibliQuiz.Data;
+using AllamaShibliQuiz.Models;
+using AllamaShibliQuiz.Models.ViewModels;
+using AutoMapper;
+using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
 
 namespace AllamaShibliQuiz.Controllers
 {
     public class RegisterController : Controller
     {
+        private readonly AsnbbDBContext _context;
+
+        private readonly IMapper _mapper;
+        public RegisterController(AsnbbDBContext context, IMapper mapper)
+        {
+            _context = context;
+            _mapper = mapper;
+        }
         // GET: RegisterController
         public ActionResult Index()
-        {
-            return View();
-        }
-
-        // GET: RegisterController/Details/5
-        public ActionResult Details(int id)
-        {
-            return View();
-        }
-
-        // GET: RegisterController/Create
-        public ActionResult Create()
         {
             return View();
         }
@@ -26,58 +27,38 @@ namespace AllamaShibliQuiz.Controllers
         // POST: RegisterController/Create
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create(IFormCollection collection)
+        public async Task<ActionResult> Index(StudentViewModel studentViewModel)
         {
             try
             {
-                return RedirectToAction(nameof(Index));
+                if (ModelState.IsValid)
+                {
+                    var student = _mapper.Map<Student>(studentViewModel);
+                    _context.Students.Add(student);
+                    await _context.SaveChangesAsync();
+                    return RedirectToAction(nameof(RegisterSuccess), new { id = 1 });
+                }
+                ViewData["ValidateMessage"] = "Data is not correct";
+                return View();
             }
             catch
             {
                 return View();
             }
         }
-
-        // GET: RegisterController/Edit/5
-        public ActionResult Edit(int id)
+        public async Task<ActionResult> RegisterSuccess(int id)
         {
-            return View();
-        }
-
-        // POST: RegisterController/Edit/5
-        [HttpPost]
-        [ValidateAntiForgeryToken]
-        public ActionResult Edit(int id, IFormCollection collection)
-        {
-            try
+            if (id == 0)
             {
                 return RedirectToAction(nameof(Index));
             }
-            catch
-            {
-                return View();
-            }
-        }
-
-        // GET: RegisterController/Delete/5
-        public ActionResult Delete(int id)
-        {
-            return View();
-        }
-
-        // POST: RegisterController/Delete/5
-        [HttpPost]
-        [ValidateAntiForgeryToken]
-        public ActionResult Delete(int id, IFormCollection collection)
-        {
-            try
+            var student = await _context.Students.FindAsync(id);
+            var studentViewModel = _mapper.Map<StudentViewModel>(student);
+            if (student == null)
             {
                 return RedirectToAction(nameof(Index));
             }
-            catch
-            {
-                return View();
-            }
+            return View(studentViewModel);
         }
     }
 }

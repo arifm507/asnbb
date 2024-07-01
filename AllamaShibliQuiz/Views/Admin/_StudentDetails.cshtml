@@ -1,0 +1,64 @@
+﻿@model AllamaShibliQuiz.Models.ViewModels.StudentViewModel
+
+<div class="member-details">
+    <div class="wrapper">
+        <div class="right w-100">
+            <div class="info">
+                <p class="close"><button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button></p>
+                <h4 class="heading">Student Details</h4>
+                <div class="info_data">
+                    <div class="data">
+                        <h6>Student Name</h6>
+                        <p>@Model.Name</p>
+                    </div>
+                    <div class="data">
+                        <h6>Father's Name</h6>
+                        <p>@Model.FatherName</p>
+                    </div>
+                </div>
+                <div class="info_data">
+                    <div class="data">
+                        <h6>Gender</h6>
+                        <p>@Model.Gender</p>
+                    </div>
+                    <div class="data">
+                        <h6>Date Of Birth</h6>
+                        <p>@Convert.ToDateTime(Model.DateOfBirth).ToString("dd/MM/yyyy")</p>
+                    </div>
+                </div>
+                <div class="info_data">
+                    <div class="data">
+                        <h6>Class</h6>
+                        <p>@Model.Class</p>
+                    </div>
+                    <div class="data">
+                        <h6>School Name</h6>
+                        <p>@Model.SchoolName</p>
+                    </div>
+                </div>
+                <div class="info_data">
+                    <div class="data">
+                        <h6>Address</h6>
+                        <p>@Model.Address</p>
+                    </div>
+                    <div class="data">
+                        <h6>Mobile Number</h6>
+                        <p>@Model.MobileNumber</p>
+                    </div>
+                </div>
+                <div class="info_data">
+                    <div class="data">
+                        <h6>Aadhar Number</h6>
+                        <p>@Model.AadharNumber</p>
+                    </div>
+                </div>
+                <div class="info_data">
+                    <div class="data">
+                        <h6>Registration Date</h6>
+                        <p>@Convert.ToDateTime(Model.CreateDate).ToString("dd/MM/yyyy")</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

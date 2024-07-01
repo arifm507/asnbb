@@ -1,14 +1,182 @@
-﻿<!-- Register Section -->
+﻿@model AllamaShibliQuiz.Models.ViewModels.DashboardViewModel
+
+<!-- Register Section -->
 <section id="register" class="section inside">
     <div class="container">
         <div class="row">
-            <div class="col-md-6 offset-md-3">
-                <div class="card card-main mt-2">
-                    <div class="card-header">
-                        <h4>Admin Dashboard</h4>
+            <div class="col-12">
+                <div class="container section-title pb-1">
+                    <h2>Dashboard</h2>
+                </div>
+            </div>
+        </div>
+        <div class="row g-3 mb-6">
+            <div class="col-xl-3 col-sm-6 col-12">
+                <div class="card shadow border-0">
+                    <div class="card-body">
+                        <div class="row">
+                            <div class="col">
+                                <span class="h2 font-bold mb-0">@Html.DisplayFor(modelItem => Model.TotalStudentRegistered)</span>
+                            </div>
+                            <div class="col-auto">
+                                <div class="icon icon-shape bg-primary text-white text-lg rounded-circle">
+                                    <i class="bi bi-people-fill"></i>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="mt-1 mb-0">
+                            <span class="h6 font-bold text-muted">Total Student Registered</span>
+                        </div>
                     </div>
+                </div>
+            </div>
+            <div class="col-xl-3 col-sm-6 col-12">
+                <div class="card shadow border-0">
+                    <div class="card-body">
+                        <div class="row">
+                            <div class="col">
+                                <span class="h2 font-bold mb-0">@Html.DisplayFor(modelItem => Model.TotalStudentApproved)</span>
+                            </div>
+                            <div class="col-auto">
+                                <div class="icon icon-shape bg-success text-white text-lg rounded-circle">
+                                    <i class="bi bi-person-fill-add"></i>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="mt-1 mb-0">
+                            <span class="h6 font-bold text-muted">Approved Registrations</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-xl-3 col-sm-6 col-12">
+                <div class="card shadow border-0">
+                    <div class="card-body">
+                        <div class="row">
+                            <div class="col">
+                                <span class="h2 font-bold mb-0">@Html.DisplayFor(modelItem => Model.TotalStudentPending)</span>
+                            </div>
+                            <div class="col-auto">
+                                <div class="icon icon-shape bg-warning text-white text-lg rounded-circle">
+                                    <i class="bi bi-person-fill-check"></i>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="mt-1 mb-0">
+                            <span class="h6 font-bold text-muted">Pending Registrations</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-xl-3 col-sm-6 col-12">
+                <div class="card shadow border-0">
+                    <div class="card-body">
+                        <div class="row">
+                            <div class="col">
+                                <span class="h2 font-bold mb-0">@Html.DisplayFor(modelItem => Model.TotalStudentRejected)</span>
+                            </div>
+                            <div class="col-auto">
+                                <div class="icon icon-shape bg-danger text-white text-lg rounded-circle">
+                                    <i class="bi bi-person-fill-exclamation"></i>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="mt-1 mb-0">
+                            <span class="h6 font-bold text-muted">Rejected Registrations</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="card shadow border-0 mb-7">
+            <div class="card-header">
+                <h5 class="mb-0">Student Applications</h5>
+            </div>
+            <div class="card-body">
+                <div class="table-responsive">
+                    <table id="studentsTable" class="table table-hover table-nowrap">
+                        <thead class="thead-light">
+                            <tr>
+                                <th scope="col">Name</th>
+                                <th scope="col">FatherName</th>
+                                <th scope="col">Class</th>
+                                <th scope="col">SchoolName</th>
+                                <th scope="col">MobileNumber</th>
+                                <th scope="col">Status</th>
+                                <th scope="col">Action</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            @foreach (var item in Model.Students)
+                            {
+                                <tr>
+                                    <td>
+                                        <a class="text-heading font-semibold" href="#">
+                                            @Html.DisplayFor(modelItem => item.Name)
+                                        </a>
+                                    </td>
+                                    <td>
+                                        @Html.DisplayFor(modelItem => item.FatherName)
+                                    </td>
+                                    <td>
+                                        @Html.DisplayFor(modelItem => item.Class)
+                                    </td>
+                                    <td>
+                                        @Html.DisplayFor(modelItem => item.SchoolName)
+                                    </td>
+                                    <td>
+                                        @Html.DisplayFor(modelItem => item.MobileNumber)
+                                    </td>
+                                    <td>
+                                        <span class="badge badge-lg badge-dot">
+                                            @if (item.Status == 0)
+                                            {
+                                                <i class="bg-warning"></i>
+                                                <span>Pending</span>
+                                            }
+                                            else if (item.Status == 1)
+                                            {
+                                                <i class="bg-success"></i>
+                                                <span>Approved</span>
+                                            }
+                                            else if (item.Status == 2)
+                                            {
+                                                <i class="bg-danger"></i>
+                                                <span>Declined</span>
+                                            }
+                                        </span>
+                                    </td>
+                                    <td class="text-end">
+                                        @if (item.Status == 0)
+                                        {
+                                            <a class="btn btn-sm btn-success" asp-action="Approve" asp-route-id="@item.Id" onclick="return confirm('Are you sure to approve this student?')">
+                                                <i class="bi bi-check-lg"></i>
+                                            </a>
+                                            <a class="btn btn-sm btn-danger" asp-action="Reject" asp-route-id="@item.Id" onclick="return confirm('Are you sure to reject this student?')">
+                                                <i class="bi bi-x-lg"></i>
+                                            </a>
+                                        }
+                                        <a data-bs-toggle="modal" data-bs-target="#studentModal" data-id="@item.Id" class="btn btn-sm btn-neutral">
+                                            <i class="bi bi-eye-fill"></i>
+                                        </a>
+                                    </td>
+                                </tr>
+                            }
+                        </tbody>
+                    </table>
                 </div>
             </div>
         </div>
     </div>
 </section>
+
+
+<!-- Team Student Detail Modal -->
+<div class="modal modal-lg fade" id="studentModal" tabindex="-1" aria-labelledby="studentModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div id="student-detail-body" class="modal-body">
+            </div>
+        </div>
+    </div>
+</div>

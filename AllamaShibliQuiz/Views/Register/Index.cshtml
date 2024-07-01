@@ -1,55 +1,74 @@
-﻿<!-- Register Section -->
+﻿@model AllamaShibliQuiz.Models.ViewModels.StudentViewModel
+<!-- Register Section -->
 <section id="result" class="section inside h-75">
     <div class="container">
-        <form action="forms/contact.php" method="post" class="php-email-form">
+        <form asp-action="Index" method="post">
             <div class="card card-main mt-2">
                 <div class="card-header">
-                    <h4>Register Here to enroll in ASNBB-2024</h4>
+                    <h4>Register here to enroll in ASNBB-2024</h4>
                 </div>
                 <div class="card-body">
                     <div class="row gy-4">
                         <div class="col-12">
                             <h6 class="text-danger mb-0">
-                               Important Note: Please enter your or parent valid Aadhar Number. You will download admit card by Aadhar Number.
+                                Important Note: Please enter your/parent valid Aadhar Number. You will download admit card by Aadhar Number.
                             </h6>
                         </div>
                         <div class="col-md-6">
                             <label for="name" class="pb-2">Full Name<i class="text-danger">*</i></label>
-                            <input type="text" name="name" id="name" class="form-control" placeholder="Enter Full Name" required>
+                            <input type="text" asp-for="Name" id="name" class="form-control" placeholder="Enter Full Name" required>
                         </div>
                         <div class="col-md-6">
                             <label for="father" class="pb-2">Father’s Name<i class="text-danger">*</i></label>
-                            <input type="text" class="form-control" name="father" id="father" placeholder="Enter Father’s Name" required>
+                            <input type="text" class="form-control" asp-for="FatherName" id="father" placeholder="Enter Father’s Name" required>
+                        </div>
+                        <div class="col-md-6">
+                            <label for="gender" class="pb-2">Gender<i class="text-danger">*</i></label>
+                            <select class="form-select" id="gender" asp-for="Gender" required>
+                                <option selected>Select Gender</option>
+                                <option value="Male">Male</option>
+                                <option value="Female">Female</option>
+                            </select>
+                        </div>
+                        <div class="col-md-6">
+                            <label for="father" class="pb-2">Date of Birth<i class="text-danger">*</i></label>
+                            <input type="date" class="form-control" asp-for="DateOfBirth" id="father" placeholder="Enter Date of Birth" required>
                         </div>
                         <div class="col-md-6">
                             <label for="class" class="pb-2">Class<i class="text-danger">*</i></label>
-                            <select class="form-select" id="class" required>
+                            <select class="form-select" id="class" asp-for="Class" required>
                                 <option selected>Select Class</option>
                                 <option value="6">Class 6</option>
                                 <option value="7">Class 7</option>
                                 <option value="8">Class 8</option>
                                 <option value="9">Class 9</option>
                                 <option value="10">Class 10</option>
+                                <option value="11">Class 11</option>
+                                <option value="12">Class 12</option>
                             </select>
                         </div>
                         <div class="col-md-6">
                             <label for="school" class="pb-2">School Name<i class="text-danger">*</i></label>
-                            <input type="text" class="form-control" id="school" placeholder="Enter School Name" required>
+                            <input type="text" class="form-control" asp-for="SchoolName" id="school" placeholder="Enter School Name" required>
                         </div>
                         <div class="col-md-6">
                             <label for="address" class="pb-2">Address<i class="text-danger">*</i></label>
-                            <input type="text" class="form-control" id="address" placeholder="Enter Full Address" required>
+                            <input type="text" class="form-control" asp-for="Address" id="address" placeholder="Enter Full Address" required>
                         </div>
                         <div class="col-md-6">
                             <label for="mobile" class="pb-2">Mobile Number (Whatsapp number)<i class="text-danger">*</i></label>
-                            <input type="text" class="form-control" id="mobile" placeholder="Enter Your/Guardian Mobile Number" required>
+                            <input type="text" class="form-control" asp-for="MobileNumber" id="mobile" placeholder="Enter Your/Guardian Mobile Number" required>
                         </div>
                         <div class="col-md-6">
                             <label for="aadhar" class="pb-2">Aadhar Number<i class="text-danger">*</i></label>
-                            <input type="text" class="form-control" id="aadhar" placeholder="Enter Aadhar Number" required>
+                            <input type="text" class="form-control" asp-for="AadharNumber" id="aadhar" placeholder="Enter Aadhar Number" required>
                         </div>
 
-                        <div class="col-md-12">
+                        <div class="col-md-12 mt-5">
+                            @if (ViewData["ValidateMessage"] != null)
+                            {
+                                <p class="text-danger">@ViewData["ValidateMessage"]</p>
+                            }
                             <button type="submit" class="btn btn-primary">Register</button>
                             <a asp-controller="Home" asp-action="index" class="btn btn-secondary">Cancel</a>
                         </div>

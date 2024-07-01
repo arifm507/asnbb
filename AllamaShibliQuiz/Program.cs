@@ -1,9 +1,12 @@
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.AspNetCore.Authentication.Cookies;
+using AllamaShibliQuiz.Data;
 
 var builder = WebApplication.CreateBuilder(args);
-var connectionString = builder.Configuration.GetConnectionString("AsnbbDBContextConnection") ?? throw new InvalidOperationException("Connection string 'AsnbbDBContextConnection' not found.");
+var connectionString = builder.Configuration.GetConnectionString("AsnbbConnectionString") ??
+    throw new InvalidOperationException("Connection string 'AsnbbConnectionString' not found.");
+builder.Services.AddDbContext<AsnbbDBContext>(options => options.UseSqlServer(connectionString));
 
 
 // Add services to the container.
@@ -15,6 +18,8 @@ builder.Services.AddAuthentication(
         option.LoginPath = "/Admin/Login";
         option.ExpireTimeSpan = TimeSpan.FromMinutes(30);
     });
+
+builder.Services.AddAutoMapper(typeof(Program));
 
 var app = builder.Build();
 

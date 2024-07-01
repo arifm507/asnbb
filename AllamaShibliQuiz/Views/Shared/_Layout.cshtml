@@ -21,10 +21,12 @@
     <link href="~/assets/vendor/bootstrap-icons/bootstrap-icons.css" rel="stylesheet">
     <link href="~/assets/vendor/aos/aos.css" rel="stylesheet">
     <link href="~/assets/vendor/glightbox/css/glightbox.min.css" rel="stylesheet">
+    <link href="https://cdn.datatables.net/2.0.8/css/dataTables.bootstrap5.css" rel="stylesheet" />
 
     <!-- Main CSS File -->
     <link href="~/assets/css/main.css" rel="stylesheet">
     <link href="~/css/site.css" rel="stylesheet" />
+    <link href="~/css/admin.css" rel="stylesheet" />
 
 </head>
 @{
@@ -38,24 +40,29 @@
         <div class="container-fluid container-xl position-relative d-flex align-items-center">
 
             <a href="/" class="logo d-flex align-items-center me-auto">
-                <img src="assets/img/logo.png" alt="">
+                <img src="~/assets/img/logo.png" alt="">
             </a>
 
             <nav id="navmenu" class="navmenu">
                 <ul>
-                    <li><a href="/" class="">Home</a></li>
-                    <li><a href="/#about">Vision</a></li>
-                    <li><a href="/#aboutshibli">Allama Shibli Nomani</a></li>
-                    <li><a href="/#team">Team</a></li>
-                    <li><a href="/#contact">Contact</a></li>
+                    @if (controllerName.Contains("Admin") && User.Identity.IsAuthenticated)
+                    {
+                        <li><a asp-controller="Admin" asp-action="Dashboard" class="">Dashboard</a></li>
+                        <li><a asp-controller="Admin" asp-action="Team">Team Members</a></li>
+                        <li><a asp-controller="Admin" asp-action="Logout">Logout</a></li>
+                    }
+                    else if (!controllerName.Contains("Admin"))
+                    {
+                        <li><a href="/" class="">Home</a></li>
+                        <li><a href="/#about">Vision</a></li>
+                        <li><a href="/#aboutshibli">Allama Shibli Nomani</a></li>
+                        <li><a href="/#team">Team</a></li>
+                        <li><a href="/#contact">Contact</a></li>
+                    }                    
                 </ul>
                 <i class="mobile-nav-toggle d-xl-none bi bi-list"></i>
             </nav>
-            @if (controllerName.Contains("Admin") && User.Identity.IsAuthenticated)
-            {
-                <a class="btn-getstarted" asp-controller="Admin" asp-action="Logout">Logout</a>
-            }
-            else if (!controllerName.Contains("Admin"))
+            @if (!controllerName.Contains("Admin"))
             {
                 <a class="btn-getstarted" asp-controller="Result" asp-action="Index">Download Result</a>                    
             }
@@ -90,12 +97,25 @@
     <div id="preloader"></div>
 
     <!-- Vendor JS Files -->
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
     <script src="~/assets/vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
     <script src="~/assets/vendor/aos/aos.js"></script>
     <script src="~/assets/vendor/glightbox/js/glightbox.min.js"></script>
     <script src="~/assets/vendor/waypoints/noframework.waypoints.js"></script>
     <script src="~/assets/vendor/imagesloaded/imagesloaded.pkgd.min.js"></script>
     <script src="~/assets/vendor/isotope-layout/isotope.pkgd.min.js"></script>
+
+    <script src="https://cdn.datatables.net/2.0.8/js/dataTables.js"></script>
+    <script src="https://cdn.datatables.net/2.0.8/js/dataTables.bootstrap5.js"></script>
+
+    <script src="https://cdn.datatables.net/buttons/3.0.2/js/dataTables.buttons.js"></script>
+    <script src="https://cdn.datatables.net/buttons/3.0.2/js/buttons.dataTables.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jszip/3.10.1/jszip.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/pdfmake/0.2.7/pdfmake.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/pdfmake/0.2.7/vfs_fonts.js"></script>
+    <script src="https://cdn.datatables.net/buttons/3.0.2/js/buttons.html5.min.js"></script>
+    <script src="https://cdn.datatables.net/buttons/3.0.2/js/buttons.print.min.js"></script>
+
 
     <!-- Main JS File -->
     <script src="~/assets/js/main.js"></script>

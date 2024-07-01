@@ -1,0 +1,80 @@
+﻿@model List<AllamaShibliQuiz.Models.ViewModels.TeamViewModel>
+
+<!-- Register Section -->
+<section id="register" class="section inside">
+    <div class="container">
+        <div class="row">
+            <div class="col-12">
+                <div class="container section-title pb-1">
+                    <h2>Team Members</h2>
+                </div><!-- End Section Title -->
+            </div>
+            <div class="row mb-2">
+                <div class="col-12 text-end">
+                    <a class="btn btn-primary" asp-action="TeamAddOrEdit"><i class="bi bi-plus"></i> Add New Member</a>
+                </div>
+            </div>
+            <div class="col-12">
+                <div class="card shadow border-0 mb-7">
+                    <div class="card-header">
+                        <h5 class="mb-0">Brainiac Battle Team Members</h5>
+                    </div>
+                    <div class="table-responsive">
+                        <table class="table table-hover table-nowrap table-bordered">
+                            <thead class="thead-light">
+                                <tr>
+                                    <th scope="col">Name</th>
+                                    <th scope="col">Role</th>
+                                    <th scope="col">Father's Name</th>
+                                    <th scope="col">Mobile Number</th>
+                                    <th scope="col">Email Id</th>
+                                    <th scope="col">Joining Date</th>
+                                    <th scope="col">Action</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                @foreach (var item in Model)
+                                {
+                                    <tr>
+                                        <td>
+                                            <img alt="..." src="data:@item.ContentType;base64,@item.ImageBase64" alt="@item.FullName" class="avatar avatar-sm rounded-circle me-2" />
+                                            <a class="text-heading font-semibold">
+                                                @Html.DisplayFor(modelItem => item.FullName)
+                                            </a>
+                                        </td>
+                                        <td>@Html.DisplayFor(modelItem => item.Role)</td>
+                                        <td>@Html.DisplayFor(modelItem => item.FatherName)</td>
+                                        <td>@Html.DisplayFor(modelItem => item.MobileNumber)</td>
+                                        <td>@Html.DisplayFor(modelItem => item.EmailId)</td>
+                                        <td>@Convert.ToDateTime(item.JoiningDate).ToString("dd/MM/yyyy")</td>
+                                        <td class="text-end">
+                                            <a data-bs-toggle="modal" data-bs-target="#detailsModal" data-id="@item.Id" class="btn btn-sm btn-neutral">
+                                                <i class="bi bi-eye-fill"></i>
+                                            </a>
+                                            <a asp-action="TeamAddOrEdit" asp-route-id="@item.Id" class="btn btn-sm btn-square btn-neutral text-danger-hover">
+                                                <i class="bi bi-pencil-fill"></i>
+                                            </a>
+                                            <a asp-action="DeleteTeamMember" asp-route-id="@item.Id" onclick="return confirm('Are you sure to delete this Team Member?')" class="btn btn-sm btn-square btn-neutral text-danger-hover">
+                                                <i class="bi bi-trash3-fill"></i>
+                                            </a>
+                                        </td>
+                                    </tr>
+                                }
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- Team Member Detail Modal -->
+<div class="modal modal-lg fade" id="detailsModal" tabindex="-1" aria-labelledby="detailsModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div id="member-detail-body" class="modal-body">
+            </div>
+        </div>
+    </div>
+</div>

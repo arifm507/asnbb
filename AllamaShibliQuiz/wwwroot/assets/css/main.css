@@ -1,15 +1,4 @@
-/**
-* Template Name: Arsha
-* Template URL: https://bootstrapmade.com/arsha-free-bootstrap-html-template-corporate/
-* Updated: Jun 02 2024 with Bootstrap v5.3.3
-* Author: BootstrapMade.com
-* License: https://bootstrapmade.com/license/
-*/
 
-/*--------------------------------------------------------------
-# Font & Color Variables
-# Help: https://bootstrapmade.com/color-system/
---------------------------------------------------------------*/
 /* Fonts */
 :root {
     --default-font: "Open Sans", system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial, "Noto Sans", "Liberation Sans", sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji";
@@ -20,7 +9,7 @@
 /* Global Colors */
 :root {
     /* Background Color - This color is applied to the background of the entire website as well as individual sections. */
-    --background-color: #ffffff;
+    --background-color: #f5f9fc;
     /* Default Color - This is the default color used for the majority of the text content. */
     --default-color: #444444;
     /* Heading Color - This color is used for titles, headings and secondary elements. */
@@ -875,51 +864,51 @@ section,
         font-weight: 600;
     }
 
-    .btn-get-started {
+.btn-get-started {
+    color: var(--contrast-color);
+    background: var(--accent-color);
+    font-family: var(--heading-font);
+    font-weight: 500;
+    font-size: 15px;
+    letter-spacing: 1px;
+    display: inline-block;
+    padding: 10px 28px 12px 28px;
+    border-radius: 50px;
+    transition: 0.5s;
+}
+
+    .btn-get-started:hover {
         color: var(--contrast-color);
-        background: var(--accent-color);
-        font-family: var(--heading-font);
-        font-weight: 500;
-        font-size: 15px;
-        letter-spacing: 1px;
-        display: inline-block;
-        padding: 10px 28px 12px 28px;
-        border-radius: 50px;
-        transition: 0.5s;
+        background: color-mix(in srgb, var(--accent-color), transparent 15%);
     }
 
-        .btn-get-started:hover {
-            color: var(--contrast-color);
-            background: color-mix(in srgb, var(--accent-color), transparent 15%);
-        }
+.hero .btn-watch-video {
+    font-size: 16px;
+    transition: 0.5s;
+    margin-left: 25px;
+    color: var(--default-color);
+    font-weight: 600;
+}
 
-    .hero .btn-watch-video {
-        font-size: 16px;
-        transition: 0.5s;
-        margin-left: 25px;
-        color: var(--default-color);
-        font-weight: 600;
+    .hero .btn-watch-video i {
+        color: var(--contrast-color);
+        font-size: 32px;
+        transition: 0.3s;
+        line-height: 0;
+        margin-right: 8px;
     }
 
-        .hero .btn-watch-video i {
-            color: var(--contrast-color);
-            font-size: 32px;
-            transition: 0.3s;
-            line-height: 0;
-            margin-right: 8px;
-        }
-
-        .hero .btn-watch-video:hover {
-            color: var(--accent-color);
-        }
-
-            .hero .btn-watch-video:hover i {
-                color: color-mix(in srgb, var(--accent-color), transparent 15%);
-            }
-
-    .hero .animated {
-        animation: up-down 2s ease-in-out infinite alternate-reverse both;
+    .hero .btn-watch-video:hover {
+        color: var(--accent-color);
     }
+
+        .hero .btn-watch-video:hover i {
+            color: color-mix(in srgb, var(--accent-color), transparent 15%);
+        }
+
+.hero .animated {
+    animation: up-down 2s ease-in-out infinite alternate-reverse both;
+}
 
 @media (max-width: 640px) {
     .hero h1 {
@@ -1398,6 +1387,7 @@ section,
     transition: 0.5s;
     padding: 30px;
     height: 100%;
+    background-color: #fff;
 }
 
 @media (max-width: 468px) {

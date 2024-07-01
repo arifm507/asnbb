@@ -1,4 +1,5 @@
 ﻿using AllamaShibliQuiz.Models;
+using AllamaShibliQuiz.Models.ViewModels;
 using Microsoft.AspNetCore.Mvc;
 using System.Diagnostics;
 
