@@ -125,7 +125,7 @@ h6 {
 
 @media (max-width: 1200px) {
     .header .logo {
-        order: 1;
+        order: 0;
     }
 
     .header .btn-getstarted {
@@ -166,7 +166,7 @@ h6 {
         padding: 0;
     }
 
-        .navmenu ul {
+        .navmenu ul.nav-ul {
             margin: 0;
             padding: 0;
             display: flex;
@@ -331,7 +331,7 @@ h6 {
         z-index: 9997;
     }
 
-        .navmenu ul {
+        .navmenu ul.nav-ul {
             display: none;
             position: absolute;
             inset: 60px 20px 20px 20px;

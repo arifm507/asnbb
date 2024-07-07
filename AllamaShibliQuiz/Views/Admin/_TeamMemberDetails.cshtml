@@ -3,9 +3,16 @@
 <div class="member-details">
     <div class="wrapper">
         <div class="left">
-            <img src="data:@Model.ContentType;base64,@Model.ImageBase64" alt="@Model.FullName" />
-            <h4 class="text-white">@Model.FullName</h4>
-            <p>@Model.Role</p>
+            <div class="row g-2 align-items-center">
+                <div class="col-6">
+                    <img src="data:@Model.ContentType;base64,@Model.ImageBase64" alt="@Model.FullName" />
+                </div>
+                <div class="col-6 text-start">
+                    <h4 class="text-white">@Model.FullName</h4>
+                    <p>@Model.Role</p>
+                    <p>@Model.MobileNumber</p>
+                </div>
+            </div>
         </div>
         <div class="right">
             <div class="info">
@@ -23,18 +30,8 @@
                 </div>
                 <div class="info_data">
                     <div class="data">
-                        <h6>Mobile Number</h6>
-                        <p>@Model.MobileNumber</p>
-                    </div>
-                    <div class="data">
                         <h6>Whatsapp Number</h6>
                         <p>@Model.WhatsappNumber</p>
-                    </div>
-                </div>
-                <div class="info_data">
-                    <div class="data">
-                        <h6>Address</h6>
-                        <p>@Model.PermanentAddress</p>
                     </div>
                     <div class="data">
                         <h6>Skills</h6>
@@ -65,6 +62,10 @@
                     <div class="data">
                         <h6>Joining Date</h6>
                         <p>@Convert.ToDateTime(Model.JoiningDate).ToString("dd/MM/yyyy")</p>
+                    </div>
+                    <div class="data">
+                        <h6>Address</h6>
+                        <p>@Model.PermanentAddress</p>
                     </div>
                 </div>
             </div>

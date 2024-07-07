@@ -23,7 +23,7 @@ namespace AllamaShibliQuiz.Controllers
         {
             return View();
         }
-        public IActionResult Register() 
+        public IActionResult Register()
         {
             return View();
         }

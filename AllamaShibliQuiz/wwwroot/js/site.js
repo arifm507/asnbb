@@ -26,6 +26,9 @@ if (myModalEl) {
             }
         });
     });
+    myModalEl.addEventListener('hide.bs.modal', event => {
+        document.getElementById("member-detail-body").innerHTML = "";
+    });
 }
 
 const myModalStudent = document.getElementById('studentModal')
@@ -42,4 +45,20 @@ if (myModalStudent) {
             }
         });
     });
+    myModalStudent.addEventListener('hide.bs.modal', event => {
+        document.getElementById("student-detail-body").innerHTML = "";
+    });
 }
+function isNumber(evt) {
+    evt = (evt) ? evt : window.event;
+    var charCode = (evt.which) ? evt.which : evt.keyCode;
+    if (charCode > 31 && (charCode < 48 || charCode > 57)) {
+        return false;
+    }
+    return true;
+}
+
+function disableSubmitButton() {
+    document.getElementById('submitButton').disabled = true;
+}
+

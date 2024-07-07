@@ -27,6 +27,7 @@
     <link href="~/assets/css/main.css" rel="stylesheet">
     <link href="~/css/site.css" rel="stylesheet" />
     <link href="~/css/admin.css" rel="stylesheet" />
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/sweetalert2@11.12.2/dist/sweetalert2.min.css" integrity="sha256-KIZHD6c6Nkk0tgsncHeNNwvNU1TX8YzPrYn01ltQwFg=" crossorigin="anonymous">
 
 </head>
 @{
@@ -42,14 +43,23 @@
             <a href="/" class="logo d-flex align-items-center me-auto">
                 <img src="~/assets/img/logo.png" alt="">
             </a>
-
             <nav id="navmenu" class="navmenu">
-                <ul>
+                <ul class="nav-ul">
                     @if (controllerName.Contains("Admin") && User.Identity.IsAuthenticated)
                     {
                         <li><a asp-controller="Admin" asp-action="Dashboard" class="">Dashboard</a></li>
                         <li><a asp-controller="Admin" asp-action="Team">Team Members</a></li>
-                        <li><a asp-controller="Admin" asp-action="Logout">Logout</a></li>
+                        <li>
+                            <a class="dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                                <div class="admin-pic">
+                                    <img src="~/assets/img/admin.png" />
+                                </div>
+                            </a>
+                            <ul class="dropdown-menu">
+                                <li><a href="#">Admin Logged-in</a></li>
+                                <li><a asp-controller="Admin" asp-action="Logout">Logout</a></li>
+                            </ul>
+                        </li>
                     }
                     else if (!controllerName.Contains("Admin"))
                     {
@@ -58,13 +68,13 @@
                         <li><a href="/#aboutshibli">Allama Shibli Nomani</a></li>
                         <li><a href="/#team">Team</a></li>
                         <li><a href="/#contact">Contact</a></li>
-                    }                    
+                    }
                 </ul>
                 <i class="mobile-nav-toggle d-xl-none bi bi-list"></i>
             </nav>
             @if (!controllerName.Contains("Admin"))
             {
-                <a class="btn-getstarted" asp-controller="Result" asp-action="Index">Download Result</a>                    
+                <a class="btn-getstarted" asp-controller="Result" asp-action="Index">Download Result</a>
             }
 
         </div>
@@ -73,7 +83,7 @@
     <div class="main">
         <main role="main">
             @RenderBody()
-        </main>        
+        </main>
     </div>
 
     <footer id="footer" class="footer">
@@ -115,11 +125,36 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/pdfmake/0.2.7/vfs_fonts.js"></script>
     <script src="https://cdn.datatables.net/buttons/3.0.2/js/buttons.html5.min.js"></script>
     <script src="https://cdn.datatables.net/buttons/3.0.2/js/buttons.print.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11.12.2/dist/sweetalert2.all.min.js" integrity="sha256-J+5D76zpkRERiI3Fzew5wbVA08FQRsuHqdsqXCnRD7Q=" crossorigin="anonymous"></script>
 
 
     <!-- Main JS File -->
     <script src="~/assets/js/main.js"></script>
     <script src="~/js/site.js" asp-append-version="true"></script>
     @await RenderSectionAsync("Scripts", required: false)
+
+    @if (ViewBag.AlertMessage != null)
+    {
+        <script type="text/javascript">
+            window.onload = function () {
+                var para = document.createElement("p");
+                para.innerHTML = "@Html.Raw(ViewBag.AlertMessage.Message)";
+                if ("@ViewBag.AlertMessage.Type" == "Error") {
+                    Swal.fire({
+                        icon: "error",
+                        title: "Please verify..",
+                        html: para
+                    });
+                }
+                else if ("@ViewBag.AlertMessage.Type" == "Success") {
+                    Swal.fire({
+                        icon: "success",
+                        title: "Success",
+                        html: para
+                    });
+                }
+            };
+        </script>
+    }
 </body>
 </html>

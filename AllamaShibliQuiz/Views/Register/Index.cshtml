@@ -2,11 +2,14 @@
 <!-- Register Section -->
 <section id="result" class="section inside h-75">
     <div class="container">
-        <form asp-action="Index" method="post">
+        <form asp-action="Index" method="post" autocomplete="off">
             <div class="card card-main mt-2">
                 <div class="card-header">
                     <h4>Register here to enroll in ASNBB-2024</h4>
                 </div>
+                @{
+                    var today = DateTime.Now.ToString("yyyy-MM-dd");
+                }
                 <div class="card-body">
                     <div class="row gy-4">
                         <div class="col-12">
@@ -25,14 +28,14 @@
                         <div class="col-md-6">
                             <label for="gender" class="pb-2">Gender<i class="text-danger">*</i></label>
                             <select class="form-select" id="gender" asp-for="Gender" required>
-                                <option selected>Select Gender</option>
+                                <option selected value="0">Select Gender</option>
                                 <option value="Male">Male</option>
                                 <option value="Female">Female</option>
                             </select>
                         </div>
                         <div class="col-md-6">
                             <label for="father" class="pb-2">Date of Birth<i class="text-danger">*</i></label>
-                            <input type="date" class="form-control" asp-for="DateOfBirth" id="father" placeholder="Enter Date of Birth" required>
+                            <input type="date" class="form-control" max="@today" asp-for="DateOfBirth" id="father" placeholder="Enter Date of Birth" required>
                         </div>
                         <div class="col-md-6">
                             <label for="class" class="pb-2">Class<i class="text-danger">*</i></label>
@@ -57,11 +60,11 @@
                         </div>
                         <div class="col-md-6">
                             <label for="mobile" class="pb-2">Mobile Number (Whatsapp number)<i class="text-danger">*</i></label>
-                            <input type="text" class="form-control" asp-for="MobileNumber" id="mobile" placeholder="Enter Your/Guardian Mobile Number" required>
+                            <input type="text" class="form-control" asp-for="MobileNumber" maxlength="10" id="mobile" onkeypress="return isNumber(event)" placeholder="Enter Your/Guardian Mobile Number" required>
                         </div>
                         <div class="col-md-6">
                             <label for="aadhar" class="pb-2">Aadhar Number<i class="text-danger">*</i></label>
-                            <input type="text" class="form-control" asp-for="AadharNumber" id="aadhar" placeholder="Enter Aadhar Number" required>
+                            <input type="text" class="form-control" asp-for="AadharNumber" id="aadhar" maxlength="12" onkeypress="return isNumber(event)" placeholder="Enter Aadhar Number" required>
                         </div>
 
                         <div class="col-md-12 mt-5">

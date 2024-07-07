@@ -21,6 +21,7 @@ namespace AllamaShibliQuiz.Controllers
             _context = context;
             _mapper = mapper;
         }
+
         [AllowAnonymous]
         public IActionResult Login()
         {
@@ -52,7 +53,11 @@ namespace AllamaShibliQuiz.Controllers
 
                 return RedirectToAction("Dashboard");
             }
-            ViewData["ValidateMessage"] = "Email or Password is incorrect";
+            ViewBag.AlertMessage = new AlertMessageViewModel()
+            {
+                Type = "Error",
+                Message = "Email or Password is incorrect"
+            };
             return View();
         }
         public async Task<IActionResult> Logout()
@@ -125,12 +130,6 @@ namespace AllamaShibliQuiz.Controllers
             return View(teamsView);
         }
 
-        [HttpPost]
-        public IActionResult Team(TeamViewModel teamModel)
-        {
-            return View();
-        }
-
         public async Task<IActionResult> TeamAddOrEdit(int? id)
         {
             if (id != null)
@@ -160,6 +159,11 @@ namespace AllamaShibliQuiz.Controllers
             if (team == null)
             {
                 ViewData["ValidateMessage"] = "Can not add or update Team Member";
+                return View("TeamAddOrEdit");
+            }
+            var isValid = IsValidData(teamModel);
+            if (!isValid)
+            {
                 return View("TeamAddOrEdit");
             }
             if (image != null && image.Length > 0)
@@ -197,6 +201,41 @@ namespace AllamaShibliQuiz.Controllers
             }
             await _context.SaveChangesAsync();
             return RedirectToAction("Team");
+        }
+
+        private bool IsValidData(TeamViewModel teamMember)
+        {
+            var errorMessage = string.Empty;
+            if (teamMember.Role == "0")
+            {
+                errorMessage += "Please select Role.";
+            }
+            if (teamMember.MobileNumber.Length < 10)
+            {
+                errorMessage += "<br /> Please enter valid mobile number(10 digit).";
+            }
+            if (teamMember.WhatsappNumber.Length < 10)
+            {
+                errorMessage += "<br /> Please enter valid whatsapp number(10 digit).";
+            }
+            if (teamMember.AadharNumber.Length < 12)
+            {
+                errorMessage += "<br /> Please enter valid aadhar number(12 digit).";
+            }
+            if (teamMember.JoiningDate == DateTime.MinValue || teamMember.JoiningDate > DateTime.Now)
+            {
+                errorMessage += "<br /> Please enter valid joining date.";
+            }
+            if (!string.IsNullOrEmpty(errorMessage))
+            {
+                ViewBag.AlertMessage = new AlertMessageViewModel()
+                {
+                    Type = "Error",
+                    Message = errorMessage
+                };
+                return false;
+            }
+            return true;
         }
 
         public async Task<IActionResult> TeamMemberDetails(int id)

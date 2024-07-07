@@ -10,13 +10,16 @@
                         <h5 class="mb-0">Add New Team Member</h5>
                     </div>
                     <div class="card-body">
-                        <form asp-action="TeamAddOrEdit" method="post" enctype="multipart/form-data">
+                        <form asp-action="TeamAddOrEdit" method="post" enctype="multipart/form-data" onsubmit="disableSubmitButton()" autocomplete="off">
                             <div class="row gy-4">
                                 <div class="col-12">
                                     <h6 class="text-danger mb-0">
                                         Important Note: Fields marked with * are mandatory.
                                     </h6>
                                 </div>
+                                @{
+                                    var today = DateTime.Now.ToString("yyyy-MM-dd");
+                                }
                                 <div class="col-md-6">
                                     <label for="name" class="pb-2">Full Name<i class="text-danger">*</i></label>
                                     <input type="text" id="name" asp-for="FullName" class="form-control" placeholder="Enter Full Name" required>
@@ -24,7 +27,7 @@
                                 <div class="col-md-6">
                                     <label for="role" class="pb-2">Role<i class="text-danger">*</i></label>
                                     <select class="form-select" id="role" asp-for="Role" required>
-                                        <option selected>Select Role</option>
+                                        <option selected value="0">Select Role</option>
                                         <option value="President">President</option>
                                         <option value="Vice President">Vice President</option>
                                         <option value="Secretary">Secretary</option>
@@ -38,15 +41,15 @@
                                 </div>
                                 <div class="col-md-6">
                                     <label for="mobile" class="pb-2">Mobile Number<i class="text-danger">*</i></label>
-                                    <input type="text" class="form-control" asp-for="MobileNumber" id="mobile" placeholder="Enter Mobile Number" required>
+                                    <input type="text" class="form-control" maxlength="10" onkeypress="return isNumber(event)" asp-for="MobileNumber" id="mobile" placeholder="Enter Mobile Number" required>
                                 </div>
                                 <div class="col-md-6">
                                     <label for="whatsappNumber" class="pb-2">Whatsapp Number<i class="text-danger">*</i></label>
-                                    <input type="text" class="form-control" id="whatsappNumber" asp-for="WhatsappNumber" placeholder="Enter Whatsapp Number" required>
+                                    <input type="text" class="form-control" id="whatsappNumber" maxlength="10" onkeypress="return isNumber(event)" asp-for="WhatsappNumber" placeholder="Enter Whatsapp Number" required>
                                 </div>
                                 <div class="col-md-6">
                                     <label for="aadhar" class="pb-2">Aadhar Number<i class="text-danger">*</i></label>
-                                    <input type="text" class="form-control" id="aadhar" asp-for="AadharNumber" placeholder="Enter Aadhar Number" required>
+                                    <input type="text" class="form-control" id="aadhar" maxlength="12" onkeypress="return isNumber(event)" asp-for="AadharNumber" placeholder="Enter Aadhar Number" required>
                                 </div>
                                 <div class="col-md-6">
                                     <label for="email" class="pb-2">EmailId<i class="text-danger">*</i></label>
@@ -78,11 +81,11 @@
                                 </div>
                                 <div class="col-md-6">
                                     <label for="joiningDate" class="pb-2">Joining Date<i class="text-danger">*</i></label>
-                                    <input type="date" class="form-control" id="joiningDate" asp-for="JoiningDate" placeholder="Enter Joining Date">
+                                    <input type="date" class="form-control" max="@today" id="joiningDate" asp-for="JoiningDate" placeholder="Enter Joining Date">
                                 </div>
                                 <div class="col-md-6">
-                                    <label for="joiningDate" class="pb-2">Member Photo<i class="text-danger">*</i></label>
-                                    <input type="file" class="form-control" id="joiningDate" asp-for="Image">
+                                    <label for="joiningDate" class="pb-2">Member Photo</label>
+                                    <input type="file" class="form-control" id="memberPhoto" asp-for="Image">
                                     @if (Model != null && Model.ImageName != null)
                                     {
                                         <p>@Model.ImageName</p>
@@ -97,11 +100,11 @@
                                 <div class="col-md-12">
                                     @if (Model == null || Model.Id == 0)
                                     {
-                                        <button type="submit" class="btn btn-primary">Add</button>
+                                        <button type="submit" id="submitButton" class="btn btn-primary">Add</button>
                                     }
                                     else
                                     {
-                                        <button type="submit" class="btn btn-warning">Update</button>
+                                        <button type="submit" id="submitButton" class="btn btn-warning">Update</button>
                                     }
                                     <a asp-action="Team" class="btn btn-secondary">Cancel</a>
                                 </div>

@@ -51,7 +51,7 @@
 }
 
 .member-details .wrapper {
-    display: flex;
+    display: block;
 }
 
 #detailsModal .modal-body {
@@ -65,7 +65,7 @@
 }
 
 .member-details .left {
-    width: 35%;
+    width: 100%;
     background: linear-gradient(to right, #283a5a, #00b5d0);
     padding: 30px 25px;
     border-top-left-radius: 5px;
@@ -77,8 +77,8 @@
     .member-details .left img {
         border-radius: 5px;
         margin-bottom: 10px;
-        width:175px;
-        height:175px;
+        width:150px;
+        height:150px;
     }
 @media only screen and (max-width: 995px) {
     .member-details .left img {
@@ -100,7 +100,7 @@
     }
 
 .member-details .right {
-    width: 65%;
+    width: 100%;
     background: #fff;
     padding: 30px 25px;
     border-top-right-radius: 5px;
@@ -148,3 +148,15 @@
                 color: #919aa3;
             }
 
+
+
+.admin-pic img {
+    width:40px;
+}
+
+.navmenu .dropdown-menu a {
+    color: #3c4c6a;
+}
+.navmenu .dropdown-menu li:hover {
+    background: #f0f0f099;
+}
