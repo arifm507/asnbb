@@ -1,4 +1,5 @@
 ﻿using AllamaShibliQuiz.Data;
+using AllamaShibliQuiz.Helpers;
 using AllamaShibliQuiz.Models;
 using AllamaShibliQuiz.Models.ViewModels;
 using AutoMapper;
@@ -36,12 +37,24 @@ namespace AllamaShibliQuiz.Controllers
         [HttpPost]
         public async Task<IActionResult> Login(LoginViewModel login)
         {
-            if (login.Email == "arifm507@gmail.com" && login.Password == "333")
+            if (string.IsNullOrEmpty(login.Email) || string.IsNullOrEmpty(login.Password))
+            {
+                ViewBag.AlertMessage = new AlertMessageViewModel()
+                {
+                    Type = "Error",
+                    Message = "Please enter valid Email or Password."
+                };
+                return View();
+            }
+            var encryptedPwd = login.Password.EncryptString();
+            var loginUser = await _context.AdminUsers.AsNoTracking().Where(x => x.Email == login.Email && x.Password == encryptedPwd).FirstOrDefaultAsync();
+            if (loginUser != null)
             {
                 List<Claim> claims = new List<Claim>() {
-                    new Claim(ClaimTypes.NameIdentifier, login.Email),
-                    new Claim("Role", "Admin")
-                };
+                                        new Claim(ClaimTypes.NameIdentifier, login.Email),
+                                        new Claim(ClaimTypes.Email, login.Email),
+                                        new Claim(ClaimTypes.Role, "Admin")
+                    };
                 ClaimsIdentity claimsIdentity = new ClaimsIdentity(claims, CookieAuthenticationDefaults.AuthenticationScheme);
                 AuthenticationProperties properties = new AuthenticationProperties()
                 {

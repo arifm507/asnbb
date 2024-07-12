@@ -2,6 +2,20 @@
 // for details on configuring this project to bundle and minify static web assets.
 
 // Write your JavaScript code.
+let i = 0;
+let txt = 'An engaging and challenging platform for students to showcase their academic knowledge, critical thinking skills, and creativity.';
+let speed = 50;
+function typeWriter() {
+    if (!document.getElementById("typeWriterText")) {
+        return;
+    }
+    if (i < txt.length) {
+        document.getElementById("typeWriterText").innerHTML += txt.charAt(i);
+        i++;
+        setTimeout(typeWriter, speed);
+    }
+}
+typeWriter();
 
 new DataTable('#studentsTable', {
     ordering: false,
@@ -61,4 +75,3 @@ function isNumber(evt) {
 function disableSubmitButton() {
     document.getElementById('submitButton').disabled = true;
 }
-
