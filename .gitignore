@@ -205,3 +205,4 @@ paket-files/
 
 .DS_STORE
 /AllamaShibliQuiz.sln
+/AllamaShibliQuiz/Properties/PublishProfiles/FolderProfile.pubxml
