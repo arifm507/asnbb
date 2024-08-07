@@ -93,7 +93,7 @@ h6 {
     }
 
         .header .logo img {
-            max-height: 80px;
+            max-height: 72px;
             /*margin-right: 8px;*/
         }
 
@@ -842,7 +842,7 @@ section,
     --heading-color: var(--hero-color);
     --contrast-color: var(--hero-color);
     width: 100%;
-    min-height: 80vh;
+    min-height: 100vh;
     position: relative;
     padding: 120px 0 60px 0;
     display: flex;

@@ -4,8 +4,8 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Allama Shibli Nomani Brainiac Battle</title>
-    <meta content="" name="description">
-    <meta content="" name="keywords">
+    <meta content="Allama Shibli Nomani Brainiac Battle is an quiz competition website. You can register yourself from here." name="description">
+    <meta content="Allama Shibli Nomani Brainiac Battle, asnbb, quiz competition, General Knowledge, Azamgarh, Allama Shibli Nomani, Registration" name="keywords">
 
     <!-- Favicons -->
     <link href="~/assets/img/logo.png" rel="icon">
@@ -21,14 +21,15 @@
     <link href="~/assets/vendor/bootstrap-icons/bootstrap-icons.css" rel="stylesheet">
     <link href="~/assets/vendor/aos/aos.css" rel="stylesheet">
     <link href="~/assets/vendor/glightbox/css/glightbox.min.css" rel="stylesheet">
-    <link href="https://cdn.datatables.net/2.0.8/css/dataTables.bootstrap5.css" rel="stylesheet" />
+    <link href="~/assets/vendor/swiper/swiper-bundle.min.css" rel="stylesheet">
+    <link href="~/assets/vendor/datatables/datatables.min.css" rel="stylesheet" />
 
     <!-- Main CSS File -->
     <link href="~/assets/css/main.css" rel="stylesheet">
     <link href="~/css/site.css" rel="stylesheet" />
     <link href="~/css/admin.css" rel="stylesheet" />
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/sweetalert2@11.12.2/dist/sweetalert2.min.css" integrity="sha256-KIZHD6c6Nkk0tgsncHeNNwvNU1TX8YzPrYn01ltQwFg=" crossorigin="anonymous">
-
+    <link href="~/assets/vendor/sweetalert/sweetalert2.min.css" rel="stylesheet" />
+    
 </head>
 @{
     var controllerName = (string)ViewContext.RouteData.Values["controller"];
@@ -106,26 +107,17 @@
     <!-- Preloader -->
     <div id="preloader"></div>
 
-    <!-- Vendor JS Files -->
-    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+
+    <script src="~/assets/js/jquery-3.6.0.min.js"></script>
     <script src="~/assets/vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
     <script src="~/assets/vendor/aos/aos.js"></script>
     <script src="~/assets/vendor/glightbox/js/glightbox.min.js"></script>
+    <script src="~/assets/vendor/swiper/swiper-bundle.min.js"></script>
     <script src="~/assets/vendor/waypoints/noframework.waypoints.js"></script>
     <script src="~/assets/vendor/imagesloaded/imagesloaded.pkgd.min.js"></script>
     <script src="~/assets/vendor/isotope-layout/isotope.pkgd.min.js"></script>
-
-    <script src="https://cdn.datatables.net/2.0.8/js/dataTables.js"></script>
-    <script src="https://cdn.datatables.net/2.0.8/js/dataTables.bootstrap5.js"></script>
-
-    <script src="https://cdn.datatables.net/buttons/3.0.2/js/dataTables.buttons.js"></script>
-    <script src="https://cdn.datatables.net/buttons/3.0.2/js/buttons.dataTables.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/jszip/3.10.1/jszip.min.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/pdfmake/0.2.7/pdfmake.min.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/pdfmake/0.2.7/vfs_fonts.js"></script>
-    <script src="https://cdn.datatables.net/buttons/3.0.2/js/buttons.html5.min.js"></script>
-    <script src="https://cdn.datatables.net/buttons/3.0.2/js/buttons.print.min.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11.12.2/dist/sweetalert2.all.min.js" integrity="sha256-J+5D76zpkRERiI3Fzew5wbVA08FQRsuHqdsqXCnRD7Q=" crossorigin="anonymous"></script>
+    <script src="~/assets/vendor/datatables/datatables.min.js"></script>
+    <script src="~/assets/vendor/sweetalert/sweetalert2.all.min.js"></script>
 
 
     <!-- Main JS File -->

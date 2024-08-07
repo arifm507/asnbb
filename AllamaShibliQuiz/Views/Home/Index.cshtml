@@ -28,27 +28,33 @@
                             <h3 class="card-heading">Our Top Performers in ASNBB-2023</h3>
                         </div>
                         <div class="card-body">
-                            <div class="container">
-                                <div class="row g-2 mb-2">
-                                    <div class="col-md-4 col-6">
-                                        <img src="~/assets/img/toppers/Zikra_Nausad.jpg" class="figure" />
-                                    </div>
-                                    <div class="col-md-4 col-6">
-                                        <img src="~/assets/img/toppers/asma_fatima.jpg" class="figure" />
-                                    </div>
-                                    <div class="col-md-4 col-6">
-                                        <img src="~/assets/img/toppers/abdurraheem.jpg" class="figure" />
-                                    </div>
-                                    <div class="col-md-4 col-6">
-                                        <img src="~/assets/img/toppers/sidra.jpg" class="figure" />
-                                    </div>
-                                    <div class="col-md-4 col-6">
-                                        <img src="~/assets/img/toppers/nashra_naushad.jpg" class="figure" />
-                                    </div>
-                                    <div class="col-md-4 col-6">
-                                        <img src="~/assets/img/toppers/shahzeen.jpg" class="figure" />
-                                    </div>
+                            <div class="swiper">
+                                <script type="application/json" class="swiper-config">
+                                    {
+                                      "loop": true,
+                                      "speed": 600,
+                                      "autoplay": {
+                                        "delay": 2000
+                                      },
+                                      "slidesPerView": 3,
+                                      "spaceBetween": 10,
+                                      "pagination": {
+                                        "el": ".swiper-pagination",
+                                        "type": "bullets",
+                                        "clickable": true
+                                      }
+                                    }
+                                </script>
+                                <div class="swiper-wrapper">
+                                    <div class="swiper-slide"><img src="~/assets/img/toppers/zikra_nausad.jpg" class="img-fluid" /></div>
+                                    <div class="swiper-slide"><img src="~/assets/img/toppers/asma_fatima.jpg" class="img-fluid" /></div>
+                                    <div class="swiper-slide"><img src="~/assets/img/toppers/abdurraheem.jpg" class="img-fluid" /></div>
+                                    <div class="swiper-slide"><img src="~/assets/img/toppers/sidra.jpg" class="img-fluid" /></div>
+                                    <div class="swiper-slide"><img src="~/assets/img/toppers/nashra_naushad.jpg" class="img-fluid" /></div>
+                                    <div class="swiper-slide"><img src="~/assets/img/toppers/shahzeen.jpg" class="img-fluid" /></div>
                                 </div>
+                                <!-- If we need pagination -->
+                                <div class="swiper-pagination"></div>
                             </div>
                         </div>
                     </div>
@@ -62,7 +68,7 @@
 <!-- About Section -->
 <section id="about" class="about section">
     <!-- Section Title -->
-    <div class="container section-title" data-aos="fade-up">
+    <div class="container section-title">
         <h2>Our Vision</h2>
     </div><!-- End Section Title -->
 
@@ -70,7 +76,7 @@
 
         <div class="row gy-4">
 
-            <div class="col-lg-6 content text-justify" data-aos="fade-up" data-aos-delay="100">
+            <div class="col-lg-6 content text-justify">
                 <p>
                     A premier quiz competition designed to honor the legacy of one of the most distinguished scholars of the modern era, Allama Shibli Nomani.
                     This event not only celebrates the pursuit of knowledge but also aims to inspire students by highlighting the life and contributions of
@@ -83,16 +89,30 @@
 
             </div>
 
-            <div class="col-lg-6 content text-justify" data-aos="fade-up" data-aos-delay="200">
+            <div class="col-lg-6 content text-justify">
+                <h2>Why Participate?</h2>
+                <ul class="mb-0">
+                    <li>Enhance your knowledge and intellectual skills.</li>
+                    <li>Compete with peers and showcase your talents.</li>
+                    <li>Win exciting prizes and recognition.</li>
+                    <li>
+                        We're preparing exam papers similar to higher-level entrance examinations
+                        such as NEET, JEE and CUET to help students prepare for them.
+                    </li>
+                </ul>
                 <p>
-                    The Allama Shibli Nomani Brainiac Battle aims to inspire and challenge participants by creating an environment that promotes learning,
-                    critical thinking, and teamwork, all while honoring the scholarly spirit of Allama Shibli Nomani. We believe in the power of knowledge
-                    to transform lives and shape future leaders.
+                    Join us for a thrilling journey of knowledge and discovery! Be a part of the Allama Shibli Nomani Brainiac Battle and test your wits against the best.
+                </p>
+
+                @* <p>
+                The Allama Shibli Nomani Brainiac Battle aims to inspire and challenge participants by creating an environment that promotes learning,
+                critical thinking, and teamwork, all while honoring the scholarly spirit of Allama Shibli Nomani. We believe in the power of knowledge
+                to transform lives and shape future leaders.
                 </p>
                 <p>
-                    We envision a world where curiosity is encouraged, intellectual pursuits are celebrated, and the thirst for knowledge knows no bounds.
-                    Through our quiz competition, we strive to create a platform that not only tests but also expands the horizons of our participants, in the same way
-                </p>
+                We envision a world where curiosity is encouraged, intellectual pursuits are celebrated, and the thirst for knowledge knows no bounds.
+                Through our quiz competition, we strive to create a platform that not only tests but also expands the horizons of our participants, in the same way
+                </p> *@
             </div>
 
         </div>
@@ -638,11 +658,11 @@
                     <div class="member-info">
                         <h4>Mr. Mohd Ahmar</h4>
                         <span>Secretary </span>
-                        <p>Mohd Ahmar qualified in M.Sc.(Chemistry). He has 3 years of teaching experience.</p>
+                        <p>Mohd Ahmar qualified in M.Sc.(Chemistry). He has 4 years of teaching experience.</p>
                         <div class="social">
-                            <a href=""><i class="bi bi-twitter-x"></i></a>
-                            <a href=""><i class="bi bi-facebook"></i></a>
-                            <a href=""><i class="bi bi-instagram"></i></a>
+                            @* <a href=""><i class="bi bi-twitter-x"></i></a> *@
+                            <a href="https://www.facebook.com/shazibshaikh.mohd?mibextid=ZbWKwL" target="_blank"><i class="bi bi-facebook"></i></a>
+                            <a href="https://www.instagram.com/ahmar__snc/?igsh=MTQ2MG01cmJxeWFxdw%3D%3D" target="_blank"><i class="bi bi-instagram"></i></a>
                         </div>
                     </div>
                 </div>
@@ -735,12 +755,12 @@
 <section id="contact" class="contact section">
 
     <!-- Section Title -->
-    <div class="container section-title" data-aos="fade-up">
+    <div class="container section-title">
         <h2>Contact</h2>
         <p>You can contact us if you have any query.</p>
     </div><!-- End Section Title -->
 
-    <div class="container" data-aos="fade-up" data-aos-delay="100">
+    <div class="container">
         <div class="row gy-4">
             <div class="col-12">
                 <div class="info-wrap">
