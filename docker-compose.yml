@@ -1,0 +1,8 @@
+version: '3.4'
+
+services:
+  allamashibliquiz:
+    image: ${DOCKER_REGISTRY-}allamashibliquiz
+    build:
+      context: .
+      dockerfile: AllamaShibliQuiz/Dockerfile
