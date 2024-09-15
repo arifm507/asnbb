@@ -29,7 +29,7 @@
     <link href="~/css/site.css" rel="stylesheet" />
     <link href="~/css/admin.css" rel="stylesheet" />
     <link href="~/assets/vendor/sweetalert/sweetalert2.min.css" rel="stylesheet" />
-    
+
 </head>
 @{
     var controllerName = (string)ViewContext.RouteData.Values["controller"];
@@ -75,7 +75,7 @@
             </nav>
             @if (!controllerName.Contains("Admin"))
             {
-                <a class="btn-getstarted" asp-controller="Result" asp-action="Index">Download Result</a>
+                <a class="btn-getstarted" asp-controller="Result" asp-action="Index">Download Result 2023</a>
             }
 
         </div>
@@ -88,13 +88,23 @@
     </div>
 
     <footer id="footer" class="footer">
-        <div class="container copyright text-center mt-4">
-            <p>© <span>Copyright</span> <strong class="px-1 sitename">ASNBB</strong> <span>All Rights Reserved</span></p>
-            <div class="credits">
-                Organized by <a href="https://maps.app.goo.gl/MeBeehQPorihw1Yz8" target="_blank">Moaz Bin Jabal Public School, MohammadPur Azamgarh</a>
-            </div>
-            <div class="credits">
-                Designed & Developed by <a href="https://www.linkedin.com/in/mohd-arif-705985135/" target="_blank">Mohd Arif</a>
+        <div class="container copyright mt-4">
+            <div class="row">
+                <div class="col-sm-6">
+                    <p>Allama Shibli Nomani Brainiac Battle</p>
+                    <div class="credits">
+                        Organized by <a href="https://www.instagram.com/shibli_brainiac_battle?utm_source=ig_web_button_share_sheet&igsh=ZDNlZDc0MzIxNw==" target="_blank">Team Brainiac Battle</a>
+                    </div>
+                    <div class="credits">
+                        Sponsored by <a href="https://maps.app.goo.gl/3iB11hjSxkBd6dLX7" target="_blank">M.I. Naseerul Uloom, Khutahna, Sanjarpur, Azamgarh</a>
+                    </div>
+                </div>
+                <div class="col-sm-6 text-end">
+                    <p>© <span>Copyright</span> <strong class="px-1 sitename">ASNBB</strong> <span>All Rights Reserved</span></p>
+                    <div class="credits">
+                        Designed & Developed by <a href="https://www.linkedin.com/in/mohd-arif-705985135/" target="_blank">Mohd Arif</a>
+                    </div>
+                </div>
             </div>
         </div>
 

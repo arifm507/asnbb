@@ -10,5 +10,6 @@ namespace AllamaShibliQuiz.Data
         public DbSet<Team> Teams { get; set; }
         public DbSet<AdminUser> AdminUsers { get; set; }
         public DbSet<Student> Students { get; set; }
+        public DbSet<School> Schools { get; set; }
     }
 }

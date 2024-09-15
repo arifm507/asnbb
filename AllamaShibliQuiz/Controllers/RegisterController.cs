@@ -3,6 +3,7 @@ using AllamaShibliQuiz.Models;
 using AllamaShibliQuiz.Models.ViewModels;
 using AutoMapper;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
 
 namespace AllamaShibliQuiz.Controllers
@@ -20,6 +21,12 @@ namespace AllamaShibliQuiz.Controllers
         // GET: RegisterController
         public ActionResult Index()
         {
+            var schoolsList = _context.Schools.Where(x => x.IsActive).Select(x => new SchoolViewModel { Id = x.Id, Name = x.Name, IsExamCentre = x.IsExamCentre }).ToList();
+            schoolsList.Add(new SchoolViewModel() { Id = 0, Name = "Other", IsExamCentre = false });
+            ViewBag.Schools = schoolsList;
+            var examCentres = schoolsList.Where(x => x.IsExamCentre).
+                Select(x => new { x.Id, x.Name }).ToList();
+            ViewBag.ExamCentres = examCentres;
             return View();
         }
 

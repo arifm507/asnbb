@@ -19,6 +19,8 @@ namespace AllamaShibliQuiz.Models
         [Required]
         public string SchoolName { get; set; }
         [Required]
+        public int ExamCentre { get; set; }
+        [Required]
         public string Address { get; set; }
         [Required]
         public string MobileNumber { get; set; }

@@ -26,9 +26,6 @@
     text-align: justify;
 }
 
-.text-green {
-    color: #00ff8e;
-}
 
 .table-header {
     --bs-table-color: #fff;
@@ -77,9 +74,10 @@
     .member-details .left img {
         border-radius: 5px;
         margin-bottom: 10px;
-        width:150px;
-        height:150px;
+        width: 150px;
+        height: 150px;
     }
+
 @media only screen and (max-width: 995px) {
     .member-details .left img {
         width: 100px;
@@ -88,16 +86,16 @@
 }
 
 
-    .member-details .left h4 {
-        margin: 12px 0;
-        font-size: 30px;
-        font-weight: 600;
-    }
+.member-details .left h4 {
+    margin: 12px 0;
+    font-size: 30px;
+    font-weight: 600;
+}
 
-    .member-details .left p {
-        font-size: 15px;
-        font-weight: 500;
-    }
+.member-details .left p {
+    font-size: 15px;
+    font-weight: 500;
+}
 
 .member-details .right {
     width: 100%;
@@ -151,15 +149,73 @@
 
 
 .admin-pic img {
-    width:40px;
+    width: 40px;
 }
 
 .navmenu .dropdown-menu a {
     color: #3c4c6a;
 }
+
 .navmenu .dropdown-menu li:hover {
     background: #f0f0f099;
 }
+
 .upi-image {
-    width:250px;
+    width: 250px;
+}
+
+.sponsored-by {
+    font-size: 18px !important;
+}
+
+    .sponsored-by .text-green {
+        /*color: #00ff8e;*/
+        color: #00beff;
+        font-weight:700;
+    }
+
+.wlcm-logo {
+    width: 70px;
+    position: absolute;
+}
+
+.wlcm-close-btn {
+    position: absolute;
+    top: 10px;
+    right: 10px;
+}
+.welcome-to {
+    font-size:22px;
+}
+
+.shibli {
+    color: #00796B;
+    font-size: 30px;
+}
+
+.brainiac {
+    font-size: 35px;
+    font-weight: 800;
+    background: linear-gradient(to right, #121FCF 0%, #CF1512 100%);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+}
+
+.quiztime-img {
+    width:130px;
+}
+.rgst-opn {
+    text-align: center;
+    font-size: 30px;
+    font-weight: 800;
+    background: #68CF00;
+    background: linear-gradient(to top left, #68CF00 0%, #00ADCF 100%);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+}
+
+.sponsor-name {
+    font-weight: 700;
+    color: darkgreen;
+    font-size: 16px;
 }

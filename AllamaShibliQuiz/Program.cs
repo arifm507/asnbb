@@ -2,11 +2,13 @@ using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.AspNetCore.Authentication.Cookies;
 using AllamaShibliQuiz.Data;
+using Microsoft.Extensions.Configuration;
+using System;
 
 var builder = WebApplication.CreateBuilder(args);
 var connectionString = builder.Configuration.GetConnectionString("AsnbbConnectionString") ??
     throw new InvalidOperationException("Connection string 'AsnbbConnectionString' not found.");
-builder.Services.AddDbContext<AsnbbDBContext>(options => options.UseSqlServer(connectionString));
+builder.Services.AddDbContext<AsnbbDBContext>(options => options.UseNpgsql(connectionString));
 
 
 // Add services to the container.
@@ -23,6 +25,7 @@ builder.Services.AddAutoMapper(typeof(Program));
 
 var app = builder.Build();
 
+AppContext.SetSwitch("Npgsql.EnableLegacyTimestampBehavior", true);
 // Configure the HTTP request pipeline.
 if (!app.Environment.IsDevelopment())
 {

@@ -17,6 +17,7 @@ namespace AllamaShibliQuiz.Controllers
     {
         private readonly AsnbbDBContext _context;
         private readonly IMapper _mapper;
+        private int validFileSize = 200; //200 KB
         public AdminController(AsnbbDBContext context, IMapper mapper)
         {
             _context = context;
@@ -181,6 +182,11 @@ namespace AllamaShibliQuiz.Controllers
             }
             if (image != null && image.Length > 0)
             {
+                var fileSize = image.Length/1024;
+                if (fileSize > validFileSize) {
+                    ViewData["ValidateMessage"] = "Please upload file size less than 200 KB.";
+                    return View("TeamAddOrEdit");
+                }
                 using (var ms = new MemoryStream())
                 {
                     await image.CopyToAsync(ms);

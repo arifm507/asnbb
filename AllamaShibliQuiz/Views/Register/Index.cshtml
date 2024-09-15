@@ -52,7 +52,15 @@
                         </div>
                         <div class="col-md-6">
                             <label for="school" class="pb-2">School Name<i class="text-danger">*</i></label>
-                            <input type="text" class="form-control" asp-for="SchoolName" id="school" placeholder="Enter School Name" required>
+                            <select class="form-select" id="school" asp-for="SchoolName" asp-items="@(new SelectList(ViewBag.Schools, "Name", "Name"))" required>
+                                <option selected value="0">Select School Name</option>
+                            </select>
+                        </div>
+                        <div class="col-md-6">
+                            <label for="gender" class="pb-2">Exam Centre<i class="text-danger">*</i></label>
+                            <select class="form-select" id="examCentre" asp-for="ExamCentre" asp-items="@(new SelectList(ViewBag.ExamCentres, "Id", "Name"))" required>
+                                <option selected value="0">Select Exam Centre</option>
+                            </select>
                         </div>
                         <div class="col-md-6">
                             <label for="address" class="pb-2">Address<i class="text-danger">*</i></label>

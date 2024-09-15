@@ -75,3 +75,10 @@ function isNumber(evt) {
 function disableSubmitButton() {
     document.getElementById('submitButton').disabled = true;
 }
+
+window.onload = () => {
+    const myModal = new bootstrap.Modal('#welcomeModal');
+    if (myModal) {
+        myModal.show();
+    }
+}
