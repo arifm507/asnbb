@@ -1,0 +1,39 @@
+﻿@model AllamaShibliQuiz.Models.ViewModels.SyllabusViewModel
+
+<!-- Register Section -->
+<section id="syllabus" class="section inside">
+    <div class="container">
+        <form method="post">
+            <div class="row">
+                <div class="col-md-6 offset-md-3">
+                    <div class="card card-main mt-2">
+                        <div class="card-header">
+                            <h4>Download Syllabus of ASNBB Exam</h4>
+                        </div>
+                        <div class="card-body pb-5">
+                            <div class="row gy-4">
+                                <div class="col-md-12">
+                                    <label for="class" class="pb-2">Class<i class="text-danger">*</i></label>
+                                    <select class="form-select" id="class" asp-for="Class" required>
+                                        <option value="0" selected>Select Class</option>
+                                        <option value="6">Class 6</option>
+                                        <option value="7">Class 7</option>
+                                        <option value="8">Class 8</option>
+                                        <option value="9">Class 9</option>
+                                        <option value="10">Class 10</option>
+                                        <option value="11">Class 11</option>
+                                        <option value="12">Class 12</option>
+                                    </select>
+                                </div>
+                                <div class="col-md-12">
+                                    <button type="submit" class="btn btn-primary">Download</button>
+                                    <a asp-controller="Home" asp-action="index" class="btn btn-secondary">Cancel</a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </form>
+    </div>
+</section>

@@ -19,15 +19,19 @@ namespace AllamaShibliQuiz.Controllers
             _mapper = mapper;
         }
         // GET: RegisterController
-        public ActionResult Index()
+        public async Task<ActionResult> IndexAsync()
         {
-            var schoolsList = _context.Schools.Where(x => x.IsActive).Select(x => new SchoolViewModel { Id = x.Id, Name = x.Name, IsExamCentre = x.IsExamCentre }).ToList();
+            await LoadRegisterPageData();
+            return View();
+        }
+        private async Task LoadRegisterPageData()
+        {
+            var schoolsList = await _context.Schools.Where(x => x.IsActive).Select(x => new SchoolViewModel { Id = x.Id, Name = x.Name, IsExamCentre = x.IsExamCentre }).ToListAsync();
             schoolsList.Add(new SchoolViewModel() { Id = 0, Name = "Other", IsExamCentre = false });
             ViewBag.Schools = schoolsList;
             var examCentres = schoolsList.Where(x => x.IsExamCentre).
                 Select(x => new { x.Id, x.Name }).ToList();
             ViewBag.ExamCentres = examCentres;
-            return View();
         }
 
         // POST: RegisterController/Create
@@ -38,6 +42,7 @@ namespace AllamaShibliQuiz.Controllers
             try
             {
                 var isValid = IsValidData(studentViewModel);
+                await LoadRegisterPageData();
                 if (ModelState.IsValid)
                 {
                     if (!isValid)
@@ -48,17 +53,21 @@ namespace AllamaShibliQuiz.Controllers
                     {
                         return View(studentViewModel);
                     }
+                    if (studentViewModel.SchoolName == "Other")
+                    {
+                        studentViewModel.SchoolName = studentViewModel.OtherSchoolName;
+                    }
                     studentViewModel.CreateDate = DateTime.Now;
                     var student = _mapper.Map<Student>(studentViewModel);
                     _context.Students.Add(student);
                     await _context.SaveChangesAsync();
                     return RedirectToAction(nameof(RegisterSuccess), new { id = student.Id });
                 }
-                return View();
+                return View(studentViewModel);
             }
             catch
             {
-                return View();
+                return View(studentViewModel);
             }
         }
         private bool IsValidData(StudentViewModel student)
@@ -79,6 +88,18 @@ namespace AllamaShibliQuiz.Controllers
             if (student.AadharNumber.Length < 12)
             {
                 errorMessage += "<br /> Please enter valid aadhar number(12 digit).";
+            }
+            if (string.IsNullOrEmpty(student.SchoolName) || student.SchoolName == "0")
+            {
+                errorMessage += "<br /> Please Select the School.";
+            }
+            if (student.ExamCentre == 0)
+            {
+                errorMessage += "<br /> Please Select the Exam Center.";
+            }
+            if (student.SchoolName == "Other" && string.IsNullOrEmpty(student.OtherSchoolName))
+            {
+                errorMessage += "<br /> Please enter school name.";
             }
             if (!string.IsNullOrEmpty(errorMessage))
             {

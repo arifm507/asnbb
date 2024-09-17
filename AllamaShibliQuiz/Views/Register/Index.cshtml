@@ -1,8 +1,8 @@
 ﻿@model AllamaShibliQuiz.Models.ViewModels.StudentViewModel
 <!-- Register Section -->
-<section id="result" class="section inside h-75">
+<section id="registerSection" class="section inside h-75">
     <div class="container">
-        <form asp-action="Index" method="post" autocomplete="off">
+        <form asp-action="Index" method="post" autocomplete="off" id="register-form">
             <div class="card card-main mt-2">
                 <div class="card-header">
                     <h4>Register here to enroll in ASNBB-2024</h4>
@@ -55,6 +55,7 @@
                             <select class="form-select" id="school" asp-for="SchoolName" asp-items="@(new SelectList(ViewBag.Schools, "Name", "Name"))" required>
                                 <option selected value="0">Select School Name</option>
                             </select>
+                            <input type="text" class="form-control mt-2" asp-for="OtherSchoolName" id="otherSchoolName" placeholder="Enter School Name" style="display:none;">
                         </div>
                         <div class="col-md-6">
                             <label for="gender" class="pb-2">Exam Centre<i class="text-danger">*</i></label>
@@ -80,7 +81,7 @@
                             {
                                 <p class="text-danger">@ViewData["ValidateMessage"]</p>
                             }
-                            <button type="submit" class="btn btn-primary">Register</button>
+                            <button type="submit" id="registerBtn" class="btn btn-primary">Register</button>
                             <a asp-controller="Home" asp-action="index" class="btn btn-secondary">Cancel</a>
                         </div>
                     </div>

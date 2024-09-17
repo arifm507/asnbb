@@ -17,16 +17,20 @@ function typeWriter() {
 }
 typeWriter();
 
-new DataTable('#studentsTable', {
-    ordering: false,
-    layout: {
-        topStart: {
-            buttons: ['excel', 'pdf']
+const studentsTable = document.getElementById('studentsTable');
+if (studentsTable) {
+    new DataTable('#studentsTable', {
+        ordering: false,
+        layout: {
+            topStart: {
+                buttons: ['excel', 'pdf']
+            }
         }
-    }
-});
+    });
 
-const myModalEl = document.getElementById('detailsModal')
+}
+
+const myModalEl = document.getElementById('detailsModal');
 if (myModalEl) {
     myModalEl.addEventListener('show.bs.modal', event => {
         var button = $(event.relatedTarget);
@@ -45,7 +49,7 @@ if (myModalEl) {
     });
 }
 
-const myModalStudent = document.getElementById('studentModal')
+const myModalStudent = document.getElementById('studentModal');
 if (myModalStudent) {
     myModalStudent.addEventListener('show.bs.modal', event => {
         var button = $(event.relatedTarget);
@@ -63,6 +67,32 @@ if (myModalStudent) {
         document.getElementById("student-detail-body").innerHTML = "";
     });
 }
+
+const homeModalElement = document.getElementById('welcomeModal')
+if (homeModalElement) {
+    const welcomeModal = new bootstrap.Modal('#welcomeModal');
+    if (welcomeModal) {
+        welcomeModal.show();
+    }
+}
+
+var schoolSelect = document.getElementById('school');
+if (schoolSelect) {
+    var otherSchoolName = document.getElementById('otherSchoolName');
+    if (schoolSelect.value === 'Other') {
+        otherSchoolName.style.display = 'block';
+    } else {
+        otherSchoolName.style.display = 'none';
+    }
+    schoolSelect.addEventListener('change', function () {
+        if (schoolSelect.value === 'Other') {
+            otherSchoolName.style.display = 'block';
+        } else {
+            otherSchoolName.style.display = 'none';
+        }
+    });
+}
+
 function isNumber(evt) {
     evt = (evt) ? evt : window.event;
     var charCode = (evt.which) ? evt.which : evt.keyCode;
@@ -74,11 +104,4 @@ function isNumber(evt) {
 
 function disableSubmitButton() {
     document.getElementById('submitButton').disabled = true;
-}
-
-window.onload = () => {
-    const myModal = new bootstrap.Modal('#welcomeModal');
-    if (myModal) {
-        myModal.show();
-    }
 }
