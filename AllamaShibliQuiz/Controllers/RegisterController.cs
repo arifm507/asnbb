@@ -26,7 +26,7 @@ namespace AllamaShibliQuiz.Controllers
         }
         private async Task LoadRegisterPageData()
         {
-            var schoolsList = await _context.Schools.Where(x => x.IsActive).Select(x => new SchoolViewModel { Id = x.Id, Name = x.Name, IsExamCentre = x.IsExamCentre }).ToListAsync();
+            var schoolsList = await _context.Schools.Where(x => x.IsActive).OrderBy(x => x.Rank).Select(x => new SchoolViewModel { Id = x.Id, Name = x.Name, IsExamCentre = x.IsExamCentre }).ToListAsync();
             schoolsList.Add(new SchoolViewModel() { Id = 0, Name = "Other", IsExamCentre = false });
             ViewBag.Schools = schoolsList;
             var examCentres = schoolsList.Where(x => x.IsExamCentre).
