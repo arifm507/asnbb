@@ -171,7 +171,7 @@
     .sponsored-by .text-green {
         /*color: #00ff8e;*/
         color: #00beff;
-        font-weight:700;
+        font-weight: 700;
     }
 
 .wlcm-logo {
@@ -184,8 +184,9 @@
     top: 10px;
     right: 10px;
 }
+
 .welcome-to {
-    font-size:22px;
+    font-size: 22px;
 }
 
 .shibli {
@@ -202,8 +203,9 @@
 }
 
 .quiztime-img {
-    width:130px;
+    width: 130px;
 }
+
 .rgst-opn {
     text-align: center;
     font-size: 30px;
@@ -218,4 +220,8 @@
     font-weight: 700;
     color: darkgreen;
     font-size: 16px;
+}
+
+.insta-img {
+    width: 130px;
 }

@@ -3,7 +3,7 @@
 
 // Write your JavaScript code.
 let i = 0;
-let txt = 'An engaging and challenging platform for students to showcase their academic knowledge, critical thinking skills, and creativity.';
+let txt = 'An engaging and challenging platform for students to showcase their academic knowledge, critical thinking skills and creativity.';
 let speed = 50;
 function typeWriter() {
     if (!document.getElementById("typeWriterText")) {
@@ -56,7 +56,7 @@ if (myModalStudent) {
         var itemId = button.data('id');
 
         $.ajax({
-            url: "StudentDetails",
+            url: "/Admin/StudentDetails",
             data: { id: itemId },
             success: function (result) {
                 document.getElementById("student-detail-body").innerHTML = result;
@@ -79,18 +79,11 @@ if (homeModalElement) {
 var schoolSelect = document.getElementById('school');
 if (schoolSelect) {
     var otherSchoolName = document.getElementById('otherSchoolName');
-    if (schoolSelect.value === 'Other') {
+    if (schoolSelect.value === '0') {
         otherSchoolName.style.display = 'block';
     } else {
         otherSchoolName.style.display = 'none';
     }
-    schoolSelect.addEventListener('change', function () {
-        if (schoolSelect.value === 'Other') {
-            otherSchoolName.style.display = 'block';
-        } else {
-            otherSchoolName.style.display = 'none';
-        }
-    });
 }
 
 function isNumber(evt) {

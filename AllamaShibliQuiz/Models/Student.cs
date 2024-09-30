@@ -16,12 +16,14 @@ namespace AllamaShibliQuiz.Models
         public DateTime DateOfBirth { get; set; }
         [Required]
         public int Class { get; set; }
+        public int? SchoolId { get; set; }
         [Required]
         public string SchoolName { get; set; }
         [Required]
-        public int ExamCentre { get; set; }
+        public int ExamCentreId { get; set; }
         [Required]
         public string Address { get; set; }
+        public string? RollNumber { get; set; }
         [Required]
         public string MobileNumber { get; set; }
         [Required]
@@ -29,5 +31,6 @@ namespace AllamaShibliQuiz.Models
         public DateTime CreateDate { get; set; }
         public DateTime? UpdateDate { get; set; }
         public int Status { get; set; }
+
     }
 }

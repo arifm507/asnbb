@@ -9,7 +9,9 @@ namespace AllamaShibliQuiz.Models
         [Required]
         public string Name { get; set; }
         public string Address { get; set; }
+        public int CentreCode { get; set; }
         public bool IsExamCentre { get; set; }
+        public bool IsExternalExamCentre { get; set; }
         public int? Rank { get; set; } 
         public bool IsActive { get; set; }
         [Required]

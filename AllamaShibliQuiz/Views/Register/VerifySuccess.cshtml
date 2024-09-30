@@ -1,0 +1,105 @@
+﻿@model List<AllamaShibliQuiz.Models.ViewModels.StudentViewModel>
+
+<section id="verify-success" class="section inside">
+    <div class="container">
+        <div class="row">
+            <div class="col-md-12">
+                <div class="card card-main mt-2">
+                    <div class="card-header">
+                        <h4>Registration ASNBB-2024</h4>
+                    </div>
+                    <div class="card-body pb-5">
+                        <div class="row">
+                            <div class="col-md-12">
+                                <p class="mb-3">
+                                    Thank you for registering for the Allama Shibli Nomani Brainiac Battle 2024. Kindly find your payment status detailed below.
+                                </p>
+                                <div class="table-responsive">
+                                    <table id="verifyTable" class="table table-hover table-nowrap">
+                                        <thead class="thead-light">
+                                            <tr>
+                                                <th scope="col">Name</th>
+                                                <th scope="col">FatherName</th>
+                                                <th scope="col">Class</th>
+                                                <th scope="col">SchoolName</th>
+                                                <th scope="col">Payment Status</th>
+                                                <th scope="col"></th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                            @foreach (var item in Model)
+                                            {
+                                                <tr>
+                                                    <td>
+                                                        <a class="text-heading font-semibold" href="#">
+                                                            @Html.DisplayFor(modelItem => item.Name)
+                                                        </a>
+                                                    </td>
+                                                    <td>
+                                                        @Html.DisplayFor(modelItem => item.FatherName)
+                                                    </td>
+                                                    <td>
+                                                        @Html.DisplayFor(modelItem => item.Class)
+                                                    </td>
+                                                    <td>
+                                                        @Html.DisplayFor(modelItem => item.SchoolName)
+                                                    </td>
+                                                    <td>
+                                                        <span class="badge badge-lg badge-dot">
+                                                            @if (item.Status == 0)
+                                                            {
+                                                                <i class="bg-warning"></i>
+                                                                <span>Pending</span>
+                                                            }
+                                                            else if (item.Status == 1)
+                                                            {
+                                                                <i class="bg-success"></i>
+                                                                <span>Success</span>
+                                                            }
+                                                            else if (item.Status == 2)
+                                                            {
+                                                                <i class="bg-danger"></i>
+                                                                <span>Declined</span>
+                                                            }
+                                                        </span>
+                                                    </td>
+                                                    <td class="text-end">
+                                                        <a data-bs-toggle="modal" data-bs-target="#studentModal" data-id="@item.Id" class="btn btn-sm btn-neutral">
+                                                            <i class="bi bi-eye-fill"></i>
+                                                        </a>
+                                                    </td>
+                                                </tr>
+                                            }
+                                        </tbody>
+                                    </table>
+                                </div>
+                                @if (Model.Any(x => x.Status == 0))
+                                {
+                                    <div class="payment-section mt-3">
+                                        <p>
+                                            If you have not done the payment yet please scan the below upi qr to complete the payment of Rs. 50/- and
+                                            please send a screenshot of the transaction to WhatsApp number <b>7408840781</b>.
+                                        </p>
+                                        <p class="text-center mt-3">
+                                            <img src="~/assets/img/upi.jpeg" class="upi-image" />
+                                        </p>
+                                    </div>
+                                }
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- Student Detail Modal -->
+<div class="modal modal-lg fade" id="studentModal" tabindex="-1" aria-labelledby="studentModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div id="student-detail-body" class="modal-body">
+            </div>
+        </div>
+    </div>
+</div>

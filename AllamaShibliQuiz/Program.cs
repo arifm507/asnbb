@@ -4,6 +4,8 @@ using Microsoft.AspNetCore.Authentication.Cookies;
 using AllamaShibliQuiz.Data;
 using Microsoft.Extensions.Configuration;
 using System;
+//using DinkToPdf.Contracts;
+//using DinkToPdf;
 
 var builder = WebApplication.CreateBuilder(args);
 var connectionString = builder.Configuration.GetConnectionString("AsnbbConnectionString") ??
@@ -22,6 +24,8 @@ builder.Services.AddAuthentication(
     });
 
 builder.Services.AddAutoMapper(typeof(Program));
+//builder.Services.AddSingleton(typeof(IConverter), new SynchronizedConverter(new PdfTools()));
+
 
 var app = builder.Build();
 

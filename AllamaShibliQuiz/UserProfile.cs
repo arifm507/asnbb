@@ -10,6 +10,7 @@ namespace AllamaShibliQuiz
         {
             CreateMap<Team, TeamViewModel>().ReverseMap();
             CreateMap<Student, StudentViewModel>().ReverseMap();
+            CreateMap<School, SchoolViewModel>().ReverseMap();
         }
     }
 }

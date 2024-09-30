@@ -1,0 +1,30 @@
+﻿@model AllamaShibliQuiz.Models.RequestModels.AdmitCardRequestModel
+
+<!-- Register Section -->
+<section id="verify-registration" class="section inside">
+    <div class="container">
+        <form asp-action="Index" method="post" autocomplete="off">
+            <div class="row">
+                <div class="col-md-6 offset-md-3">
+                    <div class="card card-main mt-2">
+                        <div class="card-header">
+                            <h4>Download Admit Card ASNBB-2024</h4>
+                        </div>
+                        <div class="card-body pb-5">
+                            <div class="row gy-4">
+                                <div class="col-md-12">
+                                    <label for="searchInput" class="pb-2">Mobile Number/Aadhar Number<i class="text-danger">*</i></label>
+                                    <input type="text" asp-for="SearchInput" id="searchInput" class="form-control" placeholder="Mobile Number/Aadhar Number" required>
+                                </div>
+                                <div class="col-md-12">
+                                    <button type="submit" class="btn btn-primary">View</button>
+                                    <a asp-controller="Home" asp-action="index" class="btn btn-secondary">Cancel</a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </form>
+    </div>
+</section>

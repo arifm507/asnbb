@@ -1,0 +1,63 @@
+﻿@model List<AllamaShibliQuiz.Models.ViewModels.StudentViewModel>
+
+<section id="verify-success" class="section inside">
+    <div class="container">
+        <div class="row">
+            <div class="col-md-12">
+                <div class="card card-main mt-2">
+                    <div class="card-header">
+                        <h4>Admit Card ASNBB-2024</h4>
+                    </div>
+                    <div class="card-body pb-5">
+                        <div class="row">
+                            <div class="col-md-12">
+                                <p class="mb-3">
+                                    Thank you for registering for the Allama Shibli Nomani Brainiac Battle 2024. Kindly download your Admit Card from below.
+                                </p>
+                                <div class="table-responsive">
+                                    <table id="verifyTable" class="table table-hover table-nowrap">
+                                        <thead class="thead-light">
+                                            <tr>
+                                                <th scope="col">Name</th>
+                                                <th scope="col">FatherName</th>
+                                                <th scope="col">Class</th>
+                                                <th scope="col">SchoolName</th>
+                                                <th scope="col"></th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                            @foreach (var item in Model)
+                                            {
+                                                <tr>
+                                                    <td>
+                                                        <a class="text-heading font-semibold" href="#">
+                                                            @Html.DisplayFor(modelItem => item.Name)
+                                                        </a>
+                                                    </td>
+                                                    <td>
+                                                        @Html.DisplayFor(modelItem => item.FatherName)
+                                                    </td>
+                                                    <td>
+                                                        @Html.DisplayFor(modelItem => item.Class)
+                                                    </td>
+                                                    <td>
+                                                        @Html.DisplayFor(modelItem => item.SchoolName)
+                                                    </td>
+                                                    <td class="text-end">
+                                                        <a asp-action="ViewCard" asp-route-id="@item.Id" class="btn btn-sm btn-neutral">
+                                                            <i class="bi bi-download"></i>
+                                                        </a>
+                                                    </td>
+                                                </tr>
+                                            }
+                                        </tbody>
+                                    </table>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>

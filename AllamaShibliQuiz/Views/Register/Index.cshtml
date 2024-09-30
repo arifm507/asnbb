@@ -12,10 +12,13 @@
                 }
                 <div class="card-body">
                     <div class="row gy-4">
-                        <div class="col-12">
+                        <div class="col-sm-9">
                             <h6 class="text-danger mb-0">
                                 Important Note: Please enter your/parent valid Aadhar Number. You will download admit card by Aadhar Number.
                             </h6>
+                        </div>
+                        <div class="col-sm-3 text-end">
+                            <a asp-controller="Register" asp-action="Verify" class="btn btn-sm btn-primary">Verify Registration</a>
                         </div>
                         <div class="col-md-6">
                             <label for="name" class="pb-2">Full Name<i class="text-danger">*</i></label>
@@ -28,7 +31,7 @@
                         <div class="col-md-6">
                             <label for="gender" class="pb-2">Gender<i class="text-danger">*</i></label>
                             <select class="form-select" id="gender" asp-for="Gender" required>
-                                <option selected value="0">Select Gender</option>
+                                <option selected value="">Select Gender</option>
                                 <option value="Male">Male</option>
                                 <option value="Female">Female</option>
                             </select>
@@ -40,7 +43,7 @@
                         <div class="col-md-6">
                             <label for="class" class="pb-2">Class<i class="text-danger">*</i></label>
                             <select class="form-select" id="class" asp-for="Class" required>
-                                <option selected>Select Class</option>
+                                <option value="">Select Class</option>
                                 <option value="6">Class 6</option>
                                 <option value="7">Class 7</option>
                                 <option value="8">Class 8</option>
@@ -52,16 +55,17 @@
                         </div>
                         <div class="col-md-6">
                             <label for="school" class="pb-2">School Name<i class="text-danger">*</i></label>
-                            <select class="form-select" id="school" asp-for="SchoolName" asp-items="@(new SelectList(ViewBag.Schools, "Name", "Name"))" required>
-                                <option selected value="0">Select School Name</option>
+                            <select class="form-select" id="school" asp-for="SchoolId" asp-items="@(new SelectList(ViewBag.Schools, "Id", "Name"))" required>
+                                <option selected value="">Select School Name</option>
                             </select>
                             <input type="text" class="form-control mt-2" asp-for="OtherSchoolName" id="otherSchoolName" placeholder="Enter School Name" style="display:none;">
                         </div>
-                        <div class="col-md-6">
-                            <label for="gender" class="pb-2">Exam Centre<i class="text-danger">*</i></label>
-                            <select class="form-select" id="examCentre" asp-for="ExamCentre" asp-items="@(new SelectList(ViewBag.ExamCentres, "Id", "Name"))" required>
-                                <option selected value="0">Select Exam Centre</option>
+                        <div class="col-md-6" id="examcentre-div">
+                            <label for="examcentre" class="pb-2">Exam Centre<i class="text-danger">*</i></label>
+                            <select class="form-select" id="examcentre" asp-for="ExamCentreId" asp-items="@(new SelectList(ViewBag.ExamCentres, "Id", "Name"))">
+                                <option selected value="">Select Exam Centre</option>
                             </select>
+                            <input type="hidden" asp-for="ExamCentreId" id="examcentre-hidden">
                         </div>
                         <div class="col-md-6">
                             <label for="address" class="pb-2">Address<i class="text-danger">*</i></label>
@@ -90,3 +94,49 @@
         </form>
     </div>
 </section>
+
+<script>
+    const schoolDropdown = document.getElementById('school');
+    if (schoolDropdown) {
+        schoolDropdown.addEventListener('change', event => {
+            var otherSchoolName = document.getElementById('otherSchoolName');
+            var schoolId = event.target.value;
+
+            if (schoolId == '0') {
+                otherSchoolName.style.display = 'block';
+            } else {
+                otherSchoolName.style.display = 'none';
+            }
+
+            if (schoolId == '' || schoolId == '0') {
+                let examCenter = document.getElementById('examcentre');
+                examCenter.value = "";
+                examCenter.required = true;
+                document.getElementById('examcentre-hidden').value = "";
+                $("#examcentre-div").show();
+            }
+            else {
+                $.ajax({
+                    url: "/Register/GetSchool",
+                    data: { id: schoolId },
+                    success: function (result) {
+                        if (result.isExamCentre) {
+                            let examCenter = document.getElementById('examcentre');
+                            examCenter.value = result.id;
+                            examCenter.required = false;
+                            document.getElementById('examcentre-hidden').value = result.id;
+                            $("#examcentre-div").hide();
+                        }
+                        else {
+                            let examCenter = document.getElementById('examcentre');
+                            examCenter.value = "";
+                            examCenter.required = true;
+                            document.getElementById('examcentre-hidden').value = "";
+                            $("#examcentre-div").show();
+                        }
+                    }
+                });
+            }
+        });
+    }
+</script>

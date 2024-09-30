@@ -21,16 +21,16 @@ namespace AllamaShibliQuiz.Controllers
         // GET: RegisterController
         public async Task<ActionResult> IndexAsync()
         {
-            return Redirect("/");
-            //await LoadRegisterPageData();
-            //return View();
+            //return Redirect("/");
+            await LoadRegisterPageData();
+            return View();
         }
         private async Task LoadRegisterPageData()
         {
-            var schoolsList = await _context.Schools.Where(x => x.IsActive).OrderBy(x => x.Rank).Select(x => new SchoolViewModel { Id = x.Id, Name = x.Name, IsExamCentre = x.IsExamCentre }).ToListAsync();
-            schoolsList.Add(new SchoolViewModel() { Id = 0, Name = "Other", IsExamCentre = false });
+            var schoolsList = await _context.Schools.Where(x => x.IsActive).OrderBy(x => x.Rank).Select(x => new SchoolViewModel { Id = x.Id, Name = x.Name, IsExamCentre = x.IsExamCentre, IsExternalExamCentre = x.IsExternalExamCentre }).ToListAsync();
+            schoolsList.Add(new SchoolViewModel() { Id = 0, Name = "Other", IsExamCentre = false, IsExternalExamCentre = false });
             ViewBag.Schools = schoolsList;
-            var examCentres = schoolsList.Where(x => x.IsExamCentre).
+            var examCentres = schoolsList.Where(x => x.IsExternalExamCentre).
                 Select(x => new { x.Id, x.Name }).ToList();
             ViewBag.ExamCentres = examCentres;
         }
@@ -42,7 +42,8 @@ namespace AllamaShibliQuiz.Controllers
         {
             try
             {
-                var isValid = IsValidData(studentViewModel);
+                var isValid = await IsValidDataAsync(studentViewModel);
+                studentViewModel.CreateDate = DateTime.Now;
                 await LoadRegisterPageData();
                 if (ModelState.IsValid)
                 {
@@ -54,11 +55,6 @@ namespace AllamaShibliQuiz.Controllers
                     {
                         return View(studentViewModel);
                     }
-                    if (studentViewModel.SchoolName == "Other")
-                    {
-                        studentViewModel.SchoolName = studentViewModel.OtherSchoolName;
-                    }
-                    studentViewModel.CreateDate = DateTime.Now;
                     var student = _mapper.Map<Student>(studentViewModel);
                     _context.Students.Add(student);
                     await _context.SaveChangesAsync();
@@ -71,34 +67,34 @@ namespace AllamaShibliQuiz.Controllers
                 return View(studentViewModel);
             }
         }
-        private bool IsValidData(StudentViewModel student)
+        private async Task<bool> IsValidDataAsync(StudentViewModel studentViewModel)
         {
             var errorMessage = string.Empty;
-            if (student.Gender == "0")
+            if (string.IsNullOrEmpty(studentViewModel.Gender))
             {
                 errorMessage += "Please select Gender.";
             }
-            if (student.Class == 0)
+            if (studentViewModel.Class == 0)
             {
                 errorMessage += "<br /> Please select Class.";
             }
-            if (student.MobileNumber.Length < 10)
+            if (studentViewModel.MobileNumber.Length < 10)
             {
                 errorMessage += "<br /> Please enter valid mobile number(10 digit).";
             }
-            if (student.AadharNumber.Length < 12)
+            if (studentViewModel.AadharNumber.Length < 12)
             {
                 errorMessage += "<br /> Please enter valid aadhar number(12 digit).";
             }
-            if (string.IsNullOrEmpty(student.SchoolName) || student.SchoolName == "0")
+            if (studentViewModel.SchoolId == null)
             {
-                errorMessage += "<br /> Please Select the School.";
+                errorMessage += "<br /> Please select school name.";
             }
-            if (student.ExamCentre == 0)
+            if (studentViewModel.ExamCentreId == 0)
             {
-                errorMessage += "<br /> Please Select the Exam Center.";
+                errorMessage += "<br /> Please select the exam center.";
             }
-            if (student.SchoolName == "Other" && string.IsNullOrEmpty(student.OtherSchoolName))
+            if (studentViewModel.SchoolId == 0 && string.IsNullOrEmpty(studentViewModel.OtherSchoolName))
             {
                 errorMessage += "<br /> Please enter school name.";
             }
@@ -110,6 +106,15 @@ namespace AllamaShibliQuiz.Controllers
                     Message = errorMessage
                 };
                 return false;
+            }
+            if (studentViewModel.SchoolId > 0)
+            {
+                var school = await GetSchoolAsync(studentViewModel.SchoolId.Value);
+                studentViewModel.SchoolName = school.Name;
+            }
+            else
+            {
+                studentViewModel.SchoolName = studentViewModel.OtherSchoolName;
             }
             return true;
         }
@@ -147,6 +152,49 @@ namespace AllamaShibliQuiz.Controllers
                 return RedirectToAction(nameof(Index));
             }
             return View(studentViewModel);
+        }
+        [HttpGet]
+        public ActionResult Verify()
+        {
+            return View();
+        }
+        [HttpPost]
+        public async Task<ActionResult> VerifyAsync(RegisterVerifyViewModel registerVerifyViewModel)
+        {
+            if (ModelState.IsValid)
+            {
+                var student = await _context.Students.Where(x => x.AadharNumber.Equals(registerVerifyViewModel.SearchInput) || x.MobileNumber.Equals(registerVerifyViewModel.SearchInput)).AnyAsync();
+                if (!student)
+                {
+                    ViewBag.AlertMessage = new AlertMessageViewModel()
+                    {
+                        Type = "Error",
+                        Message = "Entered Mobile Number/Aadhar Number is not found. Please check the detail and try again."
+                    };
+                    return View(registerVerifyViewModel);
+                }
+                return RedirectToAction(nameof(VerifySuccess), new { SearchInput = registerVerifyViewModel.SearchInput });
+            }
+            return View(registerVerifyViewModel);
+        }
+        public async Task<ActionResult> VerifySuccess(string searchInput)
+        {
+            if (string.IsNullOrEmpty(searchInput))
+            {
+                return RedirectToAction(nameof(Verify));
+            }
+            var student = await _context.Students.Where(x => x.AadharNumber.Equals(searchInput) || x.MobileNumber.Equals(searchInput)).ToListAsync();
+            if (!student.Any())
+            {
+                return RedirectToAction(nameof(Verify));
+            }
+            var studentViewModel = _mapper.Map<List<StudentViewModel>>(student);
+            return View(studentViewModel);
+        }
+        public async Task<SchoolViewModel> GetSchoolAsync(int id)
+        {
+            var school = await _context.Schools.FindAsync(id);
+            return _mapper.Map<SchoolViewModel>(school);
         }
     }
 }

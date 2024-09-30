@@ -99,6 +99,7 @@ namespace AllamaShibliQuiz.Controllers
             };
             return View(dashboardData);
         }
+        [AllowAnonymous]
         public async Task<IActionResult> StudentDetails(int id)
         {
             var student = await _context.Students.FindAsync(id);
@@ -116,6 +117,7 @@ namespace AllamaShibliQuiz.Controllers
             {
                 return NotFound();
             }
+            student.RollNumber = await generateRollNumberAsync(student.ExamCentreId, student.Class);
             student.Status = 1;
             _context.Students.Update(student);
             await _context.SaveChangesAsync();
@@ -133,8 +135,19 @@ namespace AllamaShibliQuiz.Controllers
             await _context.SaveChangesAsync();
             return RedirectToAction("Dashboard");
         }
+        private async Task<string> generateRollNumberAsync(int examCenterId, int classNumber)
+        {
+            string rollNumber = "";
+            var centreCode = await _context.Schools.Where(x => x.IsActive && x.Id == examCenterId).Select(x => x.CentreCode).FirstOrDefaultAsync();
+            var studentCount = await _context.Students.Where(x => x.Status == 1 && x.ExamCentreId == examCenterId && x.Class == classNumber).CountAsync();
+            studentCount++;
+            string paddedcentreCode = centreCode.ToString().PadLeft(2, '0');
+            string paddedClass = classNumber.ToString().PadLeft(2, '0');
+            string paddedCount = studentCount.ToString().PadLeft(3, '0');
+            rollNumber = $"24{paddedcentreCode}{paddedClass}{paddedCount}";
+            return rollNumber;
+        }
         #endregion
-
 
         #region "Team Members"
         public async Task<IActionResult> Team()
@@ -182,8 +195,9 @@ namespace AllamaShibliQuiz.Controllers
             }
             if (image != null && image.Length > 0)
             {
-                var fileSize = image.Length/1024;
-                if (fileSize > validFileSize) {
+                var fileSize = image.Length / 1024;
+                if (fileSize > validFileSize)
+                {
                     ViewData["ValidateMessage"] = "Please upload file size less than 200 KB.";
                     return View("TeamAddOrEdit");
                 }
