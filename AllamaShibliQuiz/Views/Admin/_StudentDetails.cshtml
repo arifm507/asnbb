@@ -29,28 +29,43 @@
                 <div class="info_data">
                     <div class="data">
                         <h6>Class</h6>
-                        <p>@Model.Class</p>
+                        <p>
+                            @Model.Class
+                            @if (!string.IsNullOrEmpty(Model.Subject))
+                            {
+                                <span>(@Model.Subject)</span>
+                            }
+                        </p>
                     </div>
-                    <div class="data">
-                        <h6>School Name</h6>
-                        <p>@Model.SchoolName</p>
-                    </div>
-                </div>
-                <div class="info_data">
                     <div class="data">
                         <h6>Address</h6>
                         <p>@Model.Address</p>
                     </div>
+                </div>
+                <div class="info_data">
                     <div class="data">
-                        <h6>Mobile Number</h6>
-                        <p>@Model.MobileNumber</p>
+                        <h6>School Name</h6>
+                        <p>@Model.SchoolName</p>
+                    </div>
+                    <div class="data">
+                        <h6>Exam Center</h6>
+                        <p>
+                            @Model.ExamCentreName
+                        </p>
                     </div>
                 </div>
                 <div class="info_data">
                     <div class="data">
+                        <h6>Mobile Number</h6>
+                        <p>@Model.MobileNumber</p>
+                    </div>
+                    <div class="data">
                         <h6>Aadhar Number</h6>
                         <p>@Model.AadharNumber</p>
                     </div>
+                </div>
+                <div class="info_data">
+
                     <div class="data">
                         <h6>Registration Date</h6>
                         <p>@Convert.ToDateTime(Model.CreateDate).ToString("dd/MM/yyyy")</p>

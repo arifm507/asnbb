@@ -108,6 +108,7 @@ namespace AllamaShibliQuiz.Controllers
                 return NotFound();
             }
             var studentView = _mapper.Map<StudentViewModel>(student);
+            studentView.ExamCentreName = (await _context.Schools.FindAsync(studentView.ExamCentreId))?.Name;
             return PartialView("_StudentDetails", studentView);
         }
         public async Task<IActionResult> Approve(int id)
