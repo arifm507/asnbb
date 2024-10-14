@@ -122,11 +122,10 @@ namespace AllamaShibliQuiz.Controllers
         {
             var alreadyData = await _context.Students
                 .Where(x => x.Name == student.Name
-                        && x.FatherName == student.FatherName
                         && x.Class == student.Class
-                        && x.Gender == student.Gender
                         && x.MobileNumber == student.MobileNumber
-                        && x.Status <= 1)
+                        && x.AadharNumber == student.AadharNumber
+                        && x.Status != 1)
                 .AnyAsync();
             if (alreadyData)
             {
