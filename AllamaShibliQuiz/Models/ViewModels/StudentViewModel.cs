@@ -6,7 +6,7 @@
         public string Name { get; set; }
         public string FatherName { get; set; }
         public string Gender { get; set; }
-        public DateTime DateOfBirth { get; set; }
+        public DateTime? DateOfBirth { get; set; }
         public int Class { get; set; }
         public string? Subject { get; set; }
         public int? SchoolId { get; set; }

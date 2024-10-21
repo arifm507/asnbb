@@ -12,8 +12,7 @@ namespace AllamaShibliQuiz.Models
         public string FatherName { get; set; }
         [Required]
         public string Gender { get; set; }
-        [Required]
-        public DateTime DateOfBirth { get; set; }
+        public DateTime? DateOfBirth { get; set; }
         [Required]
         public int Class { get; set; }
         public int? SchoolId { get; set; }
