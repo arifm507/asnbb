@@ -1,6 +1,7 @@
 ﻿using AllamaShibliQuiz.Data;
 using AllamaShibliQuiz.Helpers;
 using AllamaShibliQuiz.Models;
+using AllamaShibliQuiz.Models.RequestModels;
 using AllamaShibliQuiz.Models.ViewModels;
 using AutoMapper;
 using Microsoft.AspNetCore.Authentication;
@@ -95,8 +96,11 @@ namespace AllamaShibliQuiz.Controllers
                 TotalStudentRegistered = totalStudents,
                 TotalStudentApproved = totalStudentsApproved,
                 TotalStudentPending = totalStudentsPending,
-                TotalStudentRejected = totalStudentsRejected
+                TotalStudentRejected = totalStudentsRejected,
+                bulkApproveRequestModel = new BulkApproveRequestModel()
             };
+            var schoolsList = await _context.Schools.Where(x => x.IsActive && x.IsExamCentre).OrderBy(x => x.Rank).Select(x => new SchoolViewModel { Id = x.Id, Name = x.Name }).ToListAsync();
+            ViewBag.Schools = schoolsList;
             return View(dashboardData);
         }
         [AllowAnonymous]
@@ -124,6 +128,33 @@ namespace AllamaShibliQuiz.Controllers
             await _context.SaveChangesAsync();
             return RedirectToAction("Dashboard");
         }
+        [HttpPost]
+        public async Task<IActionResult> BulkApprove(BulkApproveRequestModel bulkApproveRequestModel)
+        {
+            if (ModelState.IsValid && bulkApproveRequestModel.ExamCentreId > 0 && bulkApproveRequestModel.ClassNumber > 0)
+            {
+                var students = await _context.Students.Where(x => x.ExamCentreId == bulkApproveRequestModel.ExamCentreId && x.Class == bulkApproveRequestModel.ClassNumber && x.Status == 0).ToListAsync();
+                if (!students.Any())
+                {
+                    return NotFound();
+                }
+                var paddedcentreCode = await getPaddedCenterCode(bulkApproveRequestModel.ExamCentreId);
+                var studentCount = await getStudentCount(bulkApproveRequestModel.ExamCentreId, bulkApproveRequestModel.ClassNumber);
+                string rollNumber = string.Empty;
+                string paddedClass = bulkApproveRequestModel.ClassNumber.ToString().PadLeft(2, '0');
+                foreach (var student in students)
+                {
+                    studentCount++;
+                    string paddedCount = studentCount.ToString().PadLeft(3, '0');
+                    rollNumber = $"24{paddedcentreCode}{paddedClass}{paddedCount}";
+                    student.RollNumber = rollNumber;
+                    student.Status = 1;
+                    _context.Students.Update(student);
+                }
+                await _context.SaveChangesAsync();
+            }
+            return RedirectToAction("Dashboard");
+        }
         public async Task<IActionResult> Reject(int id)
         {
             var student = await _context.Students.FindAsync(id);
@@ -147,6 +178,17 @@ namespace AllamaShibliQuiz.Controllers
             string paddedCount = studentCount.ToString().PadLeft(3, '0');
             rollNumber = $"24{paddedcentreCode}{paddedClass}{paddedCount}";
             return rollNumber;
+        }
+        private async Task<string> getPaddedCenterCode(int examCenterId)
+        {
+            var centreCode = await _context.Schools.Where(x => x.IsActive && x.Id == examCenterId).Select(x => x.CentreCode).FirstOrDefaultAsync();
+            string paddedcentreCode = centreCode.ToString().PadLeft(2, '0');
+            return paddedcentreCode;
+        }
+        private async Task<int> getStudentCount(int examCenterId, int classNumber)
+        {
+            var studentCount = await _context.Students.Where(x => x.Status == 1 && x.ExamCentreId == examCenterId && x.Class == classNumber).CountAsync();
+            return studentCount;
         }
         #endregion
 

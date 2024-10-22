@@ -104,52 +104,39 @@
 </section>
 
 <script>
+    let verifyExamCenter = (schoolId) => {
+        if (schoolId == '' || schoolId == '0') {
+            let examCenter = document.getElementById('examcentre');
+            examCenter.value = "";
+            examCenter.required = true;
+            document.getElementById('examcentre-hidden').value = "";
+            $("#examcentre-div").show();
+        }
+        else {
+            let examCenter = document.getElementById('examcentre');
+            examCenter.value = schoolId;
+            examCenter.required = false;
+            document.getElementById('examcentre-hidden').value = schoolId;
+            $("#examcentre-div").hide();
+        }
+    }
     const schoolDropdown = document.getElementById('school');
     if (schoolDropdown) {
+        verifyExamCenter(schoolDropdown.value);
         schoolDropdown.addEventListener('change', event => {
             var otherSchoolName = document.getElementById('otherSchoolName');
             var schoolId = event.target.value;
-
             if (schoolId == '0') {
                 otherSchoolName.style.display = 'block';
             } else {
                 otherSchoolName.style.display = 'none';
             }
-
-            if (schoolId == '' || schoolId == '0') {
-                let examCenter = document.getElementById('examcentre');
-                examCenter.value = "";
-                examCenter.required = true;
-                document.getElementById('examcentre-hidden').value = "";
-                $("#examcentre-div").show();
-            }
-            else {
-                $.ajax({
-                    url: "/Register/GetSchool",
-                    data: { id: schoolId },
-                    success: function (result) {
-                        if (result.isExamCentre) {
-                            let examCenter = document.getElementById('examcentre');
-                            examCenter.value = result.id;
-                            examCenter.required = false;
-                            document.getElementById('examcentre-hidden').value = result.id;
-                            $("#examcentre-div").hide();
-                        }
-                        else {
-                            let examCenter = document.getElementById('examcentre');
-                            examCenter.value = "";
-                            examCenter.required = true;
-                            document.getElementById('examcentre-hidden').value = "";
-                            $("#examcentre-div").show();
-                        }
-                    }
-                });
-            }
+            verifyExamCenter(schoolId);
         });
     }
+
     const classDropdown = document.getElementById('class');
     if (classDropdown) {
-        debugger;
         var subjectDrpdown = document.getElementById('subjectDrpdown');
         var subject = document.getElementById('subject');
         var classNumber = classDropdown.value;

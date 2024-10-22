@@ -90,7 +90,13 @@
         </div>
         <div class="card shadow border-0 mb-7">
             <div class="card-header">
-                <h5 class="mb-0">Student Applications</h5>
+                <h5 class="mb-0">
+                    Student Applications
+                    <button type="button" class="btn btn-sm btn-primary float-end" data-bs-toggle="modal" data-bs-target="#bulkApproveModal">
+                        Bulk Approve
+                    </button>
+                </h5>
+
             </div>
             <div class="card-body">
                 <div class="table-responsive">
@@ -176,6 +182,48 @@
     <div class="modal-dialog">
         <div class="modal-content">
             <div id="student-detail-body" class="modal-body">
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Bulk Approve Modal -->
+<div class="modal fade" id="bulkApproveModal" tabindex="-1" aria-labelledby="bulkApproveModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h1 class="modal-title fs-5" id="bulkApproveModalLabel">Bulk Approve</h1>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div id="bulkApprove-body" class="modal-body">
+                <form asp-controller="Admin" asp-action="BulkApprove" method="post">
+                    <div class="row">
+
+                        <div class="col-12 mt-3">
+                            <label for="schoolName" class="pb-2">School Name<i class="text-danger">*</i></label>
+                            <select class="form-select" id="schoolName" asp-for="bulkApproveRequestModel.ExamCentreId" asp-items="@(new SelectList(ViewBag.Schools, "Id", "Name"))" required>
+                                <option selected value="">Select School Name</option>
+                            </select>
+                        </div>
+                        <div class="col-12 mt-3">
+                            <label for="className" class="pb-2">Class<i class="text-danger">*</i></label>
+                            <select class="form-select" id="className" asp-for="bulkApproveRequestModel.ClassNumber" required>
+                                <option value="">Select Class</option>
+                                <option value="6">Class 6</option>
+                                <option value="7">Class 7</option>
+                                <option value="8">Class 8</option>
+                                <option value="9">Class 9</option>
+                                <option value="10">Class 10</option>
+                                <option value="11">Class 11</option>
+                                <option value="12">Class 12</option>
+                            </select>
+                        </div>
+                        <div class="col-12 mt-3">
+                            <button type="submit" class="btn btn-primary">Bulk Approve</button>
+                            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancel</button>
+                        </div>
+                    </div>
+                </form>
             </div>
         </div>
     </div>

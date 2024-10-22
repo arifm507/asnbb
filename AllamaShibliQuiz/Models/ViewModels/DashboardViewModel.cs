@@ -1,4 +1,6 @@
-﻿namespace AllamaShibliQuiz.Models.ViewModels
+﻿using AllamaShibliQuiz.Models.RequestModels;
+
+namespace AllamaShibliQuiz.Models.ViewModels
 {
     public class DashboardViewModel
     {
@@ -8,5 +10,6 @@
         public int TotalStudentApproved { get; set; }
         public int TotalStudentPending { get; set; }
         public int TotalStudentRejected { get; set; }
+        public BulkApproveRequestModel? bulkApproveRequestModel { get; set; }
     }
 }
