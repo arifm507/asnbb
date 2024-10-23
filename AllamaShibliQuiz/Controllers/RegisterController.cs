@@ -121,7 +121,7 @@ namespace AllamaShibliQuiz.Controllers
         private async Task<bool> AlreadyRegistered(StudentViewModel student)
         {
             var alreadyData = await _context.Students
-                .Where(x => x.Name == student.Name
+                .Where(x => x.Name.ToLower() == student.Name.ToLower()
                         && x.Class == student.Class
                         && x.MobileNumber == student.MobileNumber
                         && x.AadharNumber == student.AadharNumber
