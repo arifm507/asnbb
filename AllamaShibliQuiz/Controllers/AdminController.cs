@@ -133,10 +133,10 @@ namespace AllamaShibliQuiz.Controllers
         {
             if (ModelState.IsValid && bulkApproveRequestModel.ExamCentreId > 0 && bulkApproveRequestModel.ClassNumber > 0)
             {
-                var students = await _context.Students.Where(x => x.ExamCentreId == bulkApproveRequestModel.ExamCentreId && x.Class == bulkApproveRequestModel.ClassNumber && x.Status == 0).ToListAsync();
+                var students = await _context.Students.Where(x => x.ExamCentreId == bulkApproveRequestModel.ExamCentreId && x.SchoolId == bulkApproveRequestModel.ExamCentreId && x.Class == bulkApproveRequestModel.ClassNumber && x.Status == 0).ToListAsync();
                 if (!students.Any())
                 {
-                    return NotFound();
+                    return RedirectToAction("Dashboard");
                 }
                 var paddedcentreCode = await getPaddedCenterCode(bulkApproveRequestModel.ExamCentreId);
                 var studentCount = await getStudentCount(bulkApproveRequestModel.ExamCentreId, bulkApproveRequestModel.ClassNumber);
