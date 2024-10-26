@@ -53,8 +53,8 @@
                                 <option value="12">Class 12</option>
                             </select>
                             <div id="subjectDrpdown" style="display:none">
-                                <label for="subject" class="pb-2 mt-2">Subject<i class="text-danger">*</i></label>
-                                <select class="form-select" id="subject" asp-for="Subject" required>
+                                <label for="subject" class="pb-2 mt-2">Subject</label>
+                                <select class="form-select" id="subject" asp-for="Subject">
                                     <option value="">Select Subject</option>
                                     <option value="Bio">Biology</option>
                                     <option value="Maths">Maths</option>
@@ -138,25 +138,25 @@
     const classDropdown = document.getElementById('class');
     if (classDropdown) {
         var subjectDrpdown = document.getElementById('subjectDrpdown');
-        var subject = document.getElementById('subject');
+        //var subject = document.getElementById('subject');
         var classNumber = classDropdown.value;
 
         if (classNumber === "11" || classNumber === "12") {
             subjectDrpdown.style.display = 'block';
-            subject.required = true;
+            //subject.required = true;
         } else {
             subjectDrpdown.style.display = 'none';
-            subject.required = false;
+            //subject.required = false;
         }
 
         classDropdown.addEventListener('change', event => {
             var classNumber = event.target.value;
             if (classNumber == "11" || classNumber == "12") {
                 subjectDrpdown.style.display = 'block';
-                subject.required = true;
+                //subject.required = true;
             } else {
                 subjectDrpdown.style.display = 'none';
-                subject.required = false;
+                //subject.required = false;
             }
         });
     }
