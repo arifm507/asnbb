@@ -12,8 +12,9 @@ namespace AllamaShibliQuiz.Models
         public int CentreCode { get; set; }
         public bool IsExamCentre { get; set; }
         public bool IsExternalExamCentre { get; set; }
-        public int? Rank { get; set; } 
+        public int? Rank { get; set; }
         public bool IsActive { get; set; }
+        public string? ExamDate { get; set; }
         [Required]
         public DateTime CreateDate { get; set; } = DateTime.UtcNow;
         public DateTime? UpdateDate { get; set; }

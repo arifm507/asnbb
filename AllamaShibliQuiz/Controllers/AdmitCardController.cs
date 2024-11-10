@@ -28,7 +28,8 @@ namespace AllamaShibliQuiz.Controllers
         {
             if (ModelState.IsValid)
             {
-                var student = await _context.Students.Where(x => x.Status == 1 && x.AadharNumber.Equals(admitCardRequestModel.SearchInput) || x.MobileNumber.Equals(admitCardRequestModel.SearchInput)).AnyAsync();
+                var student = await _context.Students.Where(x => x.Status == 1 && x.AadharNumber.Equals(admitCardRequestModel.SearchInput) 
+                || x.MobileNumber.Equals(admitCardRequestModel.SearchInput)).AnyAsync();
                 if (!student)
                 {
                     ViewBag.AlertMessage = new AlertMessageViewModel()
@@ -49,7 +50,8 @@ namespace AllamaShibliQuiz.Controllers
             {
                 return RedirectToAction(nameof(Index));
             }
-            var student = await _context.Students.Where(x => x.Status == 1 && x.AadharNumber.Equals(searchInput) || x.MobileNumber.Equals(searchInput)).ToListAsync();
+            var student = await _context.Students.Where(x => x.Status == 1 && x.AadharNumber.Equals(searchInput) 
+            || x.MobileNumber.Equals(searchInput)).ToListAsync();
             if (!student.Any())
             {
                 return RedirectToAction(nameof(Index));
@@ -65,7 +67,10 @@ namespace AllamaShibliQuiz.Controllers
                 return RedirectToAction(nameof(Index));
             }
             var studentData = _mapper.Map<StudentViewModel>(student);
-            studentData.ExamCentreName = await _context.Schools.Where(x => x.Id == student.ExamCentreId).Select(x => x.Name).FirstOrDefaultAsync();
+            var center = await _context.Schools.Where(x => x.Id == student.ExamCentreId).Select(x => new { x.Name, x.CentreCode, x.ExamDate }).FirstOrDefaultAsync();
+            studentData.ExamCentreName = center?.Name;
+            studentData.ExamCentreCode = center?.CentreCode.ToString().PadLeft(2, '0');
+            studentData.ExamDate = center?.ExamDate;
             return View(studentData);
         }
     }

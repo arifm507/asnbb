@@ -14,6 +14,8 @@
         public string? OtherSchoolName { get; set; }
         public int ExamCentreId { get; set; }
         public string? ExamCentreName { get; set; }
+        public string? ExamCentreCode { get; set; }
+        public string? ExamDate { get; set; }
         public string? RollNumber { get; set; }
         public string Address { get; set; }
         public string MobileNumber { get; set; }

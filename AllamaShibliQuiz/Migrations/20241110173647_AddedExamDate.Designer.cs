@@ -3,6 +3,7 @@ using System;
 using AllamaShibliQuiz.Data;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 
@@ -11,9 +12,10 @@ using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 namespace AllamaShibliQuiz.Migrations
 {
     [DbContext(typeof(AsnbbDBContext))]
-    partial class AsnbbDBContextModelSnapshot : ModelSnapshot
+    [Migration("20241110173647_AddedExamDate")]
+    partial class AddedExamDate
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
