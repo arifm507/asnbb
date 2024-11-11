@@ -21,8 +21,9 @@ namespace AllamaShibliQuiz.Controllers
         // GET: RegisterController
         public async Task<ActionResult> IndexAsync()
         {
-            await LoadRegisterPageData();
-            return View();
+            return Redirect("/");
+            //await LoadRegisterPageData();
+            //return View();
         }
         private async Task LoadRegisterPageData()
         {

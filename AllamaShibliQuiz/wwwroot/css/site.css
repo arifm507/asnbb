@@ -202,10 +202,6 @@
     -webkit-text-fill-color: transparent;
 }
 
-.quiztime-img {
-    width: 130px;
-}
-
 .rgst-opn {
     text-align: center;
     font-size: 30px;
@@ -215,6 +211,27 @@
     -webkit-background-clip: text;
     -webkit-text-fill-color: transparent;
 }
+
+@media only screen and (max-width: 600px) {
+    .shibli {
+        font-size: 22px;
+        margin-top: 10px;
+    }
+
+    .brainiac {
+        font-size: 30px;
+    }
+
+    .rgst-opn {
+        font-size: 25px;
+        margin-bottom: 3px;
+    }
+}
+
+.quiztime-img {
+    width: 130px;
+}
+
 
 .sponsor-name {
     font-weight: 700;
