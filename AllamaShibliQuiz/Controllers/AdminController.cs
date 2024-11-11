@@ -190,6 +190,110 @@ namespace AllamaShibliQuiz.Controllers
             var studentCount = await _context.Students.Where(x => x.Status == 1 && x.ExamCentreId == examCenterId && x.Class == classNumber).CountAsync();
             return studentCount;
         }
+        public async Task<IActionResult> StudentEdit(int id)
+        {
+            var student = await _context.Students.FindAsync(id);
+            var studentView = _mapper.Map<StudentViewModel>(student);
+            await LoadRegisterPageData();
+            if (studentView != null)
+            {
+                return View("StudentEdit", studentView);
+            }
+            return RedirectToAction("Dashboard");
+        }
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public async Task<ActionResult> StudentEdit(StudentViewModel studentViewModel)
+        {
+            try
+            {
+                var isValid = await IsValidDataAsync(studentViewModel);
+                studentViewModel.UpdateDate = DateTime.Now;
+                await LoadRegisterPageData();
+                if (ModelState.IsValid)
+                {
+                    if (!isValid)
+                    {
+                        return View(studentViewModel);
+                    }
+                    var student = _mapper.Map<Student>(studentViewModel);
+                    _context.Students.Update(student);
+                    await _context.SaveChangesAsync();
+                    return RedirectToAction(nameof(Dashboard), new { id = student.Id });
+                }
+                return View(studentViewModel);
+            }
+            catch
+            {
+                return View(studentViewModel);
+            }
+        }
+        private async Task LoadRegisterPageData()
+        {
+            var schoolsList = await _context.Schools.Where(x => x.IsActive).OrderBy(x => x.Rank).Select(x => new SchoolViewModel { Id = x.Id, Name = x.Name, IsExamCentre = x.IsExamCentre, IsExternalExamCentre = x.IsExternalExamCentre }).ToListAsync();
+            schoolsList.Add(new SchoolViewModel() { Id = 0, Name = "Other", IsExamCentre = false, IsExternalExamCentre = false });
+            ViewBag.Schools = schoolsList;
+            var examCentres = schoolsList.Where(x => x.IsExternalExamCentre).
+                Select(x => new { x.Id, x.Name }).ToList();
+            ViewBag.ExamCentres = examCentres;
+        }
+        private async Task<bool> IsValidDataAsync(StudentViewModel studentViewModel)
+        {
+            var errorMessage = string.Empty;
+            if (string.IsNullOrEmpty(studentViewModel.Gender))
+            {
+                errorMessage += "Please select Gender.";
+            }
+            if (studentViewModel.Class == 0)
+            {
+                errorMessage += "<br /> Please select Class.";
+            }
+            if (studentViewModel.MobileNumber.Length < 10)
+            {
+                errorMessage += "<br /> Please enter valid mobile number(10 digit).";
+            }
+            if (studentViewModel.AadharNumber.Length < 12)
+            {
+                errorMessage += "<br /> Please enter valid aadhar number(12 digit).";
+            }
+            if (studentViewModel.SchoolId == null)
+            {
+                errorMessage += "<br /> Please select school name.";
+            }
+            if (studentViewModel.ExamCentreId == 0)
+            {
+                errorMessage += "<br /> Please select the exam center.";
+            }
+            if (studentViewModel.SchoolId == 0 && string.IsNullOrEmpty(studentViewModel.OtherSchoolName))
+            {
+                errorMessage += "<br /> Please enter school name.";
+            }
+            if (!string.IsNullOrEmpty(errorMessage))
+            {
+                ViewBag.AlertMessage = new AlertMessageViewModel()
+                {
+                    Type = "Error",
+                    Message = errorMessage
+                };
+                return false;
+            }
+            if (studentViewModel.SchoolId > 0)
+            {
+                var school = await GetSchoolAsync(studentViewModel.SchoolId.Value);
+                studentViewModel.SchoolName = school.Name;
+            }
+            else
+            {
+                studentViewModel.SchoolName = studentViewModel.OtherSchoolName;
+            }
+            return true;
+        }
+        public async Task<SchoolViewModel> GetSchoolAsync(int id)
+        {
+            var school = await _context.Schools.FindAsync(id);
+            return _mapper.Map<SchoolViewModel>(school);
+        }
+
         #endregion
 
         #region "Team Members"

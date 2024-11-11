@@ -28,8 +28,8 @@ namespace AllamaShibliQuiz.Controllers
         {
             if (ModelState.IsValid)
             {
-                var student = await _context.Students.Where(x => x.Status == 1 && x.AadharNumber.Equals(admitCardRequestModel.SearchInput) 
-                || x.MobileNumber.Equals(admitCardRequestModel.SearchInput)).AnyAsync();
+                var student = await _context.Students.Where(x => x.Status == 1 && (x.AadharNumber.Equals(admitCardRequestModel.SearchInput) 
+                || x.MobileNumber.Equals(admitCardRequestModel.SearchInput))).AnyAsync();
                 if (!student)
                 {
                     ViewBag.AlertMessage = new AlertMessageViewModel()
@@ -50,8 +50,8 @@ namespace AllamaShibliQuiz.Controllers
             {
                 return RedirectToAction(nameof(Index));
             }
-            var student = await _context.Students.Where(x => x.Status == 1 && x.AadharNumber.Equals(searchInput) 
-            || x.MobileNumber.Equals(searchInput)).ToListAsync();
+            var student = await _context.Students.Where(x => x.Status == 1 && (x.AadharNumber.Equals(searchInput) 
+            || x.MobileNumber.Equals(searchInput))).ToListAsync();
             if (!student.Any())
             {
                 return RedirectToAction(nameof(Index));
@@ -61,7 +61,7 @@ namespace AllamaShibliQuiz.Controllers
         }
         public async Task<ActionResult> ViewCard(int Id)
         {
-            var student = await _context.Students.FindAsync(Id);
+            var student = await _context.Students.Where(x => x.Status == 1 && x.Id == Id).FirstOrDefaultAsync();
             if (student == null)
             {
                 return RedirectToAction(nameof(Index));

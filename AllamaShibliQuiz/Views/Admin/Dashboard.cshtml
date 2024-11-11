@@ -160,10 +160,13 @@
                                             </a>
                                             <a class="btn btn-sm btn-danger" asp-action="Reject" asp-route-id="@item.Id" onclick="return confirm('Are you sure to reject this student?')">
                                                 <i class="bi bi-x-lg"></i>
-                                            </a>
+                                            </a>                                            
                                         }
                                         <a data-bs-toggle="modal" data-bs-target="#studentModal" data-id="@item.Id" class="btn btn-sm btn-neutral">
                                             <i class="bi bi-eye-fill"></i>
+                                        </a>
+                                        <a asp-action="StudentEdit" asp-route-id="@item.Id" class="btn btn-sm btn-square btn-neutral text-danger-hover">
+                                            <i class="bi bi-pencil-fill"></i>
                                         </a>
                                     </td>
                                 </tr>

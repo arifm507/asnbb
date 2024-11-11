@@ -21,6 +21,7 @@
         public string MobileNumber { get; set; }
         public string AadharNumber { get; set; }
         public DateTime CreateDate { get; set; }
+        public DateTime? UpdateDate { get; set; }
         public int Status { get; set; }
     }
 }

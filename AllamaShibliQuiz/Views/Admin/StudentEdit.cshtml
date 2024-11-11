@@ -1,0 +1,155 @@
+﻿@model AllamaShibliQuiz.Models.ViewModels.StudentViewModel
+<!-- Register Section -->
+<section id="registerSection" class="section inside h-75">
+    <div class="container">
+        <form asp-action="StudentEdit" method="post" autocomplete="off" id="register-form">
+            <div class="card card-main mt-2">
+                <div class="card-header">
+                    <h4>Edit Student</h4>
+                </div>
+                @{
+                    var today = DateTime.Now.ToString("yyyy-MM-dd");
+                }
+                <div class="card-body">
+                    <div class="row gy-4">
+                        <div class="col-md-6">
+                            <label for="name" class="pb-2">Full Name<i class="text-danger">*</i></label>
+                            <input type="text" asp-for="Name" id="name" class="form-control" placeholder="Enter Full Name" required>
+                        </div>
+                        <div class="col-md-6">
+                            <label for="father" class="pb-2">Father’s Name<i class="text-danger">*</i></label>
+                            <input type="text" class="form-control" asp-for="FatherName" id="father" placeholder="Enter Father’s Name" required>
+                        </div>
+                        <div class="col-md-6">
+                            <label for="gender" class="pb-2">Gender<i class="text-danger">*</i></label>
+                            <select class="form-select" id="gender" asp-for="Gender" required>
+                                <option selected value="">Select Gender</option>
+                                <option value="Male">Male</option>
+                                <option value="Female">Female</option>
+                            </select>
+                        </div>
+                        <div class="col-md-6">
+                            <label for="dob" class="pb-2">Date of Birth</label>
+                            <input type="date" class="form-control" max="@today" asp-for="DateOfBirth" id="dob" placeholder="Enter Date of Birth">
+                        </div>
+                        <div class="col-md-6">
+                            <label for="class" class="pb-2">Class<i class="text-danger">*</i></label>
+                            <select class="form-select" id="class" asp-for="Class" required>
+                                <option value="">Select Class</option>
+                                <option value="6">Class 6</option>
+                                <option value="7">Class 7</option>
+                                <option value="8">Class 8</option>
+                                <option value="9">Class 9</option>
+                                <option value="10">Class 10</option>
+                                <option value="11">Class 11</option>
+                                <option value="12">Class 12</option>
+                            </select>
+                            <div id="subjectDrpdown" style="display:none">
+                                <label for="subject" class="pb-2 mt-2">Subject</label>
+                                <select class="form-select" id="subject" asp-for="Subject">
+                                    <option value="">Select Subject</option>
+                                    <option value="Bio">Biology</option>
+                                    <option value="Maths">Maths</option>
+                                </select>
+                            </div>
+                        </div>
+                        <div class="col-md-6">
+                            <label for="school" class="pb-2">School Name<i class="text-danger">*</i></label>
+                            <select class="form-select" id="school" asp-for="SchoolId" asp-items="@(new SelectList(ViewBag.Schools, "Id", "Name"))" required>
+                                <option selected value="">Select School Name</option>
+                            </select>
+                            <input type="text" class="form-control mt-2" asp-for="OtherSchoolName" id="otherSchoolName" placeholder="Enter School Name" style="display:none;">
+                        </div>
+                        <div class="col-md-6" id="examcentre-div">
+                            <label for="examcentre" class="pb-2">Exam Centre<i class="text-danger">*</i></label>
+                            <select class="form-select" id="examcentre" asp-for="ExamCentreId" asp-items="@(new SelectList(ViewBag.ExamCentres, "Id", "Name"))">
+                                <option selected value="">Select Exam Centre</option>
+                            </select>
+                            <input type="hidden" asp-for="ExamCentreId" id="examcentre-hidden">
+                        </div>
+                        <div class="col-md-6">
+                            <label for="address" class="pb-2">Address<i class="text-danger">*</i></label>
+                            <input type="text" class="form-control" asp-for="Address" id="address" placeholder="Enter Full Address" required>
+                        </div>
+                        <div class="col-md-6">
+                            <label for="mobile" class="pb-2">Mobile Number (Whatsapp number)<i class="text-danger">*</i></label>
+                            <input type="text" class="form-control" asp-for="MobileNumber" maxlength="10" id="mobile" onkeypress="return isNumber(event)" placeholder="Enter Your/Guardian Mobile Number" required>
+                        </div>
+                        <div class="col-md-6">
+                            <label for="aadhar" class="pb-2">Aadhar Number<i class="text-danger">*</i></label>
+                            <input type="text" class="form-control" asp-for="AadharNumber" id="aadhar" maxlength="12" onkeypress="return isNumber(event)" placeholder="Enter Aadhar Number" required>
+                        </div>
+
+                        <div class="col-md-12 mt-5">
+                            @if (ViewData["ValidateMessage"] != null)
+                            {
+                                <p class="text-danger">@ViewData["ValidateMessage"]</p>
+                            }
+                            <button type="submit" id="updateBtn" class="btn btn-primary">Update</button>
+                            <a asp-controller="Admin" asp-action="Dashboard" class="btn btn-secondary">Cancel</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </form>
+    </div>
+</section>
+
+<script>
+    let verifyExamCenter = (schoolId) => {
+        if (schoolId == '' || schoolId == '0') {
+            let examCenter = document.getElementById('examcentre');
+            examCenter.value = "";
+            examCenter.required = true;
+            document.getElementById('examcentre-hidden').value = "";
+            $("#examcentre-div").show();
+        }
+        else {
+            let examCenter = document.getElementById('examcentre');
+            examCenter.value = schoolId;
+            examCenter.required = false;
+            document.getElementById('examcentre-hidden').value = schoolId;
+            $("#examcentre-div").hide();
+        }
+    }
+    const schoolDropdown = document.getElementById('school');
+    if (schoolDropdown) {
+        verifyExamCenter(schoolDropdown.value);
+        schoolDropdown.addEventListener('change', event => {
+            var otherSchoolName = document.getElementById('otherSchoolName');
+            var schoolId = event.target.value;
+            if (schoolId == '0') {
+                otherSchoolName.style.display = 'block';
+            } else {
+                otherSchoolName.style.display = 'none';
+            }
+            verifyExamCenter(schoolId);
+        });
+    }
+
+    const classDropdown = document.getElementById('class');
+    if (classDropdown) {
+        var subjectDrpdown = document.getElementById('subjectDrpdown');
+        //var subject = document.getElementById('subject');
+        var classNumber = classDropdown.value;
+
+        if (classNumber === "11" || classNumber === "12") {
+            subjectDrpdown.style.display = 'block';
+            //subject.required = true;
+        } else {
+            subjectDrpdown.style.display = 'none';
+            //subject.required = false;
+        }
+
+        classDropdown.addEventListener('change', event => {
+            var classNumber = event.target.value;
+            if (classNumber == "11" || classNumber == "12") {
+                subjectDrpdown.style.display = 'block';
+                //subject.required = true;
+            } else {
+                subjectDrpdown.style.display = 'none';
+                //subject.required = false;
+            }
+        });
+    }
+</script>
