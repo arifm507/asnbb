@@ -75,10 +75,10 @@
             width: 100px;
         }
 
-        .season{
-            text-align:center;
-            margin-top:0;
-            margin-bottom:5px;
+        .season {
+            text-align: center;
+            margin-top: 0;
+            margin-bottom: 5px;
         }
     </style>
 </head>
@@ -128,7 +128,16 @@
             </tr>
             <tr>
                 <td width="180">Exam Timing</td>
-                <td width="300">10 AM to 12 PM</td>
+                <td width="300">
+                    @if (@Model.ExamCentreId == 19)
+                    {
+                        <span>11:30 AM to 01:30 PM</span>
+                    }
+                    else
+                    {
+                        <span>10 AM to 12 PM</span>
+                    }
+                </td>
             </tr>
             <tr>
                 <td width="180">Center Code</td>
