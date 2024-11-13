@@ -28,9 +28,22 @@ namespace AllamaShibliQuiz.Controllers
         {
             if (ModelState.IsValid)
             {
-                var student = await _context.Students.Where(x => x.Status == 1 && (x.AadharNumber.Equals(admitCardRequestModel.SearchInput) 
+                var found = true;
+                var student = await _context.Students.Where(x => x.Status == 1 && (x.AadharNumber.Equals(admitCardRequestModel.SearchInput)
                 || x.MobileNumber.Equals(admitCardRequestModel.SearchInput))).AnyAsync();
                 if (!student)
+                {
+                    var school = await _context.Schools.Where(x => x.IsActive == true && x.ContactNumber == admitCardRequestModel.SearchInput).AnyAsync();
+                    if (!school)
+                    {
+                        found = false;
+                    }
+                }
+                if (found)
+                {
+                    return RedirectToAction(nameof(GetCard), new { SearchInput = admitCardRequestModel.SearchInput });
+                }
+                else
                 {
                     ViewBag.AlertMessage = new AlertMessageViewModel()
                     {
@@ -39,7 +52,6 @@ namespace AllamaShibliQuiz.Controllers
                     };
                     return View(admitCardRequestModel);
                 }
-                return RedirectToAction(nameof(GetCard), new { SearchInput = admitCardRequestModel.SearchInput });
             }
             return View(admitCardRequestModel);
         }
@@ -50,13 +62,21 @@ namespace AllamaShibliQuiz.Controllers
             {
                 return RedirectToAction(nameof(Index));
             }
-            var student = await _context.Students.Where(x => x.Status == 1 && (x.AadharNumber.Equals(searchInput) 
+            var students = await _context.Students.Where(x => x.Status == 1 && (x.AadharNumber.Equals(searchInput)
             || x.MobileNumber.Equals(searchInput))).ToListAsync();
-            if (!student.Any())
+            if (!students.Any())
             {
-                return RedirectToAction(nameof(Index));
+                var school = await _context.Schools.Where(x => x.IsActive == true && x.ContactNumber == searchInput).FirstOrDefaultAsync();
+                if (school != null)
+                {
+                    students = await _context.Students.Where(x => x.Status == 1 && x.ExamCentreId == school.Id).ToListAsync();
+                    if (!students.Any())
+                    {
+                        return RedirectToAction(nameof(Index));
+                    }
+                }
             }
-            var studentViewModel = _mapper.Map<List<StudentViewModel>>(student);
+            var studentViewModel = _mapper.Map<List<StudentViewModel>>(students);
             return View(studentViewModel);
         }
         public async Task<ActionResult> ViewCard(int Id)

@@ -15,6 +15,7 @@ namespace AllamaShibliQuiz.Models
         public int? Rank { get; set; }
         public bool IsActive { get; set; }
         public string? ExamDate { get; set; }
+        public string? ContactNumber { get; set; }
         [Required]
         public DateTime CreateDate { get; set; } = DateTime.UtcNow;
         public DateTime? UpdateDate { get; set; }
