@@ -18,6 +18,7 @@
                                     <table id="verifyTable" class="table table-hover table-nowrap">
                                         <thead class="thead-light">
                                             <tr>
+                                                <th scope="col">S.N.</th>
                                                 <th scope="col">Name</th>
                                                 <th scope="col">FatherName</th>
                                                 <th scope="col">Class</th>
@@ -26,25 +27,30 @@
                                             </tr>
                                         </thead>
                                         <tbody>
-                                            @foreach (var item in Model)
+                                            @foreach (var item in Model.Select((x, i) => new { Data = x, Index = i+1 }))
                                             {
                                                 <tr>
                                                     <td>
                                                         <a class="text-heading font-semibold" href="#">
-                                                            @Html.DisplayFor(modelItem => item.Name)
+                                                            @item.Index
                                                         </a>
                                                     </td>
                                                     <td>
-                                                        @Html.DisplayFor(modelItem => item.FatherName)
+                                                        <a class="text-heading font-semibold" href="#">
+                                                            @Html.DisplayFor(modelItem => item.Data.Name)
+                                                        </a>
                                                     </td>
                                                     <td>
-                                                        @Html.DisplayFor(modelItem => item.Class)
+                                                        @Html.DisplayFor(modelItem => item.Data.FatherName)
                                                     </td>
                                                     <td>
-                                                        @Html.DisplayFor(modelItem => item.SchoolName)
+                                                        @Html.DisplayFor(modelItem => item.Data.Class)
+                                                    </td>
+                                                    <td>
+                                                        @Html.DisplayFor(modelItem => item.Data.SchoolName)
                                                     </td>
                                                     <td class="text-end">
-                                                        <a asp-action="ViewCard" asp-route-id="@item.Id" class="btn btn-sm btn-neutral">
+                                                        <a asp-action="ViewCard" asp-route-id="@item.Data.Id" class="btn btn-sm btn-neutral">
                                                             <i class="bi bi-download"></i>
                                                         </a>
                                                     </td>

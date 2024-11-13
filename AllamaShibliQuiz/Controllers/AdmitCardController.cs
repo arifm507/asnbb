@@ -69,7 +69,7 @@ namespace AllamaShibliQuiz.Controllers
                 var school = await _context.Schools.Where(x => x.IsActive == true && x.ContactNumber == searchInput).FirstOrDefaultAsync();
                 if (school != null)
                 {
-                    students = await _context.Students.Where(x => x.Status == 1 && x.ExamCentreId == school.Id).ToListAsync();
+                    students = await _context.Students.Where(x => x.Status == 1 && x.SchoolId == school.Id && x.ExamCentreId == school.Id).OrderBy(x => x.Class).ThenBy(x => x.Name).ToListAsync();
                     if (!students.Any())
                     {
                         return RedirectToAction(nameof(Index));
