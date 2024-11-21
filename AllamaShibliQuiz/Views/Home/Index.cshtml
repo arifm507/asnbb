@@ -13,13 +13,13 @@
                     <small>Sponsored By - </small><span><a href="https://maps.app.goo.gl/3iB11hjSxkBd6dLX7" target="_blank" class="text-green">M.I. Naseerul Uloom, Khutahna, Sanjarpur</a></span>
                 </p>
                 <p class="text-white mb-2">
-                    Download Admit Card
+                    Download Answer Key
                 </p>
                 @* <p class="text-white mb-2">
-                    Registration Last Date 30-Oct-24
+                Registration Last Date 30-Oct-24
                 </p> *@
                 <p class="text-white mb-2">
-                    Examination Date - 16 & 17 Nov-24
+                    Prize Distribution Date - 08-Dec-24
                 </p>
                 <p class="text-justify">
                     <span id="typeWriterText"></span>
@@ -27,7 +27,7 @@
                     critical thinking skills and creativity *@
                 </p>
                 <div class="d-flex">
-                    <a asp-controller="AdmitCard" asp-action="Index" class="btn-get-started">Admit Card</a>
+                    <a asp-controller="AnswerKey" asp-action="Index" class="btn-get-started">Answer Key</a>
                     <a href="https://www.youtube.com/watch?v=e07NdiP2vCg" class="glightbox btn-watch-video d-flex align-items-center"><i class="bi bi-play-circle"></i><span>Watch Video</span></a>
                 </div>
             </div>
@@ -707,53 +707,52 @@
 </section><!-- /Contact Section -->
 <!-- Modal -->
 <div class="modal fade" id="welcomeModal" tabindex="-1" aria-labelledby="welcomeModalLabel" aria-hidden="true">
-    <div class="modal-dialog modal-lg">
+    <div class="modal-dialog">
         <div class="modal-content">
             <div class="modal-body">
                 <button type="button" class="btn-close wlcm-close-btn" data-bs-dismiss="modal" aria-label="Close"></button>
-                <img class="wlcm-logo" src="~/assets/img/logo.png" />
-                <div class="welcome-message">
-                    <p class="welcome-to">Welcome to</p>
-                    <p class="shibli">ALLAMA SHIBLI NOMANI</p>
-                    <p class="brainiac">BRAINIAC BATTLE - SEASON-2</p>
-                </div>
-                <div class="row mt-3">
-                    <div class="col-sm-12">
-                        <h5 class="text-center"><span>🌟</span>Best of Luck to All Participants of the ASNBB Season - 2!<span>🌟</span></h5>
-                        <p class="text-justify px-sm-4 mb-2">
-                            Dear Students, Go out there, give it your best, and let your knowledge shine! Believe in your abilities, stay focused, and trust the hard work you've put in.
-                            Win or lose, this experience will add value to your knowledge and bring you one step closer to your dreams.
-                        </p>
-                    </div>
-                </div>
-                <div class="row mt-2 align-items-center">
-                    <div class="col-md-3 order-2 order-md-1 text-center">
-                        <img class="insta-img" src="~/assets/img/insta.jpeg" />
-                    </div>
-                    <div class="col-md-6 order-1 order-md-2">
-                        <p class="rgst-opn">
-                            <a asp-controller="AdmitCard" asp-action="Index">Download Admit Card</a>
-                        </p>
-                        @* <p class="text-center">
-                            Registration Start Date - <strong>01-OCT-2024</strong>
-                        </p> *@
-                        @* <p class="text-center">
-                            Registration Last Date - <strong>30-OCT-2024</strong>
-                        </p> *@
-                        <p class="text-center">
-                            Exam Date - <strong>16 & 17 NOV-2024</strong>
-                        </p>
-                        @* <p class="text-center">
-                            Registration Fee - <strong>&#8377; 50/-</strong>
-                        </p> *@
-                        <p class="text-center">Eligibiliy - <strong>Class 6th to 12th</strong> (CBSE)</p>
-                    </div>
-                    <div class="col-md-3 order-3 text-center">
-                        <p class="sponsor-by">Sponsored By</p>
-                        <p class="sponsor-name">M.I. Naseerul Uloom, Khutahna, Sanjarpur</p>
-                    </div>
-                </div>
+                <img src="~/assets/img/invitation-card.jpeg" />
             </div>
+
+            @* <div class="modal-body">
+            <button type="button" class="btn-close wlcm-close-btn" data-bs-dismiss="modal" aria-label="Close"></button>
+            <img class="wlcm-logo" src="~/assets/img/logo.png" />
+            <div class="welcome-message">
+            <p class="welcome-to">Welcome to</p>
+            <p class="shibli">ALLAMA SHIBLI NOMANI</p>
+            <p class="brainiac">BRAINIAC BATTLE - SEASON-2</p>
+            </div>
+            <div class="row mt-3">
+            <div class="col-sm-12">
+            <h5 class="text-center"><span>🌟</span>Best of Luck to All Participants of the ASNBB Season - 2!<span>🌟</span></h5>
+            <p class="text-justify px-sm-4 mb-2">
+            Dear Students, Go out there, give it your best, and let your knowledge shine! Believe in your abilities, stay focused, and trust the hard work you've put in.
+            Win or lose, this experience will add value to your knowledge and bring you one step closer to your dreams.
+            </p>
+            </div>
+            </div>
+            <div class="row mt-2 align-items-center">
+            <div class="col-md-3 order-2 order-md-1 text-center">
+            <img class="insta-img" src="~/assets/img/insta.jpeg" />
+            </div>
+            <div class="col-md-6 order-1 order-md-2">
+            <p class="rgst-opn">
+            <a asp-controller="AdmitCard" asp-action="Index">Download Admit Card</a>
+            </p>
+            @* <p class="text-center">
+            Registration Start Date - <strong>01-OCT-2024</strong>
+            </p>
+            <p class="text-center">
+            Exam Date - <strong>16 & 17 NOV-2024</strong>
+            </p>
+            <p class="text-center">Eligibiliy - <strong>Class 6th to 12th</strong> (CBSE)</p>
+            </div>
+            <div class="col-md-3 order-3 text-center">
+            <p class="sponsor-by">Sponsored By</p>
+            <p class="sponsor-name">M.I. Naseerul Uloom, Khutahna, Sanjarpur</p>
+            </div>
+            </div>
+            </div> *@
         </div>
     </div>
 </div>
