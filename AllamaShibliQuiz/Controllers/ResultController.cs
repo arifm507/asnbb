@@ -26,7 +26,7 @@ namespace AllamaShibliQuiz.Controllers
             {
                 if (result.Class > 0)
                 {
-                    string path = Path.Combine(this.Environment.WebRootPath, $"results/class_{result.Class}.pdf");
+                    string path = Path.Combine(this.Environment.WebRootPath, $"results/2024/result_{result.Class}.pdf");
                     if (System.IO.File.Exists(path))
                     {
                         return File(System.IO.File.OpenRead(path), "application/octet-stream", Path.GetFileName(path));
