@@ -68,13 +68,13 @@ if (myModalStudent) {
     });
 }
 
-const homeModalElement = document.getElementById('welcomeModal')
-if (homeModalElement) {
-    const welcomeModal = new bootstrap.Modal('#welcomeModal');
-    if (welcomeModal) {
-        welcomeModal.show();
-    }
-}
+//const homeModalElement = document.getElementById('welcomeModal')
+//if (homeModalElement) {
+//    const welcomeModal = new bootstrap.Modal('#welcomeModal');
+//    if (welcomeModal) {
+//        welcomeModal.show();
+//    }
+//}
 
 var schoolSelect = document.getElementById('school');
 if (schoolSelect) {
