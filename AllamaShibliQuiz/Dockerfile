@@ -21,4 +21,5 @@ RUN dotnet publish "./AllamaShibliQuiz.csproj" -c $BUILD_CONFIGURATION -o /app/p
 FROM base AS final
 WORKDIR /app
 COPY --from=publish /app/publish .
+ENV DOTNET_USE_POLLING_FILE_WATCHER=true
 ENTRYPOINT ["dotnet", "AllamaShibliQuiz.dll"]
