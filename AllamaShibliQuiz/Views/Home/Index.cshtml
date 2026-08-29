@@ -1,765 +1,492 @@
-﻿@{
-    ViewData["Title"] = "";
+@{
+    ViewData["Title"] = "Allama Shibli Nomani Brainiac Battle";
 }
 
-<!-- Main Section -->
-<section id="hero" class="hero section">
+@section Styles {
+    <link rel="stylesheet" href="~/css/home2.css" asp-append-version="true" />
+}
+
+<!-- ═══════════════════════════════════════════════════
+     HERO
+══════════════════════════════════════════════════════ -->
+<section class="h2-hero">
     <div class="container">
-        <div class="row gy-4">
-            <div class="col-lg-6 order-1 order-lg-1 d-flex flex-column justify-content-center">
-                <h1>Allama Shibli Nomani Brainiac Battle</h1>
-                <p class="sponsored-by mb-3">
-                    <small>Organized By -</small><span><a href="https://www.instagram.com/shibli_brainiac_battle?utm_source=ig_web_button_share_sheet&igsh=ZDNlZDc0MzIxNw==" target="_blank" class="text-green">Team Brainiac Battle</a></span><br />
-                    <small>Sponsored By - </small><span><a href="https://maps.app.goo.gl/3iB11hjSxkBd6dLX7" target="_blank" class="text-green">M.I. Naseerul Uloom, Khutahna, Sanjarpur</a></span>
+        <div class="row align-items-center">
+
+            <!-- Left: Content -->
+            <div class="col-lg-6 h2-hero-content" data-aos="fade-right">
+                <div class="h2-hero-badge">
+                    <span class="h2-dot"></span> Season 3 &nbsp;·&nbsp; Coming Soon
+                </div>
+                <h1 class="h2-hero-title">
+                    Allama Shibli Nomani<br>
+                    <span>Brainiac Battle</span>
+                </h1>
+                <p class="h2-hero-season">ASNBB — Season 2 Complete &nbsp;·&nbsp; Season 3 Launching Late 2026</p>
+                <p class="h2-hero-desc">
+                    A premier quiz competition celebrating the legacy of one of India's greatest scholars.
+                    Season 2 results are declared — and Season 3 is on its way. Stay tuned for the announcement!
                 </p>
-                <p class="text-white mb-2">
-                    Result of season-2 has been declared
+                <p class="h2-hero-org">
+                    Organized by
+                    <a href="https://www.instagram.com/shibli_brainiac_battle?utm_source=ig_web_button_share_sheet&igsh=ZDNlZDc0MzIxNw==" target="_blank">Team Brainiac Battle</a>
+                    &nbsp;·&nbsp;
+                    Sponsored by
+                    <strong style="color:var(--h2-teal);font-weight:700">Moral Public School, Chittepur, Saraimeer</strong>
                 </p>
-                @* <p class="text-white mb-2">
-                Registration Last Date 30-Oct-24
-                </p> *@
-                @* <p class="text-white mb-2">
-                    Prize Distribution Date - 08-Dec-24
-                </p> *@
-                <p class="text-justify">
-                    <span id="typeWriterText"></span>
-                    @* An engaging and challenging platform for students to showcase their academic knowledge,
-                    critical thinking skills and creativity *@
-                </p>
-                <div class="d-flex">
-                    <a asp-controller="Result" asp-action="Index" class="btn-get-started">Result 2024</a>
-                    <a href="https://www.youtube.com/watch?v=e07NdiP2vCg" class="glightbox btn-watch-video d-flex align-items-center"><i class="bi bi-play-circle"></i><span>Watch Video</span></a>
+                <div class="h2-hero-cta">
+                    <a asp-controller="Result" asp-action="Index" class="h2-btn-primary">
+                        <i class="bi bi-trophy-fill"></i> View Result 2024
+                    </a>
+                    <a href="https://www.youtube.com/watch?v=e07NdiP2vCg" class="h2-btn-outline glightbox">
+                        <i class="bi bi-play-circle-fill"></i> Watch Video
+                    </a>
+                </div>
+                <div class="h2-hero-chips">
+                    <div class="h2-hero-chip"><i class="bi bi-people-fill"></i> Class 6th – 12th</div>
+                    <div class="h2-hero-chip"><i class="bi bi-geo-alt-fill"></i> Azamgarh, UP</div>
+                    <div class="h2-hero-chip"><i class="bi bi-file-earmark-check-fill"></i> OMR / Pen-Paper</div>
                 </div>
             </div>
-            <div class="col-lg-6 order-2 order-lg-2 hero-img">
-                <div class="toppers">
-                    <div class="card">
-                        <div class="card-header">
-                            <h3 class="card-heading mb-0">Our Top Performers in ASNBB-2024</h3>
-                        </div>
-                        <div class="card-body">
-                            <div class="swiper">
-                                <script type="application/json" class="swiper-config">
-                                    {
-                                      "loop": true,
-                                      "speed": 600,
-                                      "autoplay": {
-                                        "delay": 2000
-                                      },
-                                      "slidesPerView": 4,
-                                      "spaceBetween": 10,
-                                      "pagination": {
-                                        "el": ".swiper-pagination",
-                                        "type": "bullets",
-                                        "clickable": true
-                                      }
-                                    }
-                                </script>
-                                <div class="swiper-wrapper">
-                                    <div class="swiper-slide"><img src="~/assets/img/toppers24/1.jpeg" class="img-fluid" /></div>
-                                    <div class="swiper-slide"><img src="~/assets/img/toppers24/2.jpeg" class="img-fluid" /></div>
-                                    <div class="swiper-slide"><img src="~/assets/img/toppers24/3.jpeg" class="img-fluid" /></div>
-                                    <div class="swiper-slide"><img src="~/assets/img/toppers24/4.jpeg" class="img-fluid" /></div>
-                                    <div class="swiper-slide"><img src="~/assets/img/toppers24/5.jpeg" class="img-fluid" /></div>
-                                    <div class="swiper-slide"><img src="~/assets/img/toppers24/6.jpeg" class="img-fluid" /></div>
-                                    <div class="swiper-slide"><img src="~/assets/img/toppers24/7.jpeg" class="img-fluid" /></div>
-                                    <div class="swiper-slide"><img src="~/assets/img/toppers24/8.jpeg" class="img-fluid" /></div>
-                                    <div class="swiper-slide"><img src="~/assets/img/toppers24/9.jpeg" class="img-fluid" /></div>
-                                    <div class="swiper-slide"><img src="~/assets/img/toppers24/10.jpeg" class="img-fluid" /></div>
-                                    <div class="swiper-slide"><img src="~/assets/img/toppers24/11.jpeg" class="img-fluid" /></div>
-                                    <div class="swiper-slide"><img src="~/assets/img/toppers24/12.jpeg" class="img-fluid" /></div>
-                                </div>
-                                <!-- If we need pagination -->
-                                <div class="swiper-pagination"></div>
+
+            <!-- Right: Top Performers Card -->
+            <div class="col-lg-6" data-aos="fade-left" data-aos-delay="150">
+                <div class="h2-toppers-card">
+                    <div class="h2-toppers-card-header">
+                        <h5><i class="bi bi-star-fill me-2"></i>Top Performers — ASNBB 2024</h5>
+                    </div>
+                    <div class="h2-toppers-card-body">
+                        <div class="swiper h2-toppers-swiper">
+                            <script type="application/json" class="swiper-config">
+                                {
+                                  "loop": true, "speed": 700,
+                                  "autoplay": { "delay": 1800 },
+                                  "slidesPerView": 4,
+                                  "spaceBetween": 10,
+                                  "breakpoints": {
+                                    "0":   { "slidesPerView": 2 },
+                                    "480": { "slidesPerView": 3 },
+                                    "768": { "slidesPerView": 4 }
+                                  },
+                                  "pagination": { "el": ".swiper-pagination", "clickable": true }
+                                }
+                            </script>
+                            <div class="swiper-wrapper">
+                                @for (int i = 1; i <= 27; i++)
+                                {
+                                    <div class="swiper-slide">
+                                        <img src="~/assets/img/toppers24/@(i).jpeg" class="img-fluid" alt="Top Performer @i" />
+                                    </div>
+                                }
                             </div>
+                            <div class="swiper-pagination mt-2"></div>
                         </div>
                     </div>
                 </div>
             </div>
+
         </div>
     </div>
-
 </section>
-<!-- /Main Section -->
-<!-- About Section -->
-<section id="about" class="about section">
-    <!-- Section Title -->
-    <div class="container section-title">
-        <h2>Our Vision</h2>
-    </div><!-- End Section Title -->
 
+<!-- ═══════════════════════════════════════════════════
+     SEASON 3 ANNOUNCEMENT
+══════════════════════════════════════════════════════ -->
+<div class="h2-s3-bar">
     <div class="container">
+        <div class="h2-s3-inner">
+            <div class="h2-s3-badge">NEW</div>
+            <p>
+                <strong>Season 3 is coming in Late 2026!</strong>
+                Registration will open soon — follow us on Instagram for the official announcement.
+            </p>
+            <a href="https://www.instagram.com/shibli_brainiac_battle?utm_source=ig_web_button_share_sheet&igsh=ZDNlZDc0MzIxNw==" target="_blank" class="h2-s3-follow">
+                <i class="bi bi-instagram"></i> Follow for Updates
+            </a>
+        </div>
+    </div>
+</div>
 
-        <div class="row gy-4">
+<!-- ═══════════════════════════════════════════════════
+     QUICK ACTIONS BAR
+══════════════════════════════════════════════════════ -->
+<div class="h2-quick-actions">
+    <div class="container">
+        <div class="h2-action-grid">
+            <a href="https://www.instagram.com/shibli_brainiac_battle?utm_source=ig_web_button_share_sheet&igsh=ZDNlZDc0MzIxNw==" target="_blank" class="h2-action-item">
+                <div class="h2-action-icon" style="background:rgba(16,185,129,.18);color:var(--h2-gold)">
+                    <i class="bi bi-pencil-square"></i>
+                </div>
+                <div>
+                    <div class="h2-action-label">Season 3</div>
+                    <div class="h2-action-title">Registration Opening Soon</div>
+                </div>
+            </a>
+            <a asp-controller="AdmitCard" asp-action="Index" class="h2-action-item">
+                <div class="h2-action-icon" style="background:rgba(0,180,200,.18);color:var(--h2-teal)">
+                    <i class="bi bi-card-text"></i>
+                </div>
+                <div>
+                    <div class="h2-action-label">Download</div>
+                    <div class="h2-action-title">Admit Card</div>
+                </div>
+            </a>
+            <a asp-controller="Result" asp-action="Index" class="h2-action-item">
+                <div class="h2-action-icon" style="background:rgba(255,100,100,.18);color:#ff7070">
+                    <i class="bi bi-trophy"></i>
+                </div>
+                <div>
+                    <div class="h2-action-label">Season 2</div>
+                    <div class="h2-action-title">View Results</div>
+                </div>
+            </a>
+            <a asp-controller="Syllabus" asp-action="Index" class="h2-action-item">
+                <div class="h2-action-icon" style="background:rgba(100,200,100,.18);color:#4caf50">
+                    <i class="bi bi-journal-text"></i>
+                </div>
+                <div>
+                    <div class="h2-action-label">Download</div>
+                    <div class="h2-action-title">Syllabus</div>
+                </div>
+            </a>
+        </div>
+    </div>
+</div>
 
-            <div class="col-lg-6 content text-justify">
-                <p>
-                    A premier quiz competition designed to honor the legacy of one of the most distinguished scholars of the modern era, Allama Shibli Nomani.
-                    This event not only celebrates the pursuit of knowledge but also aims to inspire students by highlighting the life and contributions of
-                    Allama Shibli Nomani.
-                </p>
-                <p>
-                    The Allama Shibli Nomani Brainiac Battle aims to inspire and challenge participants by creating an environment that promotes
-                    learning, critical thinking, and teamwork. We believe in the power of knowledge to transform lives and shape future leaders.
-                </p>
-
+<!-- ═══════════════════════════════════════════════════
+     STATS
+══════════════════════════════════════════════════════ -->
+<section class="h2-stats">
+    <div class="container">
+        <div class="row text-center align-items-center">
+            <div class="col-6 col-md-3" data-aos="zoom-in" data-aos-delay="0">
+                <div class="h2-stat-item">
+                    <div class="h2-stat-num">S3</div>
+                    <div class="h2-stat-label">Coming Late 2026</div>
+                </div>
             </div>
+            <div class="col-6 col-md-3" data-aos="zoom-in" data-aos-delay="100">
+                <div class="h2-stat-item">
+                    <div class="h2-stat-num">3000+</div>
+                    <div class="h2-stat-label">Students Participated</div>
+                </div>
+            </div>
+            <div class="col-6 col-md-3" data-aos="zoom-in" data-aos-delay="200">
+                <div class="h2-stat-item">
+                    <div class="h2-stat-num">50+</div>
+                    <div class="h2-stat-label">Schools Enrolled</div>
+                </div>
+            </div>
+            <div class="col-6 col-md-3" data-aos="zoom-in" data-aos-delay="300">
+                <div class="h2-stat-item">
+                    <div class="h2-stat-num">20+</div>
+                    <div class="h2-stat-label">Exam Centres</div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
 
-            <div class="col-lg-6 content text-justify">
-                <h2>Why Participate?</h2>
-                <ul class="mb-0">
-                    <li>Enhance your knowledge and intellectual skills.</li>
-                    <li>Compete with peers and showcase your talents.</li>
-                    <li>Win exciting prizes and recognition.</li>
-                    <li>
-                        We're preparing exam papers similar to higher-level entrance examinations
-                        such as NEET, JEE and CUET to help students prepare for them.
-                    </li>
+<!-- ═══════════════════════════════════════════════════
+     VISION
+══════════════════════════════════════════════════════ -->
+<section class="h2-section" data-aos="fade-up">
+    <div class="container">
+        <div class="h2-section-title">
+            <div class="h2-label">About the Competition</div>
+            <h2>Our Vision</h2>
+            <span class="h2-divider"></span>
+        </div>
+        <div class="row align-items-center gy-5">
+            <div class="col-lg-6">
+                <div class="h2-vision-card">
+                    <div class="h2-vision-icon"><i class="bi bi-lightbulb-fill"></i></div>
+                    <div>
+                        <h5>Honoring a Great Legacy</h5>
+                        <p>A premier quiz competition designed to honor the legacy of Allama Shibli Nomani — one of the most distinguished scholars of the modern era — celebrating the pursuit of knowledge.</p>
+                    </div>
+                </div>
+                <div class="h2-vision-card">
+                    <div class="h2-vision-icon"><i class="bi bi-diagram-3-fill"></i></div>
+                    <div>
+                        <h5>Building Future Leaders</h5>
+                        <p>We create an environment that promotes learning, critical thinking, and teamwork — believing in the power of knowledge to transform lives and shape future leaders.</p>
+                    </div>
+                </div>
+            </div>
+            <div class="col-lg-6">
+                <h4 style="font-weight:800;color:var(--h2-navy);margin-bottom:20px">Why Participate?</h4>
+                <ul class="h2-why-list">
+                    <li><i class="bi bi-check-circle-fill"></i> Enhance your knowledge and sharpen intellectual skills</li>
+                    <li><i class="bi bi-check-circle-fill"></i> Compete with peers and showcase your talents</li>
+                    <li><i class="bi bi-check-circle-fill"></i> Win exciting prizes and gain recognition</li>
+                    <li><i class="bi bi-check-circle-fill"></i> Exam papers modelled on NEET, JEE &amp; CUET patterns to help you prepare for future competitive exams</li>
+                    <li><i class="bi bi-check-circle-fill"></i> Experience a thrilling journey of knowledge and discovery</li>
                 </ul>
-                <p>
-                    Join us for a thrilling journey of knowledge and discovery! Be a part of the Allama Shibli Nomani Brainiac Battle and test your wits against the best.
-                </p>
-
-                @* <p>
-                The Allama Shibli Nomani Brainiac Battle aims to inspire and challenge participants by creating an environment that promotes learning,
-                critical thinking, and teamwork, all while honoring the scholarly spirit of Allama Shibli Nomani. We believe in the power of knowledge
-                to transform lives and shape future leaders.
-                </p>
-                <p>
-                We envision a world where curiosity is encouraged, intellectual pursuits are celebrated, and the thirst for knowledge knows no bounds.
-                Through our quiz competition, we strive to create a platform that not only tests but also expands the horizons of our participants, in the same way
-                </p> *@
             </div>
-
         </div>
-
     </div>
+</section>
 
-</section><!-- /About Section -->
-<!-- About ShibliNomani Section -->
-<section id="aboutshibli" class="about section">
-    <!-- Section Title -->
-    <div class="container section-title">
-        <h2>Allama Shibli Nomani</h2>
-    </div><!-- End Section Title -->
-
+<!-- ═══════════════════════════════════════════════════
+     ALLAMA SHIBLI NOMANI
+══════════════════════════════════════════════════════ -->
+<section class="h2-section h2-light-bg" data-aos="fade-up">
     <div class="container">
-
-        <div class="row gy-4">
-
-            <div class="col-lg-6 order-2 order-lg-1 content text-justify">
-                <p>
-                    Allama Shibli Nomani (4 June 1857 – 18 November 1914) was an Islamic scholar, poet, philosopher, historian, educational thinker, author, orator, reformer and critic of orientalists from Indian subcontinent during the British Raj.
-                </p>
-                <p>
-                    He is regarded as the father of Urdu historiography. He was also proficient in Arabic and Persian languages. Shibli was associated with two influential movements in the region, the Aligarh and the Nadwa movements.
-                </p>
-                <p>
-                    As a supporter of the Deobandi school, he believed that English language and European sciences should be incorporated into the education system. Shibli wrote several biographies of Muslim heroes, convinced that Muslims of his time could learn valuable lessons from the past.
-                </p>
-                <p>
-                    Shibli established the Darul Musannefin Shibli Academy in 1914 to promote Islamic scholarship and also founded the Shibli National College in
-                    1883. He collected much material on the life of Muhammad, and completed the first two volumes of the planned work, Sirat al-Nabi.
-                    His disciple, Sulaiman Nadvi, added to this material and wrote the remaining five volumes after Shibli's death.
-                </p>
-                <p>
-
-                </p>
-            </div>
-            <div class="col-lg-6 order-1 order-lg-2 text-center">
-                <img src="~/assets/img/shibli.jpg" class="shibli-nomani-img w-50" />
-            </div>
-
+        <div class="h2-section-title">
+            <div class="h2-label">The Inspiration</div>
+            <h2>Allama Shibli Nomani</h2>
+            <span class="h2-divider"></span>
         </div>
-
-    </div>
-
-</section><!-- /About ShibliNomani Section -->
-<!-- Syllabus Section -->
-<section id="syllabus" class="skills faq-2 section">
-    <div class="container section-title">
-        <h2>Syllabus</h2>
-    </div><!-- End Section Title -->
-
-    <div class="container">
-        <div class="row">
-            <div class="col-lg-4 pt-4 pt-lg-0 content">
-                <div class="faq-container">
-                    <div class="faq-item">
-                        <h3>Class - 6<sup>th</sup> to 8<sup>th</sup></h3>
-                        <div class="faq-content">
-                            <div class="skills-content skills-animation">
-                                <div class="progress">
-                                    <span class="skill"><span>Science</span> <i class="val">20 Marks</i></span>
-                                    <div class="progress-bar-wrap">
-                                        <div class="progress-bar" role="progressbar" aria-valuenow="20" aria-valuemin="0" aria-valuemax="100"></div>
-                                    </div>
-                                </div><!-- End Skills Item -->
-
-                                <div class="progress">
-                                    <span class="skill"><span>Maths</span> <i class="val">20 Marks</i></span>
-                                    <div class="progress-bar-wrap">
-                                        <div class="progress-bar" role="progressbar" aria-valuenow="20" aria-valuemin="0" aria-valuemax="100"></div>
-                                    </div>
-                                </div><!-- End Skills Item -->
-
-                                <div class="progress">
-                                    <span class="skill"><span>SST</span> <i class="val">20 Marks</i></span>
-                                    <div class="progress-bar-wrap">
-                                        <div class="progress-bar" role="progressbar" aria-valuenow="20" aria-valuemin="0" aria-valuemax="100"></div>
-                                    </div>
-                                </div><!-- End Skills Item -->
-
-                                <div class="progress">
-                                    <span class="skill"><span>Eng. Grammar</span> <i class="val">10 Marks</i></span>
-                                    <div class="progress-bar-wrap">
-                                        <div class="progress-bar" role="progressbar" aria-valuenow="10" aria-valuemin="0" aria-valuemax="100"></div>
-                                    </div>
-                                </div><!-- End Skills Item -->
-                                <div class="progress">
-                                    <span class="skill"><span>Islamic History</span> <i class="val">10 Marks</i></span>
-                                    <div class="progress-bar-wrap">
-                                        <div class="progress-bar" role="progressbar" aria-valuenow="10" aria-valuemin="0" aria-valuemax="100"></div>
-                                    </div>
-                                </div><!-- End Skills Item -->
-
-                                <div class="progress">
-                                    <span class="skill"><span>Shibli Nomani Bio.</span> <i class="val">10 Marks</i></span>
-                                    <div class="progress-bar-wrap">
-                                        <div class="progress-bar" role="progressbar" aria-valuenow="10" aria-valuemin="0" aria-valuemax="100"></div>
-                                    </div>
-                                </div><!-- End Skills Item -->
-                                <div class="progress">
-                                    <span class="skill"><span>Azamgarh Local Heroes</span> <i class="val">10 Marks</i></span>
-                                    <div class="progress-bar-wrap">
-                                        <div class="progress-bar" role="progressbar" aria-valuenow="5" aria-valuemin="0" aria-valuemax="100"></div>
-                                    </div>
-                                </div><!-- End Skills Item -->
-
-                            </div>
-                        </div>
-                        <i class="faq-toggle bi bi-chevron-right"></i>
-                    </div><!-- End Faq item-->
+        <div class="row align-items-center gy-5">
+            <div class="col-lg-4 text-center" data-aos="fade-right">
+                <div class="h2-shibli-frame d-inline-block">
+                    <img src="~/assets/img/shibli.jpg" alt="Allama Shibli Nomani" />
                 </div>
             </div>
-            <div class="col-lg-4 pt-4 pt-lg-0 content">
-                <div class="faq-container">
-                    <div class="faq-item">
-                        <h3>Class - 9<sup>th</sup> & 10<sup>th</sup></h3>
-                        <div class="faq-content">
-                            <div class="skills-content skills-animation">
-                                <div class="progress">
-                                    <span class="skill"><span>Maths</span> <i class="val">20 Marks</i></span>
-                                    <div class="progress-bar-wrap">
-                                        <div class="progress-bar" role="progressbar" aria-valuenow="20" aria-valuemin="0" aria-valuemax="100"></div>
-                                    </div>
-                                </div><!-- End Skills Item -->
-
-                                <div class="progress">
-                                    <span class="skill"><span>Chemistry</span> <i class="val">10 Marks</i></span>
-                                    <div class="progress-bar-wrap">
-                                        <div class="progress-bar" role="progressbar" aria-valuenow="10" aria-valuemin="0" aria-valuemax="100"></div>
-                                    </div>
-                                </div><!-- End Skills Item -->
-
-                                <div class="progress">
-                                    <span class="skill"><span>Biology</span> <i class="val">10 Marks</i></span>
-                                    <div class="progress-bar-wrap">
-                                        <div class="progress-bar" role="progressbar" aria-valuenow="10" aria-valuemin="0" aria-valuemax="100"></div>
-                                    </div>
-                                </div><!-- End Skills Item -->
-
-                                <div class="progress">
-                                    <span class="skill"><span>Physics</span> <i class="val">10 Marks</i></span>
-                                    <div class="progress-bar-wrap">
-                                        <div class="progress-bar" role="progressbar" aria-valuenow="10" aria-valuemin="0" aria-valuemax="100"></div>
-                                    </div>
-                                </div><!-- End Skills Item -->
-
-
-                                <div class="progress">
-                                    <span class="skill"><span>Geography</span> <i class="val">6 Marks</i></span>
-                                    <div class="progress-bar-wrap">
-                                        <div class="progress-bar" role="progressbar" aria-valuenow="6" aria-valuemin="0" aria-valuemax="100"></div>
-                                    </div>
-                                </div><!-- End Skills Item -->
-
-                                <div class="progress">
-                                    <span class="skill"><span>History</span> <i class="val">6 Marks</i></span>
-                                    <div class="progress-bar-wrap">
-                                        <div class="progress-bar" role="progressbar" aria-valuenow="6" aria-valuemin="0" aria-valuemax="100"></div>
-                                    </div>
-                                </div><!-- End Skills Item -->
-
-                                <div class="progress">
-                                    <span class="skill"><span>Political Science</span> <i class="val">4 Marks</i></span>
-                                    <div class="progress-bar-wrap">
-                                        <div class="progress-bar" role="progressbar" aria-valuenow="4" aria-valuemin="0" aria-valuemax="100"></div>
-                                    </div>
-                                </div><!-- End Skills Item -->
-
-                                <div class="progress">
-                                    <span class="skill"><span>Economics</span> <i class="val">4 Marks</i></span>
-                                    <div class="progress-bar-wrap">
-                                        <div class="progress-bar" role="progressbar" aria-valuenow="4" aria-valuemin="0" aria-valuemax="100"></div>
-                                    </div>
-                                </div><!-- End Skills Item -->
-                                <div class="progress">
-                                    <span class="skill"><span>Eng. Grammar</span> <i class="val">10 Marks</i></span>
-                                    <div class="progress-bar-wrap">
-                                        <div class="progress-bar" role="progressbar" aria-valuenow="10" aria-valuemin="0" aria-valuemax="100"></div>
-                                    </div>
-                                </div><!-- End Skills Item -->
-                                <div class="progress">
-                                    <span class="skill"><span>Islamic Studies</span> <i class="val">10 Marks</i></span>
-                                    <div class="progress-bar-wrap">
-                                        <div class="progress-bar" role="progressbar" aria-valuenow="10" aria-valuemin="0" aria-valuemax="100"></div>
-                                    </div>
-                                </div><!-- End Skills Item -->
-                                <div class="progress">
-                                    <span class="skill"><span>Azamgarh Local Heroes</span> <i class="val">5 Marks</i></span>
-                                    <div class="progress-bar-wrap">
-                                        <div class="progress-bar" role="progressbar" aria-valuenow="5" aria-valuemin="0" aria-valuemax="100"></div>
-                                    </div>
-                                </div><!-- End Skills Item -->
-                                <div class="progress">
-                                    <span class="skill"><span>Shibli Nomani Bio.</span> <i class="val">5 Marks</i></span>
-                                    <div class="progress-bar-wrap">
-                                        <div class="progress-bar" role="progressbar" aria-valuenow="5" aria-valuemin="0" aria-valuemax="100"></div>
-                                    </div>
-                                </div><!-- End Skills Item -->
-
-
-                            </div>
-                        </div>
-                        <i class="faq-toggle bi bi-chevron-right"></i>
-                    </div><!-- End Faq item-->
+            <div class="col-lg-8 h2-shibli-text" data-aos="fade-left">
+                <div class="h2-shibli-badge">
+                    <i class="bi bi-calendar3"></i> 4 June 1857 &ndash; 18 November 1914
                 </div>
-            </div>
-            <div class="col-lg-4 pt-4 pt-lg-0 content">
-                <div class="faq-container">
-                    <div class="faq-item">
-                        <h3>Class - 11th & 12th (Science)</h3>
-                        <div class="faq-content">
-                            <div class="skills-content skills-animation">
-                                <div class="progress">
-                                    <span class="skill"><span>Chemistry</span> <i class="val">25 Marks</i></span>
-                                    <div class="progress-bar-wrap">
-                                        <div class="progress-bar" role="progressbar" aria-valuenow="25" aria-valuemin="0" aria-valuemax="100"></div>
-                                    </div>
-                                </div><!-- End Skills Item -->
-
-                                <div class="progress">
-                                    <span class="skill"><span>Physics</span> <i class="val">25 Marks</i></span>
-                                    <div class="progress-bar-wrap">
-                                        <div class="progress-bar" role="progressbar" aria-valuenow="25" aria-valuemin="0" aria-valuemax="100"></div>
-                                    </div>
-                                </div><!-- End Skills Item -->
-
-                                <div class="progress">
-                                    <span class="skill"><span>Biology/Maths</span> <i class="val">25 Marks</i></span>
-                                    <div class="progress-bar-wrap">
-                                        <div class="progress-bar" role="progressbar" aria-valuenow="25" aria-valuemin="0" aria-valuemax="100"></div>
-                                    </div>
-                                </div><!-- End Skills Item -->
-
-                                <div class="progress">
-                                    <span class="skill"><span>Reasoning</span> <i class="val">10 Marks</i></span>
-                                    <div class="progress-bar-wrap">
-                                        <div class="progress-bar" role="progressbar" aria-valuenow="10" aria-valuemin="0" aria-valuemax="100"></div>
-                                    </div>
-                                </div><!-- End Skills Item -->
-                                <div class="progress">
-                                    <span class="skill"><span>Allama Shibli Nomani Bio.</span> <i class="val">5 Marks</i></span>
-                                    <div class="progress-bar-wrap">
-                                        <div class="progress-bar" role="progressbar" aria-valuenow="5" aria-valuemin="0" aria-valuemax="100"></div>
-                                    </div>
-                                </div><!-- End Skills Item -->
-
-                                <div class="progress">
-                                    <span class="skill"><span>Current Affair</span> <i class="val">5 Marks</i></span>
-                                    <div class="progress-bar-wrap">
-                                        <div class="progress-bar" role="progressbar" aria-valuenow="5" aria-valuemin="0" aria-valuemax="100"></div>
-                                    </div>
-                                </div><!-- End Skills Item -->
-                                <div class="progress">
-                                    <span class="skill"><span>Azamgarh Local Heroes</span> <i class="val">5 Marks</i></span>
-                                    <div class="progress-bar-wrap">
-                                        <div class="progress-bar" role="progressbar" aria-valuenow="5" aria-valuemin="0" aria-valuemax="100"></div>
-                                    </div>
-                                </div><!-- End Skills Item -->
-                            </div>
-                        </div>
-                        <i class="faq-toggle bi bi-chevron-right"></i>
-                    </div><!-- End Faq item-->
-                </div>
-            </div>
-        </div>
-        <div class="row">
-            <div class="col-12 text-end mt-3">
-                <a asp-controller="Syllabus" asp-action="Index" class="btn-get-started">Download Syllabus</a>
-            </div>
-        </div>
-
-    </div>
-
-</section><!-- /Syllabus Section -->
-<!-- Gallery Section -->
-<section id="portfolio" class="portfolio section">
-    <!-- Section Title -->
-    <div class="container section-title">
-        <h2>Image Gallery</h2>
-        <p>Here are some memorable moments from past ASNBB</p>
-    </div><!-- End Section Title -->
-
-    <div class="container">
-
-        <div class="isotope-layout" data-default-filter="*" data-layout="masonry" data-sort="original-order">
-
-            <ul class="portfolio-filters isotope-filters">
-                <li data-filter="*" class="filter-active">All</li>
-                <li data-filter=".filter-exam">Exam Day</li>
-                <li data-filter=".filter-prize">Prize Distribution</li>
-            </ul><!-- End Portfolio Filters -->
-
-            <div class="row gy-4 isotope-container">
-
-                <div class="col-lg-4 col-md-6 portfolio-item isotope-item filter-prize">
-                    <img src="assets/img/portfolio/1.jpeg" class="img-fluid" alt="">
-                    <div class="portfolio-info">
-                        <a href="assets/img/portfolio/1.jpeg" data-gallery="portfolio-gallery-app" class="glightbox preview-link"><i class="bi bi-zoom-in"></i></a>
-                    </div>
-                </div><!-- End Portfolio Item -->
-
-                <div class="col-lg-4 col-md-6 portfolio-item isotope-item filter-prize">
-                    <img src="assets/img/portfolio/14.jpeg" class="img-fluid" alt="">
-                    <div class="portfolio-info">
-                        <a href="assets/img/portfolio/14.jpeg" data-gallery="portfolio-gallery-app" class="glightbox preview-link"><i class="bi bi-zoom-in"></i></a>
-                    </div>
-                </div><!-- End Portfolio Item -->
-
-                <div class="col-lg-4 col-md-6 portfolio-item isotope-item filter-exam">
-                    <img src="assets/img/portfolio/41.jpeg" class="img-fluid" alt="">
-                    <div class="portfolio-info">
-                        <a href="assets/img/portfolio/41.jpeg" data-gallery="portfolio-gallery-app" class="glightbox preview-link"><i class="bi bi-zoom-in"></i></a>
-                    </div>
-                </div><!-- End Portfolio Item -->
-
-                <div class="col-lg-4 col-md-6 portfolio-item isotope-item filter-prize">
-                    <img src="assets/img/portfolio/18.jpeg" class="img-fluid" alt="">
-                    <div class="portfolio-info">
-                        <a href="assets/img/portfolio/18.jpeg" data-gallery="portfolio-gallery-app" class="glightbox preview-link"><i class="bi bi-zoom-in"></i></a>
-                    </div>
-                </div><!-- End Portfolio Item -->
-
-                <div class="col-lg-4 col-md-6 portfolio-item isotope-item filter-prize">
-                    <img src="assets/img/portfolio/19.jpeg" class="img-fluid" alt="">
-                    <div class="portfolio-info">
-                        <a href="assets/img/portfolio/19.jpeg" data-gallery="portfolio-gallery-app" class="glightbox preview-link"><i class="bi bi-zoom-in"></i></a>
-                    </div>
-                </div><!-- End Portfolio Item -->
-                <div class="col-lg-4 col-md-6 portfolio-item isotope-item filter-exam">
-                    <img src="assets/img/portfolio/42.jpeg" class="img-fluid" alt="">
-                    <div class="portfolio-info">
-                        <a href="assets/img/portfolio/42.jpeg" data-gallery="portfolio-gallery-app" class="glightbox preview-link"><i class="bi bi-zoom-in"></i></a>
-                    </div>
-                </div><!-- End Portfolio Item -->
-
-                <div class="col-lg-4 col-md-6 portfolio-item isotope-item filter-prize">
-                    <img src="assets/img/portfolio/33.jpeg" class="img-fluid" alt="">
-                    <div class="portfolio-info">
-                        <a href="assets/img/portfolio/33.jpeg" data-gallery="portfolio-gallery-app" class="glightbox preview-link"><i class="bi bi-zoom-in"></i></a>
-                    </div>
-                </div><!-- End Portfolio Item -->
-
-                <div class="col-lg-4 col-md-6 portfolio-item isotope-item filter-exam">
-                    <img src="assets/img/portfolio/43.jpeg" class="img-fluid" alt="">
-                    <div class="portfolio-info">
-                        <a href="assets/img/portfolio/43.jpeg" data-gallery="portfolio-gallery-app" class="glightbox preview-link"><i class="bi bi-zoom-in"></i></a>
-                    </div>
-                </div><!-- End Portfolio Item -->
-
-                <div class="col-lg-4 col-md-6 portfolio-item isotope-item filter-prize">
-                    <img src="assets/img/portfolio/34.jpeg" class="img-fluid" alt="">
-                    <div class="portfolio-info">
-                        <a href="assets/img/portfolio/34.jpeg" data-gallery="portfolio-gallery-app" class="glightbox preview-link"><i class="bi bi-zoom-in"></i></a>
-                    </div>
-                </div><!-- End Portfolio Item -->
-
-                <div class="col-lg-4 col-md-6 portfolio-item isotope-item filter-prize">
-                    <img src="assets/img/portfolio/31.jpeg" class="img-fluid" alt="">
-                    <div class="portfolio-info">
-                        <a href="assets/img/portfolio/31.jpeg" data-gallery="portfolio-gallery-app" class="glightbox preview-link"><i class="bi bi-zoom-in"></i></a>
-                    </div>
-                </div><!-- End Portfolio Item -->
-
-            </div><!-- End Portfolio Container -->
-            <div class="row">
-                <div class="col-12 text-end mt-3">
-                    <a asp-controller="Gallery" asp-action="Index" class="btn-get-started">View More...</a>
+                <p>
+                    Allama Shibli Nomani was an Islamic scholar, poet, philosopher, historian, educational thinker,
+                    author, orator, reformer and critic from the Indian subcontinent during the British Raj.
+                    He is regarded as the <strong>father of Urdu historiography</strong>.
+                </p>
+                <p>
+                    Proficient in Arabic and Persian, Shibli was associated with two influential movements —
+                    the <strong>Aligarh</strong> and the <strong>Nadwa</strong> movements. He championed the
+                    integration of English and European sciences into the Islamic education system.
+                </p>
+                <p>
+                    Shibli established the <strong>Darul Musannefin Shibli Academy</strong> in 1914 and
+                    founded <strong>Shibli National College</strong> in 1883. His masterwork <em>Sirat al-Nabi</em>,
+                    later completed by his disciple Sulaiman Nadvi, remains a landmark in Urdu Islamic literature.
+                </p>
+                <div class="h2-shibli-tags">
+                    <span>Islamic Scholar</span>
+                    <span>Urdu Historian</span>
+                    <span>Poet &amp; Philosopher</span>
+                    <span>Aligarh Movement</span>
+                    <span>Nadwa Movement</span>
+                    <span>Darul Musannefin</span>
                 </div>
             </div>
         </div>
     </div>
+</section>
 
-</section><!-- /Gallery Section -->
-<!-- Team Section -->
-<section id="team" class="team section">
-
-    <!-- Section Title -->
-    <div class="container section-title">
-        <h2>Team</h2>
-        <p>
-            We are dedicated and dynamic group responsible for ensuring the smooth and successful execution of quiz event.
-            Comprised of experienced professionals, this team brings together diverse skills and expertise to create engaging and
-            well-organized competition.
-        </p>
-    </div><!-- End Section Title -->
-
+<!-- ═══════════════════════════════════════════════════
+     SYLLABUS
+══════════════════════════════════════════════════════ -->
+<section class="h2-section h2-syllabus" data-aos="fade-up">
     <div class="container">
-
-        <div class="row gy-4">
-
-            <div class="col-lg-6">
-                <div class="team-member d-flex align-items-start">
-                    <div class="pic"><img src="assets/img/team/asad.jpeg" class="img-fluid" alt=""></div>
-                    <div class="member-info">
-                        <h4>Mr. Asad Ayyub</h4>
-                        <span>
-                            <b>President</b> <br />
-                            <i class="bi bi-phone"></i> +91 7408840781<br /><i class="bi bi-envelope-at"></i> asadayyub81@gmail.com
-                        </span>
-                        <p>Asad Ayyub qualified in M.Sc.(Zoology) & B.Ed. He has 3 years of teaching experience.</p>
-                        <div class="social">
-                            <a href="https://www.facebook.com/share/romazXhH2fKvsDYP/?mibextid=qi2Omg" target="_blank"><i class="bi bi-facebook"></i></a>
-                            <a href="https://www.instagram.com/bold_asad_shaikh?utm_source=ig_web_button_share_sheet&igsh=ZDNlZDc0MzIxNw=="><i class="bi bi-instagram"></i></a>
-                        </div>
-                    </div>
-                </div>
-            </div><!-- End Team Member -->
-
-            <div class="col-lg-6">
-                <div class="team-member d-flex align-items-start">
-                    <div class="pic"><img src="assets/img/team/aksam.jpeg" class="img-fluid" alt=""></div>
-                    <div class="member-info">
-                        <h4>Mr. Aksam Saifi Jamal</h4>
-                        <span>
-                            <b>Vice President</b><br />
-                            <i class="bi bi-phone"></i> +91 8960535991<br /><i class="bi bi-envelope-at"></i> aksamsaifi14@gmail.com
-                        </span>
-                        <p>Aksam Saifi Jamal qualified in M.Sc.(Botany) & B.Ed. He has 3 years of teaching experience.</p>
-                        <div class="social">
-                            <a href="https://www.facebook.com/aksam.saifi.1?mibextid=ZbWKwL" target="_blank"><i class="bi bi-facebook"></i></a>
-                            <a href="https://www.instagram.com/aksam_saifi_jamal?igsh=MTB2MnBhNTFnODFjaw==" target="_blank"><i class="bi bi-instagram"></i></a>
-                        </div>
-                    </div>
-                </div>
-            </div><!-- End Team Member -->
-
-            <div class="col-lg-6">
-                <div class="team-member d-flex align-items-start">
-                    <div class="pic"><img src="assets/img/team/ahmar.jpeg" class="img-fluid" alt=""></div>
-                    <div class="member-info">
-                        <h4>Mr. Mohd Ahmar</h4>
-                        <span>
-                            <b>Secretary</b>
-                            <br />
-                            <i class="bi bi-phone"></i> +91 7236012757<br /><i class="bi bi-envelope-at"></i> mohdahmar795@gmail.com
-                        </span>
-                        <p>Mohd Ahmar qualified in M.Sc.(Chemistry). He has 4 years of teaching experience.</p>
-                        <div class="social">
-                            @* <a href=""><i class="bi bi-twitter-x"></i></a> *@
-                            <a href="https://www.facebook.com/shazibshaikh.mohd?mibextid=ZbWKwL" target="_blank"><i class="bi bi-facebook"></i></a>
-                            <a href="https://www.instagram.com/ahmar__snc/?igsh=MTQ2MG01cmJxeWFxdw%3D%3D" target="_blank"><i class="bi bi-instagram"></i></a>
-                        </div>
-                    </div>
-                </div>
-            </div><!-- End Team Member -->
-
-            <div class="col-lg-6">
-                <div class="team-member d-flex align-items-start">
-                    <div class="pic"><img src="assets/img/team/wamique.jpeg" class="img-fluid" alt=""></div>
-                    <div class="member-info">
-                        <h4>Mr. Mohd Wamique</h4>
-                        <span>
-                            <b>Gen. Secretary</b>
-                            <br />
-                            <i class="bi bi-phone"></i> +91 8931866437<br /><i class="bi bi-envelope-at"></i> mohammadwamique9582@gmail.com
-                        </span>
-                        <p>Mohd Wamique qualified in M.Sc.(Botany) & B.Ed. He has 3 years of teaching experience.</p>
-                        <div class="social">
-                            <a href="https://www.facebook.com/share/3ZW5G9hvots2wCjb/?mibextid=qi2Omg"><i class="bi bi-facebook"></i></a>
-                            <a href="https://www.instagram.com/waamique333?utm_source=ig_web_button_share_sheet&igsh=ZDNlZDc0MzIxNw=="><i class="bi bi-instagram"></i></a>
-                        </div>
-                    </div>
-                </div>
-            </div><!-- End Team Member -->
-
+        <div class="h2-section-title">
+            <div class="h2-label">Exam Pattern</div>
+            <h2>Syllabus &amp; Marks Distribution</h2>
+            <span class="h2-divider"></span>
+            <p>Select your class group to view the subject-wise marks distribution</p>
         </div>
 
-    </div>
+        <ul class="nav nav-pills" id="syllabusTab" role="tablist">
+            <li class="nav-item" role="presentation">
+                <button class="nav-link active" data-bs-toggle="pill" data-bs-target="#tab68" type="button">Class 6 – 8</button>
+            </li>
+            <li class="nav-item" role="presentation">
+                <button class="nav-link" data-bs-toggle="pill" data-bs-target="#tab910" type="button">Class 9 – 10</button>
+            </li>
+            <li class="nav-item" role="presentation">
+                <button class="nav-link" data-bs-toggle="pill" data-bs-target="#tab1112" type="button">Class 11 – 12 (Science)</button>
+            </li>
+        </ul>
 
-</section><!-- /Team Section -->
-<!-- Faq 2 Section -->
-<section id="faq-2" class="faq-2 section">
-    <!-- Section Title -->
-    <div class="container section-title">
-        <h2>Frequently Asked Questions</h2>
-        <p>Here are some frequently asked questions.</p>
-    </div><!-- End Section Title -->
+        <div class="tab-content mt-2">
+            <div class="tab-pane fade show active" id="tab68" role="tabpanel">
+                <div class="h2-subject-grid">
+                    <div class="h2-subject-card"><div class="h2-subject-icon" style="background:#e8f4fd;color:#1a73e8"><i class="bi bi-flask"></i></div><div><div class="h2-subject-name">Science</div><div class="h2-subject-marks">Total: <strong>20 Marks</strong></div></div></div>
+                    <div class="h2-subject-card"><div class="h2-subject-icon" style="background:#fef3e2;color:#e8a020"><i class="bi bi-calculator"></i></div><div><div class="h2-subject-name">Maths</div><div class="h2-subject-marks">Total: <strong>20 Marks</strong></div></div></div>
+                    <div class="h2-subject-card"><div class="h2-subject-icon" style="background:#e8f8f2;color:#2ecc71"><i class="bi bi-globe"></i></div><div><div class="h2-subject-name">Social Studies</div><div class="h2-subject-marks">Total: <strong>20 Marks</strong></div></div></div>
+                    <div class="h2-subject-card"><div class="h2-subject-icon" style="background:#fce4ec;color:#e91e63"><i class="bi bi-translate"></i></div><div><div class="h2-subject-name">English Grammar</div><div class="h2-subject-marks">Total: <strong>10 Marks</strong></div></div></div>
+                    <div class="h2-subject-card"><div class="h2-subject-icon" style="background:#f3e5f5;color:#9c27b0"><i class="bi bi-moon-stars"></i></div><div><div class="h2-subject-name">Islamic History</div><div class="h2-subject-marks">Total: <strong>10 Marks</strong></div></div></div>
+                    <div class="h2-subject-card"><div class="h2-subject-icon" style="background:#fff8e1;color:#ff8f00"><i class="bi bi-person-badge"></i></div><div><div class="h2-subject-name">Shibli Nomani Bio.</div><div class="h2-subject-marks">Total: <strong>10 Marks</strong></div></div></div>
+                    <div class="h2-subject-card"><div class="h2-subject-icon" style="background:#e0f2f1;color:#009688"><i class="bi bi-map"></i></div><div><div class="h2-subject-name">Azamgarh Local Heroes</div><div class="h2-subject-marks">Total: <strong>10 Marks</strong></div></div></div>
+                </div>
+                <div class="h2-total-bar">Total: 100 Marks &nbsp;|&nbsp; Duration: 2 Hours &nbsp;|&nbsp; OMR / Pen-Paper</div>
+            </div>
+            <div class="tab-pane fade" id="tab910" role="tabpanel">
+                <div class="h2-subject-grid">
+                    <div class="h2-subject-card"><div class="h2-subject-icon" style="background:#fef3e2;color:#e8a020"><i class="bi bi-calculator"></i></div><div><div class="h2-subject-name">Maths</div><div class="h2-subject-marks">Total: <strong>20 Marks</strong></div></div></div>
+                    <div class="h2-subject-card"><div class="h2-subject-icon" style="background:#e8f4fd;color:#1a73e8"><i class="bi bi-activity"></i></div><div><div class="h2-subject-name">Chemistry</div><div class="h2-subject-marks">Total: <strong>10 Marks</strong></div></div></div>
+                    <div class="h2-subject-card"><div class="h2-subject-icon" style="background:#e8f8f2;color:#2ecc71"><i class="bi bi-heart-pulse"></i></div><div><div class="h2-subject-name">Biology</div><div class="h2-subject-marks">Total: <strong>10 Marks</strong></div></div></div>
+                    <div class="h2-subject-card"><div class="h2-subject-icon" style="background:#fce4ec;color:#e91e63"><i class="bi bi-lightning"></i></div><div><div class="h2-subject-name">Physics</div><div class="h2-subject-marks">Total: <strong>10 Marks</strong></div></div></div>
+                    <div class="h2-subject-card"><div class="h2-subject-icon" style="background:#e0f2f1;color:#009688"><i class="bi bi-geo"></i></div><div><div class="h2-subject-name">Geography</div><div class="h2-subject-marks">Total: <strong>6 Marks</strong></div></div></div>
+                    <div class="h2-subject-card"><div class="h2-subject-icon" style="background:#f3e5f5;color:#9c27b0"><i class="bi bi-book"></i></div><div><div class="h2-subject-name">History</div><div class="h2-subject-marks">Total: <strong>6 Marks</strong></div></div></div>
+                    <div class="h2-subject-card"><div class="h2-subject-icon" style="background:#e3f2fd;color:#1565c0"><i class="bi bi-bank"></i></div><div><div class="h2-subject-name">Political Science</div><div class="h2-subject-marks">Total: <strong>4 Marks</strong></div></div></div>
+                    <div class="h2-subject-card"><div class="h2-subject-icon" style="background:#fff8e1;color:#ff8f00"><i class="bi bi-graph-up"></i></div><div><div class="h2-subject-name">Economics</div><div class="h2-subject-marks">Total: <strong>4 Marks</strong></div></div></div>
+                    <div class="h2-subject-card"><div class="h2-subject-icon" style="background:#fce4ec;color:#c2185b"><i class="bi bi-translate"></i></div><div><div class="h2-subject-name">English Grammar</div><div class="h2-subject-marks">Total: <strong>10 Marks</strong></div></div></div>
+                    <div class="h2-subject-card"><div class="h2-subject-icon" style="background:#f3e5f5;color:#7b1fa2"><i class="bi bi-moon-stars"></i></div><div><div class="h2-subject-name">Islamic Studies</div><div class="h2-subject-marks">Total: <strong>10 Marks</strong></div></div></div>
+                    <div class="h2-subject-card"><div class="h2-subject-icon" style="background:#e0f2f1;color:#009688"><i class="bi bi-map"></i></div><div><div class="h2-subject-name">Azamgarh Local Heroes</div><div class="h2-subject-marks">Total: <strong>5 Marks</strong></div></div></div>
+                    <div class="h2-subject-card"><div class="h2-subject-icon" style="background:#fff8e1;color:#ff8f00"><i class="bi bi-person-badge"></i></div><div><div class="h2-subject-name">Shibli Nomani Bio.</div><div class="h2-subject-marks">Total: <strong>5 Marks</strong></div></div></div>
+                </div>
+                <div class="h2-total-bar">Total: 100 Marks &nbsp;|&nbsp; Duration: 2 Hours &nbsp;|&nbsp; OMR / Pen-Paper</div>
+            </div>
+            <div class="tab-pane fade" id="tab1112" role="tabpanel">
+                <div class="h2-subject-grid">
+                    <div class="h2-subject-card"><div class="h2-subject-icon" style="background:#e8f4fd;color:#1a73e8"><i class="bi bi-activity"></i></div><div><div class="h2-subject-name">Chemistry</div><div class="h2-subject-marks">Total: <strong>25 Marks</strong></div></div></div>
+                    <div class="h2-subject-card"><div class="h2-subject-icon" style="background:#fce4ec;color:#e91e63"><i class="bi bi-lightning"></i></div><div><div class="h2-subject-name">Physics</div><div class="h2-subject-marks">Total: <strong>25 Marks</strong></div></div></div>
+                    <div class="h2-subject-card"><div class="h2-subject-icon" style="background:#e8f8f2;color:#2ecc71"><i class="bi bi-heart-pulse"></i></div><div><div class="h2-subject-name">Biology / Maths</div><div class="h2-subject-marks">Total: <strong>25 Marks</strong></div></div></div>
+                    <div class="h2-subject-card"><div class="h2-subject-icon" style="background:#fef3e2;color:#e8a020"><i class="bi bi-cpu"></i></div><div><div class="h2-subject-name">Reasoning</div><div class="h2-subject-marks">Total: <strong>10 Marks</strong></div></div></div>
+                    <div class="h2-subject-card"><div class="h2-subject-icon" style="background:#fff8e1;color:#ff8f00"><i class="bi bi-person-badge"></i></div><div><div class="h2-subject-name">Allama Shibli Nomani Bio.</div><div class="h2-subject-marks">Total: <strong>5 Marks</strong></div></div></div>
+                    <div class="h2-subject-card"><div class="h2-subject-icon" style="background:#f3e5f5;color:#9c27b0"><i class="bi bi-newspaper"></i></div><div><div class="h2-subject-name">Current Affairs</div><div class="h2-subject-marks">Total: <strong>5 Marks</strong></div></div></div>
+                    <div class="h2-subject-card"><div class="h2-subject-icon" style="background:#e0f2f1;color:#009688"><i class="bi bi-map"></i></div><div><div class="h2-subject-name">Azamgarh Local Heroes</div><div class="h2-subject-marks">Total: <strong>5 Marks</strong></div></div></div>
+                </div>
+                <div class="h2-total-bar">Total: 100 Marks &nbsp;|&nbsp; Duration: 2 Hours &nbsp;|&nbsp; OMR / Pen-Paper</div>
+            </div>
+        </div>
+
+        <div class="text-center mt-4">
+            <a asp-controller="Syllabus" asp-action="Index" class="h2-btn-primary">
+                <i class="bi bi-download"></i> Download Full Syllabus
+            </a>
+        </div>
+    </div>
+</section>
+
+<!-- ═══════════════════════════════════════════════════
+     GALLERY
+══════════════════════════════════════════════════════ -->
+<section class="h2-section h2-light-bg" data-aos="fade-up">
     <div class="container">
+        <div class="h2-section-title">
+            <div class="h2-label">Memories</div>
+            <h2>Image Gallery</h2>
+            <span class="h2-divider"></span>
+            <p>Memorable moments from the Allama Shibli Nomani Brainiac Battle</p>
+        </div>
+        <div class="h2-gallery-filters">
+            <button class="h2-filter-btn active" data-filter="all">All</button>
+            <button class="h2-filter-btn" data-filter="prize">Prize Distribution</button>
+            <button class="h2-filter-btn" data-filter="exam">Exam Day</button>
+        </div>
+        <div class="h2-gallery-grid">
+            <div class="h2-gallery-item" data-category="prize"><img src="~/assets/img/portfolio/1.jpeg" alt="Prize Distribution" loading="lazy"><div class="h2-gallery-overlay"><i class="bi bi-zoom-in"></i></div><a href="~/assets/img/portfolio/1.jpeg" data-gallery="h2-gallery" class="glightbox stretched-link"></a></div>
+            <div class="h2-gallery-item" data-category="exam"><img src="~/assets/img/portfolio/41.jpeg" alt="Exam Day" loading="lazy"><div class="h2-gallery-overlay"><i class="bi bi-zoom-in"></i></div><a href="~/assets/img/portfolio/41.jpeg" data-gallery="h2-gallery" class="glightbox stretched-link"></a></div>
+            <div class="h2-gallery-item" data-category="prize"><img src="~/assets/img/portfolio/14.jpeg" alt="Prize Distribution" loading="lazy"><div class="h2-gallery-overlay"><i class="bi bi-zoom-in"></i></div><a href="~/assets/img/portfolio/14.jpeg" data-gallery="h2-gallery" class="glightbox stretched-link"></a></div>
+            <div class="h2-gallery-item" data-category="prize"><img src="~/assets/img/portfolio/18.jpeg" alt="Prize Distribution" loading="lazy"><div class="h2-gallery-overlay"><i class="bi bi-zoom-in"></i></div><a href="~/assets/img/portfolio/18.jpeg" data-gallery="h2-gallery" class="glightbox stretched-link"></a></div>
+            <div class="h2-gallery-item" data-category="exam"><img src="~/assets/img/portfolio/42.jpeg" alt="Exam Day" loading="lazy"><div class="h2-gallery-overlay"><i class="bi bi-zoom-in"></i></div><a href="~/assets/img/portfolio/42.jpeg" data-gallery="h2-gallery" class="glightbox stretched-link"></a></div>
+            <div class="h2-gallery-item" data-category="prize"><img src="~/assets/img/portfolio/19.jpeg" alt="Prize Distribution" loading="lazy"><div class="h2-gallery-overlay"><i class="bi bi-zoom-in"></i></div><a href="~/assets/img/portfolio/19.jpeg" data-gallery="h2-gallery" class="glightbox stretched-link"></a></div>
+            <div class="h2-gallery-item" data-category="prize"><img src="~/assets/img/portfolio/33.jpeg" alt="Prize Distribution" loading="lazy"><div class="h2-gallery-overlay"><i class="bi bi-zoom-in"></i></div><a href="~/assets/img/portfolio/33.jpeg" data-gallery="h2-gallery" class="glightbox stretched-link"></a></div>
+            <div class="h2-gallery-item" data-category="exam"><img src="~/assets/img/portfolio/43.jpeg" alt="Exam Day" loading="lazy"><div class="h2-gallery-overlay"><i class="bi bi-zoom-in"></i></div><a href="~/assets/img/portfolio/43.jpeg" data-gallery="h2-gallery" class="glightbox stretched-link"></a></div>
+            <div class="h2-gallery-item" data-category="prize"><img src="~/assets/img/portfolio/34.jpeg" alt="Prize Distribution" loading="lazy"><div class="h2-gallery-overlay"><i class="bi bi-zoom-in"></i></div><a href="~/assets/img/portfolio/34.jpeg" data-gallery="h2-gallery" class="glightbox stretched-link"></a></div>
+        </div>
+        <div class="text-center mt-4">
+            <a asp-controller="Gallery" asp-action="Index" class="h2-btn-primary">
+                <i class="bi bi-images"></i> View Full Gallery
+            </a>
+        </div>
+    </div>
+</section>
+
+<!-- ═══════════════════════════════════════════════════
+     TEAM
+══════════════════════════════════════════════════════ -->
+<section class="h2-section" data-aos="fade-up">
+    <div class="container">
+        <div class="h2-section-title">
+            <div class="h2-label">The People Behind ASNBB</div>
+            <h2>Our Team</h2>
+            <span class="h2-divider"></span>
+            <p>A dedicated group of professionals committed to making the Brainiac Battle a successful and enriching experience</p>
+        </div>
+        <div class="row gy-4 justify-content-center">
+            <div class="col-lg-3 col-md-6">
+                <div class="h2-team-card" data-aos="fade-up" data-aos-delay="0">
+                    <div class="h2-team-img"><img src="~/assets/img/team/asad.jpeg" alt="Mr. Asad Ayyub"><div class="h2-team-img-footer"><div class="h2-team-socials"><a href="https://www.facebook.com/share/romazXhH2fKvsDYP/?mibextid=qi2Omg" target="_blank"><i class="bi bi-facebook"></i></a><a href="https://www.instagram.com/bold_asad_shaikh?utm_source=ig_web_button_share_sheet&igsh=ZDNlZDc0MzIxNw==" target="_blank"><i class="bi bi-instagram"></i></a></div></div></div>
+                    <div class="h2-team-body"><div class="h2-team-role">President</div><h4>Mr. Asad Ayyub</h4><p class="h2-team-qual">M.Sc. (Zoology) &amp; B.Ed. · 3 yrs teaching exp.</p><div class="h2-team-contacts"><a href="tel:+917408840781"><i class="bi bi-telephone"></i> +91 7408840781</a><a href="mailto:asadayyub81@gmail.com"><i class="bi bi-envelope"></i> asadayyub81@gmail.com</a></div></div>
+                </div>
+            </div>
+            <div class="col-lg-3 col-md-6">
+                <div class="h2-team-card" data-aos="fade-up" data-aos-delay="100">
+                    <div class="h2-team-img"><img src="~/assets/img/team/aksam.jpeg" alt="Mr. Aksam Saifi Jamal"><div class="h2-team-img-footer"><div class="h2-team-socials"><a href="https://www.facebook.com/aksam.saifi.1?mibextid=ZbWKwL" target="_blank"><i class="bi bi-facebook"></i></a><a href="https://www.instagram.com/aksam_saifi_jamal?igsh=MTB2MnBhNTFnODFjaw==" target="_blank"><i class="bi bi-instagram"></i></a></div></div></div>
+                    <div class="h2-team-body"><div class="h2-team-role">Vice President</div><h4>Mr. Aksam Saifi Jamal</h4><p class="h2-team-qual">M.Sc. (Botany) &amp; B.Ed. · 3 yrs teaching exp.</p><div class="h2-team-contacts"><a href="tel:+918960535991"><i class="bi bi-telephone"></i> +91 8960535991</a><a href="mailto:aksamsaifi14@gmail.com"><i class="bi bi-envelope"></i> aksamsaifi14@gmail.com</a></div></div>
+                </div>
+            </div>
+            <div class="col-lg-3 col-md-6">
+                <div class="h2-team-card" data-aos="fade-up" data-aos-delay="200">
+                    <div class="h2-team-img"><img src="~/assets/img/team/ahmar.jpeg" alt="Mr. Mohd Ahmar"><div class="h2-team-img-footer"><div class="h2-team-socials"><a href="https://www.facebook.com/shazibshaikh.mohd?mibextid=ZbWKwL" target="_blank"><i class="bi bi-facebook"></i></a><a href="https://www.instagram.com/ahmar__snc/?igsh=MTQ2MG01cmJxeWFxdw%3D%3D" target="_blank"><i class="bi bi-instagram"></i></a></div></div></div>
+                    <div class="h2-team-body"><div class="h2-team-role">Secretary</div><h4>Mr. Mohd Ahmar</h4><p class="h2-team-qual">M.Sc. (Chemistry) · 4 yrs teaching exp.</p><div class="h2-team-contacts"><a href="tel:+917236012757"><i class="bi bi-telephone"></i> +91 7236012757</a><a href="mailto:mohdahmar795@gmail.com"><i class="bi bi-envelope"></i> mohdahmar795@gmail.com</a></div></div>
+                </div>
+            </div>
+            <div class="col-lg-3 col-md-6">
+                <div class="h2-team-card" data-aos="fade-up" data-aos-delay="300">
+                    <div class="h2-team-img"><img src="~/assets/img/team/wamique.jpeg" alt="Mr. Mohd Wamique"><div class="h2-team-img-footer"><div class="h2-team-socials"><a href="https://www.facebook.com/share/3ZW5G9hvots2wCjb/?mibextid=qi2Omg" target="_blank"><i class="bi bi-facebook"></i></a><a href="https://www.instagram.com/waamique333?utm_source=ig_web_button_share_sheet&igsh=ZDNlZDc0MzIxNw==" target="_blank"><i class="bi bi-instagram"></i></a></div></div></div>
+                    <div class="h2-team-body"><div class="h2-team-role">Gen. Secretary</div><h4>Mr. Mohd Wamique</h4><p class="h2-team-qual">M.Sc. (Botany) &amp; B.Ed. · 3 yrs teaching exp.</p><div class="h2-team-contacts"><a href="tel:+918931866437"><i class="bi bi-telephone"></i> +91 8931866437</a><a href="mailto:mohammadwamique9582@gmail.com"><i class="bi bi-envelope"></i> mohammadwamique9582@gmail.com</a></div></div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- ═══════════════════════════════════════════════════
+     FAQ
+══════════════════════════════════════════════════════ -->
+<section class="h2-section h2-light-bg" data-aos="fade-up">
+    <div class="container">
+        <div class="h2-section-title">
+            <div class="h2-label">Got Questions?</div>
+            <h2>Frequently Asked Questions</h2>
+            <span class="h2-divider"></span>
+        </div>
         <div class="row justify-content-center">
-            <div class="col-lg-10">
-                <div class="faq-container">
-                    <div class="faq-item faq-active">
-                        <h3>When will quiz examination happen?</h3>
-                        <div class="faq-content">
-                            <p>The Allama Shibli Nomani Brainiac Battle will be held in November-2024.</p>
-                        </div>
-                        <i class="faq-toggle bi bi-chevron-right"></i>
-                    </div><!-- End Faq item-->
-
-                    <div class="faq-item">
-                        <h3>Which class student can participate?</h3>
-                        <div class="faq-content">
-                            <p>Students from class 6th to 12th can participate in this quiz competition.</p>
-                        </div>
-                        <i class="faq-toggle bi bi-chevron-right"></i>
-                    </div><!-- End Faq item-->
-
-                    <div class="faq-item">
-                        <h3>What will be the medium of paper?</h3>
-                        <div class="faq-content">
-                            <p>It will be based on english medium (CBSE Pattern).</p>
-                        </div>
-                        <i class="faq-toggle bi bi-chevron-right"></i>
-                    </div><!-- End Faq item-->
-
-                    <div class="faq-item">
-                        <h3>Will it be online or offline and place of examination?</h3>
-                        <div class="faq-content">
-                            <p>It is a Pen-Paper(OMR) based Exam. Examination will be held offline on 4-5 examination centres in Azamgarh, UP.</p>
-                        </div>
-                        <i class="faq-toggle bi bi-chevron-right"></i>
-                    </div><!-- End Faq item-->
-
-                    <div class="faq-item">
-                        <h3>How to participate in this examination?</h3>
-                        <div class="faq-content">
-                            <p>
-                                You can fill registration form and send the registration fee using UPI and send us to the given mobile number on registration page.
-                                Then after successful verification you can give exam at exam center organized by Our Team.
-                            </p>
-                        </div>
-                        <i class="faq-toggle bi bi-chevron-right"></i>
-                    </div><!-- End Faq item-->
-
-                </div>
-
+            <div class="col-lg-8">
+                <div class="h2-faq open"><div class="h2-faq-q">When will the quiz examination happen? <i class="bi bi-chevron-right"></i></div><div class="h2-faq-a">Season 2 was successfully held in November 2024. <strong>Season 3 is planned for Late 2026</strong> — the exact date has not been announced yet. Follow us on Instagram to be the first to know when registration opens.</div></div>
+                <div class="h2-faq"><div class="h2-faq-q">Which class students can participate? <i class="bi bi-chevron-right"></i></div><div class="h2-faq-a">Students from Class 6th to 12th can participate in the quiz competition.</div></div>
+                <div class="h2-faq"><div class="h2-faq-q">What will be the medium of the paper? <i class="bi bi-chevron-right"></i></div><div class="h2-faq-a">The exam will be based on English medium following the CBSE pattern.</div></div>
+                <div class="h2-faq"><div class="h2-faq-q">Will it be online or offline? <i class="bi bi-chevron-right"></i></div><div class="h2-faq-a">It is a Pen-Paper (OMR) based offline examination held at 4–5 exam centres in Azamgarh, UP.</div></div>
+                <div class="h2-faq"><div class="h2-faq-q">How do I register and participate? <i class="bi bi-chevron-right"></i></div><div class="h2-faq-a">Fill the registration form on this website and send the registration fee via UPI to the number provided on the registration page. After successful verification you will receive your admit card and exam centre details.</div></div>
             </div>
-
         </div>
-
     </div>
-</section><!-- /Faq 2 Section -->
-<!-- Contact Section -->
-<section id="contact" class="contact section">
-    <!-- Section Title -->
-    <div class="container section-title">
-        <h2>Contact</h2>
-        <p>You can contact us if you have any query.</p>
-    </div><!-- End Section Title -->
+</section>
 
+<!-- ═══════════════════════════════════════════════════
+     CONTACT
+══════════════════════════════════════════════════════ -->
+<section class="h2-section h2-navy-bg" data-aos="fade-up">
     <div class="container">
-        <div class="row gy-4">
-            <div class="col-12">
-                <div class="info-wrap">
-                    <div class="row">
-                        <div class="col-sm-4 mb-sm-0 mb-3">
-                            <div class="info-item d-flex">
-                                <i class="bi bi-geo-alt flex-shrink-0"></i>
-                                <div>
-                                    <h3>Address</h3>
-                                    <p>Village and Post Kotila, District Azamgarh, UP, 276207</p>
-                                </div>
-                            </div><!-- End Info Item -->
-                        </div>
-                        <div class="col-sm-4 mb-sm-0 mb-3">
-                            <div class="info-item d-flex">
-                                <i class="bi bi-telephone flex-shrink-0"></i>
-                                <div>
-                                    <h3>Call Us</h3>
-                                    <a href="tel:+91 9236408638">+91 9236408638</a>
-                                    <a href="tel:+91 7408840781">+91 7408840781</a>
-                                </div>
-                            </div><!-- End Info Item -->
-                        </div>
-                        <div class="col-sm-4 mb-sm-0 mb-3">
-                            <div class="info-item d-flex">
-                                <i class="bi bi-envelope flex-shrink-0"></i>
-                                <div>
-                                    <h3>Email Us</h3>
-                                    <p>asnbb.info@gmail.com</p>
-                                </div>
-                            </div><!-- End Info Item -->
-                        </div>
-                    </div>
-                </div>
-            </div>
+        <div class="h2-section-title">
+            <div class="h2-label" style="color:var(--h2-gold-lt)">Get in Touch</div>
+            <h2>Contact Us</h2>
+            <span class="h2-divider"></span>
+            <p>Have a question? Reach out — we're happy to help.</p>
         </div>
-
-    </div>
-
-</section><!-- /Contact Section -->
-<!-- Modal -->
-@* <div class="modal fade" id="welcomeModal" tabindex="-1" aria-labelledby="welcomeModalLabel" aria-hidden="true">
-    <div class="modal-dialog">
-        <div class="modal-content">
-            <div class="modal-body">
-                <button type="button" class="btn-close wlcm-close-btn" data-bs-dismiss="modal" aria-label="Close"></button>
-                <img src="~/assets/img/invitation-card.jpeg" />
-            </div>
-
-             <div class="modal-body">
-            <button type="button" class="btn-close wlcm-close-btn" data-bs-dismiss="modal" aria-label="Close"></button>
-            <img class="wlcm-logo" src="~/assets/img/logo.png" />
-            <div class="welcome-message">
-            <p class="welcome-to">Welcome to</p>
-            <p class="shibli">ALLAMA SHIBLI NOMANI</p>
-            <p class="brainiac">BRAINIAC BATTLE - SEASON-2</p>
-            </div>
-            <div class="row mt-3">
-            <div class="col-sm-12">
-            <h5 class="text-center"><span>🌟</span>Best of Luck to All Participants of the ASNBB Season - 2!<span>🌟</span></h5>
-            <p class="text-justify px-sm-4 mb-2">
-            Dear Students, Go out there, give it your best, and let your knowledge shine! Believe in your abilities, stay focused, and trust the hard work you've put in.
-            Win or lose, this experience will add value to your knowledge and bring you one step closer to your dreams.
-            </p>
-            </div>
-            </div>
-            <div class="row mt-2 align-items-center">
-            <div class="col-md-3 order-2 order-md-1 text-center">
-            <img class="insta-img" src="~/assets/img/insta.jpeg" />
-            </div>
-            <div class="col-md-6 order-1 order-md-2">
-            <p class="rgst-opn">
-            <a asp-controller="AdmitCard" asp-action="Index">Download Admit Card</a>
-            </p>
-            <p class="text-center">
-            Registration Start Date - <strong>01-OCT-2024</strong>
-            </p>
-            <p class="text-center">
-            Exam Date - <strong>16 & 17 NOV-2024</strong>
-            </p>
-            <p class="text-center">Eligibiliy - <strong>Class 6th to 12th</strong> (CBSE)</p>
-            </div>
-            <div class="col-md-3 order-3 text-center">
-            <p class="sponsor-by">Sponsored By</p>
-            <p class="sponsor-name">M.I. Naseerul Uloom, Khutahna, Sanjarpur</p>
-            </div>
-            </div>
-            </div>
+        <div class="row gy-4 justify-content-center">
+            <div class="col-lg-4 col-md-6"><div class="h2-contact-card"><div class="h2-contact-icon"><i class="bi bi-geo-alt-fill"></i></div><h5>Address</h5><p>Village and Post Kotila</p><p>District Azamgarh, UP – 276207</p></div></div>
+            <div class="col-lg-4 col-md-6"><div class="h2-contact-card"><div class="h2-contact-icon"><i class="bi bi-telephone-fill"></i></div><h5>Call Us</h5><a href="tel:+919236408638">+91 9236408638</a><a href="tel:+917408840781">+91 7408840781</a></div></div>
+            <div class="col-lg-4 col-md-6"><div class="h2-contact-card"><div class="h2-contact-icon"><i class="bi bi-envelope-fill"></i></div><h5>Email Us</h5><a href="mailto:asnbb.info@gmail.com">asnbb.info@gmail.com</a></div></div>
         </div>
     </div>
-</div> *@
+</section>
 
+@section Scripts {
+<script>
+    document.querySelectorAll('.h2-faq-q').forEach(function (q) {
+        q.addEventListener('click', function () {
+            var item = q.parentElement;
+            var wasOpen = item.classList.contains('open');
+            document.querySelectorAll('.h2-faq').forEach(function (f) { f.classList.remove('open'); });
+            if (!wasOpen) item.classList.add('open');
+        });
+    });
+    document.querySelectorAll('.h2-filter-btn').forEach(function (btn) {
+        btn.addEventListener('click', function () {
+            document.querySelectorAll('.h2-filter-btn').forEach(function (b) { b.classList.remove('active'); });
+            btn.classList.add('active');
+            var filter = btn.dataset.filter;
+            document.querySelectorAll('.h2-gallery-item').forEach(function (item) {
+                item.style.display = (filter === 'all' || item.dataset.category === filter) ? '' : 'none';
+            });
+        });
+    });
+</script>
+}

@@ -1,349 +1,124 @@
-﻿<section id="portfolio" class="portfolio section inside">
-    <!-- Section Title -->
-    <div class="container section-title" data-aos="fade-up">
-        <h2>Image Gallery</h2>
-        <p>Here are some memorable moments from past ASNBB</p>
-    </div><!-- End Section Title -->
+@section Styles {
+    <link rel="stylesheet" href="~/css/inner-pages.css" asp-append-version="true" />
+}
 
+@{
+    // (image number, category)  prize = Prize Distribution,  exam = Exam Day
+    var images = new (int Num, string Cat)[]
+    {
+        (1,"prize"),(2,"prize"),(18,"prize"),(3,"prize"),(33,"prize"),
+        (4,"prize"),(22,"prize"),(5,"prize"),(6,"prize"),(31,"prize"),
+        (7,"prize"),(8,"prize"),(9,"prize"),(10,"prize"),(11,"prize"),
+        (12,"prize"),(13,"prize"),(14,"prize"),(15,"prize"),(16,"prize"),
+        (49,"prize"),(17,"prize"),(19,"prize"),(20,"prize"),(21,"prize"),
+        (23,"prize"),(24,"prize"),(25,"prize"),(26,"prize"),(27,"prize"),
+        (28,"prize"),(29,"prize"),(30,"prize"),(32,"prize"),(34,"prize"),
+        (35,"prize"),(36,"prize"),(37,"prize"),(38,"prize"),(39,"prize"),
+        (40,"prize"),(50,"prize"),(51,"prize"),(52,"prize"),(53,"prize"),
+        (41,"exam"),(42,"exam"),(43,"exam"),(44,"exam"),
+        (45,"exam"),(46,"exam"),(47,"exam"),(48,"exam")
+    };
+
+    int total = images.Length;
+    int examCount  = images.Count(x => x.Cat == "exam");
+    int prizeCount = images.Count(x => x.Cat == "prize");
+}
+
+<section class="gal-section">
     <div class="container">
 
-        <div class="isotope-layout" data-default-filter="*" data-layout="masonry" data-sort="original-order">
+        <!-- Page title (dark variant) -->
+        <div class="ip-page-title" style="margin-bottom:20px">
+            <nav class="ip-breadcrumb">
+                <a asp-controller="Home" asp-action="Index">Home</a>
+                <i class="bi bi-chevron-right"></i>
+                <span>Gallery</span>
+            </nav>
+            <div class="ip-page-title-row">
+                <div class="ip-page-title-icon"><i class="bi bi-images"></i></div>
+                <div>
+                    <h1>Image Gallery</h1>
+                    <p>Memorable moments from ASNBB Season 2 &nbsp;·&nbsp; 2024</p>
+                </div>
+            </div>
+        </div>
 
-            @* <ul class="portfolio-filters isotope-filters" data-aos="fade-up" data-aos-delay="100">
-                <li data-filter="*" class="filter-active">All</li>
-                <li data-filter=".filter-app">Exam Day</li>
-                <li data-filter=".filter-product">Result</li>
-            </ul><!-- End Portfolio Filters --> *@
+        <!-- Stats bar -->
+        <div class="gal-stats">
+            <div class="gal-stat">
+                <i class="bi bi-images"></i>
+                <span><strong>@total</strong> Photos</span>
+            </div>
+            <div class="gal-stat">
+                <i class="bi bi-trophy-fill"></i>
+                <span><strong>@prizeCount</strong> Prize Distribution</span>
+            </div>
+            <div class="gal-stat">
+                <i class="bi bi-pencil-fill"></i>
+                <span><strong>@examCount</strong> Exam Day</span>
+            </div>
+            <div class="gal-stat">
+                <i class="bi bi-calendar3"></i>
+                <span>Season 2 &nbsp;·&nbsp; <strong>2024</strong></span>
+            </div>
+        </div>
 
-            <div class="row gy-4 isotope-container" data-aos="fade-up" data-aos-delay="200">
+        <!-- Filter buttons -->
+        <div class="gal-filters">
+            <button class="gal-filter-btn active" data-filter="all">
+                All Photos <span class="gal-count" id="cnt-all">@total</span>
+            </button>
+            <button class="gal-filter-btn" data-filter="prize">
+                <i class="bi bi-trophy"></i> Prize Distribution
+                <span class="gal-count" id="cnt-prize">@prizeCount</span>
+            </button>
+            <button class="gal-filter-btn" data-filter="exam">
+                <i class="bi bi-pencil-square"></i> Exam Day
+                <span class="gal-count" id="cnt-exam">@examCount</span>
+            </button>
+        </div>
 
-                <div class="col-lg-4 col-md-6 portfolio-item isotope-item filter-app">
-                    <img src="assets/img/portfolio/1.jpeg" class="img-fluid" alt="">
-                    <div class="portfolio-info">
-                        <h4>1</h4>
-                        <a href="assets/img/portfolio/1.jpeg" data-gallery="portfolio-gallery-app" class="glightbox preview-link"><i class="bi bi-zoom-in"></i></a>
+        <!-- Masonry grid -->
+        <div class="gal-grid" id="galGrid">
+            @foreach (var img in images)
+            {
+                <div class="gal-item" data-cat="@img.Cat">
+                    <img src="~/assets/img/portfolio/@(img.Num).jpeg"
+                         alt="ASNBB @(img.Cat == "prize" ? "Prize Distribution" : "Exam Day")"
+                         loading="lazy" />
+                    <div class="gal-overlay">
+                        <i class="bi bi-zoom-in"></i>
                     </div>
-                </div><!-- End Portfolio Item -->
-
-                <div class="col-lg-4 col-md-6 portfolio-item isotope-item filter-product">
-                    <img src="assets/img/portfolio/2.jpeg" class="img-fluid" alt="">
-                    <div class="portfolio-info">
-                        <h4>2</h4>
-                        <a href="assets/img/portfolio/2.jpeg" data-gallery="portfolio-gallery-app" class="glightbox preview-link"><i class="bi bi-zoom-in"></i></a>
-                    </div>
-                </div><!-- End Portfolio Item -->
-
-                <div class="col-lg-4 col-md-6 portfolio-item isotope-item filter-branding">
-                    <img src="assets/img/portfolio/18.jpeg" class="img-fluid" alt="">
-                    <div class="portfolio-info">
-                        <h4>3</h4>
-                        <a href="assets/img/portfolio/18.jpeg" data-gallery="portfolio-gallery-app" class="glightbox preview-link"><i class="bi bi-zoom-in"></i></a>
-                    </div>
-                </div><!-- End Portfolio Item -->
-
-                <div class="col-lg-4 col-md-6 portfolio-item isotope-item filter-app">
-                    <img src="assets/img/portfolio/3.jpeg" class="img-fluid" alt="">
-                    <div class="portfolio-info">
-                        <h4>4</h4>
-                        <a href="assets/img/portfolio/3.jpeg" data-gallery="portfolio-gallery-app" class="glightbox preview-link"><i class="bi bi-zoom-in"></i></a>
-                    </div>
-                </div><!-- End Portfolio Item -->
-
-                <div class="col-lg-4 col-md-6 portfolio-item isotope-item filter-product">
-                    <img src="assets/img/portfolio/33.jpeg" class="img-fluid" alt="">
-                    <div class="portfolio-info">
-                        <h4>5</h4>
-                        <a href="assets/img/portfolio/33.jpeg" data-gallery="portfolio-gallery-app" class="glightbox preview-link"><i class="bi bi-zoom-in"></i></a>
-                    </div>
-                </div><!-- End Portfolio Item -->
-
-                <div class="col-lg-4 col-md-6 portfolio-item isotope-item filter-branding">
-                    <img src="assets/img/portfolio/4.jpeg" class="img-fluid" alt="">
-                    <div class="portfolio-info">
-                        <h4>6</h4>
-                        <a href="assets/img/portfolio/4.jpeg" data-gallery="portfolio-gallery-app" class="glightbox preview-link"><i class="bi bi-zoom-in"></i></a>
-                    </div>
-                </div><!-- End Portfolio Item -->
-
-                <div class="col-lg-4 col-md-6 portfolio-item isotope-item filter-app">
-                    <img src="assets/img/portfolio/22.jpeg" class="img-fluid" alt="">
-                    <div class="portfolio-info">
-                        <h4>7</h4>
-                        <a href="assets/img/portfolio/22.jpeg" data-gallery="portfolio-gallery-app" class="glightbox preview-link"><i class="bi bi-zoom-in"></i></a>
-                    </div>
-                </div><!-- End Portfolio Item -->
-
-                <div class="col-lg-4 col-md-6 portfolio-item isotope-item filter-product">
-                    <img src="assets/img/portfolio/5.jpeg" class="img-fluid" alt="">
-                    <div class="portfolio-info">
-                        <h4>8</h4>
-                        <a href="assets/img/portfolio/5.jpeg" data-gallery="portfolio-gallery-app" class="glightbox preview-link"><i class="bi bi-zoom-in"></i></a>
-                    </div>
-                </div><!-- End Portfolio Item -->
-
-                <div class="col-lg-4 col-md-6 portfolio-item isotope-item filter-branding">
-                    <img src="assets/img/portfolio/6.jpeg" class="img-fluid" alt="">
-                    <div class="portfolio-info">
-                        <h4>9</h4>
-                        <a href="assets/img/portfolio/6.jpeg" data-gallery="portfolio-gallery-app" class="glightbox preview-link"><i class="bi bi-zoom-in"></i></a>
-                    </div>
-                </div><!-- End Portfolio Item -->
-                <div class="col-lg-4 col-md-6 portfolio-item isotope-item filter-branding">
-                    <img src="assets/img/portfolio/31.jpeg" class="img-fluid" alt="">
-                    <div class="portfolio-info">
-                        <h4>10</h4>
-                        <a href="assets/img/portfolio/31.jpeg" data-gallery="portfolio-gallery-app" class="glightbox preview-link"><i class="bi bi-zoom-in"></i></a>
-                    </div>
-                </div><!-- End Portfolio Item -->
-                <div class="col-lg-4 col-md-6 portfolio-item isotope-item filter-branding">
-                    <img src="assets/img/portfolio/7.jpeg" class="img-fluid" alt="">
-                    <div class="portfolio-info">
-                        <h4>11</h4>
-                        <a href="assets/img/portfolio/7.jpeg" data-gallery="portfolio-gallery-app" class="glightbox preview-link"><i class="bi bi-zoom-in"></i></a>
-                    </div>
-                </div><!-- End Portfolio Item -->
-                <div class="col-lg-4 col-md-6 portfolio-item isotope-item filter-branding">
-                    <img src="assets/img/portfolio/8.jpeg" class="img-fluid" alt="">
-                    <div class="portfolio-info">
-                        <h4>12</h4>
-                        <a href="assets/img/portfolio/8.jpeg" data-gallery="portfolio-gallery-app" class="glightbox preview-link"><i class="bi bi-zoom-in"></i></a>
-                    </div>
-                </div><!-- End Portfolio Item -->
-                <div class="col-lg-4 col-md-6 portfolio-item isotope-item filter-branding">
-                    <img src="assets/img/portfolio/9.jpeg" class="img-fluid" alt="">
-                    <div class="portfolio-info">
-                        <h4>13</h4>
-                        <a href="assets/img/portfolio/9.jpeg" data-gallery="portfolio-gallery-app" class="glightbox preview-link"><i class="bi bi-zoom-in"></i></a>
-                    </div>
-                </div><!-- End Portfolio Item -->
-                <div class="col-lg-4 col-md-6 portfolio-item isotope-item filter-branding">
-                    <img src="assets/img/portfolio/10.jpeg" class="img-fluid" alt="">
-                    <div class="portfolio-info">
-                        <h4>14</h4>
-                        <a href="assets/img/portfolio/10.jpeg" data-gallery="portfolio-gallery-app" class="glightbox preview-link"><i class="bi bi-zoom-in"></i></a>
-                    </div>
-                </div><!-- End Portfolio Item -->
-                <div class="col-lg-4 col-md-6 portfolio-item isotope-item filter-branding">
-                    <img src="assets/img/portfolio/11.jpeg" class="img-fluid" alt="">
-                    <div class="portfolio-info">
-                        <h4>15</h4>
-                        <a href="assets/img/portfolio/11.jpeg" data-gallery="portfolio-gallery-app" class="glightbox preview-link"><i class="bi bi-zoom-in"></i></a>
-                    </div>
-                </div><!-- End Portfolio Item -->
-                <div class="col-lg-4 col-md-6 portfolio-item isotope-item filter-branding">
-                    <img src="assets/img/portfolio/12.jpeg" class="img-fluid" alt="">
-                    <div class="portfolio-info">
-                        <h4>16</h4>
-                        <a href="assets/img/portfolio/12.jpeg" data-gallery="portfolio-gallery-app" class="glightbox preview-link"><i class="bi bi-zoom-in"></i></a>
-                    </div>
-                </div><!-- End Portfolio Item -->
-                <div class="col-lg-4 col-md-6 portfolio-item isotope-item filter-branding">
-                    <img src="assets/img/portfolio/13.jpeg" class="img-fluid" alt="">
-                    <div class="portfolio-info">
-                        <h4>17</h4>
-                        <a href="assets/img/portfolio/13.jpeg" data-gallery="portfolio-gallery-app" class="glightbox preview-link"><i class="bi bi-zoom-in"></i></a>
-                    </div>
-                </div><!-- End Portfolio Item -->
-                <div class="col-lg-4 col-md-6 portfolio-item isotope-item filter-branding">
-                    <img src="assets/img/portfolio/14.jpeg" class="img-fluid" alt="">
-                    <div class="portfolio-info">
-                        <h4>18</h4>
-                        <a href="assets/img/portfolio/14.jpeg" data-gallery="portfolio-gallery-app" class="glightbox preview-link"><i class="bi bi-zoom-in"></i></a>
-                    </div>
-                </div><!-- End Portfolio Item -->
-                <div class="col-lg-4 col-md-6 portfolio-item isotope-item filter-branding">
-                    <img src="assets/img/portfolio/15.jpeg" class="img-fluid" alt="">
-                    <div class="portfolio-info">
-                        <h4>19</h4>
-                        <a href="assets/img/portfolio/15.jpeg" data-gallery="portfolio-gallery-app" class="glightbox preview-link"><i class="bi bi-zoom-in"></i></a>
-                    </div>
-                </div><!-- End Portfolio Item -->
-                <div class="col-lg-4 col-md-6 portfolio-item isotope-item filter-branding">
-                    <img src="assets/img/portfolio/16.jpeg" class="img-fluid" alt="">
-                    <div class="portfolio-info">
-                        <h4>20</h4>
-                        <a href="assets/img/portfolio/16.jpeg" data-gallery="portfolio-gallery-app" class="glightbox preview-link"><i class="bi bi-zoom-in"></i></a>
-                    </div>
-                </div><!-- End Portfolio Item -->
-                <div class="col-lg-4 col-md-6 portfolio-item isotope-item filter-branding">
-                    <img src="assets/img/portfolio/49.jpeg" class="img-fluid" alt="">
-                    <div class="portfolio-info">
-                        <h4>20.1</h4>
-                        <a href="assets/img/portfolio/49.jpeg" data-gallery="portfolio-gallery-app" class="glightbox preview-link"><i class="bi bi-zoom-in"></i></a>
-                    </div>
-                </div><!-- End Portfolio Item -->
-                <div class="col-lg-4 col-md-6 portfolio-item isotope-item filter-branding">
-                    <img src="assets/img/portfolio/17.jpeg" class="img-fluid" alt="">
-                    <div class="portfolio-info">
-                        <h4>21</h4>
-                        <a href="assets/img/portfolio/17.jpeg" data-gallery="portfolio-gallery-app" class="glightbox preview-link"><i class="bi bi-zoom-in"></i></a>
-                    </div>
-                </div><!-- End Portfolio Item -->
-                <div class="col-lg-4 col-md-6 portfolio-item isotope-item filter-branding">
-                    <img src="assets/img/portfolio/19.jpeg" class="img-fluid" alt="">
-                    <div class="portfolio-info">
-                        <h4>22</h4>
-                        <a href="assets/img/portfolio/19.jpeg" data-gallery="portfolio-gallery-app" class="glightbox preview-link"><i class="bi bi-zoom-in"></i></a>
-                    </div>
-                </div><!-- End Portfolio Item -->
-                <div class="col-lg-4 col-md-6 portfolio-item isotope-item filter-branding">
-                    <img src="assets/img/portfolio/20.jpeg" class="img-fluid" alt="">
-                    <div class="portfolio-info">
-                        <h4>23</h4>
-                        <a href="assets/img/portfolio/20.jpeg" data-gallery="portfolio-gallery-app" class="glightbox preview-link"><i class="bi bi-zoom-in"></i></a>
-                    </div>
-                </div><!-- End Portfolio Item -->
-                <div class="col-lg-4 col-md-6 portfolio-item isotope-item filter-branding">
-                    <img src="assets/img/portfolio/21.jpeg" class="img-fluid" alt="">
-                    <div class="portfolio-info">
-                        <h4>24</h4>
-                        <a href="assets/img/portfolio/21.jpeg" data-gallery="portfolio-gallery-app" class="glightbox preview-link"><i class="bi bi-zoom-in"></i></a>
-                    </div>
-                </div><!-- End Portfolio Item -->
-                <div class="col-lg-4 col-md-6 portfolio-item isotope-item filter-branding">
-                    <img src="assets/img/portfolio/23.jpeg" class="img-fluid" alt="">
-                    <div class="portfolio-info">
-                        <h4>25</h4>
-                        <a href="assets/img/portfolio/23.jpeg" data-gallery="portfolio-gallery-app" class="glightbox preview-link"><i class="bi bi-zoom-in"></i></a>
-                    </div>
-                </div><!-- End Portfolio Item -->
-                <div class="col-lg-4 col-md-6 portfolio-item isotope-item filter-branding">
-                    <img src="assets/img/portfolio/24.jpeg" class="img-fluid" alt="">
-                    <div class="portfolio-info">
-                        <h4>26</h4>
-                        <a href="assets/img/portfolio/24.jpeg" data-gallery="portfolio-gallery-app" class="glightbox preview-link"><i class="bi bi-zoom-in"></i></a>
-                    </div>
-                </div><!-- End Portfolio Item -->
-                <div class="col-lg-4 col-md-6 portfolio-item isotope-item filter-branding">
-                    <img src="assets/img/portfolio/25.jpeg" class="img-fluid" alt="">
-                    <div class="portfolio-info">
-                        <h4>27</h4>
-                        <a href="assets/img/portfolio/25.jpeg" data-gallery="portfolio-gallery-app" class="glightbox preview-link"><i class="bi bi-zoom-in"></i></a>
-                    </div>
-                </div><!-- End Portfolio Item -->
-                <div class="col-lg-4 col-md-6 portfolio-item isotope-item filter-branding">
-                    <img src="assets/img/portfolio/26.jpeg" class="img-fluid" alt="">
-                    <div class="portfolio-info">
-                        <h4>28</h4>
-                        <a href="assets/img/portfolio/26.jpeg" data-gallery="portfolio-gallery-app" class="glightbox preview-link"><i class="bi bi-zoom-in"></i></a>
-                    </div>
-                </div><!-- End Portfolio Item -->
-                <div class="col-lg-4 col-md-6 portfolio-item isotope-item filter-branding">
-                    <img src="assets/img/portfolio/27.jpeg" class="img-fluid" alt="">
-                    <div class="portfolio-info">
-                        <h4>29</h4>
-                        <a href="assets/img/portfolio/27.jpeg" data-gallery="portfolio-gallery-app" class="glightbox preview-link"><i class="bi bi-zoom-in"></i></a>
-                    </div>
-                </div><!-- End Portfolio Item -->
-                <div class="col-lg-4 col-md-6 portfolio-item isotope-item filter-branding">
-                    <img src="assets/img/portfolio/28.jpeg" class="img-fluid" alt="">
-                    <div class="portfolio-info">
-                        <h4>30</h4>
-                        <a href="assets/img/portfolio/28.jpeg" data-gallery="portfolio-gallery-app" class="glightbox preview-link"><i class="bi bi-zoom-in"></i></a>
-                    </div>
-                </div><!-- End Portfolio Item -->
-                <div class="col-lg-4 col-md-6 portfolio-item isotope-item filter-branding">
-                    <img src="assets/img/portfolio/29.jpeg" class="img-fluid" alt="">
-                    <div class="portfolio-info">
-                        <h4>31</h4>
-                        <a href="assets/img/portfolio/29.jpeg" data-gallery="portfolio-gallery-app" class="glightbox preview-link"><i class="bi bi-zoom-in"></i></a>
-                    </div>
-                </div><!-- End Portfolio Item -->
-                <div class="col-lg-4 col-md-6 portfolio-item isotope-item filter-branding">
-                    <img src="assets/img/portfolio/30.jpeg" class="img-fluid" alt="">
-                    <div class="portfolio-info">
-                        <h4>32</h4>
-                        <a href="assets/img/portfolio/30.jpeg" data-gallery="portfolio-gallery-app" class="glightbox preview-link"><i class="bi bi-zoom-in"></i></a>
-                    </div>
-                </div><!-- End Portfolio Item -->
-                <div class="col-lg-4 col-md-6 portfolio-item isotope-item filter-branding">
-                    <img src="assets/img/portfolio/32.jpeg" class="img-fluid" alt="">
-                    <div class="portfolio-info">
-                        <h4>33</h4>
-                        <a href="assets/img/portfolio/32.jpeg" data-gallery="portfolio-gallery-app" class="glightbox preview-link"><i class="bi bi-zoom-in"></i></a>
-                    </div>
-                </div><!-- End Portfolio Item -->
-                <div class="col-lg-4 col-md-6 portfolio-item isotope-item filter-branding">
-                    <img src="assets/img/portfolio/34.jpeg" class="img-fluid" alt="">
-                    <div class="portfolio-info">
-                        <h4>34</h4>
-                        <a href="assets/img/portfolio/34.jpeg" data-gallery="portfolio-gallery-app" class="glightbox preview-link"><i class="bi bi-zoom-in"></i></a>
-                    </div>
-                </div><!-- End Portfolio Item -->
-                <div class="col-lg-4 col-md-6 portfolio-item isotope-item filter-branding">
-                    <img src="assets/img/portfolio/35.jpeg" class="img-fluid" alt="">
-                    <div class="portfolio-info">
-                        <h4>35</h4>
-                        <a href="assets/img/portfolio/35.jpeg" data-gallery="portfolio-gallery-app" class="glightbox preview-link"><i class="bi bi-zoom-in"></i></a>
-                    </div>
-                </div><!-- End Portfolio Item -->
-                <div class="col-lg-4 col-md-6 portfolio-item isotope-item filter-branding">
-                    <img src="assets/img/portfolio/36.jpeg" class="img-fluid" alt="">
-                    <div class="portfolio-info">
-                        <h4>36</h4>
-                        <a href="assets/img/portfolio/36.jpeg" data-gallery="portfolio-gallery-app" class="glightbox preview-link"><i class="bi bi-zoom-in"></i></a>
-                    </div>
-                </div><!-- End Portfolio Item -->
-                <div class="col-lg-4 col-md-6 portfolio-item isotope-item filter-branding">
-                    <img src="assets/img/portfolio/37.jpeg" class="img-fluid" alt="">
-                    <div class="portfolio-info">
-                        <h4>37</h4>
-                        <a href="assets/img/portfolio/37.jpeg" data-gallery="portfolio-gallery-app" class="glightbox preview-link"><i class="bi bi-zoom-in"></i></a>
-                    </div>
-                </div><!-- End Portfolio Item -->
-                <div class="col-lg-4 col-md-6 portfolio-item isotope-item filter-branding">
-                    <img src="assets/img/portfolio/38.jpeg" class="img-fluid" alt="">
-                    <div class="portfolio-info">
-                        <h4>38</h4>
-                        <a href="assets/img/portfolio/38.jpeg" data-gallery="portfolio-gallery-app" class="glightbox preview-link"><i class="bi bi-zoom-in"></i></a>
-                    </div>
-                </div><!-- End Portfolio Item -->
-                <div class="col-lg-4 col-md-6 portfolio-item isotope-item filter-branding">
-                    <img src="assets/img/portfolio/39.jpeg" class="img-fluid" alt="">
-                    <div class="portfolio-info">
-                        <h4>39</h4>
-                        <a href="assets/img/portfolio/39.jpeg" data-gallery="portfolio-gallery-app" class="glightbox preview-link"><i class="bi bi-zoom-in"></i></a>
-                    </div>
-                </div><!-- End Portfolio Item -->
-                <div class="col-lg-4 col-md-6 portfolio-item isotope-item filter-branding">
-                    <img src="assets/img/portfolio/40.jpeg" class="img-fluid" alt="">
-                    <div class="portfolio-info">
-                        <h4>40</h4>
-                        <a href="assets/img/portfolio/40.jpeg" data-gallery="portfolio-gallery-app" class="glightbox preview-link"><i class="bi bi-zoom-in"></i></a>
-                    </div>
-                </div><!-- End Portfolio Item -->
-                <div class="col-lg-4 col-md-6 portfolio-item isotope-item filter-branding">
-                    <img src="assets/img/portfolio/50.jpeg" class="img-fluid" alt="">
-                    <div class="portfolio-info">
-                        <h4>40</h4>
-                        <a href="assets/img/portfolio/50.jpeg" data-gallery="portfolio-gallery-app" class="glightbox preview-link"><i class="bi bi-zoom-in"></i></a>
-                    </div>
-                </div><!-- End Portfolio Item -->
-                <div class="col-lg-4 col-md-6 portfolio-item isotope-item filter-branding">
-                    <img src="assets/img/portfolio/51.jpeg" class="img-fluid" alt="">
-                    <div class="portfolio-info">
-                        <h4>40</h4>
-                        <a href="assets/img/portfolio/51.jpeg" data-gallery="portfolio-gallery-app" class="glightbox preview-link"><i class="bi bi-zoom-in"></i></a>
-                    </div>
-                </div><!-- End Portfolio Item -->
-                <div class="col-lg-4 col-md-6 portfolio-item isotope-item filter-branding">
-                    <img src="assets/img/portfolio/52.jpeg" class="img-fluid" alt="">
-                    <div class="portfolio-info">
-                        <h4>40</h4>
-                        <a href="assets/img/portfolio/52.jpeg" data-gallery="portfolio-gallery-app" class="glightbox preview-link"><i class="bi bi-zoom-in"></i></a>
-                    </div>
-                </div><!-- End Portfolio Item -->
-                <div class="col-lg-4 col-md-6 portfolio-item isotope-item filter-branding">
-                    <img src="assets/img/portfolio/53.jpeg" class="img-fluid" alt="">
-                    <div class="portfolio-info">
-                        <h4>40</h4>
-                        <a href="assets/img/portfolio/53.jpeg" data-gallery="portfolio-gallery-app" class="glightbox preview-link"><i class="bi bi-zoom-in"></i></a>
-                    </div>
-                </div><!-- End Portfolio Item -->
-
-            </div><!-- End Portfolio Container -->
+                    <a href="~/assets/img/portfolio/@(img.Num).jpeg"
+                       data-gallery="asnbb-gallery"
+                       class="glightbox"
+                       style="position:absolute;inset:0"></a>
+                </div>
+            }
         </div>
 
     </div>
+</section>
 
-</section><!-- /Portfolio Section -->
+@section Scripts {
+<script>
+    var filterBtns = document.querySelectorAll('.gal-filter-btn');
+    var items      = document.querySelectorAll('.gal-item');
+
+    filterBtns.forEach(function (btn) {
+        btn.addEventListener('click', function () {
+            filterBtns.forEach(function (b) { b.classList.remove('active'); });
+            btn.classList.add('active');
+
+            var filter = btn.dataset.filter;
+            items.forEach(function (item) {
+                if (filter === 'all' || item.dataset.cat === filter) {
+                    item.classList.remove('gal-hidden');
+                } else {
+                    item.classList.add('gal-hidden');
+                }
+            });
+        });
+    });
+</script>
+}

@@ -29,7 +29,7 @@
     <link href="~/css/admin.css" rel="stylesheet" />
     <link href="~/assets/vendor/sweetalert/sweetalert2.min.css" rel="stylesheet" />
     <script src="~/assets/js/jquery-3.6.0.min.js"></script>
-
+    @await RenderSectionAsync("Styles", required: false)
 </head>
 @{
     var controllerName = (string)ViewContext.RouteData.Values["controller"];
@@ -96,7 +96,7 @@
                         Organized by <a href="https://www.instagram.com/shibli_brainiac_battle?utm_source=ig_web_button_share_sheet&igsh=ZDNlZDc0MzIxNw==" target="_blank">Team Brainiac Battle</a>
                     </div>
                     <div class="credits">
-                        Sponsored by <a href="https://maps.app.goo.gl/3iB11hjSxkBd6dLX7" target="_blank">M.I. Naseerul Uloom, Khutahna, Sanjarpur, Azamgarh</a>
+                        Sponsored by <strong>Moral Public School, Chittepur, Saraimeer</strong>
                     </div>
                 </div>
                 <div class="col-sm-6 text-end">

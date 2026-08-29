@@ -242,3 +242,28 @@
 .insta-img {
     width: 130px;
 }
+
+/* Header background — match emerald & navy theme */
+.index-page .header.blue,
+.index-page.scrolled .header {
+    background: linear-gradient(135deg, #0f2040 0%, #1e3a5f 100%) !important;
+}
+
+/* Scroll-to-top button — emerald theme */
+.scroll-top { background-color: #10b981; }
+.scroll-top:hover { background-color: #059669; }
+
+/* Override header btn-getstarted to match the emerald & navy theme */
+.header .btn-getstarted,
+.header .btn-getstarted:focus {
+    background: #10b981;
+    color: #ffffff;
+    border: 2px solid #10b981;
+}
+
+.header .btn-getstarted:hover,
+.header .btn-getstarted:focus:hover {
+    background: #34d399;
+    border-color: #34d399;
+    color: #ffffff;
+}

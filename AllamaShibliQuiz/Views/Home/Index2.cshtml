@@ -1,0 +1,707 @@
+@{
+    ViewData["Title"] = "Allama Shibli Nomani Brainiac Battle";
+}
+
+@section Styles {
+    <link rel="stylesheet" href="~/css/home2.css" asp-append-version="true" />
+}
+
+<!-- ═══════════════════════════════════════════════════
+     HERO
+══════════════════════════════════════════════════════ -->
+<section class="h2-hero">
+    <div class="container">
+        <div class="row align-items-center">
+
+            <!-- Left: Content -->
+            <div class="col-lg-6 h2-hero-content" data-aos="fade-right">
+                <div class="h2-hero-badge">
+                    <span class="h2-dot"></span> Season 2 &nbsp;·&nbsp; 2024
+                </div>
+                <h1 class="h2-hero-title">
+                    Allama Shibli Nomani<br>
+                    <span>Brainiac Battle</span>
+                </h1>
+                <p class="h2-hero-season">ASNBB — Season 2 &nbsp;|&nbsp; Results Declared</p>
+                <p class="h2-hero-desc">
+                    A premier quiz competition celebrating the legacy of one of India's greatest scholars.
+                    Inspiring students to achieve academic excellence across Azamgarh.
+                </p>
+                <p class="h2-hero-org">
+                    Organized by
+                    <a href="https://www.instagram.com/shibli_brainiac_battle?utm_source=ig_web_button_share_sheet&igsh=ZDNlZDc0MzIxNw==" target="_blank">Team Brainiac Battle</a>
+                    &nbsp;·&nbsp;
+                    Sponsored by
+                    Moral Public School, Chittepur, Saraimeer
+                </p>
+                <div class="h2-hero-cta">
+                    <a asp-controller="Result" asp-action="Index" class="h2-btn-primary">
+                        <i class="bi bi-trophy-fill"></i> View Result 2024
+                    </a>
+                    <a href="https://www.youtube.com/watch?v=e07NdiP2vCg" class="h2-btn-outline glightbox">
+                        <i class="bi bi-play-circle-fill"></i> Watch Video
+                    </a>
+                </div>
+                <div class="h2-hero-chips">
+                    <div class="h2-hero-chip"><i class="bi bi-people-fill"></i> Class 6th – 12th</div>
+                    <div class="h2-hero-chip"><i class="bi bi-geo-alt-fill"></i> Azamgarh, UP</div>
+                    <div class="h2-hero-chip"><i class="bi bi-file-earmark-check-fill"></i> OMR / Pen-Paper</div>
+                </div>
+            </div>
+
+            <!-- Right: Top Performers Card -->
+            <div class="col-lg-6" data-aos="fade-left" data-aos-delay="150">
+                <div class="h2-toppers-card">
+                    <div class="h2-toppers-card-header">
+                        <h5><i class="bi bi-star-fill me-2"></i>Top Performers — ASNBB 2024</h5>
+                    </div>
+                    <div class="h2-toppers-card-body">
+                        <div class="swiper h2-toppers-swiper">
+                            <script type="application/json" class="swiper-config">
+                                {
+                                  "loop": true, "speed": 700,
+                                  "autoplay": { "delay": 1800 },
+                                  "slidesPerView": 4,
+                                  "spaceBetween": 10,
+                                  "breakpoints": {
+                                    "0":   { "slidesPerView": 2 },
+                                    "480": { "slidesPerView": 3 },
+                                    "768": { "slidesPerView": 4 }
+                                  },
+                                  "pagination": { "el": ".swiper-pagination", "clickable": true }
+                                }
+                            </script>
+                            <div class="swiper-wrapper">
+                                @for (int i = 1; i <= 27; i++)
+                                {
+                                    <div class="swiper-slide">
+                                        <img src="~/assets/img/toppers24/@(i).jpeg" class="img-fluid" alt="Top Performer @i" />
+                                    </div>
+                                }
+                            </div>
+                            <div class="swiper-pagination mt-2"></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    </div>
+</section>
+
+<!-- ═══════════════════════════════════════════════════
+     QUICK ACTIONS BAR
+══════════════════════════════════════════════════════ -->
+<div class="h2-quick-actions">
+    <div class="container">
+        <div class="h2-action-grid">
+            <a asp-controller="Register" asp-action="Index" class="h2-action-item">
+                <div class="h2-action-icon" style="background:rgba(16,185,129,.18);color:var(--h2-gold)">
+                    <i class="bi bi-pencil-square"></i>
+                </div>
+                <div>
+                    <div class="h2-action-label">Student</div>
+                    <div class="h2-action-title">Register Now</div>
+                </div>
+            </a>
+            <a asp-controller="AdmitCard" asp-action="Index" class="h2-action-item">
+                <div class="h2-action-icon" style="background:rgba(0,180,200,.18);color:var(--h2-teal)">
+                    <i class="bi bi-card-text"></i>
+                </div>
+                <div>
+                    <div class="h2-action-label">Download</div>
+                    <div class="h2-action-title">Admit Card</div>
+                </div>
+            </a>
+            <a asp-controller="Result" asp-action="Index" class="h2-action-item">
+                <div class="h2-action-icon" style="background:rgba(255,100,100,.18);color:#ff7070">
+                    <i class="bi bi-trophy"></i>
+                </div>
+                <div>
+                    <div class="h2-action-label">Season 2</div>
+                    <div class="h2-action-title">View Results</div>
+                </div>
+            </a>
+            <a asp-controller="Syllabus" asp-action="Index" class="h2-action-item">
+                <div class="h2-action-icon" style="background:rgba(100,200,100,.18);color:#4caf50">
+                    <i class="bi bi-journal-text"></i>
+                </div>
+                <div>
+                    <div class="h2-action-label">Download</div>
+                    <div class="h2-action-title">Syllabus</div>
+                </div>
+            </a>
+        </div>
+    </div>
+</div>
+
+<!-- ═══════════════════════════════════════════════════
+     STATS
+══════════════════════════════════════════════════════ -->
+<section class="h2-stats">
+    <div class="container">
+        <div class="row text-center align-items-center">
+            <div class="col-6 col-md-3" data-aos="zoom-in" data-aos-delay="0">
+                <div class="h2-stat-item">
+                    <div class="h2-stat-num">2</div>
+                    <div class="h2-stat-label">Seasons Completed</div>
+                </div>
+            </div>
+            <div class="col-6 col-md-3" data-aos="zoom-in" data-aos-delay="100">
+                <div class="h2-stat-item">
+                    <div class="h2-stat-num">3000+</div>
+                    <div class="h2-stat-label">Students Participated</div>
+                </div>
+            </div>
+            <div class="col-6 col-md-3" data-aos="zoom-in" data-aos-delay="200">
+                <div class="h2-stat-item">
+                    <div class="h2-stat-num">50+</div>
+                    <div class="h2-stat-label">Schools Enrolled</div>
+                </div>
+            </div>
+            <div class="col-6 col-md-3" data-aos="zoom-in" data-aos-delay="300">
+                <div class="h2-stat-item">
+                    <div class="h2-stat-num">20+</div>
+                    <div class="h2-stat-label">Exam Centres</div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- ═══════════════════════════════════════════════════
+     VISION
+══════════════════════════════════════════════════════ -->
+<section class="h2-section" data-aos="fade-up">
+    <div class="container">
+        <div class="h2-section-title">
+            <div class="h2-label">About the Competition</div>
+            <h2>Our Vision</h2>
+            <span class="h2-divider"></span>
+        </div>
+        <div class="row align-items-center gy-5">
+            <div class="col-lg-6">
+                <div class="h2-vision-card">
+                    <div class="h2-vision-icon"><i class="bi bi-lightbulb-fill"></i></div>
+                    <div>
+                        <h5>Honoring a Great Legacy</h5>
+                        <p>A premier quiz competition designed to honor the legacy of Allama Shibli Nomani — one of the most distinguished scholars of the modern era — celebrating the pursuit of knowledge.</p>
+                    </div>
+                </div>
+                <div class="h2-vision-card">
+                    <div class="h2-vision-icon"><i class="bi bi-diagram-3-fill"></i></div>
+                    <div>
+                        <h5>Building Future Leaders</h5>
+                        <p>We create an environment that promotes learning, critical thinking, and teamwork — believing in the power of knowledge to transform lives and shape future leaders.</p>
+                    </div>
+                </div>
+            </div>
+            <div class="col-lg-6">
+                <h4 style="font-weight:800;color:var(--h2-navy);margin-bottom:20px">Why Participate?</h4>
+                <ul class="h2-why-list">
+                    <li><i class="bi bi-check-circle-fill"></i> Enhance your knowledge and sharpen intellectual skills</li>
+                    <li><i class="bi bi-check-circle-fill"></i> Compete with peers and showcase your talents</li>
+                    <li><i class="bi bi-check-circle-fill"></i> Win exciting prizes and gain recognition</li>
+                    <li><i class="bi bi-check-circle-fill"></i> Exam papers modelled on NEET, JEE &amp; CUET patterns to help you prepare for future competitive exams</li>
+                    <li><i class="bi bi-check-circle-fill"></i> Experience a thrilling journey of knowledge and discovery</li>
+                </ul>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- ═══════════════════════════════════════════════════
+     ALLAMA SHIBLI NOMANI
+══════════════════════════════════════════════════════ -->
+<section class="h2-section h2-light-bg" data-aos="fade-up">
+    <div class="container">
+        <div class="h2-section-title">
+            <div class="h2-label">The Inspiration</div>
+            <h2>Allama Shibli Nomani</h2>
+            <span class="h2-divider"></span>
+        </div>
+        <div class="row align-items-center gy-5">
+            <div class="col-lg-4 text-center" data-aos="fade-right">
+                <div class="h2-shibli-frame d-inline-block">
+                    <img src="~/assets/img/shibli.jpg" alt="Allama Shibli Nomani" />
+                </div>
+            </div>
+            <div class="col-lg-8 h2-shibli-text" data-aos="fade-left">
+                <div class="h2-shibli-badge">
+                    <i class="bi bi-calendar3"></i> 4 June 1857 &ndash; 18 November 1914
+                </div>
+                <p>
+                    Allama Shibli Nomani was an Islamic scholar, poet, philosopher, historian, educational thinker,
+                    author, orator, reformer and critic from the Indian subcontinent during the British Raj.
+                    He is regarded as the <strong>father of Urdu historiography</strong>.
+                </p>
+                <p>
+                    Proficient in Arabic and Persian, Shibli was associated with two influential movements —
+                    the <strong>Aligarh</strong> and the <strong>Nadwa</strong> movements. He championed the
+                    integration of English and European sciences into the Islamic education system.
+                </p>
+                <p>
+                    Shibli established the <strong>Darul Musannefin Shibli Academy</strong> in 1914 and
+                    founded <strong>Shibli National College</strong> in 1883. His masterwork <em>Sirat al-Nabi</em>,
+                    later completed by his disciple Sulaiman Nadvi, remains a landmark in Urdu Islamic literature.
+                </p>
+                <div class="h2-shibli-tags">
+                    <span>Islamic Scholar</span>
+                    <span>Urdu Historian</span>
+                    <span>Poet &amp; Philosopher</span>
+                    <span>Aligarh Movement</span>
+                    <span>Nadwa Movement</span>
+                    <span>Darul Musannefin</span>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- ═══════════════════════════════════════════════════
+     SYLLABUS
+══════════════════════════════════════════════════════ -->
+<section class="h2-section h2-syllabus" data-aos="fade-up">
+    <div class="container">
+        <div class="h2-section-title">
+            <div class="h2-label">Exam Pattern</div>
+            <h2>Syllabus &amp; Marks Distribution</h2>
+            <span class="h2-divider"></span>
+            <p>Select your class group to view the subject-wise marks distribution</p>
+        </div>
+
+        <ul class="nav nav-pills" id="syllabusTab" role="tablist">
+            <li class="nav-item" role="presentation">
+                <button class="nav-link active" data-bs-toggle="pill" data-bs-target="#tab68" type="button">Class 6 – 8</button>
+            </li>
+            <li class="nav-item" role="presentation">
+                <button class="nav-link" data-bs-toggle="pill" data-bs-target="#tab910" type="button">Class 9 – 10</button>
+            </li>
+            <li class="nav-item" role="presentation">
+                <button class="nav-link" data-bs-toggle="pill" data-bs-target="#tab1112" type="button">Class 11 – 12 (Science)</button>
+            </li>
+        </ul>
+
+        <div class="tab-content mt-2">
+
+            <!-- Class 6–8 -->
+            <div class="tab-pane fade show active" id="tab68" role="tabpanel">
+                <div class="h2-subject-grid">
+                    <div class="h2-subject-card">
+                        <div class="h2-subject-icon" style="background:#e8f4fd;color:#1a73e8"><i class="bi bi-flask"></i></div>
+                        <div><div class="h2-subject-name">Science</div><div class="h2-subject-marks">Total: <strong>20 Marks</strong></div></div>
+                    </div>
+                    <div class="h2-subject-card">
+                        <div class="h2-subject-icon" style="background:#fef3e2;color:#e8a020"><i class="bi bi-calculator"></i></div>
+                        <div><div class="h2-subject-name">Maths</div><div class="h2-subject-marks">Total: <strong>20 Marks</strong></div></div>
+                    </div>
+                    <div class="h2-subject-card">
+                        <div class="h2-subject-icon" style="background:#e8f8f2;color:#2ecc71"><i class="bi bi-globe"></i></div>
+                        <div><div class="h2-subject-name">Social Studies</div><div class="h2-subject-marks">Total: <strong>20 Marks</strong></div></div>
+                    </div>
+                    <div class="h2-subject-card">
+                        <div class="h2-subject-icon" style="background:#fce4ec;color:#e91e63"><i class="bi bi-translate"></i></div>
+                        <div><div class="h2-subject-name">English Grammar</div><div class="h2-subject-marks">Total: <strong>10 Marks</strong></div></div>
+                    </div>
+                    <div class="h2-subject-card">
+                        <div class="h2-subject-icon" style="background:#f3e5f5;color:#9c27b0"><i class="bi bi-moon-stars"></i></div>
+                        <div><div class="h2-subject-name">Islamic History</div><div class="h2-subject-marks">Total: <strong>10 Marks</strong></div></div>
+                    </div>
+                    <div class="h2-subject-card">
+                        <div class="h2-subject-icon" style="background:#fff8e1;color:#ff8f00"><i class="bi bi-person-badge"></i></div>
+                        <div><div class="h2-subject-name">Shibli Nomani Bio.</div><div class="h2-subject-marks">Total: <strong>10 Marks</strong></div></div>
+                    </div>
+                    <div class="h2-subject-card">
+                        <div class="h2-subject-icon" style="background:#e0f2f1;color:#009688"><i class="bi bi-map"></i></div>
+                        <div><div class="h2-subject-name">Azamgarh Local Heroes</div><div class="h2-subject-marks">Total: <strong>10 Marks</strong></div></div>
+                    </div>
+                </div>
+                <div class="h2-total-bar">Total: 100 Marks &nbsp;|&nbsp; Duration: 2 Hours &nbsp;|&nbsp; OMR / Pen-Paper</div>
+            </div>
+
+            <!-- Class 9–10 -->
+            <div class="tab-pane fade" id="tab910" role="tabpanel">
+                <div class="h2-subject-grid">
+                    <div class="h2-subject-card">
+                        <div class="h2-subject-icon" style="background:#fef3e2;color:#e8a020"><i class="bi bi-calculator"></i></div>
+                        <div><div class="h2-subject-name">Maths</div><div class="h2-subject-marks">Total: <strong>20 Marks</strong></div></div>
+                    </div>
+                    <div class="h2-subject-card">
+                        <div class="h2-subject-icon" style="background:#e8f4fd;color:#1a73e8"><i class="bi bi-activity"></i></div>
+                        <div><div class="h2-subject-name">Chemistry</div><div class="h2-subject-marks">Total: <strong>10 Marks</strong></div></div>
+                    </div>
+                    <div class="h2-subject-card">
+                        <div class="h2-subject-icon" style="background:#e8f8f2;color:#2ecc71"><i class="bi bi-heart-pulse"></i></div>
+                        <div><div class="h2-subject-name">Biology</div><div class="h2-subject-marks">Total: <strong>10 Marks</strong></div></div>
+                    </div>
+                    <div class="h2-subject-card">
+                        <div class="h2-subject-icon" style="background:#fce4ec;color:#e91e63"><i class="bi bi-lightning"></i></div>
+                        <div><div class="h2-subject-name">Physics</div><div class="h2-subject-marks">Total: <strong>10 Marks</strong></div></div>
+                    </div>
+                    <div class="h2-subject-card">
+                        <div class="h2-subject-icon" style="background:#e0f2f1;color:#009688"><i class="bi bi-geo"></i></div>
+                        <div><div class="h2-subject-name">Geography</div><div class="h2-subject-marks">Total: <strong>6 Marks</strong></div></div>
+                    </div>
+                    <div class="h2-subject-card">
+                        <div class="h2-subject-icon" style="background:#f3e5f5;color:#9c27b0"><i class="bi bi-book"></i></div>
+                        <div><div class="h2-subject-name">History</div><div class="h2-subject-marks">Total: <strong>6 Marks</strong></div></div>
+                    </div>
+                    <div class="h2-subject-card">
+                        <div class="h2-subject-icon" style="background:#e3f2fd;color:#1565c0"><i class="bi bi-bank"></i></div>
+                        <div><div class="h2-subject-name">Political Science</div><div class="h2-subject-marks">Total: <strong>4 Marks</strong></div></div>
+                    </div>
+                    <div class="h2-subject-card">
+                        <div class="h2-subject-icon" style="background:#fff8e1;color:#ff8f00"><i class="bi bi-graph-up"></i></div>
+                        <div><div class="h2-subject-name">Economics</div><div class="h2-subject-marks">Total: <strong>4 Marks</strong></div></div>
+                    </div>
+                    <div class="h2-subject-card">
+                        <div class="h2-subject-icon" style="background:#fce4ec;color:#c2185b"><i class="bi bi-translate"></i></div>
+                        <div><div class="h2-subject-name">English Grammar</div><div class="h2-subject-marks">Total: <strong>10 Marks</strong></div></div>
+                    </div>
+                    <div class="h2-subject-card">
+                        <div class="h2-subject-icon" style="background:#f3e5f5;color:#7b1fa2"><i class="bi bi-moon-stars"></i></div>
+                        <div><div class="h2-subject-name">Islamic Studies</div><div class="h2-subject-marks">Total: <strong>10 Marks</strong></div></div>
+                    </div>
+                    <div class="h2-subject-card">
+                        <div class="h2-subject-icon" style="background:#e0f2f1;color:#009688"><i class="bi bi-map"></i></div>
+                        <div><div class="h2-subject-name">Azamgarh Local Heroes</div><div class="h2-subject-marks">Total: <strong>5 Marks</strong></div></div>
+                    </div>
+                    <div class="h2-subject-card">
+                        <div class="h2-subject-icon" style="background:#fff8e1;color:#ff8f00"><i class="bi bi-person-badge"></i></div>
+                        <div><div class="h2-subject-name">Shibli Nomani Bio.</div><div class="h2-subject-marks">Total: <strong>5 Marks</strong></div></div>
+                    </div>
+                </div>
+                <div class="h2-total-bar">Total: 100 Marks &nbsp;|&nbsp; Duration: 2 Hours &nbsp;|&nbsp; OMR / Pen-Paper</div>
+            </div>
+
+            <!-- Class 11–12 -->
+            <div class="tab-pane fade" id="tab1112" role="tabpanel">
+                <div class="h2-subject-grid">
+                    <div class="h2-subject-card">
+                        <div class="h2-subject-icon" style="background:#e8f4fd;color:#1a73e8"><i class="bi bi-activity"></i></div>
+                        <div><div class="h2-subject-name">Chemistry</div><div class="h2-subject-marks">Total: <strong>25 Marks</strong></div></div>
+                    </div>
+                    <div class="h2-subject-card">
+                        <div class="h2-subject-icon" style="background:#fce4ec;color:#e91e63"><i class="bi bi-lightning"></i></div>
+                        <div><div class="h2-subject-name">Physics</div><div class="h2-subject-marks">Total: <strong>25 Marks</strong></div></div>
+                    </div>
+                    <div class="h2-subject-card">
+                        <div class="h2-subject-icon" style="background:#e8f8f2;color:#2ecc71"><i class="bi bi-heart-pulse"></i></div>
+                        <div><div class="h2-subject-name">Biology / Maths</div><div class="h2-subject-marks">Total: <strong>25 Marks</strong></div></div>
+                    </div>
+                    <div class="h2-subject-card">
+                        <div class="h2-subject-icon" style="background:#fef3e2;color:#e8a020"><i class="bi bi-cpu"></i></div>
+                        <div><div class="h2-subject-name">Reasoning</div><div class="h2-subject-marks">Total: <strong>10 Marks</strong></div></div>
+                    </div>
+                    <div class="h2-subject-card">
+                        <div class="h2-subject-icon" style="background:#fff8e1;color:#ff8f00"><i class="bi bi-person-badge"></i></div>
+                        <div><div class="h2-subject-name">Allama Shibli Nomani Bio.</div><div class="h2-subject-marks">Total: <strong>5 Marks</strong></div></div>
+                    </div>
+                    <div class="h2-subject-card">
+                        <div class="h2-subject-icon" style="background:#f3e5f5;color:#9c27b0"><i class="bi bi-newspaper"></i></div>
+                        <div><div class="h2-subject-name">Current Affairs</div><div class="h2-subject-marks">Total: <strong>5 Marks</strong></div></div>
+                    </div>
+                    <div class="h2-subject-card">
+                        <div class="h2-subject-icon" style="background:#e0f2f1;color:#009688"><i class="bi bi-map"></i></div>
+                        <div><div class="h2-subject-name">Azamgarh Local Heroes</div><div class="h2-subject-marks">Total: <strong>5 Marks</strong></div></div>
+                    </div>
+                </div>
+                <div class="h2-total-bar">Total: 100 Marks &nbsp;|&nbsp; Duration: 2 Hours &nbsp;|&nbsp; OMR / Pen-Paper</div>
+            </div>
+
+        </div>
+
+        <div class="text-center mt-4">
+            <a asp-controller="Syllabus" asp-action="Index" class="h2-btn-primary">
+                <i class="bi bi-download"></i> Download Full Syllabus
+            </a>
+        </div>
+    </div>
+</section>
+
+<!-- ═══════════════════════════════════════════════════
+     GALLERY
+══════════════════════════════════════════════════════ -->
+<section class="h2-section h2-light-bg" data-aos="fade-up">
+    <div class="container">
+        <div class="h2-section-title">
+            <div class="h2-label">Memories</div>
+            <h2>Image Gallery</h2>
+            <span class="h2-divider"></span>
+            <p>Memorable moments from the Allama Shibli Nomani Brainiac Battle</p>
+        </div>
+
+        <div class="h2-gallery-filters">
+            <button class="h2-filter-btn active" data-filter="all">All</button>
+            <button class="h2-filter-btn" data-filter="prize">Prize Distribution</button>
+            <button class="h2-filter-btn" data-filter="exam">Exam Day</button>
+        </div>
+
+        <div class="h2-gallery-grid">
+            <div class="h2-gallery-item" data-category="prize">
+                <img src="~/assets/img/portfolio/1.jpeg" alt="Prize Distribution" loading="lazy">
+                <div class="h2-gallery-overlay"><i class="bi bi-zoom-in"></i></div>
+                <a href="~/assets/img/portfolio/1.jpeg" data-gallery="h2-gallery" class="glightbox stretched-link"></a>
+            </div>
+            <div class="h2-gallery-item" data-category="exam">
+                <img src="~/assets/img/portfolio/41.jpeg" alt="Exam Day" loading="lazy">
+                <div class="h2-gallery-overlay"><i class="bi bi-zoom-in"></i></div>
+                <a href="~/assets/img/portfolio/41.jpeg" data-gallery="h2-gallery" class="glightbox stretched-link"></a>
+            </div>
+            <div class="h2-gallery-item" data-category="prize">
+                <img src="~/assets/img/portfolio/14.jpeg" alt="Prize Distribution" loading="lazy">
+                <div class="h2-gallery-overlay"><i class="bi bi-zoom-in"></i></div>
+                <a href="~/assets/img/portfolio/14.jpeg" data-gallery="h2-gallery" class="glightbox stretched-link"></a>
+            </div>
+            <div class="h2-gallery-item" data-category="prize">
+                <img src="~/assets/img/portfolio/18.jpeg" alt="Prize Distribution" loading="lazy">
+                <div class="h2-gallery-overlay"><i class="bi bi-zoom-in"></i></div>
+                <a href="~/assets/img/portfolio/18.jpeg" data-gallery="h2-gallery" class="glightbox stretched-link"></a>
+            </div>
+            <div class="h2-gallery-item" data-category="exam">
+                <img src="~/assets/img/portfolio/42.jpeg" alt="Exam Day" loading="lazy">
+                <div class="h2-gallery-overlay"><i class="bi bi-zoom-in"></i></div>
+                <a href="~/assets/img/portfolio/42.jpeg" data-gallery="h2-gallery" class="glightbox stretched-link"></a>
+            </div>
+            <div class="h2-gallery-item" data-category="prize">
+                <img src="~/assets/img/portfolio/19.jpeg" alt="Prize Distribution" loading="lazy">
+                <div class="h2-gallery-overlay"><i class="bi bi-zoom-in"></i></div>
+                <a href="~/assets/img/portfolio/19.jpeg" data-gallery="h2-gallery" class="glightbox stretched-link"></a>
+            </div>
+            <div class="h2-gallery-item" data-category="prize">
+                <img src="~/assets/img/portfolio/33.jpeg" alt="Prize Distribution" loading="lazy">
+                <div class="h2-gallery-overlay"><i class="bi bi-zoom-in"></i></div>
+                <a href="~/assets/img/portfolio/33.jpeg" data-gallery="h2-gallery" class="glightbox stretched-link"></a>
+            </div>
+            <div class="h2-gallery-item" data-category="exam">
+                <img src="~/assets/img/portfolio/43.jpeg" alt="Exam Day" loading="lazy">
+                <div class="h2-gallery-overlay"><i class="bi bi-zoom-in"></i></div>
+                <a href="~/assets/img/portfolio/43.jpeg" data-gallery="h2-gallery" class="glightbox stretched-link"></a>
+            </div>
+            <div class="h2-gallery-item" data-category="prize">
+                <img src="~/assets/img/portfolio/34.jpeg" alt="Prize Distribution" loading="lazy">
+                <div class="h2-gallery-overlay"><i class="bi bi-zoom-in"></i></div>
+                <a href="~/assets/img/portfolio/34.jpeg" data-gallery="h2-gallery" class="glightbox stretched-link"></a>
+            </div>
+        </div>
+
+        <div class="text-center mt-4">
+            <a asp-controller="Gallery" asp-action="Index" class="h2-btn-primary">
+                <i class="bi bi-images"></i> View Full Gallery
+            </a>
+        </div>
+    </div>
+</section>
+
+<!-- ═══════════════════════════════════════════════════
+     TEAM
+══════════════════════════════════════════════════════ -->
+<section class="h2-section" data-aos="fade-up">
+    <div class="container">
+        <div class="h2-section-title">
+            <div class="h2-label">The People Behind ASNBB</div>
+            <h2>Our Team</h2>
+            <span class="h2-divider"></span>
+            <p>A dedicated group of professionals committed to making the Brainiac Battle a successful and enriching experience</p>
+        </div>
+        <div class="row gy-4 justify-content-center">
+
+            <div class="col-lg-3 col-md-6">
+                <div class="h2-team-card" data-aos="fade-up" data-aos-delay="0">
+                    <div class="h2-team-img">
+                        <img src="~/assets/img/team/asad.jpeg" alt="Mr. Asad Ayyub">
+                        <div class="h2-team-img-footer">
+                            <div class="h2-team-socials">
+                                <a href="https://www.facebook.com/share/romazXhH2fKvsDYP/?mibextid=qi2Omg" target="_blank"><i class="bi bi-facebook"></i></a>
+                                <a href="https://www.instagram.com/bold_asad_shaikh?utm_source=ig_web_button_share_sheet&igsh=ZDNlZDc0MzIxNw==" target="_blank"><i class="bi bi-instagram"></i></a>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="h2-team-body">
+                        <div class="h2-team-role">President</div>
+                        <h4>Mr. Asad Ayyub</h4>
+                        <p class="h2-team-qual">M.Sc. (Zoology) &amp; B.Ed. · 3 yrs teaching exp.</p>
+                        <div class="h2-team-contacts">
+                            <a href="tel:+917408840781"><i class="bi bi-telephone"></i> +91 7408840781</a>
+                            <a href="mailto:asadayyub81@gmail.com"><i class="bi bi-envelope"></i> asadayyub81@gmail.com</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-lg-3 col-md-6">
+                <div class="h2-team-card" data-aos="fade-up" data-aos-delay="100">
+                    <div class="h2-team-img">
+                        <img src="~/assets/img/team/aksam.jpeg" alt="Mr. Aksam Saifi Jamal">
+                        <div class="h2-team-img-footer">
+                            <div class="h2-team-socials">
+                                <a href="https://www.facebook.com/aksam.saifi.1?mibextid=ZbWKwL" target="_blank"><i class="bi bi-facebook"></i></a>
+                                <a href="https://www.instagram.com/aksam_saifi_jamal?igsh=MTB2MnBhNTFnODFjaw==" target="_blank"><i class="bi bi-instagram"></i></a>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="h2-team-body">
+                        <div class="h2-team-role">Vice President</div>
+                        <h4>Mr. Aksam Saifi Jamal</h4>
+                        <p class="h2-team-qual">M.Sc. (Botany) &amp; B.Ed. · 3 yrs teaching exp.</p>
+                        <div class="h2-team-contacts">
+                            <a href="tel:+918960535991"><i class="bi bi-telephone"></i> +91 8960535991</a>
+                            <a href="mailto:aksamsaifi14@gmail.com"><i class="bi bi-envelope"></i> aksamsaifi14@gmail.com</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-lg-3 col-md-6">
+                <div class="h2-team-card" data-aos="fade-up" data-aos-delay="200">
+                    <div class="h2-team-img">
+                        <img src="~/assets/img/team/ahmar.jpeg" alt="Mr. Mohd Ahmar">
+                        <div class="h2-team-img-footer">
+                            <div class="h2-team-socials">
+                                <a href="https://www.facebook.com/shazibshaikh.mohd?mibextid=ZbWKwL" target="_blank"><i class="bi bi-facebook"></i></a>
+                                <a href="https://www.instagram.com/ahmar__snc/?igsh=MTQ2MG01cmJxeWFxdw%3D%3D" target="_blank"><i class="bi bi-instagram"></i></a>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="h2-team-body">
+                        <div class="h2-team-role">Secretary</div>
+                        <h4>Mr. Mohd Ahmar</h4>
+                        <p class="h2-team-qual">M.Sc. (Chemistry) · 4 yrs teaching exp.</p>
+                        <div class="h2-team-contacts">
+                            <a href="tel:+917236012757"><i class="bi bi-telephone"></i> +91 7236012757</a>
+                            <a href="mailto:mohdahmar795@gmail.com"><i class="bi bi-envelope"></i> mohdahmar795@gmail.com</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-lg-3 col-md-6">
+                <div class="h2-team-card" data-aos="fade-up" data-aos-delay="300">
+                    <div class="h2-team-img">
+                        <img src="~/assets/img/team/wamique.jpeg" alt="Mr. Mohd Wamique">
+                        <div class="h2-team-img-footer">
+                            <div class="h2-team-socials">
+                                <a href="https://www.facebook.com/share/3ZW5G9hvots2wCjb/?mibextid=qi2Omg" target="_blank"><i class="bi bi-facebook"></i></a>
+                                <a href="https://www.instagram.com/waamique333?utm_source=ig_web_button_share_sheet&igsh=ZDNlZDc0MzIxNw==" target="_blank"><i class="bi bi-instagram"></i></a>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="h2-team-body">
+                        <div class="h2-team-role">Gen. Secretary</div>
+                        <h4>Mr. Mohd Wamique</h4>
+                        <p class="h2-team-qual">M.Sc. (Botany) &amp; B.Ed. · 3 yrs teaching exp.</p>
+                        <div class="h2-team-contacts">
+                            <a href="tel:+918931866437"><i class="bi bi-telephone"></i> +91 8931866437</a>
+                            <a href="mailto:mohammadwamique9582@gmail.com"><i class="bi bi-envelope"></i> mohammadwamique9582@gmail.com</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    </div>
+</section>
+
+<!-- ═══════════════════════════════════════════════════
+     FAQ
+══════════════════════════════════════════════════════ -->
+<section class="h2-section h2-light-bg" data-aos="fade-up">
+    <div class="container">
+        <div class="h2-section-title">
+            <div class="h2-label">Got Questions?</div>
+            <h2>Frequently Asked Questions</h2>
+            <span class="h2-divider"></span>
+        </div>
+        <div class="row justify-content-center">
+            <div class="col-lg-8">
+
+                <div class="h2-faq open">
+                    <div class="h2-faq-q">When will the quiz examination happen? <i class="bi bi-chevron-right"></i></div>
+                    <div class="h2-faq-a">The Allama Shibli Nomani Brainiac Battle Season 2 was held in November 2024. Stay tuned for Season 3 announcements.</div>
+                </div>
+                <div class="h2-faq">
+                    <div class="h2-faq-q">Which class students can participate? <i class="bi bi-chevron-right"></i></div>
+                    <div class="h2-faq-a">Students from Class 6th to 12th can participate in the quiz competition.</div>
+                </div>
+                <div class="h2-faq">
+                    <div class="h2-faq-q">What will be the medium of the paper? <i class="bi bi-chevron-right"></i></div>
+                    <div class="h2-faq-a">The exam will be based on English medium following the CBSE pattern.</div>
+                </div>
+                <div class="h2-faq">
+                    <div class="h2-faq-q">Will it be online or offline? <i class="bi bi-chevron-right"></i></div>
+                    <div class="h2-faq-a">It is a Pen-Paper (OMR) based offline examination held at 4–5 exam centres in Azamgarh, UP.</div>
+                </div>
+                <div class="h2-faq">
+                    <div class="h2-faq-q">How do I register and participate? <i class="bi bi-chevron-right"></i></div>
+                    <div class="h2-faq-a">Fill the registration form on this website and send the registration fee via UPI to the number provided on the registration page. After successful verification you will receive your admit card and exam centre details.</div>
+                </div>
+
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- ═══════════════════════════════════════════════════
+     CONTACT
+══════════════════════════════════════════════════════ -->
+<section class="h2-section h2-navy-bg" data-aos="fade-up">
+    <div class="container">
+        <div class="h2-section-title">
+            <div class="h2-label" style="color:var(--h2-gold-lt)">Get in Touch</div>
+            <h2>Contact Us</h2>
+            <span class="h2-divider"></span>
+            <p>Have a question? Reach out — we're happy to help.</p>
+        </div>
+        <div class="row gy-4 justify-content-center">
+            <div class="col-lg-4 col-md-6">
+                <div class="h2-contact-card">
+                    <div class="h2-contact-icon"><i class="bi bi-geo-alt-fill"></i></div>
+                    <h5>Address</h5>
+                    <p>Village and Post Kotila</p>
+                    <p>District Azamgarh, UP – 276207</p>
+                </div>
+            </div>
+            <div class="col-lg-4 col-md-6">
+                <div class="h2-contact-card">
+                    <div class="h2-contact-icon"><i class="bi bi-telephone-fill"></i></div>
+                    <h5>Call Us</h5>
+                    <a href="tel:+919236408638">+91 9236408638</a>
+                    <a href="tel:+917408840781">+91 7408840781</a>
+                </div>
+            </div>
+            <div class="col-lg-4 col-md-6">
+                <div class="h2-contact-card">
+                    <div class="h2-contact-icon"><i class="bi bi-envelope-fill"></i></div>
+                    <h5>Email Us</h5>
+                    <a href="mailto:asnbb.info@gmail.com">asnbb.info@gmail.com</a>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+@section Scripts {
+<script>
+    // FAQ accordion
+    document.querySelectorAll('.h2-faq-q').forEach(function (q) {
+        q.addEventListener('click', function () {
+            var item = q.parentElement;
+            var wasOpen = item.classList.contains('open');
+            document.querySelectorAll('.h2-faq').forEach(function (f) { f.classList.remove('open'); });
+            if (!wasOpen) item.classList.add('open');
+        });
+    });
+
+    // Gallery filter
+    document.querySelectorAll('.h2-filter-btn').forEach(function (btn) {
+        btn.addEventListener('click', function () {
+            document.querySelectorAll('.h2-filter-btn').forEach(function (b) { b.classList.remove('active'); });
+            btn.classList.add('active');
+            var filter = btn.dataset.filter;
+            document.querySelectorAll('.h2-gallery-item').forEach(function (item) {
+                item.style.display = (filter === 'all' || item.dataset.category === filter) ? '' : 'none';
+            });
+        });
+    });
+</script>
+}

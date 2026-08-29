@@ -1,44 +1,109 @@
-﻿@model AllamaShibliQuiz.Models.ViewModels.ResultViewModel
+@model AllamaShibliQuiz.Models.ViewModels.ResultViewModel
 
-<!-- Register Section -->
-<section id="register" class="section inside">
+@section Styles {
+    <link rel="stylesheet" href="~/css/inner-pages.css" asp-append-version="true" />
+}
+
+<!-- ── Page ── -->
+<section class="ip-section">
     <div class="container">
-        <form method="post">
-            <div class="row">
-                <div class="col-md-6 offset-md-3">
-                    <div class="card card-main mt-2">
-                        <div class="card-header">
-                            <h4>Download Result of ASNBB Exam</h4>
-                        </div>
-                        <div class="card-body pb-5">
-                            <div class="row gy-4">
-                                <div class="col-md-12">
-                                    <label for="class" class="pb-2">Exam Year<i class="text-danger">*</i></label>
-                                    <select class="form-select" id="year" asp-for="Year" required>
-                                        <option value="2024">2024</option>
-                                    </select>
-                                </div>
-                                <div class="col-md-12">
-                                    <label for="class" class="pb-2">Class<i class="text-danger">*</i></label>
-                                    <select class="form-select" id="class" asp-for="Class" required>
-                                        <option value="6">Class 6</option>
-                                        <option value="7">Class 7</option>
-                                        <option value="8">Class 8</option>
-                                        <option value="9">Class 9</option>
-                                        <option value="10">Class 10</option>
-                                        <option value="11">Class 11</option>
-                                        <option value="12">Class 12</option>
-                                    </select>
-                                </div>
-                                <div class="col-md-12">
-                                    <button type="submit" class="btn btn-primary">Download</button>
-                                    <a asp-controller="Home" asp-action="index" class="btn btn-secondary">Cancel</a>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
+
+        <!-- Compact title above card -->
+        <div class="ip-page-title">
+            <nav class="ip-breadcrumb">
+                <a asp-controller="Home" asp-action="Index">Home</a>
+                <i class="bi bi-chevron-right"></i>
+                <span>Results</span>
+            </nav>
+            <div class="ip-page-title-row">
+                <div class="ip-page-title-icon"><i class="bi bi-trophy-fill"></i></div>
+                <div>
+                    <h1>ASNBB Results</h1>
+                    <p>Season 2 &nbsp;·&nbsp; 2024 Official Results</p>
                 </div>
             </div>
-        </form>
+        </div>
+
+        <div class="row justify-content-center">
+            <div class="col-lg-6 col-md-8">
+                <div class="ip-card">
+
+                    <div class="ip-card-header">
+                        <div class="ip-card-icon"><i class="bi bi-file-earmark-pdf-fill"></i></div>
+                        <div>
+                            <h3>Download Result PDF</h3>
+                            <p>Select your class to download the official result</p>
+                        </div>
+                    </div>
+
+                    @if (Model != null && Model.Class > 0)
+                    {
+                        <div class="ip-alert ip-alert-error">
+                            <i class="bi bi-exclamation-circle-fill"></i>
+                            Result for Class @Model.Class could not be found. Please try again.
+                        </div>
+                    }
+
+                    <form method="post" class="ip-form">
+                        @Html.AntiForgeryToken()
+
+                        <!-- Exam Year -->
+                        <div class="ip-form-group">
+                            <label class="ip-label">Exam Year</label>
+                            <div class="ip-year-badge">
+                                <i class="bi bi-calendar3"></i> 2024 — Season 2
+                                <input type="hidden" name="Year" value="2024" />
+                            </div>
+                        </div>
+
+                        <!-- Class Selection Grid -->
+                        <div class="ip-form-group">
+                            <label class="ip-label">Select Class <span class="ip-required">*</span></label>
+                            <div class="ip-class-grid">
+                                @foreach (var c in new[] { 6, 7, 8, 9, 10, 11, 12 })
+                                {
+                                    <label class="ip-class-card @(Model?.Class == c ? "selected" : "")">
+                                        <input type="radio" name="Class" value="@c"
+                                               @(Model?.Class == c ? "checked" : "") required />
+                                        <span class="ip-class-num">@c</span>
+                                        <span class="ip-class-lbl">Class</span>
+                                    </label>
+                                }
+                            </div>
+                        </div>
+
+                        <!-- Actions -->
+                        <div class="ip-form-actions">
+                            <button type="submit" class="ip-btn-primary">
+                                <i class="bi bi-download"></i> Download Result
+                            </button>
+                            <a asp-controller="Home" asp-action="Index" class="ip-btn-ghost">
+                                <i class="bi bi-arrow-left"></i> Back to Home
+                            </a>
+                        </div>
+                    </form>
+
+                    <div class="ip-card-note">
+                        <i class="bi bi-info-circle-fill"></i>
+                        Results are provided as PDF files. A PDF viewer is required to open them.
+                    </div>
+
+                </div>
+            </div>
+        </div>
     </div>
 </section>
+
+@section Scripts {
+<script>
+    // Highlight selected card on click (fallback for browsers without :has support)
+    document.querySelectorAll('.ip-class-card').forEach(function (card) {
+        card.addEventListener('click', function () {
+            document.querySelectorAll('.ip-class-card').forEach(function (c) {
+                c.classList.remove('selected');
+            });
+            card.classList.add('selected');
+        });
+    });
+</script>
+}

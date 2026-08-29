@@ -1,39 +1,115 @@
-﻿@model AllamaShibliQuiz.Models.ViewModels.SyllabusViewModel
+@model AllamaShibliQuiz.Models.ViewModels.SyllabusViewModel
 
-<!-- Register Section -->
-<section id="syllabus" class="section inside">
+@section Styles {
+    <link rel="stylesheet" href="~/css/inner-pages.css" asp-append-version="true" />
+}
+
+<section class="ip-section">
     <div class="container">
-        <form method="post">
-            <div class="row">
-                <div class="col-md-6 offset-md-3">
-                    <div class="card card-main mt-2">
-                        <div class="card-header">
-                            <h4>Download Syllabus of ASNBB Exam</h4>
+
+        <!-- Compact title -->
+        <div class="ip-page-title">
+            <nav class="ip-breadcrumb">
+                <a asp-controller="Home" asp-action="Index">Home</a>
+                <i class="bi bi-chevron-right"></i>
+                <span>Syllabus</span>
+            </nav>
+            <div class="ip-page-title-row">
+                <div class="ip-page-title-icon"><i class="bi bi-journal-text"></i></div>
+                <div>
+                    <h1>Download Syllabus</h1>
+                    <p>ASNBB &nbsp;·&nbsp; Subject-wise exam syllabus</p>
+                </div>
+            </div>
+        </div>
+
+        <div class="row justify-content-center">
+            <div class="col-lg-6 col-md-8">
+                <div class="ip-card">
+
+                    <div class="ip-card-header">
+                        <div class="ip-card-icon"><i class="bi bi-file-earmark-text-fill"></i></div>
+                        <div>
+                            <h3>Select Your Class</h3>
+                            <p>Download the syllabus PDF for your class</p>
                         </div>
-                        <div class="card-body pb-5">
-                            <div class="row gy-4">
-                                <div class="col-md-12">
-                                    <label for="class" class="pb-2">Class<i class="text-danger">*</i></label>
-                                    <select class="form-select" id="class" asp-for="Class" required>
-                                        <option value="0" selected>Select Class</option>
-                                        <option value="6">Class 6</option>
-                                        <option value="7">Class 7</option>
-                                        <option value="8">Class 8</option>
-                                        <option value="9">Class 9</option>
-                                        <option value="10">Class 10</option>
-                                        <option value="11">Class 11</option>
-                                        <option value="12">Class 12</option>
-                                    </select>
-                                </div>
-                                <div class="col-md-12">
-                                    <button type="submit" class="btn btn-primary">Download</button>
-                                    <a asp-controller="Home" asp-action="index" class="btn btn-secondary">Cancel</a>
-                                </div>
+                    </div>
+
+                    @if (Model != null && Model.Class > 0)
+                    {
+                        <div class="ip-alert ip-alert-error">
+                            <i class="bi bi-exclamation-circle-fill"></i>
+                            Syllabus for Class @Model.Class could not be found. Please try again.
+                        </div>
+                    }
+
+                    <!-- Class group info strip -->
+                    <div style="padding: 0 32px; margin-top: 20px;">
+                        <div class="ip-syllabus-groups">
+                            <div class="ip-syllabus-group">
+                                <span class="ip-sg-label">Class 6–8</span>
+                                <span class="ip-sg-subjects">Science · Maths · SST · English · Islamic History</span>
+                            </div>
+                            <div class="ip-syllabus-group">
+                                <span class="ip-sg-label">Class 9–10</span>
+                                <span class="ip-sg-subjects">Physics · Chemistry · Biology · Maths · SST</span>
+                            </div>
+                            <div class="ip-syllabus-group">
+                                <span class="ip-sg-label">Class 11–12</span>
+                                <span class="ip-sg-subjects">Physics · Chemistry · Bio/Maths · Reasoning</span>
                             </div>
                         </div>
                     </div>
+
+                    <form method="post" class="ip-form" style="padding-top: 20px;">
+                        @Html.AntiForgeryToken()
+
+                        <div class="ip-form-group">
+                            <label class="ip-label">Select Class <span class="ip-required">*</span></label>
+                            <div class="ip-class-grid">
+                                @foreach (var c in new[] { 6, 7, 8, 9, 10, 11, 12 })
+                                {
+                                    <label class="ip-class-card @(Model?.Class == c ? "selected" : "")">
+                                        <input type="radio" name="Class" value="@c"
+                                               @(Model?.Class == c ? "checked" : "") required />
+                                        <span class="ip-class-num">@c</span>
+                                        <span class="ip-class-lbl">Class</span>
+                                    </label>
+                                }
+                            </div>
+                        </div>
+
+                        <div class="ip-form-actions">
+                            <button type="submit" class="ip-btn-primary">
+                                <i class="bi bi-download"></i> Download Syllabus
+                            </button>
+                            <a asp-controller="Home" asp-action="Index" class="ip-btn-ghost">
+                                <i class="bi bi-arrow-left"></i> Back to Home
+                            </a>
+                        </div>
+                    </form>
+
+                    <div class="ip-card-note">
+                        <i class="bi bi-info-circle-fill"></i>
+                        Syllabus PDFs include subject-wise marks distribution and important topics.
+                    </div>
+
                 </div>
             </div>
-        </form>
+        </div>
+
     </div>
 </section>
+
+@section Scripts {
+<script>
+    document.querySelectorAll('.ip-class-card').forEach(function (card) {
+        card.addEventListener('click', function () {
+            document.querySelectorAll('.ip-class-card').forEach(function (c) {
+                c.classList.remove('selected');
+            });
+            card.classList.add('selected');
+        });
+    });
+</script>
+}

@@ -1,40 +1,30 @@
-using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.AspNetCore.Authentication.Cookies;
 using AllamaShibliQuiz.Data;
-using Microsoft.Extensions.Configuration;
-using System;
-//using DinkToPdf.Contracts;
-//using DinkToPdf;
+
+// Must be set before any Npgsql type initialization to retain DateTime (not DateTimeOffset) mapping.
+AppContext.SetSwitch("Npgsql.EnableLegacyTimestampBehavior", true);
 
 var builder = WebApplication.CreateBuilder(args);
-var connectionString = builder.Configuration.GetConnectionString("AsnbbConnectionString") ??
-    throw new InvalidOperationException("Connection string 'AsnbbConnectionString' not found.");
+var connectionString = Environment.GetEnvironmentVariable("ASNBB_CONNECTION_STRING")
+    ?? throw new InvalidOperationException("Environment variable 'ASNBB_CONNECTION_STRING' is not set.");
 builder.Services.AddDbContext<AsnbbDBContext>(options => options.UseNpgsql(connectionString));
 
-
-// Add services to the container.
 builder.Services.AddControllersWithViews();
 
-builder.Services.AddAuthentication(
-    CookieAuthenticationDefaults.AuthenticationScheme)
+builder.Services.AddAuthentication(CookieAuthenticationDefaults.AuthenticationScheme)
     .AddCookie(option => {
         option.LoginPath = "/Admin/Login";
         option.ExpireTimeSpan = TimeSpan.FromMinutes(30);
     });
 
-builder.Services.AddAutoMapper(typeof(Program));
-//builder.Services.AddSingleton(typeof(IConverter), new SynchronizedConverter(new PdfTools()));
-
+builder.Services.AddAutoMapper(cfg => cfg.AddMaps(typeof(Program).Assembly));
 
 var app = builder.Build();
 
-AppContext.SetSwitch("Npgsql.EnableLegacyTimestampBehavior", true);
-// Configure the HTTP request pipeline.
 if (!app.Environment.IsDevelopment())
 {
     app.UseExceptionHandler("/Home/Error");
-    // The default HSTS value is 30 days. You may want to change this for production scenarios, see https://aka.ms/aspnetcore-hsts.
     app.UseHsts();
 }
 
@@ -42,7 +32,7 @@ app.UseHttpsRedirection();
 app.UseStaticFiles();
 
 app.UseRouting();
-app.UseAuthentication();;
+app.UseAuthentication();
 
 app.UseAuthorization();
 

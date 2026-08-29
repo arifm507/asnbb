@@ -1,105 +1,154 @@
-﻿@model List<AllamaShibliQuiz.Models.ViewModels.StudentViewModel>
+@model List<AllamaShibliQuiz.Models.ViewModels.StudentViewModel>
 
-<section id="verify-success" class="section inside">
+@section Styles {
+    <link rel="stylesheet" href="~/css/inner-pages.css" asp-append-version="true" />
+}
+
+@{
+    bool hasPending = Model.Any(x => x.Status == 0);
+}
+
+<section class="ip-section">
     <div class="container">
-        <div class="row">
-            <div class="col-md-12">
-                <div class="card card-main mt-2">
-                    <div class="card-header">
-                        <h4>Registration ASNBB-2024</h4>
-                    </div>
-                    <div class="card-body pb-5">
-                        <div class="row">
-                            <div class="col-md-12">
-                                <p class="mb-3">
-                                    Thank you for registering for the Allama Shibli Nomani Brainiac Battle 2024. Kindly find your payment status detailed below.
-                                </p>
-                                <div class="table-responsive">
-                                    <table id="verifyTable" class="table table-hover table-nowrap">
-                                        <thead class="thead-light">
-                                            <tr>
-                                                <th scope="col">Name</th>
-                                                <th scope="col">FatherName</th>
-                                                <th scope="col">Class</th>
-                                                <th scope="col">SchoolName</th>
-                                                <th scope="col">Payment Status</th>
-                                                <th scope="col"></th>
-                                            </tr>
-                                        </thead>
-                                        <tbody>
-                                            @foreach (var item in Model)
-                                            {
-                                                <tr>
-                                                    <td>
-                                                        <a class="text-heading font-semibold" href="#">
-                                                            @Html.DisplayFor(modelItem => item.Name)
-                                                        </a>
-                                                    </td>
-                                                    <td>
-                                                        @Html.DisplayFor(modelItem => item.FatherName)
-                                                    </td>
-                                                    <td>
-                                                        @Html.DisplayFor(modelItem => item.Class)
-                                                    </td>
-                                                    <td>
-                                                        @Html.DisplayFor(modelItem => item.SchoolName)
-                                                    </td>
-                                                    <td>
-                                                        <span class="badge badge-lg badge-dot">
-                                                            @if (item.Status == 0)
-                                                            {
-                                                                <i class="bg-warning"></i>
-                                                                <span>Pending</span>
-                                                            }
-                                                            else if (item.Status == 1)
-                                                            {
-                                                                <i class="bg-success"></i>
-                                                                <span>Success</span>
-                                                            }
-                                                            else if (item.Status == 2)
-                                                            {
-                                                                <i class="bg-danger"></i>
-                                                                <span>Declined</span>
-                                                            }
-                                                        </span>
-                                                    </td>
-                                                    <td class="text-end">
-                                                        <a data-bs-toggle="modal" data-bs-target="#studentModal" data-id="@item.Id" class="btn btn-sm btn-neutral">
-                                                            <i class="bi bi-eye-fill"></i>
-                                                        </a>
-                                                    </td>
-                                                </tr>
-                                            }
-                                        </tbody>
-                                    </table>
-                                </div>
-                                @if (Model.Any(x => x.Status == 0))
-                                {
-                                    <div class="payment-section mt-3">
-                                        <p>
-                                            If you have not done the payment yet please scan the below upi qr to complete the payment of Rs. 50/- and
-                                            please send a screenshot of the transaction to WhatsApp number <b>7408840781</b>.
-                                        </p>
-                                        <p class="text-center mt-3">
-                                            <img src="~/assets/img/upi.jpeg" class="upi-image" />
-                                        </p>
-                                    </div>
-                                }
-                            </div>
-                        </div>
-                    </div>
+
+        <!-- Compact title -->
+        <div class="ip-page-title">
+            <nav class="ip-breadcrumb">
+                <a asp-controller="Home" asp-action="Index">Home</a>
+                <i class="bi bi-chevron-right"></i>
+                <a asp-controller="Register" asp-action="Verify">Verify</a>
+                <i class="bi bi-chevron-right"></i>
+                <span>Result</span>
+            </nav>
+            <div class="ip-page-title-row">
+                <div class="ip-page-title-icon"><i class="bi bi-clipboard2-check-fill"></i></div>
+                <div>
+                    <h1>Registration Status</h1>
+                    <p>ASNBB &nbsp;·&nbsp; Your registration details</p>
                 </div>
             </div>
         </div>
+
+        <div class="row justify-content-center">
+            <div class="col-lg-9 col-md-11">
+
+                <!-- Found banner -->
+                <div class="ip-result-banner ip-result-banner-ok">
+                    <i class="bi bi-check-circle-fill"></i>
+                    <span>
+                        <strong>@Model.Count registration(s) found</strong> — details are listed below.
+                    </span>
+                </div>
+
+                <!-- Student Cards -->
+                <div class="ip-student-cards">
+                    @foreach (var item in Model)
+                    {
+                        var initials = string.Join("", item.Name.Split(' ').Take(2).Select(w => w[0])).ToUpper();
+
+                        string badgeClass = item.Status == 1 ? "ip-badge-approved"
+                                          : item.Status == 2 ? "ip-badge-declined"
+                                          : "ip-badge-pending";
+                        string badgeIcon  = item.Status == 1 ? "bi-check-circle-fill"
+                                          : item.Status == 2 ? "bi-x-circle-fill"
+                                          : "bi-clock-fill";
+                        string badgeText  = item.Status == 1 ? "Approved"
+                                          : item.Status == 2 ? "Declined"
+                                          : "Pending";
+
+                        <div class="ip-student-card">
+                            <div class="ip-student-avatar">@initials</div>
+
+                            <div class="ip-student-info">
+                                <h4>@item.Name</h4>
+                                <p>Father: @item.FatherName</p>
+                                <div class="ip-student-meta">
+                                    <span><i class="bi bi-mortarboard-fill"></i> Class @item.Class</span>
+                                    <span><i class="bi bi-building"></i> @item.SchoolName</span>
+                                    @if (!string.IsNullOrEmpty(item.RollNumber))
+                                    {
+                                        <span><i class="bi bi-hash"></i> Roll: @item.RollNumber</span>
+                                    }
+                                </div>
+                            </div>
+
+                            <div class="ip-student-right">
+                                <span class="ip-badge @badgeClass">
+                                    <i class="bi @badgeIcon"></i> @badgeText
+                                </span>
+                                <button type="button" class="ip-btn-sm"
+                                        data-bs-toggle="modal"
+                                        data-bs-target="#studentModal"
+                                        data-id="@item.Id">
+                                    <i class="bi bi-eye"></i> View Details
+                                </button>
+                            </div>
+                        </div>
+                    }
+                </div>
+
+                <!-- Payment Section (only for pending) -->
+                @if (hasPending)
+                {
+                    <div class="ip-payment-card">
+                        <div class="ip-payment-header">
+                            <div class="ip-payment-icon"><i class="bi bi-credit-card-2-front-fill"></i></div>
+                            <div>
+                                <h3>Complete Your Payment</h3>
+                                <p>Your registration is pending. Please pay Rs. 50/- to confirm your seat.</p>
+                            </div>
+                        </div>
+                        <div class="ip-payment-body">
+                            <div class="ip-payment-steps">
+                                <div class="ip-payment-step">
+                                    <div class="ip-step-num">1</div>
+                                    <div>
+                                        <h5>Scan the QR Code</h5>
+                                        <p>Open any UPI app (GPay, PhonePe, Paytm) and scan the QR code to pay Rs. 50/-</p>
+                                    </div>
+                                </div>
+                                <div class="ip-payment-step">
+                                    <div class="ip-step-num">2</div>
+                                    <div>
+                                        <h5>Send Payment Screenshot</h5>
+                                        <p>After payment, send the transaction screenshot to our WhatsApp number for verification.</p>
+                                        <a href="https://wa.me/917408840781" target="_blank" class="ip-whatsapp-btn">
+                                            <i class="bi bi-whatsapp"></i> +91 7408840781
+                                        </a>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="ip-payment-qr">
+                                <p style="font-size:.82rem;color:var(--ip-muted);margin-bottom:12px;font-weight:600;text-transform:uppercase;letter-spacing:.5px">
+                                    Scan &amp; Pay · Rs. 50/-
+                                </p>
+                                <img src="~/assets/img/upi.jpeg" alt="UPI QR Code" />
+                            </div>
+                        </div>
+                    </div>
+                }
+
+                <!-- Actions -->
+                <div class="d-flex gap-3 mt-4 flex-wrap">
+                    <a asp-controller="Register" asp-action="Verify" class="ip-btn-ghost">
+                        <i class="bi bi-arrow-left"></i> Search Again
+                    </a>
+                    <a asp-controller="Home" asp-action="Index" class="ip-btn-ghost">
+                        <i class="bi bi-house"></i> Back to Home
+                    </a>
+                </div>
+
+            </div>
+        </div>
+
     </div>
 </section>
 
-<!-- Student Detail Modal -->
-<div class="modal modal-lg fade" id="studentModal" tabindex="-1" aria-labelledby="studentModalLabel" aria-hidden="true">
-    <div class="modal-dialog">
-        <div class="modal-content">
-            <div id="student-detail-body" class="modal-body">
-            </div>
+<!-- Student Detail Modal (kept for AJAX compatibility with site.js) -->
+<div class="modal modal-lg fade" id="studentModal" tabindex="-1" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered">
+        <div class="modal-content" style="border-radius:16px;overflow:hidden;border:none;box-shadow:0 20px 60px rgba(0,0,0,.15)">
+            <div id="student-detail-body" class="modal-body p-0"></div>
         </div>
     </div>
 </div>
