@@ -17,6 +17,7 @@ namespace AllamaShibliQuiz.Models
         public int Class { get; set; }
         public int? SchoolId { get; set; }
         public string? Subject { get; set; }
+        public string? OptionalSubject { get; set; }
         [Required]
         public string SchoolName { get; set; }
         [Required]

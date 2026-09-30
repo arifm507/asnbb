@@ -9,6 +9,7 @@
         public DateTime? DateOfBirth { get; set; }
         public int Class { get; set; }
         public string? Subject { get; set; }
+        public string? OptionalSubject { get; set; }
         public int? SchoolId { get; set; }
         public string? SchoolName { get; set; }
         public string? OtherSchoolName { get; set; }

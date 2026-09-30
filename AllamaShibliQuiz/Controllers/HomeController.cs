@@ -16,6 +16,14 @@ namespace AllamaShibliQuiz.Controllers
 
         public IActionResult Index()
         {
+            if (TempData["AlertMessage"] is string msg)
+            {
+                ViewBag.AlertMessage = new AllamaShibliQuiz.Models.ViewModels.AlertMessageViewModel
+                {
+                    Type = TempData["AlertType"] as string ?? "Info",
+                    Message = msg
+                };
+            }
             return View();
         }
 

@@ -154,6 +154,12 @@
                                     </select>
                                     <input type="hidden" asp-for="ExamCentreId" id="examcentre-hidden" />
                                 </div>
+                                <div class="col-md-6" id="optionalSubjectDiv" style="display:none">
+                                    <label class="ip-field-label">Optional Subject <span class="ip-required">*</span></label>
+                                    <select id="optionalSubject" asp-for="OptionalSubject" class="ip-select">
+                                        <option value="">Select Optional Subject</option>
+                                    </select>
+                                </div>
                             </div>
                         </div>
 
@@ -324,12 +330,51 @@
 
     var classDropdown = document.getElementById('class');
     if (classDropdown) {
-        var subjectDiv = document.getElementById('subjectDrpdown');
+        var subjectDiv          = document.getElementById('subjectDrpdown');
+        var optionalSubjectDiv  = document.getElementById('optionalSubjectDiv');
+        var optionalSubjectSel  = document.getElementById('optionalSubject');
+
+        var optionalSubjectOptions = {
+            '6':  ['Islamic Studies', 'Sports'],
+            '7':  ['Islamic Studies', 'Sports'],
+            '8':  ['Islamic Studies', 'Sports'],
+            '9':  ['Islamic Studies', 'UP History'],
+            '10': ['Islamic Studies', 'UP History'],
+            '11': ['Islamic Studies', 'UP History'],
+            '12': ['Islamic Studies', 'UP History']
+        };
+
         function toggleSubject(val) {
             subjectDiv.style.display = (val === '11' || val === '12') ? '' : 'none';
         }
+
+        function updateOptionalSubject(val) {
+            var opts = optionalSubjectOptions[val];
+            if (opts) {
+                var existing = optionalSubjectSel.value;
+                optionalSubjectSel.innerHTML = '<option value="">Select Optional Subject</option>';
+                opts.forEach(function (o) {
+                    var opt = document.createElement('option');
+                    opt.value = o;
+                    opt.textContent = o;
+                    if (o === existing) opt.selected = true;
+                    optionalSubjectSel.appendChild(opt);
+                });
+                optionalSubjectDiv.style.display  = '';
+                optionalSubjectSel.required = true;
+            } else {
+                optionalSubjectDiv.style.display  = 'none';
+                optionalSubjectSel.required = false;
+                optionalSubjectSel.value = '';
+            }
+        }
+
         toggleSubject(classDropdown.value);
-        classDropdown.addEventListener('change', function (e) { toggleSubject(e.target.value); });
+        updateOptionalSubject(classDropdown.value);
+        classDropdown.addEventListener('change', function (e) {
+            toggleSubject(e.target.value);
+            updateOptionalSubject(e.target.value);
+        });
     }
 
     /* ── Error-state highlight ── */
@@ -337,12 +382,12 @@
         el.addEventListener('input', function () { el.classList.remove('ip-input-error'); });
     });
 
-    /* ── If page reloaded with server error, jump to step 3 ── */
+    /* ── If page reloaded with server error, jump to step 2 ── */
     @if (hasError)
     {
         <text>
-        currentStep = 3;
-        showStep(3, false);
+        currentStep = 2;
+        showStep(2, false);
         </text>
     }
 </script>

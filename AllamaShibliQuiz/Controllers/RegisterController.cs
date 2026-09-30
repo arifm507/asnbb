@@ -94,6 +94,10 @@ namespace AllamaShibliQuiz.Controllers
             {
                 errorMessage += "<br /> Please select the exam center.";
             }
+            if (string.IsNullOrEmpty(studentViewModel.OptionalSubject))
+            {
+                errorMessage += "<br /> Please select Optional Subject.";
+            }
             if (studentViewModel.SchoolId == 0 && string.IsNullOrEmpty(studentViewModel.OtherSchoolName))
             {
                 errorMessage += "<br /> Please enter school name.";
@@ -132,7 +136,7 @@ namespace AllamaShibliQuiz.Controllers
                 ViewBag.AlertMessage = new AlertMessageViewModel()
                 {
                     Type = "Error",
-                    Message = $"Hi <b>{student.Name}</b>, you are already registered for ASNBB-2024. " +
+                    Message = $"Hi <b>{student.Name}</b>, you are already registered for ASNBB-2026. " +
                     $"Please verify your registration with admin team."
                 };
             }

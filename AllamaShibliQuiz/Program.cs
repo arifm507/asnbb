@@ -6,8 +6,9 @@ using AllamaShibliQuiz.Data;
 AppContext.SetSwitch("Npgsql.EnableLegacyTimestampBehavior", true);
 
 var builder = WebApplication.CreateBuilder(args);
-var connectionString = Environment.GetEnvironmentVariable("ASNBB_CONNECTION_STRING")
-    ?? throw new InvalidOperationException("Environment variable 'ASNBB_CONNECTION_STRING' is not set.");
+var connectionString = builder.Configuration.GetConnectionString("AsnbbConnectionString")
+    ?? Environment.GetEnvironmentVariable("ASNBB_CONNECTION_STRING")
+    ?? throw new InvalidOperationException("Connection string 'AsnbbConnectionString' is not configured.");
 builder.Services.AddDbContext<AsnbbDBContext>(options => options.UseNpgsql(connectionString));
 
 builder.Services.AddControllersWithViews();
@@ -39,5 +40,11 @@ app.UseAuthorization();
 app.MapControllerRoute(
     name: "default",
     pattern: "{controller=Home}/{action=Index}/{id?}");
+
+using (var scope = app.Services.CreateScope())
+{
+    var db = scope.ServiceProvider.GetRequiredService<AsnbbDBContext>();
+    db.Database.Migrate();
+}
 
 app.Run();
