@@ -35,8 +35,8 @@
                     <strong style="color:var(--h2-teal);font-weight:700">Moral Public School, Chittepur, Saraimeer</strong>
                 </p>
                 <div class="h2-hero-cta">
-                    <a asp-controller="Result" asp-action="Index" class="h2-btn-primary">
-                        <i class="bi bi-trophy-fill"></i> View Result 2024
+                    <a asp-controller="Home" asp-action="Register" class="h2-btn-primary">
+                        <i class="bi bi-pencil-square"></i> Register Now
                     </a>
                     <a href="https://www.youtube.com/watch?v=e07NdiP2vCg" class="h2-btn-outline glightbox">
                         <i class="bi bi-play-circle-fill"></i> Watch Video
@@ -190,7 +190,7 @@
 <!-- ═══════════════════════════════════════════════════
      VISION
 ══════════════════════════════════════════════════════ -->
-<section class="h2-section" data-aos="fade-up">
+<section id="about" class="h2-section" data-aos="fade-up">
     <div class="container">
         <div class="h2-section-title">
             <div class="h2-label">About the Competition</div>
@@ -231,7 +231,7 @@
 <!-- ═══════════════════════════════════════════════════
      ALLAMA SHIBLI NOMANI
 ══════════════════════════════════════════════════════ -->
-<section class="h2-section h2-light-bg" data-aos="fade-up">
+<section id="aboutshibli" class="h2-section h2-light-bg" data-aos="fade-up">
     <div class="container">
         <div class="h2-section-title">
             <div class="h2-label">The Inspiration</div>
@@ -279,7 +279,7 @@
 <!-- ═══════════════════════════════════════════════════
      SYLLABUS
 ══════════════════════════════════════════════════════ -->
-<section class="h2-section h2-syllabus" data-aos="fade-up">
+<section id="syllabus" class="h2-section h2-syllabus" data-aos="fade-up">
     <div class="container">
         <div class="h2-section-title">
             <div class="h2-label">Exam Pattern</div>
@@ -303,42 +303,38 @@
         <div class="tab-content mt-2">
             <div class="tab-pane fade show active" id="tab68" role="tabpanel">
                 <div class="h2-subject-grid">
-                    <div class="h2-subject-card"><div class="h2-subject-icon" style="background:#e8f4fd;color:#1a73e8"><i class="bi bi-flask"></i></div><div><div class="h2-subject-name">Science</div><div class="h2-subject-marks">Total: <strong>20 Marks</strong></div></div></div>
-                    <div class="h2-subject-card"><div class="h2-subject-icon" style="background:#fef3e2;color:#e8a020"><i class="bi bi-calculator"></i></div><div><div class="h2-subject-name">Maths</div><div class="h2-subject-marks">Total: <strong>20 Marks</strong></div></div></div>
-                    <div class="h2-subject-card"><div class="h2-subject-icon" style="background:#e8f8f2;color:#2ecc71"><i class="bi bi-globe"></i></div><div><div class="h2-subject-name">Social Studies</div><div class="h2-subject-marks">Total: <strong>20 Marks</strong></div></div></div>
-                    <div class="h2-subject-card"><div class="h2-subject-icon" style="background:#fce4ec;color:#e91e63"><i class="bi bi-translate"></i></div><div><div class="h2-subject-name">English Grammar</div><div class="h2-subject-marks">Total: <strong>10 Marks</strong></div></div></div>
-                    <div class="h2-subject-card"><div class="h2-subject-icon" style="background:#f3e5f5;color:#9c27b0"><i class="bi bi-moon-stars"></i></div><div><div class="h2-subject-name">Islamic History</div><div class="h2-subject-marks">Total: <strong>10 Marks</strong></div></div></div>
-                    <div class="h2-subject-card"><div class="h2-subject-icon" style="background:#fff8e1;color:#ff8f00"><i class="bi bi-person-badge"></i></div><div><div class="h2-subject-name">Shibli Nomani Bio.</div><div class="h2-subject-marks">Total: <strong>10 Marks</strong></div></div></div>
-                    <div class="h2-subject-card"><div class="h2-subject-icon" style="background:#e0f2f1;color:#009688"><i class="bi bi-map"></i></div><div><div class="h2-subject-name">Azamgarh Local Heroes</div><div class="h2-subject-marks">Total: <strong>10 Marks</strong></div></div></div>
+                    <div class="h2-subject-card"><div class="h2-subject-icon" style="background:#e8f4fd;color:#1a73e8"><i class="bi bi-lightbulb"></i></div><div><div class="h2-subject-name">Science</div><div class="h2-subject-marks">Total: <strong>25 Marks</strong></div></div></div>
+                    <div class="h2-subject-card"><div class="h2-subject-icon" style="background:#fef3e2;color:#e8a020"><i class="bi bi-calculator"></i></div><div><div class="h2-subject-name">Maths</div><div class="h2-subject-marks">Total: <strong>25 Marks</strong></div></div></div>
+                    <div class="h2-subject-card"><div class="h2-subject-icon" style="background:#fce4ec;color:#e91e63"><i class="bi bi-translate"></i></div><div><div class="h2-subject-name">English</div><div class="h2-subject-marks">Total: <strong>10 Marks</strong></div></div></div>
+                    <div class="h2-subject-card"><div class="h2-subject-icon" style="background:#e8f8f2;color:#2ecc71"><i class="bi bi-globe"></i></div><div><div class="h2-subject-name">Social Studies (SST)</div><div class="h2-subject-marks">Total: <strong>20 Marks</strong></div></div></div>
+                    <div class="h2-subject-card"><div class="h2-subject-icon" style="background:#f3e5f5;color:#9c27b0"><i class="bi bi-moon-stars"></i></div><div><div class="h2-subject-name">Sports / Islamic</div><div class="h2-subject-marks">Total: <strong>5 Marks</strong></div></div></div>
+                    <div class="h2-subject-card"><div class="h2-subject-icon" style="background:#e0f2f1;color:#009688"><i class="bi bi-trophy"></i></div><div><div class="h2-subject-name">Know Your Heroes</div><div class="h2-subject-marks">Total: <strong>5 Marks</strong></div></div></div>
+                    <div class="h2-subject-card"><div class="h2-subject-icon" style="background:#fff8e1;color:#ff8f00"><i class="bi bi-person-badge"></i></div><div><div class="h2-subject-name">Allama Shibli Nomani</div><div class="h2-subject-marks">Total: <strong>10 Marks</strong></div></div></div>
                 </div>
                 <div class="h2-total-bar">Total: 100 Marks &nbsp;|&nbsp; Duration: 2 Hours &nbsp;|&nbsp; OMR / Pen-Paper</div>
             </div>
             <div class="tab-pane fade" id="tab910" role="tabpanel">
                 <div class="h2-subject-grid">
-                    <div class="h2-subject-card"><div class="h2-subject-icon" style="background:#fef3e2;color:#e8a020"><i class="bi bi-calculator"></i></div><div><div class="h2-subject-name">Maths</div><div class="h2-subject-marks">Total: <strong>20 Marks</strong></div></div></div>
-                    <div class="h2-subject-card"><div class="h2-subject-icon" style="background:#e8f4fd;color:#1a73e8"><i class="bi bi-activity"></i></div><div><div class="h2-subject-name">Chemistry</div><div class="h2-subject-marks">Total: <strong>10 Marks</strong></div></div></div>
-                    <div class="h2-subject-card"><div class="h2-subject-icon" style="background:#e8f8f2;color:#2ecc71"><i class="bi bi-heart-pulse"></i></div><div><div class="h2-subject-name">Biology</div><div class="h2-subject-marks">Total: <strong>10 Marks</strong></div></div></div>
-                    <div class="h2-subject-card"><div class="h2-subject-icon" style="background:#fce4ec;color:#e91e63"><i class="bi bi-lightning"></i></div><div><div class="h2-subject-name">Physics</div><div class="h2-subject-marks">Total: <strong>10 Marks</strong></div></div></div>
-                    <div class="h2-subject-card"><div class="h2-subject-icon" style="background:#e0f2f1;color:#009688"><i class="bi bi-geo"></i></div><div><div class="h2-subject-name">Geography</div><div class="h2-subject-marks">Total: <strong>6 Marks</strong></div></div></div>
-                    <div class="h2-subject-card"><div class="h2-subject-icon" style="background:#f3e5f5;color:#9c27b0"><i class="bi bi-book"></i></div><div><div class="h2-subject-name">History</div><div class="h2-subject-marks">Total: <strong>6 Marks</strong></div></div></div>
-                    <div class="h2-subject-card"><div class="h2-subject-icon" style="background:#e3f2fd;color:#1565c0"><i class="bi bi-bank"></i></div><div><div class="h2-subject-name">Political Science</div><div class="h2-subject-marks">Total: <strong>4 Marks</strong></div></div></div>
-                    <div class="h2-subject-card"><div class="h2-subject-icon" style="background:#fff8e1;color:#ff8f00"><i class="bi bi-graph-up"></i></div><div><div class="h2-subject-name">Economics</div><div class="h2-subject-marks">Total: <strong>4 Marks</strong></div></div></div>
-                    <div class="h2-subject-card"><div class="h2-subject-icon" style="background:#fce4ec;color:#c2185b"><i class="bi bi-translate"></i></div><div><div class="h2-subject-name">English Grammar</div><div class="h2-subject-marks">Total: <strong>10 Marks</strong></div></div></div>
-                    <div class="h2-subject-card"><div class="h2-subject-icon" style="background:#f3e5f5;color:#7b1fa2"><i class="bi bi-moon-stars"></i></div><div><div class="h2-subject-name">Islamic Studies</div><div class="h2-subject-marks">Total: <strong>10 Marks</strong></div></div></div>
-                    <div class="h2-subject-card"><div class="h2-subject-icon" style="background:#e0f2f1;color:#009688"><i class="bi bi-map"></i></div><div><div class="h2-subject-name">Azamgarh Local Heroes</div><div class="h2-subject-marks">Total: <strong>5 Marks</strong></div></div></div>
-                    <div class="h2-subject-card"><div class="h2-subject-icon" style="background:#fff8e1;color:#ff8f00"><i class="bi bi-person-badge"></i></div><div><div class="h2-subject-name">Shibli Nomani Bio.</div><div class="h2-subject-marks">Total: <strong>5 Marks</strong></div></div></div>
+                    <div class="h2-subject-card"><div class="h2-subject-icon" style="background:#e8f4fd;color:#1a73e8"><i class="bi bi-lightbulb"></i></div><div><div class="h2-subject-name">Science</div><div class="h2-subject-marks">Total: <strong>30 Marks</strong></div></div></div>
+                    <div class="h2-subject-card"><div class="h2-subject-icon" style="background:#fef3e2;color:#e8a020"><i class="bi bi-calculator"></i></div><div><div class="h2-subject-name">Maths</div><div class="h2-subject-marks">Total: <strong>20–25 Marks</strong></div></div></div>
+                    <div class="h2-subject-card"><div class="h2-subject-icon" style="background:#fce4ec;color:#e91e63"><i class="bi bi-translate"></i></div><div><div class="h2-subject-name">English</div><div class="h2-subject-marks">Total: <strong>10 Marks</strong></div></div></div>
+                    <div class="h2-subject-card"><div class="h2-subject-icon" style="background:#e8f8f2;color:#2ecc71"><i class="bi bi-globe"></i></div><div><div class="h2-subject-name">Social Studies (SST)</div><div class="h2-subject-marks">Total: <strong>15–20 Marks</strong></div></div></div>
+                    <div class="h2-subject-card"><div class="h2-subject-icon" style="background:#f3e5f5;color:#9c27b0"><i class="bi bi-moon-stars"></i></div><div><div class="h2-subject-name">UP History / Islamic</div><div class="h2-subject-marks">Total: <strong>5 Marks</strong></div></div></div>
+                    <div class="h2-subject-card"><div class="h2-subject-icon" style="background:#e0f2f1;color:#009688"><i class="bi bi-trophy"></i></div><div><div class="h2-subject-name">Know Your Heroes</div><div class="h2-subject-marks">Total: <strong>5 Marks</strong></div></div></div>
+                    <div class="h2-subject-card"><div class="h2-subject-icon" style="background:#fff8e1;color:#ff8f00"><i class="bi bi-person-badge"></i></div><div><div class="h2-subject-name">Allama Shibli Nomani</div><div class="h2-subject-marks">Total: <strong>10 Marks</strong></div></div></div>
                 </div>
                 <div class="h2-total-bar">Total: 100 Marks &nbsp;|&nbsp; Duration: 2 Hours &nbsp;|&nbsp; OMR / Pen-Paper</div>
             </div>
             <div class="tab-pane fade" id="tab1112" role="tabpanel">
                 <div class="h2-subject-grid">
+                    <div class="h2-subject-card"><div class="h2-subject-icon" style="background:#e8f8f2;color:#2ecc71"><i class="bi bi-heart-pulse"></i></div><div><div class="h2-subject-name">Biology / Maths</div><div class="h2-subject-marks">Total: <strong>25 Marks</strong></div></div></div>
                     <div class="h2-subject-card"><div class="h2-subject-icon" style="background:#e8f4fd;color:#1a73e8"><i class="bi bi-activity"></i></div><div><div class="h2-subject-name">Chemistry</div><div class="h2-subject-marks">Total: <strong>25 Marks</strong></div></div></div>
                     <div class="h2-subject-card"><div class="h2-subject-icon" style="background:#fce4ec;color:#e91e63"><i class="bi bi-lightning"></i></div><div><div class="h2-subject-name">Physics</div><div class="h2-subject-marks">Total: <strong>25 Marks</strong></div></div></div>
-                    <div class="h2-subject-card"><div class="h2-subject-icon" style="background:#e8f8f2;color:#2ecc71"><i class="bi bi-heart-pulse"></i></div><div><div class="h2-subject-name">Biology / Maths</div><div class="h2-subject-marks">Total: <strong>25 Marks</strong></div></div></div>
-                    <div class="h2-subject-card"><div class="h2-subject-icon" style="background:#fef3e2;color:#e8a020"><i class="bi bi-cpu"></i></div><div><div class="h2-subject-name">Reasoning</div><div class="h2-subject-marks">Total: <strong>10 Marks</strong></div></div></div>
-                    <div class="h2-subject-card"><div class="h2-subject-icon" style="background:#fff8e1;color:#ff8f00"><i class="bi bi-person-badge"></i></div><div><div class="h2-subject-name">Allama Shibli Nomani Bio.</div><div class="h2-subject-marks">Total: <strong>5 Marks</strong></div></div></div>
+                    <div class="h2-subject-card"><div class="h2-subject-icon" style="background:#fef3e2;color:#e8a020"><i class="bi bi-cpu"></i></div><div><div class="h2-subject-name">Reasoning</div><div class="h2-subject-marks">Total: <strong>5 Marks</strong></div></div></div>
+                    <div class="h2-subject-card"><div class="h2-subject-icon" style="background:#fff8e1;color:#ff8f00"><i class="bi bi-person-badge"></i></div><div><div class="h2-subject-name">Allama Shibli Nomani</div><div class="h2-subject-marks">Total: <strong>5 Marks</strong></div></div></div>
+                    <div class="h2-subject-card"><div class="h2-subject-icon" style="background:#e0f2f1;color:#009688"><i class="bi bi-trophy"></i></div><div><div class="h2-subject-name">Know Your Heroes</div><div class="h2-subject-marks">Total: <strong>5 Marks</strong></div></div></div>
                     <div class="h2-subject-card"><div class="h2-subject-icon" style="background:#f3e5f5;color:#9c27b0"><i class="bi bi-newspaper"></i></div><div><div class="h2-subject-name">Current Affairs</div><div class="h2-subject-marks">Total: <strong>5 Marks</strong></div></div></div>
-                    <div class="h2-subject-card"><div class="h2-subject-icon" style="background:#e0f2f1;color:#009688"><i class="bi bi-map"></i></div><div><div class="h2-subject-name">Azamgarh Local Heroes</div><div class="h2-subject-marks">Total: <strong>5 Marks</strong></div></div></div>
+                    <div class="h2-subject-card"><div class="h2-subject-icon" style="background:#e3f2fd;color:#1565c0"><i class="bi bi-moon-stars"></i></div><div><div class="h2-subject-name">UP History / Islamic</div><div class="h2-subject-marks">Total: <strong>5 Marks</strong></div></div></div>
                 </div>
                 <div class="h2-total-bar">Total: 100 Marks &nbsp;|&nbsp; Duration: 2 Hours &nbsp;|&nbsp; OMR / Pen-Paper</div>
             </div>
@@ -390,7 +386,7 @@
 <!-- ═══════════════════════════════════════════════════
      TEAM
 ══════════════════════════════════════════════════════ -->
-<section class="h2-section" data-aos="fade-up">
+<section id="team" class="h2-section" data-aos="fade-up">
     <div class="container">
         <div class="h2-section-title">
             <div class="h2-label">The People Behind ASNBB</div>
@@ -452,7 +448,7 @@
 <!-- ═══════════════════════════════════════════════════
      CONTACT
 ══════════════════════════════════════════════════════ -->
-<section class="h2-section h2-navy-bg" data-aos="fade-up">
+<section id="contact" class="h2-section h2-navy-bg" data-aos="fade-up">
     <div class="container">
         <div class="h2-section-title">
             <div class="h2-label" style="color:var(--h2-gold-lt)">Get in Touch</div>

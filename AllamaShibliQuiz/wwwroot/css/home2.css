@@ -358,6 +358,7 @@
 
 /* ── Responsive ────────────────────────────────────── */
 @media (max-width: 991px) {
+  .h2-hero-content { padding-top: 85px; }
   .h2-hero-title   { font-size: 2.2rem; }
   .h2-toppers-card { margin-top: 40px; }
   .h2-section      { padding: 60px 0; }
@@ -369,6 +370,7 @@
   .h2-gallery-grid { columns: 2; }
 }
 @media (max-width: 575px) {
+  .h2-hero-content { padding-top: 75px; }
   .h2-hero-title   { font-size: 1.75rem; }
   .h2-hero-cta     { flex-direction: column; }
   .h2-btn-primary,
