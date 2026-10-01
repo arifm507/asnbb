@@ -3,7 +3,6 @@ using AllamaShibliQuiz.Helpers;
 using AllamaShibliQuiz.Models;
 using AllamaShibliQuiz.Models.RequestModels;
 using AllamaShibliQuiz.Models.ViewModels;
-using AutoMapper;
 using Microsoft.AspNetCore.Authentication;
 using Microsoft.AspNetCore.Authentication.Cookies;
 using Microsoft.AspNetCore.Authorization;
@@ -17,9 +16,9 @@ namespace AllamaShibliQuiz.Controllers
     public class AdminController : Controller
     {
         private readonly AsnbbDBContext _context;
-        private readonly IMapper _mapper;
+        private readonly AppMapper _mapper;
         private int validFileSize = 200; //200 KB
-        public AdminController(AsnbbDBContext context, IMapper mapper)
+        public AdminController(AsnbbDBContext context, AppMapper mapper)
         {
             _context = context;
             _mapper = mapper;
@@ -85,7 +84,7 @@ namespace AllamaShibliQuiz.Controllers
         public async Task<IActionResult> Dashboard()
         {
             var students = await _context.Students.AsNoTracking().OrderByDescending(x => x.CreateDate).OrderBy(x => x.Status).ToListAsync();
-            var studentsView = _mapper.Map<List<StudentViewModel>>(students);
+            var studentsView = students.Select(_mapper.StudentToViewModel).ToList();
             var totalStudents = studentsView.Count();
             var totalStudentsApproved = studentsView.Where(x => x.Status == 1).Count();
             var totalStudentsPending = studentsView.Where(x => x.Status == 0).Count();
@@ -111,7 +110,7 @@ namespace AllamaShibliQuiz.Controllers
             {
                 return NotFound();
             }
-            var studentView = _mapper.Map<StudentViewModel>(student);
+            var studentView = _mapper.StudentToViewModel(student);
             studentView.ExamCentreName = (await _context.Schools.FindAsync(studentView.ExamCentreId))?.Name;
             return PartialView("_StudentDetails", studentView);
         }
@@ -146,7 +145,7 @@ namespace AllamaShibliQuiz.Controllers
                 {
                     studentCount++;
                     string paddedCount = studentCount.ToString().PadLeft(3, '0');
-                    rollNumber = $"24{paddedcentreCode}{paddedClass}{paddedCount}";
+                    rollNumber = $"26{paddedcentreCode}{paddedClass}{paddedCount}";
                     student.RollNumber = rollNumber;
                     student.Status = 1;
                     _context.Students.Update(student);
@@ -176,7 +175,7 @@ namespace AllamaShibliQuiz.Controllers
             string paddedcentreCode = centreCode.ToString().PadLeft(2, '0');
             string paddedClass = classNumber.ToString().PadLeft(2, '0');
             string paddedCount = studentCount.ToString().PadLeft(3, '0');
-            rollNumber = $"24{paddedcentreCode}{paddedClass}{paddedCount}";
+            rollNumber = $"26{paddedcentreCode}{paddedClass}{paddedCount}";
             return rollNumber;
         }
         private async Task<string> getPaddedCenterCode(int examCenterId)
@@ -193,7 +192,7 @@ namespace AllamaShibliQuiz.Controllers
         public async Task<IActionResult> StudentEdit(int id)
         {
             var student = await _context.Students.FindAsync(id);
-            var studentView = _mapper.Map<StudentViewModel>(student);
+            var studentView = _mapper.StudentToViewModel(student);
             await LoadRegisterPageData();
             if (studentView != null)
             {
@@ -216,7 +215,7 @@ namespace AllamaShibliQuiz.Controllers
                     {
                         return View(studentViewModel);
                     }
-                    var student = _mapper.Map<Student>(studentViewModel);
+                    var student = _mapper.ViewModelToStudent(studentViewModel);
                     _context.Students.Update(student);
                     await _context.SaveChangesAsync();
                     return RedirectToAction(nameof(Dashboard), new { id = student.Id });
@@ -291,7 +290,7 @@ namespace AllamaShibliQuiz.Controllers
         public async Task<SchoolViewModel> GetSchoolAsync(int id)
         {
             var school = await _context.Schools.FindAsync(id);
-            return _mapper.Map<SchoolViewModel>(school);
+            return _mapper.SchoolToViewModel(school);
         }
 
         #endregion
@@ -300,7 +299,7 @@ namespace AllamaShibliQuiz.Controllers
         public async Task<IActionResult> Team()
         {
             var teams = await _context.Teams.AsNoTracking().ToListAsync();
-            var teamsView = _mapper.Map<List<TeamViewModel>>(teams);
+            var teamsView = teams.Select(_mapper.TeamToViewModel).ToList();
             return View(teamsView);
         }
 
@@ -309,7 +308,7 @@ namespace AllamaShibliQuiz.Controllers
             if (id != null)
             {
                 var teamMember = await _context.Teams.FindAsync(id);
-                var teamsView = _mapper.Map<TeamViewModel>(teamMember);
+                var teamsView = _mapper.TeamToViewModel(teamMember);
                 if (teamsView != null)
                 {
                     return View("TeamAddOrEdit", teamsView);
@@ -324,7 +323,7 @@ namespace AllamaShibliQuiz.Controllers
             var team = new Team();
             if (teamModel.Id == 0)
             {
-                team = _mapper.Map<Team>(teamModel);
+                team = _mapper.ViewModelToTeam(teamModel);
             }
             else
             {
@@ -425,7 +424,7 @@ namespace AllamaShibliQuiz.Controllers
             {
                 return NotFound();
             }
-            var teamMemberView = _mapper.Map<TeamViewModel>(teamMember);
+            var teamMemberView = _mapper.TeamToViewModel(teamMember);
             return PartialView("_TeamMemberDetails", teamMemberView);
         }
 

@@ -1,5 +1,6 @@
 using Microsoft.EntityFrameworkCore;
 using Microsoft.AspNetCore.Authentication.Cookies;
+using AllamaShibliQuiz;
 using AllamaShibliQuiz.Data;
 
 // Must be set before any Npgsql type initialization to retain DateTime (not DateTimeOffset) mapping.
@@ -19,7 +20,7 @@ builder.Services.AddAuthentication(CookieAuthenticationDefaults.AuthenticationSc
         option.ExpireTimeSpan = TimeSpan.FromMinutes(30);
     });
 
-builder.Services.AddAutoMapper(cfg => cfg.AddMaps(typeof(Program).Assembly));
+builder.Services.AddScoped<AppMapper>();
 
 var app = builder.Build();
 

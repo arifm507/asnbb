@@ -1,7 +1,6 @@
 ﻿using AllamaShibliQuiz.Data;
 using AllamaShibliQuiz.Models;
 using AllamaShibliQuiz.Models.ViewModels;
-using AutoMapper;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
@@ -12,8 +11,8 @@ namespace AllamaShibliQuiz.Controllers
     {
         private readonly AsnbbDBContext _context;
 
-        private readonly IMapper _mapper;
-        public RegisterController(AsnbbDBContext context, IMapper mapper)
+        private readonly AppMapper _mapper;
+        public RegisterController(AsnbbDBContext context, AppMapper mapper)
         {
             _context = context;
             _mapper = mapper;
@@ -55,7 +54,7 @@ namespace AllamaShibliQuiz.Controllers
                     {
                         return View(studentViewModel);
                     }
-                    var student = _mapper.Map<Student>(studentViewModel);
+                    var student = _mapper.ViewModelToStudent(studentViewModel);
                     _context.Students.Add(student);
                     await _context.SaveChangesAsync();
                     return RedirectToAction(nameof(RegisterSuccess), new { id = student.Id });
@@ -149,7 +148,7 @@ namespace AllamaShibliQuiz.Controllers
                 return RedirectToAction(nameof(Index));
             }
             var student = await _context.Students.FindAsync(id);
-            var studentViewModel = _mapper.Map<StudentViewModel>(student);
+            var studentViewModel = _mapper.StudentToViewModel(student);
             if (student == null)
             {
                 return RedirectToAction(nameof(Index));
@@ -191,13 +190,13 @@ namespace AllamaShibliQuiz.Controllers
             {
                 return RedirectToAction(nameof(Verify));
             }
-            var studentViewModel = _mapper.Map<List<StudentViewModel>>(student);
+            var studentViewModel = student.Select(_mapper.StudentToViewModel).ToList();
             return View(studentViewModel);
         }
         public async Task<SchoolViewModel> GetSchoolAsync(int id)
         {
             var school = await _context.Schools.FindAsync(id);
-            return _mapper.Map<SchoolViewModel>(school);
+            return _mapper.SchoolToViewModel(school);
         }
     }
 }
