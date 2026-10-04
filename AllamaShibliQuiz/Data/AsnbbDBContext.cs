@@ -11,5 +11,12 @@ namespace AllamaShibliQuiz.Data
         public DbSet<AdminUser> AdminUsers { get; set; }
         public DbSet<Student> Students { get; set; }
         public DbSet<School> Schools { get; set; }
+
+        protected override void OnModelCreating(ModelBuilder modelBuilder)
+        {
+            modelBuilder.Entity<Student>()
+                .HasIndex(s => new { s.Name, s.Class, s.MobileNumber, s.AadharNumber })
+                .IsUnique();
+        }
     }
 }

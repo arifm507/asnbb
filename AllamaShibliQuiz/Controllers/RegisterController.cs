@@ -4,6 +4,7 @@ using AllamaShibliQuiz.Models.ViewModels;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
+using Npgsql;
 
 namespace AllamaShibliQuiz.Controllers
 {
@@ -56,7 +57,15 @@ namespace AllamaShibliQuiz.Controllers
                     }
                     var student = _mapper.ViewModelToStudent(studentViewModel);
                     _context.Students.Add(student);
-                    await _context.SaveChangesAsync();
+                    try
+                    {
+                        await _context.SaveChangesAsync();
+                    }
+                    catch (DbUpdateException ex) when (IsDuplicateRegistration(ex))
+                    {
+                        SetAlreadyRegisteredMessage(studentViewModel);
+                        return View(studentViewModel);
+                    }
                     return RedirectToAction(nameof(RegisterSuccess), new { id = student.Id });
                 }
                 return View(studentViewModel);
@@ -127,19 +136,27 @@ namespace AllamaShibliQuiz.Controllers
                 .Where(x => x.Name.ToLower() == student.Name.ToLower()
                         && x.Class == student.Class
                         && x.MobileNumber == student.MobileNumber
-                        && x.AadharNumber == student.AadharNumber
-                        && x.Status != 1)
+                        && x.AadharNumber == student.AadharNumber)
                 .AnyAsync();
             if (alreadyData)
             {
-                ViewBag.AlertMessage = new AlertMessageViewModel()
-                {
-                    Type = "Error",
-                    Message = $"Hi <b>{student.Name}</b>, you are already registered for ASNBB-2026. " +
-                    $"Please verify your registration with admin team."
-                };
+                SetAlreadyRegisteredMessage(student);
             }
             return alreadyData;
+        }
+        private void SetAlreadyRegisteredMessage(StudentViewModel student)
+        {
+            ViewBag.AlertMessage = new AlertMessageViewModel()
+            {
+                Type = "Error",
+                Message = $"Hi <b>{student.Name}</b>, you are already registered for ASNBB-2026. " +
+                $"Please verify your registration with admin team."
+            };
+        }
+        private static bool IsDuplicateRegistration(DbUpdateException exception)
+        {
+            return exception.InnerException is PostgresException postgresException
+                && postgresException.SqlState == PostgresErrorCodes.UniqueViolation;
         }
         public async Task<ActionResult> RegisterSuccess(int id)
         {

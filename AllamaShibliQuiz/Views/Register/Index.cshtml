@@ -295,10 +295,16 @@
         showStep(currentStep, true);
     });
 
+    var submitting = false;
     document.getElementById('register-form').addEventListener('submit', function (e) {
-        if (!validateStep(currentStep)) {
+        if (!validateStep(currentStep) || submitting) {
             e.preventDefault();
+            return;
         }
+        submitting = true;
+        var button = document.getElementById('submitBtn');
+        button.disabled = true;
+        button.innerHTML = '<i class="bi bi-hourglass-split"></i> Submitting...';
     });
 
     /* ── Existing school / class logic (preserved exactly) ── */
