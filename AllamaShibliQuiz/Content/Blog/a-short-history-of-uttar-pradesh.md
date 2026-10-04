@@ -8,6 +8,7 @@ author: Team Brainiac Battle
 summary: From ancient kingdoms and Mughal splendour to the freedom struggle, Uttar Pradesh sits at the crossroads of Indian history. Here is a quick tour.
 metaTitle: A Short History of Uttar Pradesh | ASNBB
 metaDescription: A concise history of Uttar Pradesh — its ancient kingdoms, Mughal era, role in India's freedom struggle, and rich cultural heritage.
+featuredImage: /uploads/blog/uttar-pradesh-banner.jpg
 published: true
 ---
 

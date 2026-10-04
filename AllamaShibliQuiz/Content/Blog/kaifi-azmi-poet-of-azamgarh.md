@@ -8,6 +8,7 @@ author: Team Brainiac Battle
 summary: From the villages of Azamgarh to the heart of Indian cinema, Kaifi Azmi turned poetry into a force for social change. Here is his remarkable story.
 metaTitle: "Kaifi Azmi — Revolutionary Poet of Azamgarh | ASNBB"
 metaDescription: The life of Kaifi Azmi, the Urdu poet and lyricist from Azamgarh whose verses championed justice, equality, and the dignity of the common people.
+featuredImage: /uploads/blog/kaifi-azmi-banner.jpg
 published: true
 ---
 

@@ -8,6 +8,7 @@ author: Team Brainiac Battle
 summary: A life sketch of Allama Shibli Nomani — the scholar, poet, and historian from Azamgarh whose vision for education still inspires generations.
 metaTitle: Allama Shibli Nomani — Life, Works & Legacy | ASNBB
 metaDescription: Discover the life of Allama Shibli Nomani, the 19th-century scholar, poet, and historian from Azamgarh, and the legacy that inspires the Brainiac Battle quiz.
+featuredImage: /uploads/blog/allama-shibli-nomani-banner.jpg
 published: true
 ---
 
