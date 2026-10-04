@@ -1,0 +1,235 @@
+@model AllamaShibliQuiz.Models.Blog.BlogPost
+@using AllamaShibliQuiz.Models.Blog
+@{
+    var cat = Model.CategoryInfo;
+    var icon = cat?.Icon ?? "bi-journal-text";
+    var related = ViewBag.Related as IReadOnlyList<BlogPost> ?? new List<BlogPost>();
+
+    var metaTitle = string.IsNullOrWhiteSpace(Model.MetaTitle) ? Model.Title : Model.MetaTitle;
+    var metaDesc = string.IsNullOrWhiteSpace(Model.MetaDescription) ? Model.Summary : Model.MetaDescription;
+    ViewData["Title"] = metaTitle;
+    ViewData["MetaDescription"] = metaDesc;
+
+    var baseUrl = $"{Context.Request.Scheme}://{Context.Request.Host}";
+    var canonical = baseUrl + Url.Action("Details", "Blog", new { slug = Model.Slug });
+    var imageUrl = string.IsNullOrEmpty(Model.FeaturedImage) ? null : baseUrl + Model.FeaturedImage;
+
+    var authorInitials = string.Concat(
+        Model.Author.Split(' ', StringSplitOptions.RemoveEmptyEntries)
+            .Take(2).Select(w => char.ToUpper(w[0])));
+
+    // Language / direction
+    var lang = BlogLanguages.Get(Model.Language);
+    var isRtl = lang.IsRtl;
+    ViewData["HtmlLang"] = lang.Code;
+
+    // Build the URL for this post in a given language.
+    Func<string, string> langUrl = (code) => code == BlogLanguages.Default
+        ? Url.Action("Details", "Blog", new { slug = Model.Slug })!
+        : Url.Action("DetailsLocalized", "Blog", new { lang = code, slug = Model.Slug })!;
+}
+
+@section Styles {
+    <link rel="stylesheet" href="~/css/inner-pages.css" asp-append-version="true" />
+    <link rel="stylesheet" href="~/css/blog.css" asp-append-version="true" />
+    <!-- Devanagari (Hindi) + Nastaliq (Urdu) web fonts, used on translated articles -->
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+Devanagari:wght@400;600;700&family=Noto+Nastaliq+Urdu:wght@400;600;700&display=swap" rel="stylesheet" />
+}
+
+@section Meta {
+    <link rel="canonical" href="@canonical" />
+    @foreach (var code in Model.AvailableLanguages)
+    {
+        <link rel="alternate" hreflang="@code" href="@(baseUrl + langUrl(code))" />
+    }
+    <link rel="alternate" hreflang="x-default" href="@(baseUrl + langUrl("en"))" />
+    <meta property="og:locale" content="@(lang.Code == "en" ? "en_US" : lang.Code == "hi" ? "hi_IN" : "ur_PK")" />
+    <meta property="og:type" content="article" />
+    <meta property="og:title" content="@metaTitle" />
+    <meta property="og:description" content="@metaDesc" />
+    <meta property="og:url" content="@canonical" />
+    @if (imageUrl != null)
+    {
+        <meta property="og:image" content="@imageUrl" />
+    }
+    <meta name="twitter:card" content="@(imageUrl != null ? "summary_large_image" : "summary")" />
+    <meta name="twitter:title" content="@metaTitle" />
+    <meta name="twitter:description" content="@metaDesc" />
+    @if (imageUrl != null)
+    {
+        <meta name="twitter:image" content="@imageUrl" />
+    }
+    <script type="application/ld+json">
+    {
+        "@@context": "https://schema.org",
+        "@@type": "BlogPosting",
+        "headline": @Html.Raw(System.Text.Json.JsonSerializer.Serialize(Model.Title)),
+        "description": @Html.Raw(System.Text.Json.JsonSerializer.Serialize(metaDesc)),
+        "datePublished": "@Model.Date.ToString("yyyy-MM-dd")",
+        "author": { "@@type": "Organization", "name": @Html.Raw(System.Text.Json.JsonSerializer.Serialize(Model.Author)) },
+        "publisher": { "@@type": "Organization", "name": "Allama Shibli Nomani Brainiac Battle" },
+        "mainEntityOfPage": "@canonical"@(imageUrl != null ? "," : "")
+        @if (imageUrl != null)
+        {
+            @Html.Raw($"\"image\": \"{imageUrl}\"")
+        }
+    }
+    </script>
+}
+
+<!-- Reading progress -->
+<div class="bl-progress" id="blProgress"></div>
+
+<article class="bl-article">
+
+    <!-- Hero -->
+    <header class="bl-article-hero @(imageUrl != null ? "has-image" : "")">
+        @if (imageUrl != null)
+        {
+            <div class="bl-hero-img" style="background-image:url('@Model.FeaturedImage')"></div>
+        }
+        <div class="container bl-container">
+            <nav class="bl-article-breadcrumb">
+                <a asp-controller="Home" asp-action="Index">Home</a>
+                <i class="bi bi-chevron-right"></i>
+                <a asp-controller="Blog" asp-action="Index">Blog</a>
+                @if (cat != null)
+                {
+                    <i class="bi bi-chevron-right"></i>
+                    <a asp-controller="Blog" asp-action="Category" asp-route-slug="@cat.Slug">@cat.Name</a>
+                }
+            </nav>
+
+            @if (cat != null)
+            {
+                <div>
+                    <a class="bl-article-cat" asp-controller="Blog" asp-action="Category" asp-route-slug="@cat.Slug">
+                        <i class="bi @icon"></i> @cat.Name
+                    </a>
+                </div>
+            }
+
+            <h1>@Model.Title</h1>
+
+            <div class="bl-article-meta">
+                <span class="bl-article-author">
+                    <span class="bl-author-avatar">@authorInitials</span>
+                    @Model.Author
+                </span>
+                <span><i class="bi bi-calendar3"></i> @Model.Date.ToString("dd MMMM yyyy")</span>
+                <span><i class="bi bi-clock"></i> @Model.ReadingTimeMinutes min read</span>
+            </div>
+
+            @if (Model.AvailableLanguages.Count > 1)
+            {
+                <div class="bl-lang-toggle" role="group" aria-label="Choose language">
+                    <i class="bi bi-translate"></i>
+                    @foreach (var l in BlogLanguages.All)
+                    {
+                        var available = Model.AvailableLanguages.Contains(l.Code);
+                        var isActive = l.Code == Model.Language;
+                        if (available)
+                        {
+                            <a href="@langUrl(l.Code)" class="bl-lang-btn @(isActive ? "active" : "")"
+                               lang="@l.Code" title="@l.EnglishName">@l.NativeName</a>
+                        }
+                    }
+                </div>
+            }
+        </div>
+    </header>
+
+    <!-- Body -->
+    <div class="container bl-container">
+        <div class="bl-article-wrap" data-aos="fade-up">
+            @if (Model.IsTranslation)
+            {
+                <div class="bl-trans-badge" lang="@lang.Code" dir="@(isRtl ? "rtl" : "ltr")">
+                    <i class="bi bi-translate"></i>
+                    @(lang.Code == "hi" ? "यह लेख हिंदी में अनुवादित है।" :
+                      lang.Code == "ur" ? "یہ مضمون اردو میں ترجمہ کیا گیا ہے۔" :
+                      "Translated article.")
+                </div>
+            }
+            <div class="bl-content lang-@lang.Code" lang="@lang.Code" dir="@(isRtl ? "rtl" : "ltr")">
+                @Html.Raw(Model.ContentHtml)
+            </div>
+
+            @if (Model.Tags.Any())
+            {
+                <div class="bl-tags">
+                    @foreach (var tag in Model.Tags)
+                    {
+                        <a class="bl-tag" asp-controller="Blog" asp-action="Tag" asp-route-tag="@tag">#@tag</a>
+                    }
+                </div>
+            }
+
+            <div class="bl-share">
+                <span class="bl-share-label">Share:</span>
+                <a class="bl-share-btn wa" target="_blank" rel="noopener"
+                   href="https://wa.me/?text=@Uri.EscapeDataString(Model.Title + " " + canonical)" aria-label="Share on WhatsApp"><i class="bi bi-whatsapp"></i></a>
+                <a class="bl-share-btn fb" target="_blank" rel="noopener"
+                   href="https://www.facebook.com/sharer/sharer.php?u=@Uri.EscapeDataString(canonical)" aria-label="Share on Facebook"><i class="bi bi-facebook"></i></a>
+                <a class="bl-share-btn tw" target="_blank" rel="noopener"
+                   href="https://twitter.com/intent/tweet?text=@Uri.EscapeDataString(Model.Title)&url=@Uri.EscapeDataString(canonical)" aria-label="Share on X"><i class="bi bi-twitter-x"></i></a>
+                <a class="bl-share-btn cp" href="#" id="blCopyLink" data-url="@canonical" aria-label="Copy link"><i class="bi bi-link-45deg"></i></a>
+            </div>
+        </div>
+
+        <!-- CTA -->
+        <div class="bl-cta" data-aos="fade-up">
+            <div>
+                <h4>Ready to test your knowledge?</h4>
+                <p>Register for the Allama Shibli Nomani Brainiac Battle and put your learning into action.</p>
+            </div>
+            <a asp-controller="Register" asp-action="Index">Register Now</a>
+        </div>
+
+        <!-- Related -->
+        @if (related.Count > 0)
+        {
+            <section class="bl-related">
+                <h3>Related Reads</h3>
+                <div class="bl-grid">
+                    @foreach (var post in related)
+                    {
+                        <partial name="_PostCard" model="post" />
+                    }
+                </div>
+            </section>
+        }
+    </div>
+</article>
+
+@section Scripts {
+    <script>
+        (function () {
+            // Reading progress bar
+            var bar = document.getElementById('blProgress');
+            var article = document.querySelector('.bl-article');
+            function onScroll() {
+                if (!article || !bar) return;
+                var total = article.offsetHeight - window.innerHeight;
+                var pct = total > 0 ? (window.scrollY / total) * 100 : 0;
+                bar.style.width = Math.min(100, Math.max(0, pct)) + '%';
+            }
+            window.addEventListener('scroll', onScroll, { passive: true });
+            onScroll();
+
+            // Copy link
+            var copyBtn = document.getElementById('blCopyLink');
+            if (copyBtn) {
+                copyBtn.addEventListener('click', function (e) {
+                    e.preventDefault();
+                    var url = copyBtn.getAttribute('data-url');
+                    navigator.clipboard && navigator.clipboard.writeText(url).then(function () {
+                        if (window.Swal) {
+                            Swal.fire({ icon: 'success', title: 'Link copied!', timer: 1400, showConfirmButton: false });
+                        }
+                    });
+                });
+            }
+        })();
+    </script>
+}

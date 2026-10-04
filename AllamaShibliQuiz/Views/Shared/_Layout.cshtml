@@ -1,11 +1,16 @@
 ﻿<!DOCTYPE html>
-<html lang="en">
+<html lang="@(ViewData["HtmlLang"] as string ?? "en")">
 <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Allama Shibli Nomani Brainiac Battle</title>
-    <meta name="description" content="Allama Shibli Nomani Brainiac Battle is an quiz competition website. You can register yourself from here." />
+    @{
+        var pageTitle = ViewData["Title"] as string;
+        var metaDescription = ViewData["MetaDescription"] as string;
+    }
+    <title>@(string.IsNullOrWhiteSpace(pageTitle) ? "Allama Shibli Nomani Brainiac Battle" : pageTitle)</title>
+    <meta name="description" content="@(string.IsNullOrWhiteSpace(metaDescription) ? "Allama Shibli Nomani Brainiac Battle is an quiz competition website. You can register yourself from here." : metaDescription)" />
     <meta name="keywords" content="Allama Shibli Nomani Brainiac Battle, asnbb, quiz competition, General Knowledge, Azamgarh, Allama Shibli Nomani, Registration" />
+    @await RenderSectionAsync("Meta", required: false)
 
     <!-- Favicons -->
     <link href="~/assets/img/logo.png" rel="icon">
@@ -69,6 +74,7 @@
                         <li><a href="/#aboutshibli">Allama Shibli Nomani</a></li>
                         <li><a href="/#syllabus">Syllabus</a></li>
                         <li><a href="/#team">Team</a></li>
+                        <li><a asp-controller="Blog" asp-action="Index">Blog</a></li>
                         <li><a href="/#contact">Contact</a></li>
                     }
                 </ul>

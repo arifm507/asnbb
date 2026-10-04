@@ -402,6 +402,62 @@
 </section>
 
 <!-- ═══════════════════════════════════════════════════
+     FROM THE BLOG
+══════════════════════════════════════════════════════ -->
+@{
+    var latestPosts = ViewBag.LatestPosts as List<AllamaShibliQuiz.Models.Blog.BlogPost>;
+}
+@if (latestPosts != null && latestPosts.Any())
+{
+    <section id="blog" class="h2-section" data-aos="fade-up">
+        <div class="container">
+            <div class="h2-section-title">
+                <div class="h2-label">Read &amp; Learn</div>
+                <h2>From Our Blog</h2>
+                <span class="h2-divider"></span>
+                <p>Stories of Allama Shibli Nomani, the personalities of Azamgarh, the history of Uttar Pradesh, and tips to crack competitive exams.</p>
+            </div>
+            <div class="h2-blog-grid">
+                @foreach (var post in latestPosts)
+                {
+                    var icon = post.CategoryInfo?.Icon ?? "bi-journal-text";
+                    <a asp-controller="Blog" asp-action="Details" asp-route-slug="@post.Slug" class="h2-blog-card" data-aos="fade-up">
+                        <div class="h2-blog-media">
+                            @if (!string.IsNullOrEmpty(post.FeaturedImage))
+                            {
+                                <img src="@post.FeaturedImage" alt="@post.Title" loading="lazy" />
+                            }
+                            else
+                            {
+                                <div class="h2-blog-ph"><i class="bi @icon"></i></div>
+                            }
+                            @if (post.CategoryInfo != null)
+                            {
+                                <span class="h2-blog-cat"><i class="bi @icon"></i> @post.CategoryInfo.Name</span>
+                            }
+                        </div>
+                        <div class="h2-blog-body">
+                            <h3>@post.Title</h3>
+                            <p>@post.Summary</p>
+                            <div class="h2-blog-meta">
+                                <span><i class="bi bi-calendar3"></i> @post.Date.ToString("dd MMM yyyy")</span>
+                                <span><i class="bi bi-clock"></i> @post.ReadingTimeMinutes min read</span>
+                                <span class="h2-blog-readmore">Read <i class="bi bi-arrow-right"></i></span>
+                            </div>
+                        </div>
+                    </a>
+                }
+            </div>
+            <div class="text-center mt-4">
+                <a asp-controller="Blog" asp-action="Index" class="h2-btn-primary">
+                    <i class="bi bi-journal-richtext"></i> View All Blogs
+                </a>
+            </div>
+        </div>
+    </section>
+}
+
+<!-- ═══════════════════════════════════════════════════
      TEAM
 ══════════════════════════════════════════════════════ -->
 <section id="team" class="h2-section" data-aos="fade-up">

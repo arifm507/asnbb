@@ -22,6 +22,9 @@ builder.Services.AddAuthentication(CookieAuthenticationDefaults.AuthenticationSc
 
 builder.Services.AddScoped<AppMapper>();
 
+// Blog posts are loaded from Content/Blog Markdown files once and cached in memory.
+builder.Services.AddSingleton<AllamaShibliQuiz.Services.IBlogService, AllamaShibliQuiz.Services.BlogService>();
+
 var app = builder.Build();
 
 if (!app.Environment.IsDevelopment())

@@ -1,5 +1,6 @@
 ﻿using AllamaShibliQuiz.Models;
 using AllamaShibliQuiz.Models.ViewModels;
+using AllamaShibliQuiz.Services;
 using Microsoft.AspNetCore.Mvc;
 using System.Diagnostics;
 
@@ -8,10 +9,12 @@ namespace AllamaShibliQuiz.Controllers
     public class HomeController : Controller
     {
         private readonly ILogger<HomeController> _logger;
+        private readonly IBlogService _blog;
 
-        public HomeController(ILogger<HomeController> logger)
+        public HomeController(ILogger<HomeController> logger, IBlogService blog)
         {
             _logger = logger;
+            _blog = blog;
         }
 
         public IActionResult Index()
@@ -24,6 +27,8 @@ namespace AllamaShibliQuiz.Controllers
                     Message = msg
                 };
             }
+            // Latest posts for the homepage "From the Blog" section.
+            ViewBag.LatestPosts = _blog.GetPublished().Take(3).ToList();
             return View();
         }
 

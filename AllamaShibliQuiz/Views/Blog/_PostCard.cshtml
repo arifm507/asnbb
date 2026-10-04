@@ -1,0 +1,30 @@
+@model AllamaShibliQuiz.Models.Blog.BlogPost
+@{
+    var cat = Model.CategoryInfo;
+    var icon = cat?.Icon ?? "bi-journal-text";
+}
+<a asp-controller="Blog" asp-action="Details" asp-route-slug="@Model.Slug" class="bl-card" data-aos="fade-up">
+    <div class="bl-card-media">
+        @if (!string.IsNullOrEmpty(Model.FeaturedImage))
+        {
+            <img src="@Model.FeaturedImage" alt="@Model.Title" loading="lazy" />
+        }
+        else
+        {
+            <div class="bl-card-ph"><i class="bi @icon"></i></div>
+        }
+        @if (cat != null)
+        {
+            <span class="bl-card-cat"><i class="bi @icon"></i> @cat.Name</span>
+        }
+    </div>
+    <div class="bl-card-body">
+        <h3>@Model.Title</h3>
+        <p>@Model.Summary</p>
+        <div class="bl-card-meta">
+            <span><i class="bi bi-calendar3"></i> @Model.Date.ToString("dd MMM yyyy")</span>
+            <span><i class="bi bi-clock"></i> @Model.ReadingTimeMinutes min read</span>
+            <span class="bl-card-readmore">Read <i class="bi bi-arrow-right"></i></span>
+        </div>
+    </div>
+</a>

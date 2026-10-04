@@ -1,0 +1,99 @@
+@model AllamaShibliQuiz.Models.ViewModels.BlogListViewModel
+@{
+    ViewData["Title"] = Model.MetaTitle;
+    ViewData["MetaDescription"] = Model.MetaDescription;
+
+    // Build a pagination URL for a given page number based on the current page kind.
+    Func<int, string> pageUrl = (p) => Model.PageKind switch
+    {
+        "category" => Url.Action("Category", "Blog", new { slug = Model.PageRouteValue, page = p })!,
+        "tag" => Url.Action("Tag", "Blog", new { tag = Model.PageRouteValue, page = p })!,
+        _ => Url.Action("Index", "Blog", new { page = p })!
+    };
+}
+
+@section Styles {
+    <link rel="stylesheet" href="~/css/inner-pages.css" asp-append-version="true" />
+    <link rel="stylesheet" href="~/css/blog.css" asp-append-version="true" />
+}
+
+<section class="bl-page">
+    <div class="container bl-container">
+
+        <!-- Hero -->
+        <div class="bl-hero" data-aos="fade-up">
+            <span class="bl-eyebrow"><i class="bi bi-journal-richtext"></i> ASNBB Blog</span>
+            <h1>@Model.Heading</h1>
+            <p>@Model.Subtitle</p>
+        </div>
+
+        <!-- Category chips -->
+        <div class="bl-chips" data-aos="fade-up" data-aos-delay="100">
+            <a class="bl-chip @(Model.PageKind == "index" ? "active" : "")" asp-controller="Blog" asp-action="Index">
+                <i class="bi bi-grid"></i> All Posts
+            </a>
+            @foreach (var c in Model.Categories)
+            {
+                <a class="bl-chip @(Model.ActiveCategory == c.Slug ? "active" : "")"
+                   asp-controller="Blog" asp-action="Category" asp-route-slug="@c.Slug">
+                    <i class="bi @c.Icon"></i> @c.Name
+                </a>
+            }
+        </div>
+
+        <!-- Posts -->
+        @if (Model.Posts.Count == 0)
+        {
+            <div class="bl-empty">
+                <i class="bi bi-journal-x"></i>
+                <h3>No posts yet</h3>
+                <p>Check back soon — new articles are on the way.</p>
+            </div>
+        }
+        else
+        {
+            <div class="bl-grid">
+                @foreach (var post in Model.Posts)
+                {
+                    <partial name="_PostCard" model="post" />
+                }
+            </div>
+
+            @if (Model.TotalPages > 1)
+            {
+                <nav class="bl-pager" aria-label="Blog pagination">
+                    @if (Model.Page > 1)
+                    {
+                        <a href="@pageUrl(Model.Page - 1)" aria-label="Previous"><i class="bi bi-chevron-left"></i></a>
+                    }
+                    else
+                    {
+                        <span class="disabled"><i class="bi bi-chevron-left"></i></span>
+                    }
+
+                    @for (int p = 1; p <= Model.TotalPages; p++)
+                    {
+                        if (p == Model.Page)
+                        {
+                            <span class="active">@p</span>
+                        }
+                        else
+                        {
+                            <a href="@pageUrl(p)">@p</a>
+                        }
+                    }
+
+                    @if (Model.Page < Model.TotalPages)
+                    {
+                        <a href="@pageUrl(Model.Page + 1)" aria-label="Next"><i class="bi bi-chevron-right"></i></a>
+                    }
+                    else
+                    {
+                        <span class="disabled"><i class="bi bi-chevron-right"></i></span>
+                    }
+                </nav>
+            }
+        }
+
+    </div>
+</section>
