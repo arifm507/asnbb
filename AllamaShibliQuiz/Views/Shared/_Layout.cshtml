@@ -1,25 +1,59 @@
-﻿<!DOCTYPE html>
+﻿@{
+    var controllerName = ViewContext.RouteData.Values["controller"]?.ToString() ?? "";
+    var isAdmin = controllerName.Contains("Admin");
+    var dynamicClass = controllerName == "Home" ? "" : "blue";
+    var pageTitle = ViewData["Title"] as string;
+    var metaDescription = ViewData["MetaDescription"] as string;
+    var robots = ViewData["Robots"] as string;
+    var customSeo = ViewData["CustomSeo"] as bool? == true;
+    var siteName = "Allama Shibli Nomani Brainiac Battle";
+    var title = string.IsNullOrWhiteSpace(pageTitle) ? siteName : pageTitle;
+    var description = string.IsNullOrWhiteSpace(metaDescription)
+        ? "Register for ASNBB Season 3, the offline OMR quiz in Azamgarh for Class 6th–12th. Registration is open 1–31 Oct 2026. Exam on 21–22 Nov 2026."
+        : metaDescription;
+    var baseUrl = $"{Context.Request.Scheme}://{Context.Request.Host}";
+    var canonical = ViewData["Canonical"] as string ?? $"{baseUrl}{Context.Request.Path}";
+    var ogImage = ViewData["OgImage"] as string ?? $"{baseUrl}/assets/img/logo.png";
+    var ogType = ViewData["OgType"] as string ?? "website";
+    if (isAdmin && string.IsNullOrWhiteSpace(robots))
+    {
+        robots = "noindex, nofollow";
+    }
+}
+<!DOCTYPE html>
 <html lang="@(ViewData["HtmlLang"] as string ?? "en")">
 <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    @{
-        var pageTitle = ViewData["Title"] as string;
-        var metaDescription = ViewData["MetaDescription"] as string;
+    <title>@title</title>
+    <meta name="description" content="@description" />
+    @if (!string.IsNullOrWhiteSpace(robots))
+    {
+        <meta name="robots" content="@robots" />
     }
-    <title>@(string.IsNullOrWhiteSpace(pageTitle) ? "Allama Shibli Nomani Brainiac Battle" : pageTitle)</title>
-    <meta name="description" content="@(string.IsNullOrWhiteSpace(metaDescription) ? "Allama Shibli Nomani Brainiac Battle is an quiz competition website. You can register yourself from here." : metaDescription)" />
-    <meta name="keywords" content="Allama Shibli Nomani Brainiac Battle, asnbb, quiz competition, General Knowledge, Azamgarh, Allama Shibli Nomani, Registration" />
+    @if (!customSeo)
+    {
+        <link rel="canonical" href="@canonical" />
+        <meta property="og:site_name" content="@siteName" />
+        <meta property="og:type" content="@ogType" />
+        <meta property="og:title" content="@title" />
+        <meta property="og:description" content="@description" />
+        <meta property="og:url" content="@canonical" />
+        <meta property="og:image" content="@ogImage" />
+        <meta name="twitter:card" content="summary" />
+        <meta name="twitter:title" content="@title" />
+        <meta name="twitter:description" content="@description" />
+    }
     @await RenderSectionAsync("Meta", required: false)
 
     <!-- Favicons -->
     <link href="~/assets/img/logo.png" rel="icon">
     <link href="~/assets/img/apple-touch-icon.png" rel="apple-touch-icon">
 
-    <!-- Fonts -->
+    <!-- Fonts: only the weights the public pages actually use -->
     <link href="https://fonts.googleapis.com" rel="preconnect">
     <link href="https://fonts.gstatic.com" rel="preconnect" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Open+Sans:ital,wght@0,300;0,400;0,500;0,600;0,700;0,800;1,300;1,400;1,500;1,600;1,700;1,800&family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&family=Jost:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Open+Sans:ital,wght@0,400;0,600;0,700;1,400&family=Poppins:wght@400;500;600;700;800;900&family=Jost:wght@400;500;600;700;800&display=swap" rel="stylesheet">
 
     <!-- Vendor CSS Files -->
     <link href="~/assets/vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
@@ -27,27 +61,28 @@
     <link href="~/assets/vendor/aos/aos.css" rel="stylesheet">
     <link href="~/assets/vendor/glightbox/css/glightbox.min.css" rel="stylesheet">
     <link href="~/assets/vendor/swiper/swiper-bundle.min.css" rel="stylesheet">
-    <link href="~/assets/vendor/datatable/datatables.min.css" rel="stylesheet" />
+    @if (isAdmin)
+    {
+        <link href="~/assets/vendor/datatable/datatables.min.css" rel="stylesheet" />
+    }
     <!-- Main CSS File -->
     <link href="~/assets/css/main.css" rel="stylesheet">
     <link href="~/css/site.css" rel="stylesheet" />
-    <link href="~/css/admin.css" rel="stylesheet" />
+    @if (isAdmin)
+    {
+        <link href="~/css/admin.css" rel="stylesheet" />
+    }
     <link href="~/assets/vendor/sweetalert/sweetalert2.min.css" rel="stylesheet" />
     <script src="~/assets/js/jquery-3.6.0.min.js"></script>
     @await RenderSectionAsync("Styles", required: false)
 </head>
-@{
-    var controllerName = (string)ViewContext.RouteData.Values["controller"];
-    var methodName = (string)ViewContext.RouteData.Values["Method"];
-    var dynamicClass = controllerName == "Home" ? "" : "blue";
-}
 
 <body class="index-page">
     <header id="header" class="header @dynamicClass d-flex align-items-center fixed-top">
         <div class="container-fluid container-xl position-relative d-flex align-items-center">
 
             <a href="/" class="logo d-flex align-items-center me-auto">
-                <img src="~/assets/img/logo.png" alt="">
+                <img src="~/assets/img/logo.png" alt="Allama Shibli Nomani Brainiac Battle">
             </a>
             <nav id="navmenu" class="navmenu">
                 <ul class="nav-ul">
@@ -132,7 +167,10 @@
     <script src="~/assets/vendor/waypoints/noframework.waypoints.js"></script>
     <script src="~/assets/vendor/imagesloaded/imagesloaded.pkgd.min.js"></script>
     <script src="~/assets/vendor/isotope-layout/isotope.pkgd.min.js"></script>
-    <script src="~/assets/vendor/datatable/datatables.min.js"></script>
+    @if (isAdmin)
+    {
+        <script src="~/assets/vendor/datatable/datatables.min.js"></script>
+    }
     <script src="~/assets/vendor/sweetalert/sweetalert2.all.min.js"></script>
 
 

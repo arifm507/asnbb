@@ -1,7 +1,10 @@
+@using AllamaShibliQuiz.Models.ViewModels
 @model AllamaShibliQuiz.Models.ViewModels.StudentViewModel
 @{
     var today = DateTime.Now.ToString("yyyy-MM-dd");
     var hasError = ViewData["ValidateMessage"] != null;
+    ViewData["Title"] = "ASNBB 2026 Registration | Class 6–12 Quiz, Azamgarh";
+    ViewData["MetaDescription"] = "Register for Allama Shibli Nomani Brainiac Battle Season 3. Open to Class 6th–12th students in Azamgarh. Registration closes 31 Oct 2026.";
 }
 
 @section Styles {
@@ -139,9 +142,12 @@
                                 </div>
                                 <div class="col-md-6">
                                     <label class="ip-field-label">School Name <span class="ip-required">*</span></label>
-                                    <select id="school" asp-for="SchoolId" class="ip-select"
-                                            asp-items="@(new SelectList(ViewBag.Schools, "Id", "Name"))" required>
+                                    <select id="school" asp-for="SchoolId" class="ip-select" required>
                                         <option value="">Select School</option>
+                                        @foreach (var school in (IEnumerable<SchoolViewModel>)ViewBag.Schools)
+                                        {
+                                            <option value="@school.Id" data-is-exam-centre="@(school.IsExamCentre ? "true" : "false")">@school.Name</option>
+                                        }
                                     </select>
                                     <input type="text" id="otherSchoolName" asp-for="OtherSchoolName"
                                            class="ip-input mt-3" placeholder="Type school name" style="display:none" />
@@ -152,7 +158,9 @@
                                             asp-items="@(new SelectList(ViewBag.ExamCentres, "Id", "Name"))">
                                         <option value="">Select Exam Centre</option>
                                     </select>
-                                    <input type="hidden" asp-for="ExamCentreId" id="examcentre-hidden" />
+                                    <input type="text" id="examcentre-locked" class="ip-input" readonly tabindex="-1" style="display:none" />
+                                    <p id="examcentre-locked-hint" class="ip-field-hint" style="display:none">This school is an exam centre, so it is used as your exam centre.</p>
+                                    <input type="hidden" asp-for="ExamCentreId" id="examcentre-hidden" disabled />
                                 </div>
                                 <div class="col-md-6" id="optionalSubjectDiv" style="display:none">
                                     <label class="ip-field-label">Optional Subject <span class="ip-required">*</span></label>
@@ -307,20 +315,37 @@
         button.innerHTML = '<i class="bi bi-hourglass-split"></i> Submitting...';
     });
 
-    /* ── Existing school / class logic (preserved exactly) ── */
+    /* School is the exam centre only when that school has IsExamCentre. */
     function verifyExamCenter(schoolId) {
-        var examCenter = document.getElementById('examcentre');
-        var hidden     = document.getElementById('examcentre-hidden');
-        if (schoolId === '' || schoolId === '0') {
-            examCenter.value    = '';
-            examCenter.required = true;
-            hidden.value        = '';
-            document.getElementById('examcentre-div').style.display = '';
+        var schoolDropdown = document.getElementById('school');
+        var option         = schoolDropdown.options[schoolDropdown.selectedIndex];
+        var isExamCentre   = !!(option && option.getAttribute('data-is-exam-centre') === 'true');
+        var examCenter     = document.getElementById('examcentre');
+        var hidden         = document.getElementById('examcentre-hidden');
+        var locked         = document.getElementById('examcentre-locked');
+        var lockedHint     = document.getElementById('examcentre-locked-hint');
+        var lockToSchool   = schoolId !== '' && schoolId !== '0' && isExamCentre;
+
+        if (lockToSchool) {
+            examCenter.required    = false;
+            examCenter.disabled    = true;
+            examCenter.style.display = 'none';
+            hidden.disabled        = false;
+            hidden.value           = schoolId;
+            locked.value           = option.text;
+            locked.style.display   = '';
+            lockedHint.style.display = '';
         } else {
-            examCenter.value    = schoolId;
-            examCenter.required = false;
-            hidden.value        = schoolId;
-            document.getElementById('examcentre-div').style.display = 'none';
+            var wasLocked = examCenter.disabled;
+            examCenter.disabled     = false;
+            examCenter.required     = true;
+            examCenter.style.display = '';
+            if (wasLocked) examCenter.value = '';
+            hidden.disabled         = true;
+            hidden.value            = '';
+            locked.value            = '';
+            locked.style.display    = 'none';
+            lockedHint.style.display = 'none';
         }
     }
 

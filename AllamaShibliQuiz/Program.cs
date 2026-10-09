@@ -1,5 +1,6 @@
 using Microsoft.EntityFrameworkCore;
 using Microsoft.AspNetCore.Authentication.Cookies;
+using Microsoft.AspNetCore.HttpOverrides;
 using AllamaShibliQuiz;
 using AllamaShibliQuiz.Data;
 
@@ -14,6 +15,15 @@ builder.Services.AddDbContext<AsnbbDBContext>(options => options.UseNpgsql(conne
 
 builder.Services.AddControllersWithViews();
 
+builder.Services.Configure<ForwardedHeadersOptions>(options =>
+{
+    options.ForwardedHeaders =
+        ForwardedHeaders.XForwardedFor | ForwardedHeaders.XForwardedProto;
+    // Render terminates HTTPS at a proxy whose address is not known at build time.
+    options.KnownIPNetworks.Clear();
+    options.KnownProxies.Clear();
+});
+
 builder.Services.AddAuthentication(CookieAuthenticationDefaults.AuthenticationScheme)
     .AddCookie(option => {
         option.LoginPath = "/Admin/Login";
@@ -26,6 +36,8 @@ builder.Services.AddScoped<AppMapper>();
 builder.Services.AddSingleton<AllamaShibliQuiz.Services.IBlogService, AllamaShibliQuiz.Services.BlogService>();
 
 var app = builder.Build();
+
+app.UseForwardedHeaders();
 
 if (!app.Environment.IsDevelopment())
 {

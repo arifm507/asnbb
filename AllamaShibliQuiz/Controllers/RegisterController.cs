@@ -77,6 +77,16 @@ namespace AllamaShibliQuiz.Controllers
         }
         private async Task<bool> IsValidDataAsync(StudentViewModel studentViewModel)
         {
+            SchoolViewModel? selectedSchool = null;
+            if (studentViewModel.SchoolId > 0)
+            {
+                selectedSchool = await GetSchoolAsync(studentViewModel.SchoolId.Value);
+                if (selectedSchool is { IsExamCentre: true })
+                {
+                    studentViewModel.ExamCentreId = selectedSchool.Id;
+                }
+            }
+
             var errorMessage = string.Empty;
             if (string.IsNullOrEmpty(studentViewModel.Gender))
             {
@@ -119,10 +129,9 @@ namespace AllamaShibliQuiz.Controllers
                 };
                 return false;
             }
-            if (studentViewModel.SchoolId > 0)
+            if (selectedSchool != null)
             {
-                var school = await GetSchoolAsync(studentViewModel.SchoolId.Value);
-                studentViewModel.SchoolName = school.Name;
+                studentViewModel.SchoolName = selectedSchool.Name;
             }
             else
             {

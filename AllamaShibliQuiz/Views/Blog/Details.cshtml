@@ -9,6 +9,7 @@
     var metaDesc = string.IsNullOrWhiteSpace(Model.MetaDescription) ? Model.Summary : Model.MetaDescription;
     ViewData["Title"] = metaTitle;
     ViewData["MetaDescription"] = metaDesc;
+    ViewData["CustomSeo"] = true;
 
     var baseUrl = $"{Context.Request.Scheme}://{Context.Request.Host}";
     var canonical = baseUrl + Url.Action("Details", "Blog", new { slug = Model.Slug });

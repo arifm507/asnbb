@@ -1,4 +1,3 @@
-using System.Text;
 using System.Xml;
 using AllamaShibliQuiz.Services;
 using Microsoft.AspNetCore.Mvc;
@@ -20,9 +19,13 @@ namespace AllamaShibliQuiz.Controllers
         {
             var baseUrl = $"{Request.Scheme}://{Request.Host}";
 
-            var sb = new StringBuilder();
-            var settings = new XmlWriterSettings { Indent = true, Encoding = Encoding.UTF8 };
-            using (var writer = XmlWriter.Create(sb, settings))
+            using var stream = new MemoryStream();
+            var settings = new XmlWriterSettings
+            {
+                Indent = true,
+                Encoding = new System.Text.UTF8Encoding(encoderShouldEmitUTF8Identifier: false)
+            };
+            using (var writer = XmlWriter.Create(stream, settings))
             {
                 writer.WriteStartDocument();
                 writer.WriteStartElement("urlset", "http://www.sitemaps.org/schemas/sitemap/0.9");
@@ -63,7 +66,7 @@ namespace AllamaShibliQuiz.Controllers
                 writer.WriteEndDocument();
             }
 
-            return Content(sb.ToString(), "application/xml", Encoding.UTF8);
+            return File(stream.ToArray(), "application/xml");
         }
 
         [HttpGet("/robots.txt")]
@@ -71,7 +74,7 @@ namespace AllamaShibliQuiz.Controllers
         {
             var baseUrl = $"{Request.Scheme}://{Request.Host}";
             var body = $"User-agent: *\nAllow: /\nDisallow: /Admin\n\nSitemap: {baseUrl}/sitemap.xml\n";
-            return Content(body, "text/plain", Encoding.UTF8);
+            return Content(body, "text/plain", System.Text.Encoding.UTF8);
         }
 
         private static string PostUrl(string baseUrl, string lang, string slug) =>

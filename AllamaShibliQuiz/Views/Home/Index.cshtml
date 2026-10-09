@@ -1,5 +1,6 @@
 @{
-    ViewData["Title"] = "Allama Shibli Nomani Brainiac Battle";
+    ViewData["Title"] = "Allama Shibli Nomani Brainiac Battle 2026 | Quiz for Class 6–12, Azamgarh";
+    ViewData["MetaDescription"] = "Register for ASNBB Season 3, the offline OMR quiz in Azamgarh for Class 6th–12th. Registration is open 1–31 Oct 2026. Exam on 21–22 Nov 2026.";
 
     // TODO: Replace these sample testimonials with real participant / parent / teacher
     // quotes before the next deploy. They are illustrative placeholders only.
@@ -383,12 +384,12 @@
         </div>
         <div class="h2-gallery-grid">
             @* Prize Distribution — latest 2024 photos (wwwroot/assets/img/toppers24). Adjust the range to show more/fewer. *@
-            @for (int i = 1; i <= 6; i++)
+            @for (int i = 1; i <= 4; i++)
             {
                 <div class="h2-gallery-item" data-category="prize"><img src="~/assets/img/toppers24/@(i).jpeg" alt="Prize Distribution 2024" loading="lazy"><div class="h2-gallery-overlay"><i class="bi bi-zoom-in"></i></div><a href="~/assets/img/toppers24/@(i).jpeg" data-gallery="h2-gallery" class="glightbox stretched-link"></a></div>
             }
             @* Exam Day — moments from the examination (wwwroot/assets/img/portfolio). *@
-            @foreach (var n in new[] { 1, 54 , 42, 43, 2, 6, 5})
+            @foreach (var n in new[] { 1, 54 , 42, 43, 2})
             {
                 <div class="h2-gallery-item" data-category="exam"><img src="~/assets/img/portfolio/@(n).jpeg" alt="Exam Day" loading="lazy"><div class="h2-gallery-overlay"><i class="bi bi-zoom-in"></i></div><a href="~/assets/img/portfolio/@(n).jpeg" data-gallery="h2-gallery" class="glightbox stretched-link"></a></div>
             }
@@ -579,6 +580,40 @@
 </a>
 
 @section Scripts {
+@{
+    var seoBase = $"{Context.Request.Scheme}://{Context.Request.Host}";
+}
+<script type="application/ld+json">
+{
+  "@@context": "https://schema.org",
+  "@@type": "Event",
+  "name": "Allama Shibli Nomani Brainiac Battle Season 3",
+  "description": "Offline OMR quiz for Class 6th–12th students in Azamgarh, Uttar Pradesh. Registration is open 1–31 October 2026.",
+  "startDate": "2026-11-21",
+  "endDate": "2026-11-22",
+  "eventAttendanceMode": "https://schema.org/OfflineEventAttendanceMode",
+  "eventStatus": "https://schema.org/EventScheduled",
+  "url": "@seoBase/",
+  "image": "@seoBase/assets/img/logo.png",
+  "location": {
+    "@@type": "Place",
+    "name": "Azamgarh, Uttar Pradesh",
+    "address": {
+      "@@type": "PostalAddress",
+      "streetAddress": "Village and Post Kotila",
+      "addressLocality": "Azamgarh",
+      "addressRegion": "Uttar Pradesh",
+      "postalCode": "276207",
+      "addressCountry": "IN"
+    }
+  },
+  "organizer": {
+    "@@type": "Organization",
+    "name": "Team Brainiac Battle",
+    "url": "@seoBase/"
+  }
+}
+</script>
 <!-- FAQ structured data for SEO -->
 <script type="application/ld+json">
 {
