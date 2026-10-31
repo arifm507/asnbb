@@ -9,7 +9,7 @@
     var siteName = "Allama Shibli Nomani Brainiac Battle";
     var title = string.IsNullOrWhiteSpace(pageTitle) ? siteName : pageTitle;
     var description = string.IsNullOrWhiteSpace(metaDescription)
-        ? "Register for ASNBB Season 3, the offline OMR quiz in Azamgarh for Class 6th–12th. Registration is open 1–31 Oct 2026. Exam on 21–22 Nov 2026."
+        ? "Register for ASNBB Season 3, the offline OMR quiz in Azamgarh for Class 6th–12th. Registration is open 1 Oct – 10 Nov 2026. Exam on 21–22 Nov 2026."
         : metaDescription;
     var baseUrl = $"{Context.Request.Scheme}://{Context.Request.Host}";
     var canonical = ViewData["Canonical"] as string ?? $"{baseUrl}{Context.Request.Path}";

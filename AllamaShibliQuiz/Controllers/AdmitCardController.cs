@@ -5,7 +5,7 @@ namespace AllamaShibliQuiz.Controllers
 {
     public class AdmitCardController : Controller
     {
-        private const string AdmitCardUnavailableMessage = "Admit cards will be available after the registration period closes on 31 Oct 2026. Please check back in November.";
+        private const string AdmitCardUnavailableMessage = "Admit cards will be available after the registration period closes on 10 Nov 2026. Please check back in November.";
 
         public IActionResult Index()
         {

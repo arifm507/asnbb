@@ -26,10 +26,10 @@ namespace AllamaShibliQuiz.Controllers
             {
                 if (result.Class > 0)
                 {
-                    string path = Path.Combine(this.Environment.WebRootPath, $"syllabus/class-{result.Class}.jpeg");
+                    string path = Path.Combine(this.Environment.WebRootPath, $"syllabus/class-{result.Class}.pdf");
                     if (System.IO.File.Exists(path))
                     {
-                        return File(System.IO.File.OpenRead(path), "image/jpeg", Path.GetFileName(path));
+                        return File(System.IO.File.OpenRead(path), "application/pdf", Path.GetFileName(path));
                     }
 
                 }
