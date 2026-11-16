@@ -3,6 +3,7 @@ using Microsoft.AspNetCore.Authentication.Cookies;
 using Microsoft.AspNetCore.HttpOverrides;
 using AllamaShibliQuiz;
 using AllamaShibliQuiz.Data;
+using AllamaShibliQuiz.Services;
 
 // Must be set before any Npgsql type initialization to retain DateTime (not DateTimeOffset) mapping.
 AppContext.SetSwitch("Npgsql.EnableLegacyTimestampBehavior", true);
@@ -33,7 +34,8 @@ builder.Services.AddAuthentication(CookieAuthenticationDefaults.AuthenticationSc
 builder.Services.AddScoped<AppMapper>();
 
 // Blog posts are loaded from Content/Blog Markdown files once and cached in memory.
-builder.Services.AddSingleton<AllamaShibliQuiz.Services.IBlogService, AllamaShibliQuiz.Services.BlogService>();
+builder.Services.AddSingleton<IBlogService, BlogService>();
+builder.Services.AddSingleton<IAdmitCardPdfService, AdmitCardPdfService>();
 
 var app = builder.Build();
 

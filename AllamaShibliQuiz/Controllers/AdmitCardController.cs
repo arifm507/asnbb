@@ -1,38 +1,119 @@
-﻿using AllamaShibliQuiz.Models.RequestModels;
+﻿using AllamaShibliQuiz.Data;
+using AllamaShibliQuiz.Models.RequestModels;
+using AllamaShibliQuiz.Models.ViewModels;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
 
 namespace AllamaShibliQuiz.Controllers
 {
     public class AdmitCardController : Controller
     {
-        private const string AdmitCardUnavailableMessage = "Admit cards will be available after the registration period closes on 10 Nov 2026. Please check back in November.";
+        private readonly AsnbbDBContext _context;
+        private readonly AppMapper _mapper;
 
+        public AdmitCardController(AsnbbDBContext context, AppMapper mapper)
+        {
+            _context = context;
+            _mapper = mapper;
+        }
+
+        [HttpGet]
         public IActionResult Index()
         {
-            TempData["AlertType"] = "Info";
-            TempData["AlertMessage"] = AdmitCardUnavailableMessage;
-            return RedirectToAction("Index", "Home");
+            return View(new AdmitCardRequestModel());
         }
+
         [HttpPost]
-        public IActionResult IndexAsync(AdmitCardRequestModel admitCardRequestModel)
+        [ValidateAntiForgeryToken]
+        public async Task<IActionResult> Index(AdmitCardRequestModel admitCardRequestModel)
         {
-            TempData["AlertType"] = "Info";
-            TempData["AlertMessage"] = AdmitCardUnavailableMessage;
-            return RedirectToAction("Index", "Home");
+            if (!ModelState.IsValid)
+            {
+                return View(admitCardRequestModel);
+            }
+
+            var searchInput = admitCardRequestModel.SearchInput?.Trim();
+            if (string.IsNullOrEmpty(searchInput))
+            {
+                return View(admitCardRequestModel);
+            }
+
+            var found = await _context.Students.AnyAsync(x => x.Status == 1 &&
+                (x.AadharNumber == searchInput || x.MobileNumber == searchInput));
+            if (!found)
+            {
+                found = await _context.Schools.AnyAsync(x => x.IsActive && x.ContactNumber == searchInput);
+            }
+
+            if (found)
+            {
+                return RedirectToAction(nameof(GetCard), new { searchInput });
+            }
+
+            ViewBag.AlertMessage = new AlertMessageViewModel
+            {
+                Type = "Error",
+                Message = "Entered Mobile Number/Aadhar Number is not found. Please check the detail and try again."
+            };
+            return View(admitCardRequestModel);
         }
 
-        public IActionResult GetCard(string searchInput)
+        public async Task<IActionResult> GetCard(string searchInput)
         {
-            TempData["AlertType"] = "Info";
-            TempData["AlertMessage"] = AdmitCardUnavailableMessage;
-            return RedirectToAction("Index", "Home");
+            if (string.IsNullOrWhiteSpace(searchInput))
+            {
+                return RedirectToAction(nameof(Index));
+            }
+
+            searchInput = searchInput.Trim();
+            var students = await _context.Students
+                .Where(x => x.Status == 1 && (x.AadharNumber == searchInput || x.MobileNumber == searchInput))
+                .ToListAsync();
+
+            if (students.Count == 0)
+            {
+                var school = await _context.Schools
+                    .Where(x => x.IsActive && x.ContactNumber == searchInput)
+                    .FirstOrDefaultAsync();
+                if (school == null)
+                {
+                    return RedirectToAction(nameof(Index));
+                }
+
+                students = await _context.Students
+                    .Where(x => x.Status == 1 && x.SchoolId == school.Id && x.ExamCentreId == school.Id)
+                    .OrderBy(x => x.Class)
+                    .ThenBy(x => x.Name)
+                    .ToListAsync();
+                if (students.Count == 0)
+                {
+                    return RedirectToAction(nameof(Index));
+                }
+            }
+
+            var studentViewModel = students.Select(_mapper.StudentToViewModel).ToList();
+            return View(studentViewModel);
         }
 
-        public IActionResult ViewCard(int Id)
+        public async Task<IActionResult> ViewCard(int id)
         {
-            TempData["AlertType"] = "Info";
-            TempData["AlertMessage"] = AdmitCardUnavailableMessage;
-            return RedirectToAction("Index", "Home");
+            var student = await _context.Students
+                .Where(x => x.Status == 1 && x.Id == id)
+                .FirstOrDefaultAsync();
+            if (student == null)
+            {
+                return RedirectToAction(nameof(Index));
+            }
+
+            var studentData = _mapper.StudentToViewModel(student);
+            var center = await _context.Schools
+                .Where(x => x.Id == student.ExamCentreId)
+                .Select(x => new { x.Name, x.CentreCode, x.ExamDate })
+                .FirstOrDefaultAsync();
+            studentData.ExamCentreName = center?.Name;
+            studentData.ExamCentreCode = center?.CentreCode.ToString().PadLeft(2, '0');
+            studentData.ExamDate = center?.ExamDate;
+            return View(studentData);
         }
     }
 }

@@ -3,12 +3,14 @@ using AllamaShibliQuiz.Helpers;
 using AllamaShibliQuiz.Models;
 using AllamaShibliQuiz.Models.RequestModels;
 using AllamaShibliQuiz.Models.ViewModels;
+using AllamaShibliQuiz.Services;
 using Microsoft.AspNetCore.Authentication;
 using Microsoft.AspNetCore.Authentication.Cookies;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using System.Security.Claims;
+using System.Text.RegularExpressions;
 
 namespace AllamaShibliQuiz.Controllers
 {
@@ -17,11 +19,13 @@ namespace AllamaShibliQuiz.Controllers
     {
         private readonly AsnbbDBContext _context;
         private readonly AppMapper _mapper;
+        private readonly IAdmitCardPdfService _admitCardPdfService;
         private int validFileSize = 200; //200 KB
-        public AdminController(AsnbbDBContext context, AppMapper mapper)
+        public AdminController(AsnbbDBContext context, AppMapper mapper, IAdmitCardPdfService admitCardPdfService)
         {
             _context = context;
             _mapper = mapper;
+            _admitCardPdfService = admitCardPdfService;
         }
 
         [AllowAnonymous]
@@ -100,6 +104,12 @@ namespace AllamaShibliQuiz.Controllers
             };
             var schoolsList = await _context.Schools.Where(x => x.IsActive && x.IsExamCentre).OrderBy(x => x.Rank).Select(x => new SchoolViewModel { Id = x.Id, Name = x.Name }).ToListAsync();
             ViewBag.Schools = schoolsList;
+            ViewBag.AdmitCardCentres = await _context.Schools.AsNoTracking()
+                .Where(x => x.IsActive && (x.IsExamCentre || x.IsExternalExamCentre))
+                .OrderBy(x => x.Rank)
+                .ThenBy(x => x.Name)
+                .Select(x => new SchoolViewModel { Id = x.Id, Name = x.Name })
+                .ToListAsync();
             return View(dashboardData);
         }
         [AllowAnonymous]
@@ -154,6 +164,63 @@ namespace AllamaShibliQuiz.Controllers
             }
             return RedirectToAction("Dashboard");
         }
+
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public async Task<IActionResult> BulkDownloadAdmitCards(BulkAdmitCardRequestModel request)
+        {
+            if (request.ExamCentreId <= 0 || request.ClassNumber is < 6 or > 12)
+            {
+                return BadRequest(new { message = "Please select an exam center and a class." });
+            }
+
+            var center = await _context.Schools.AsNoTracking()
+                .Where(x => x.Id == request.ExamCentreId && x.IsActive)
+                .Select(x => new { x.Name, x.CentreCode, x.ExamDate })
+                .FirstOrDefaultAsync();
+            if (center == null)
+            {
+                return BadRequest(new { message = "The selected exam center was not found." });
+            }
+
+            var students = await _context.Students.AsNoTracking()
+                .Where(x => x.Status == 1 && x.ExamCentreId == request.ExamCentreId && x.Class == request.ClassNumber)
+                .OrderBy(x => x.RollNumber)
+                .ThenBy(x => x.Name)
+                .ToListAsync();
+            if (students.Count == 0)
+            {
+                return BadRequest(new { message = "No approved students were found for this exam center and class." });
+            }
+
+            var cards = students.Select(student =>
+            {
+                var card = _mapper.StudentToViewModel(student);
+                card.ExamCentreName = center.Name;
+                card.ExamCentreCode = center.CentreCode.ToString().PadLeft(2, '0');
+                card.ExamDate = center.ExamDate;
+                return card;
+            }).ToList();
+
+            var zip = _admitCardPdfService.CreateZip(cards);
+            Response.Headers.Append("X-Admit-Card-Count", cards.Count.ToString());
+            return File(zip, "application/zip", AdmitCardZipName(center.Name, request.ClassNumber));
+        }
+
+        private static string AdmitCardZipName(string centreName, int classNumber)
+        {
+            var safeCentre = Regex.Replace(centreName ?? "Centre", @"[^\w\-]+", "_").Trim('_');
+            if (string.IsNullOrEmpty(safeCentre))
+            {
+                safeCentre = "Centre";
+            }
+            if (safeCentre.Length > 40)
+            {
+                safeCentre = safeCentre[..40].Trim('_');
+            }
+            return $"AdmitCards_Class{classNumber}_{safeCentre}.zip";
+        }
+
         public async Task<IActionResult> Reject(int id)
         {
             var student = await _context.Students.FindAsync(id);
@@ -172,7 +239,7 @@ namespace AllamaShibliQuiz.Controllers
             var centreCode = await _context.Schools.Where(x => x.IsActive && x.Id == examCenterId).Select(x => x.CentreCode).FirstOrDefaultAsync();
             var studentCount = await _context.Students.Where(x => x.Status == 1 && x.ExamCentreId == examCenterId && x.Class == classNumber).CountAsync();
             studentCount++;
-            string paddedcentreCode = centreCode.ToString().PadLeft(2, '0');
+            string paddedcentreCode = centreCode.ToString().PadLeft(3, '0');
             string paddedClass = classNumber.ToString().PadLeft(2, '0');
             string paddedCount = studentCount.ToString().PadLeft(3, '0');
             rollNumber = $"26{paddedcentreCode}{paddedClass}{paddedCount}";
