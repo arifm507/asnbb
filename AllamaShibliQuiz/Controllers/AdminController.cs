@@ -197,7 +197,7 @@ namespace AllamaShibliQuiz.Controllers
             {
                 var card = _mapper.StudentToViewModel(student);
                 card.ExamCentreName = center.Name;
-                card.ExamCentreCode = center.CentreCode.ToString().PadLeft(2, '0');
+                card.ExamCentreCode = center.CentreCode.ToString().PadLeft(3, '0');
                 card.ExamDate = center.ExamDate;
                 return card;
             }).ToList();
@@ -248,7 +248,7 @@ namespace AllamaShibliQuiz.Controllers
         private async Task<string> getPaddedCenterCode(int examCenterId)
         {
             var centreCode = await _context.Schools.Where(x => x.IsActive && x.Id == examCenterId).Select(x => x.CentreCode).FirstOrDefaultAsync();
-            string paddedcentreCode = centreCode.ToString().PadLeft(2, '0');
+            string paddedcentreCode = centreCode.ToString().PadLeft(3, '0');
             return paddedcentreCode;
         }
         private async Task<int> getStudentCount(int examCenterId, int classNumber)
