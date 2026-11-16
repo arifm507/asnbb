@@ -246,7 +246,7 @@
             </div>
             <div class="modal-body">
                 <form id="bulkAdmitCardForm" asp-controller="Admin" asp-action="BulkDownloadAdmitCards" method="post">
-                    <p class="text-muted mb-0">Approved students for the selected exam center and class are packed into one zip file. Each admit card is a separate PDF.</p>
+                    <p class="text-muted mb-0">Approved students for the selected exam center and class are combined into one PDF. Each admit card is a separate page.</p>
                     <div class="row">
                         <div class="col-12 mt-3">
                             <label for="admitCardCentre" class="pb-2">Exam Center<i class="text-danger">*</i></label>
@@ -302,9 +302,9 @@
                     });
                     var contentType = (response.headers.get('content-type') || '').toLowerCase();
                     var disposition = response.headers.get('content-disposition') || '';
-                    var isZip = contentType.indexOf('zip') !== -1 || disposition.toLowerCase().indexOf('.zip') !== -1;
+                    var isPdf = contentType.indexOf('pdf') !== -1 || disposition.toLowerCase().indexOf('.pdf') !== -1;
 
-                    if (!response.ok || !isZip) {
+                    if (!response.ok || !isPdf) {
                         var message = 'Could not generate admit cards. Please try again.';
                         if (response.status === 401 || response.status === 403 || response.redirected) {
                             message = 'Your admin session has expired. Please log in again.';
@@ -319,7 +319,7 @@
                     }
 
                     var blob = await response.blob();
-                    var fileName = 'AdmitCards.zip';
+                    var fileName = 'AdmitCards.pdf';
                     var match = /filename\*=UTF-8''([^;]+)|filename="?([^";]+)"?/i.exec(disposition);
                     if (match) {
                         fileName = decodeURIComponent((match[1] || match[2]).trim());
@@ -342,8 +342,8 @@
                         icon: 'success',
                         title: 'Download started',
                         text: count
-                            ? count + ' admit card(s) were packed into a zip file.'
-                            : 'Admit cards were packed into a zip file.'
+                            ? count + ' admit card(s) were combined into one PDF, one card per page.'
+                            : 'Admit cards were combined into one PDF, one card per page.'
                     });
                 } catch (error) {
                     Swal.fire({

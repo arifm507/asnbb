@@ -1,5 +1,3 @@
-using System.IO.Compression;
-using System.Text.RegularExpressions;
 using AllamaShibliQuiz.Models.ViewModels;
 using QuestPDF.Fluent;
 using QuestPDF.Helpers;
@@ -9,7 +7,7 @@ namespace AllamaShibliQuiz.Services
 {
     public interface IAdmitCardPdfService
     {
-        byte[] CreateZip(IReadOnlyList<StudentViewModel> students);
+        byte[] CreatePdf(IReadOnlyList<StudentViewModel> students);
     }
 
     /// <summary>
@@ -46,40 +44,23 @@ namespace AllamaShibliQuiz.Services
             _controllerSign = TryRead(Path.Combine(imageRoot, "ahmar_sign.jpeg"));
         }
 
-        public byte[] CreateZip(IReadOnlyList<StudentViewModel> students)
+        public byte[] CreatePdf(IReadOnlyList<StudentViewModel> students)
         {
-            using var zipStream = new MemoryStream();
-            using (var archive = new ZipArchive(zipStream, ZipArchiveMode.Create, leaveOpen: true))
+            return Document.Create(container =>
             {
-                var usedNames = new HashSet<string>(StringComparer.OrdinalIgnoreCase);
                 foreach (var student in students)
                 {
-                    var entry = archive.CreateEntry(PdfFileName(student, usedNames), CompressionLevel.Fastest);
-                    using var entryStream = entry.Open();
-                    using var pdfStream = new MemoryStream();
-                    Generate(student, pdfStream);
-                    pdfStream.Position = 0;
-                    pdfStream.CopyTo(entryStream);
+                    container.Page(page =>
+                    {
+                        page.Size(PageSizes.A4);
+                        page.MarginHorizontal(28);
+                        page.MarginVertical(24);
+                        page.PageColor(Colors.White);
+                        page.DefaultTextStyle(style => style.FontSize(10).FontColor(Colors.Black));
+                        page.Content().Element(content => ComposeCard(content, student));
+                    });
                 }
-            }
-
-            return zipStream.ToArray();
-        }
-
-        private void Generate(StudentViewModel student, Stream output)
-        {
-            Document.Create(container =>
-            {
-                container.Page(page =>
-                {
-                    page.Size(PageSizes.A4);
-                    page.MarginHorizontal(28);
-                    page.MarginVertical(24);
-                    page.PageColor(Colors.White);
-                    page.DefaultTextStyle(style => style.FontSize(10).FontColor(Colors.Black));
-                    page.Content().Element(content => ComposeCard(content, student));
-                });
-            }).GeneratePdf(output);
+            }).GeneratePdf();
         }
 
         private void ComposeCard(IContainer container, StudentViewModel student)
@@ -214,33 +195,6 @@ namespace AllamaShibliQuiz.Services
             }
 
             container.Height(46).AlignCenter().Image(image).FitHeight();
-        }
-
-        private static string PdfFileName(StudentViewModel student, HashSet<string> usedNames)
-        {
-            var roll = string.IsNullOrWhiteSpace(student.RollNumber) ? "NoRoll" : student.RollNumber.Trim();
-            var name = string.IsNullOrWhiteSpace(student.Name) ? "Student" : student.Name.Trim();
-            var baseName = Sanitize($"{roll}_{name}");
-            var candidate = baseName;
-            var suffix = 2;
-            while (!usedNames.Add(candidate))
-            {
-                candidate = $"{baseName}_{suffix}";
-                suffix++;
-            }
-
-            return candidate + ".pdf";
-        }
-
-        private static string Sanitize(string value)
-        {
-            var cleaned = Regex.Replace(value, @"[^\w\-. ]+", "_").Trim(' ', '.', '_');
-            if (cleaned.Length > 80)
-            {
-                cleaned = cleaned[..80].Trim(' ', '.', '_');
-            }
-
-            return string.IsNullOrWhiteSpace(cleaned) ? "Student" : cleaned;
         }
 
         private static string Display(string? value) => value ?? string.Empty;

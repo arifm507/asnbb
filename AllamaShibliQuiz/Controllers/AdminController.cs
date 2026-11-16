@@ -202,12 +202,12 @@ namespace AllamaShibliQuiz.Controllers
                 return card;
             }).ToList();
 
-            var zip = _admitCardPdfService.CreateZip(cards);
+            var pdf = _admitCardPdfService.CreatePdf(cards);
             Response.Headers.Append("X-Admit-Card-Count", cards.Count.ToString());
-            return File(zip, "application/zip", AdmitCardZipName(center.Name, request.ClassNumber));
+            return File(pdf, "application/pdf", AdmitCardPdfName(center.Name, request.ClassNumber));
         }
 
-        private static string AdmitCardZipName(string centreName, int classNumber)
+        private static string AdmitCardPdfName(string centreName, int classNumber)
         {
             var safeCentre = Regex.Replace(centreName ?? "Centre", @"[^\w\-]+", "_").Trim('_');
             if (string.IsNullOrEmpty(safeCentre))
@@ -218,7 +218,7 @@ namespace AllamaShibliQuiz.Controllers
             {
                 safeCentre = safeCentre[..40].Trim('_');
             }
-            return $"AdmitCards_Class{classNumber}_{safeCentre}.zip";
+            return $"AdmitCards_Class{classNumber}_{safeCentre}.pdf";
         }
 
         public async Task<IActionResult> Reject(int id)
