@@ -12,20 +12,18 @@
     <meta name="robots" content="noindex, nofollow">
     <link href="/assets/vendor/bootstrap-icons/bootstrap-icons.css" rel="stylesheet">
     <style>
-        /* ── Screen styles ────────────────────────────── */
         * { box-sizing: border-box; margin: 0; padding: 0; }
 
         body {
-            font-family: Arial, sans-serif;
-            background: #f0f3f8;
-            -webkit-print-color-adjust: exact !important;
-            print-color-adjust: exact !important;
-            forced-color-adjust: auto !important;
+            font-family: "Segoe UI", Calibri, Arial, sans-serif;
+            color: #111;
+            background: #d8d8d8;
+            -webkit-print-color-adjust: exact;
+            print-color-adjust: exact;
         }
 
-        /* Sticky toolbar */
         .vc-toolbar {
-            background: linear-gradient(135deg, #0f2040 0%, #1e3a5f 100%);
+            background: #161616;
             padding: 12px 28px;
             display: flex;
             align-items: center;
@@ -34,16 +32,18 @@
             position: sticky;
             top: 0;
             z-index: 100;
-            box-shadow: 0 2px 12px rgba(0,0,0,.25);
         }
         .vc-toolbar-brand {
             display: flex;
             align-items: center;
             gap: 10px;
+            min-width: 0;
         }
         .vc-toolbar-brand img {
             width: 36px;
-            border-radius: 8px;
+            height: 36px;
+            object-fit: contain;
+            filter: grayscale(1) contrast(1.05);
         }
         .vc-toolbar-brand span {
             color: #fff;
@@ -52,131 +52,258 @@
         }
         .vc-toolbar-brand small {
             display: block;
-            color: rgba(255,255,255,.5);
+            color: rgba(255,255,255,.62);
             font-size: .72rem;
             font-weight: 400;
+            white-space: nowrap;
+            overflow: hidden;
+            text-overflow: ellipsis;
         }
-        .vc-toolbar-actions { display: flex; gap: 10px; }
+        .vc-toolbar-actions { display: flex; gap: 10px; flex-shrink: 0; }
 
         .vc-btn {
             display: inline-flex;
             align-items: center;
             gap: 7px;
-            padding: 9px 20px;
-            border-radius: 50px;
+            padding: 9px 18px;
+            border-radius: 4px;
             font-size: .83rem;
             font-weight: 700;
+            font-family: inherit;
             cursor: pointer;
             text-decoration: none;
-            border: none;
-            transition: all .25s;
+            border: 1px solid transparent;
         }
-        .vc-btn-print {
-            background: #10b981;
-            color: #fff;
-            box-shadow: 0 4px 12px rgba(16,185,129,.35);
-        }
-        .vc-btn-print:hover { background: #059669; color: #fff; transform: translateY(-1px); }
+        .vc-btn-print { background: #fff; color: #111; }
+        .vc-btn-print:hover { background: #ececec; color: #111; }
         .vc-btn-back {
-            background: rgba(255,255,255,.1);
+            background: transparent;
             color: #fff;
-            border: 1px solid rgba(255,255,255,.2);
+            border-color: rgba(255,255,255,.4);
         }
-        .vc-btn-back:hover { background: rgba(255,255,255,.2); color: #fff; }
+        .vc-btn-back:hover { background: rgba(255,255,255,.08); color: #fff; }
 
-        /* Page wrapper */
         .vc-page {
             display: flex;
             justify-content: center;
-            padding: 32px 20px 60px;
+            padding: 28px 16px 56px;
+            overflow-x: auto;
         }
-
-        /* Card shell (screen only) */
-        .vc-card-shell {
-            background: #fff;
-            border-radius: 16px;
-            box-shadow: 0 8px 40px rgba(0,0,0,.12);
-            overflow: hidden;
-            width: 720px;
-            max-width: 100%;
-        }
-        .vc-card-shell-header {
-            background: linear-gradient(135deg, #0f2040, #1e3a5f);
-            padding: 14px 24px;
-            display: flex;
-            align-items: center;
-            justify-content: space-between;
-        }
-        .vc-card-shell-header span {
-            color: rgba(255,255,255,.7);
-            font-size: .78rem;
-            font-weight: 600;
-            text-transform: uppercase;
-            letter-spacing: 1px;
-        }
-        .vc-card-shell-header .vc-roll {
-            background: #10b981;
-            color: #fff;
-            font-size: .78rem;
-            font-weight: 700;
-            padding: 4px 14px;
-            border-radius: 50px;
-        }
-        .vc-card-body { padding: 24px; }
-
-        /* ── Admit card content (shared screen + print) ── */
-        table { border-collapse: collapse; }
 
         .admit-card {
-            border: 1px solid #999;
-            padding: 20px;
-            width: 680px;
-            max-width: 100%;
+            width: 196mm;
+            flex: 0 0 auto;
+            background: #fff;
+            color: #111;
+            border: 2.5px solid #111;
+            padding: 2.2mm;
+            box-shadow: 0 10px 28px rgba(0,0,0,.18);
         }
-        .table-gray td:nth-child(1) { background-color: lightgray; }
-        .text-center { text-align: center; }
-        .text-gray   { color: gray; }
+        .admit-card img { filter: grayscale(1) contrast(1.08); }
 
-        h1 {
+        .ac-sheet {
+            border: 1px solid #111;
+            padding: 4.5mm 5mm 4mm;
+        }
+
+        .ac-masthead {
+            display: grid;
+            grid-template-columns: 22mm 1fr 22mm;
+            align-items: center;
+            column-gap: 3mm;
+        }
+        .ac-logo {
+            width: 22mm;
+            height: 22mm;
+            object-fit: contain;
+        }
+        .ac-titles { text-align: center; }
+        .ac-titles h1 {
+            font-family: Georgia, "Times New Roman", Times, serif;
+            font-size: 15.5pt;
+            font-weight: 700;
+            line-height: 1.15;
+            letter-spacing: 0.01em;
+        }
+        .ac-season {
+            font-family: Georgia, "Times New Roman", Times, serif;
+            font-size: 13pt;
+            font-weight: 700;
+            margin-top: 0.8mm;
+        }
+        .ac-line {
+            font-size: 10pt;
+            line-height: 1.35;
+            margin-top: 0.3mm;
+        }
+        .ac-doc {
+            font-size: 10.5pt;
+            font-weight: 700;
+            letter-spacing: 0.06em;
+            margin-top: 1.1mm;
+        }
+
+        .ac-rule-thick {
+            border: 0;
+            border-top: 2.5px solid #111;
+            margin: 2.6mm 0 0;
+        }
+        .ac-rule-thin {
+            border: 0;
+            border-top: 0.7px solid #111;
+            margin: 0.9mm 0 3.2mm;
+        }
+
+        .ac-table, .ac-signs {
+            width: 100%;
+            border-collapse: collapse;
+            table-layout: fixed;
+        }
+        .ac-table th, .ac-table td, .ac-signs td {
+            border: 1px solid #111;
+            padding: 1.9mm 2.5mm;
+            vertical-align: middle;
+            font-size: 10.5pt;
+            line-height: 1.3;
+        }
+        .col-label { width: 46mm; }
+        .col-side { width: 42mm; }
+        .ac-label {
+            font-weight: 700;
+            font-size: 9pt;
+            letter-spacing: 0.01em;
+        }
+        .ac-name { font-weight: 700; }
+        .ac-roll {
+            font-weight: 800;
+            font-size: 13.5pt;
+            letter-spacing: 0.14em;
+            font-variant-numeric: tabular-nums;
+        }
+        .ac-emphasis { font-weight: 700; }
+        .ac-wrap { overflow-wrap: anywhere; }
+
+        .ac-section {
+            text-align: center;
+            font-size: 9.5pt;
+            font-weight: 800;
+            letter-spacing: 0.18em;
+            padding: 1.7mm 2mm;
+            border-top: 1.5px solid #111;
+            border-bottom: 1.5px solid #111;
+        }
+
+        .ac-photo {
+            padding: 1.6mm;
+            vertical-align: middle;
+            text-align: center;
+        }
+        .ac-photo-box {
+            width: 35mm;
+            height: 45mm;
+            max-width: 100%;
+            margin: 0 auto;
+            border: 1px dashed #111;
             display: flex;
             align-items: center;
-            margin: 0;
-            text-align: center;
-            font-size: 1.1rem;
+            justify-content: center;
+            padding: 2mm;
         }
-        .img-logo    { width: 55px; margin-right: 10px; }
-        .common-text { text-align: center; font-size: 14px; margin-top: 0; margin-bottom: 6px; }
-        .season      { text-align: center; margin-top: 0; margin-bottom: 5px; }
-        .imp-text    { margin-top: 8px; margin-bottom: 3px; color: red; font-size: .88rem; }
-        ol           { margin-top: 3px; padding-left: 15px; font-size: .85rem; }
-        .sign        { width: 100px; }
+        .ac-photo-box span {
+            font-size: 7.5pt;
+            line-height: 1.35;
+            text-align: center;
+        }
 
-        /* ── Print media ────────────────────────────────── */
+        .ac-signcell { padding: 1.6mm 1.8mm 1.4mm; vertical-align: bottom; height: 1px; }
+        .ac-signpad {
+            height: 100%;
+            min-height: 32mm;
+            display: flex;
+            flex-direction: column;
+            justify-content: flex-end;
+        }
+        .ac-signpad-line { border-top: 1px solid #111; margin: 0 1.5mm; }
+        .ac-signpad-label {
+            text-align: center;
+            font-size: 8pt;
+            font-weight: 700;
+            padding-top: 1.2mm;
+        }
+
+        .ac-signs { margin-top: 3mm; }
+        .ac-sign-image {
+            height: 24mm;
+            text-align: center;
+            vertical-align: bottom;
+            padding: 1.5mm 3mm 1mm;
+        }
+        .ac-sign-image img {
+            display: block;
+            margin: 0 auto;
+            max-width: 68mm;
+            max-height: 18mm;
+            width: auto;
+            height: auto;
+            object-fit: contain;
+        }
+        .ac-sign-role {
+            text-align: center;
+            font-size: 8.5pt;
+            font-weight: 700;
+            letter-spacing: 0.02em;
+            padding: 1.4mm 2mm 1.8mm;
+        }
+
+        .ac-notes {
+            margin-top: 3.2mm;
+            border: 1px solid #111;
+            padding: 2.4mm 3.2mm 2mm;
+        }
+        .ac-notes h2 {
+            font-size: 10pt;
+            font-weight: 800;
+            border-bottom: 1px solid #111;
+            padding-bottom: 1.2mm;
+            margin-bottom: 1.6mm;
+        }
+        .ac-notes ol {
+            margin: 0;
+            padding-left: 4.8mm;
+            font-size: 9pt;
+            line-height: 1.38;
+        }
+        .ac-notes li { margin: 0.7mm 0; padding-left: 0.6mm; }
+        .ac-notes li::marker { font-weight: 700; }
+
         @@media print {
-            .vc-toolbar    { display: none !important; }
-            .vc-page       { padding: 0; background: none; }
-            .vc-card-shell { box-shadow: none; border-radius: 0; width: auto; }
-            .vc-card-shell-header { display: none; }
-            .vc-card-body  { padding: 0; }
-            body           { background: white; }
+            .vc-toolbar { display: none !important; }
+            body { background: #fff; }
+            .vc-page { display: block; padding: 0; overflow: visible; }
+            .admit-card {
+                width: auto;
+                border-width: 2px;
+                box-shadow: none;
+            }
+            @@page { size: A4 portrait; margin: 8mm; }
         }
 
         @@media (max-width: 600px) {
+            .vc-toolbar { padding: 10px 12px; }
             .vc-toolbar-brand small { display: none; }
-            .vc-btn span            { display: none; }
-            .vc-btn                 { padding: 9px 14px; }
+            .vc-btn span { display: none; }
+            .vc-btn { padding: 9px 12px; }
         }
     </style>
 </head>
 <body>
 
-    <!-- Screen toolbar -->
     <div class="vc-toolbar">
         <div class="vc-toolbar-brand">
-            <img src="/assets/img/logo.png" alt="ASNBB Logo" />
+            <img src="/assets/img/logo.png" alt="ASNBB logo" />
             <div>
                 <span>ASNBB Admit Card</span>
-                <small>Season 3 &nbsp;·&nbsp; 2026</small>
+                <small>@Model.Name &nbsp;·&nbsp; Season 3 &nbsp;·&nbsp; 2026</small>
             </div>
         </div>
         <div class="vc-toolbar-actions">
@@ -191,102 +318,112 @@
         </div>
     </div>
 
-    <!-- Page body -->
     <div class="vc-page">
-        <div class="vc-card-shell">
+        <article class="admit-card">
+            <div class="ac-sheet">
+                <header class="ac-masthead">
+                    <img src="/assets/img/logo.png" class="ac-logo" alt="ASNBB logo" />
+                    <div class="ac-titles">
+                        <h1>Allama Shibli Nomani Brainiac Battle</h1>
+                        <p class="ac-season">Season - 3</p>
+                        <p class="ac-line">Organized by - Team Brainiac Battle</p>
+                        <p class="ac-line">Sponsored by - Moral Public School, Chittepur, Saraimeer</p>
+                        <p class="ac-doc">(Admit Card - 2026)</p>
+                    </div>
+                    <div aria-hidden="true"></div>
+                </header>
 
-            <!-- Card shell header (screen only) -->
-            <div class="vc-card-shell-header">
-                <span><i class="bi bi-card-text me-1"></i> Official Admit Card</span>
-                @if (!string.IsNullOrEmpty(Model.RollNumber))
-                {
-                    <span class="vc-roll">Roll No: @Model.RollNumber</span>
-                }
-            </div>
+                <hr class="ac-rule-thick" />
+                <hr class="ac-rule-thin" />
 
-            <!-- Admit card content -->
-            <div class="vc-card-body">
-                <div class="admit-card">
-                    <h1>
-                        <img src="/assets/img/logo.png" class="img-logo" />
-                        Allama Shibli Nomani Brainiac Battle
-                    </h1>
-                    <h2 class="season">Season - 3</h2>
-                    <p class="common-text">Organized by - Team Brainiac Battle</p>
-                    <p class="common-text">Sponsored by - Moral Public School, Chittepur, Saraimeer</p>
-                    <p class="common-text">(Admit Card - 2026)</p>
+                <table class="ac-table">
+                    <colgroup>
+                        <col class="col-label" />
+                        <col />
+                        <col class="col-side" />
+                    </colgroup>
+                    <tr>
+                        <td class="ac-label">Name</td>
+                        <td class="ac-name ac-wrap">@Model.Name?.ToUpperInvariant()</td>
+                        <td class="ac-photo" rowspan="5">
+                            <div class="ac-photo-box">
+                                <span>Please affix your passport size photograph here.</span>
+                            </div>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td class="ac-label">Roll Number</td>
+                        <td class="ac-roll">@Model.RollNumber?.ToUpperInvariant()</td>
+                    </tr>
+                    <tr>
+                        <td class="ac-label">Father's Name</td>
+                        <td class="ac-wrap">@Model.FatherName?.ToUpperInvariant()</td>
+                    </tr>
+                    <tr>
+                        <td class="ac-label">Class</td>
+                        <td>@Model.Class</td>
+                    </tr>
+                    <tr>
+                        <td class="ac-label">School Name</td>
+                        <td class="ac-wrap">@Model.SchoolName?.ToUpperInvariant()</td>
+                    </tr>
+                </table>
 
-                    <table class="table-gray" border="1" width="650" cellpadding="8">
-                        <tr>
-                            <td width="180">Name</td>
-                            <td width="300" colspan="2">@Model.Name</td>
-                        </tr>
-                        <tr>
-                            <td width="180">Roll Number</td>
-                            <td width="300">@Model.RollNumber</td>
-                            <td width="170" rowspan="4" class="text-gray text-center">
-                                Please affix your passport size photograph here.
-                            </td>
-                        </tr>
-                        <tr>
-                            <td width="180">Father's Name</td>
-                            <td width="300">@Model.FatherName</td>
-                        </tr>
-                        <tr>
-                            <td width="180">Class</td>
-                            <td width="300">@Model.Class</td>
-                        </tr>
-                        <tr>
-                            <td width="180">School Name</td>
-                            <td width="300">@Model.SchoolName</td>
-                        </tr>
-                    </table>
+                <table class="ac-table" style="margin-top: 3mm;">
+                    <colgroup>
+                        <col class="col-label" />
+                        <col />
+                        <col class="col-side" />
+                    </colgroup>
+                    <tr>
+                        <td class="ac-section" colspan="3">EXAM DAY DETAILS</td>
+                    </tr>
+                    <tr>
+                        <td class="ac-label">Date and Day of Exam</td>
+                        <td class="ac-emphasis">@Model.ExamDate?.ToUpperInvariant()</td>
+                        <td class="ac-signcell" rowspan="4">
+                            <div class="ac-signpad">
+                                <div class="ac-signpad-line"></div>
+                                <div class="ac-signpad-label">Student Sign</div>
+                            </div>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td class="ac-label">Exam Timing</td>
+                        <td class="ac-emphasis">
+                            @if (Model.ExamCentreId == 19)
+                            {
+                                <span>11:30 AM TO 01:30 PM</span>
+                            }
+                            else
+                            {
+                                <span>10 AM TO 12 PM</span>
+                            }
+                        </td>
+                    </tr>
+                    <tr>
+                        <td class="ac-label">Center Code</td>
+                        <td class="ac-emphasis">@Model.ExamCentreCode?.ToUpperInvariant()</td>
+                    </tr>
+                    <tr>
+                        <td class="ac-label">Exam Center</td>
+                        <td class="ac-wrap">@Model.ExamCentreName?.ToUpperInvariant()</td>
+                    </tr>
+                </table>
 
-                    <table class="table-gray" border="1" width="650" cellpadding="8">
-                        <tr>
-                            <td colspan="3" class="text-center">EXAM DAY DETAILS</td>
-                        </tr>
-                        <tr>
-                            <td width="180">Date and Day of Exam</td>
-                            <td width="300">@Model.ExamDate</td>
-                            <td width="170" rowspan="3"></td>
-                        </tr>
-                        <tr>
-                            <td width="180">Exam Timing</td>
-                            <td width="300">
-                                @if (Model.ExamCentreId == 19)
-                                {
-                                    <span>11:30 AM to 01:30 PM</span>
-                                }
-                                else
-                                {
-                                    <span>10 AM to 12 PM</span>
-                                }
-                            </td>
-                        </tr>
-                        <tr>
-                            <td width="180">Center Code</td>
-                            <td width="300">@Model.ExamCentreCode</td>
-                        </tr>
-                        <tr>
-                            <td width="180">Exam Center</td>
-                            <td width="300">@Model.ExamCentreName</td>
-                            <td width="170" class="text-center text-gray">Student Sign</td>
-                        </tr>
-                    </table>
+                <table class="ac-signs">
+                    <tr>
+                        <td class="ac-sign-image"><img src="/assets/img/asad_sign.jpeg" alt="President signature" /></td>
+                        <td class="ac-sign-image"><img src="/assets/img/ahmar_sign.jpeg" alt="Examination controller signature" /></td>
+                    </tr>
+                    <tr>
+                        <td class="ac-sign-role">President Signature</td>
+                        <td class="ac-sign-role">Examination Controller Signature</td>
+                    </tr>
+                </table>
 
-                    <table border="1" width="650" cellpadding="6">
-                        <tr class="text-center">
-                            <td width="325"><img class="sign" src="/assets/img/asad_sign.jpeg" /></td>
-                            <td width="325"><img class="sign" src="/assets/img/ahmar_sign.jpeg" /></td>
-                        </tr>
-                        <tr class="text-center text-gray">
-                            <td width="325">President Signature</td>
-                            <td width="325">Examination Controller Signature</td>
-                        </tr>
-                    </table>
-
-                    <h3 class="imp-text">Important Instructions for candidates:-</h3>
+                <section class="ac-notes">
+                    <h2>Important Instructions for candidates:-</h2>
                     <ol>
                         <li>Candidate should report 30 minutes before examination time.</li>
                         <li>Candidate should bring their own blue/black ball pen for filling OMR sheets.</li>
@@ -296,10 +433,9 @@
                         <li>Use of WHITE FLUID &amp; OVER WRITING/CUTTING on TEST BOOKLET and OMR SHEET is strictly prohibited.</li>
                         <li>Candidate must carry — i) ADMIT CARD &nbsp; ii) SCHOOL ID CARD &nbsp; iii) BALL POINT PEN (BLUE/BLACK)</li>
                     </ol>
-                </div>
+                </section>
             </div>
-
-        </div>
+        </article>
     </div>
 
 </body>

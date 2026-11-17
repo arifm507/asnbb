@@ -1,6 +1,7 @@
 ﻿using AllamaShibliQuiz.Data;
 using AllamaShibliQuiz.Models.RequestModels;
 using AllamaShibliQuiz.Models.ViewModels;
+using System.Globalization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 
@@ -112,8 +113,26 @@ namespace AllamaShibliQuiz.Controllers
                 .FirstOrDefaultAsync();
             studentData.ExamCentreName = center?.Name;
             studentData.ExamCentreCode = center?.CentreCode.ToString().PadLeft(2, '0');
-            studentData.ExamDate = center?.ExamDate;
+            studentData.ExamDate = AppendExamDay(center?.ExamDate);
             return View(studentData);
+        }
+
+        // Turns "22/11/2026" into "22/11/2026 (Sunday)". Leaves the value untouched if it is not a valid date.
+        private static string? AppendExamDay(string? examDate)
+        {
+            if (string.IsNullOrWhiteSpace(examDate))
+            {
+                return examDate;
+            }
+
+            var trimmed = examDate.Trim();
+            if (!DateOnly.TryParseExact(trimmed, new[] { "dd/MM/yyyy", "yyyy-MM-dd" },
+                    CultureInfo.InvariantCulture, DateTimeStyles.None, out var date))
+            {
+                return examDate;
+            }
+
+            return $"{trimmed} ({date.DayOfWeek})";
         }
     }
 }
