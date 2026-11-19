@@ -1,6 +1,6 @@
 @{
     ViewData["Title"] = "Allama Shibli Nomani Brainiac Battle 2026 | Quiz for Class 6–12, Azamgarh";
-    ViewData["MetaDescription"] = "Register for ASNBB Season 3, the offline OMR quiz in Azamgarh for Class 6th–12th. Registration is open 1 Oct – 10 Nov 2026. Exam on 21–22 Nov 2026.";
+    ViewData["MetaDescription"] = "ASNBB Season 3, the offline OMR quiz in Azamgarh for Class 6th–12th. Registration for 2026 is closed. Exam on 21–22 Nov 2026.";
 
     // TODO: Replace these sample testimonials with real participant / parent / teacher
     // quotes before the next deploy. They are illustrative placeholders only.
@@ -26,16 +26,16 @@
             <!-- Left: Content -->
             <div class="col-lg-6 h2-hero-content">
                 <div class="h2-hero-badge">
-                    <span class="h2-dot"></span> Season 3 &nbsp;·&nbsp; Registration Open
+                    <span class="h2-dot"></span> Season 3 &nbsp;·&nbsp; Registration Closed
                 </div>
                 <h1 class="h2-hero-title">
                     Allama Shibli Nomani<br>
                     <span>Brainiac Battle</span>
                 </h1>
-                <p class="h2-hero-season">ASNBB — Season 3 &nbsp;·&nbsp; Registration: 01 Oct – 10 Nov 2026</p>
+                <p class="h2-hero-season">ASNBB — Season 3 &nbsp;·&nbsp; Registration closed</p>
                 <p class="h2-hero-desc">
                     A premier quiz competition celebrating the legacy of one of India's greatest scholars.
-                    Season 3 registration is now open — register before 10 Nov 2026. Exam on 21–22 Nov 2026.
+                    Season 3 registration is now closed. Exam on 21–22 Nov 2026.
                 </p>
                 <p class="h2-hero-org">
                     Organized by
@@ -45,20 +45,16 @@
                     <strong style="color:var(--h2-teal);font-weight:700">Moral Public School, Chittepur, Saraimeer</strong>
                 </p>
                 <div class="h2-countdown" id="regCountdown" data-deadline="2026-11-10T23:59:59">
-                    <div class="h2-countdown-label"><i class="bi bi-alarm-fill"></i> Registration closes in</div>
-                    <div class="h2-countdown-timer">
-                        <div class="h2-cd-unit"><span class="h2-cd-num" data-cd="days">00</span><span class="h2-cd-lbl">Days</span></div>
-                        <div class="h2-cd-sep">:</div>
-                        <div class="h2-cd-unit"><span class="h2-cd-num" data-cd="hours">00</span><span class="h2-cd-lbl">Hrs</span></div>
-                        <div class="h2-cd-sep">:</div>
-                        <div class="h2-cd-unit"><span class="h2-cd-num" data-cd="mins">00</span><span class="h2-cd-lbl">Min</span></div>
-                        <div class="h2-cd-sep">:</div>
-                        <div class="h2-cd-unit"><span class="h2-cd-num" data-cd="secs">00</span><span class="h2-cd-lbl">Sec</span></div>
-                    </div>
+                    <div class="h2-countdown-label"><i class="bi bi-lock-fill"></i> Registration for Season 3 is now closed</div>
                 </div>
                 <div class="h2-hero-cta">
+                    @* Registration closed for this year
                     <a asp-controller="Register" asp-action="Index" class="h2-btn-primary">
                         <i class="bi bi-pencil-square"></i> Register Now
+                    </a>
+                    *@
+                    <a asp-controller="AdmitCard" asp-action="Index" class="h2-btn-primary">
+                        <i class="bi bi-card-text"></i> Download Admit Card
                     </a>
                     <a href="https://www.youtube.com/watch?v=e07NdiP2vCg" class="h2-btn-outline glightbox">
                         <i class="bi bi-play-circle-fill"></i> Watch Video
@@ -117,6 +113,7 @@
 <div class="h2-quick-actions">
     <div class="container">
         <div class="h2-action-grid">
+            @* Registration closed for this year
             <a asp-controller="Register" asp-action="Index" class="h2-action-item">
                 <div class="h2-action-icon" style="background:rgba(16,185,129,.18);color:var(--h2-gold)">
                     <i class="bi bi-pencil-square"></i>
@@ -126,6 +123,7 @@
                     <div class="h2-action-title">Register Now (Till 10 Nov)</div>
                 </div>
             </a>
+            *@
             <a asp-controller="AdmitCard" asp-action="Index" class="h2-action-item">
                 <div class="h2-action-icon" style="background:rgba(0,180,200,.15);color:var(--h2-teal)">
                     <i class="bi bi-card-text"></i>
@@ -542,11 +540,11 @@
         </div>
         <div class="row justify-content-center">
             <div class="col-lg-8">
-                <div class="h2-faq open"><div class="h2-faq-q">When will the quiz examination happen? <i class="bi bi-chevron-right"></i></div><div class="h2-faq-a">Season 2 was successfully held in November 2024. <strong>Season 3 exam will be held on 21 &amp; 22 November 2026.</strong> Registration is open from 01 Oct to 10 Nov 2026.</div></div>
+                <div class="h2-faq open"><div class="h2-faq-q">When will the quiz examination happen? <i class="bi bi-chevron-right"></i></div><div class="h2-faq-a">Season 2 was successfully held in November 2024. <strong>Season 3 exam will be held on 21 &amp; 22 November 2026.</strong> Registration for Season 3 closed on 10 Nov 2026.</div></div>
                 <div class="h2-faq"><div class="h2-faq-q">Which class students can participate? <i class="bi bi-chevron-right"></i></div><div class="h2-faq-a">Students from Class 6th to 12th can participate in the quiz competition.</div></div>
                 <div class="h2-faq"><div class="h2-faq-q">What will be the medium of the paper? <i class="bi bi-chevron-right"></i></div><div class="h2-faq-a">The exam will be based on English medium following the CBSE pattern.</div></div>
                 <div class="h2-faq"><div class="h2-faq-q">Will it be online or offline? <i class="bi bi-chevron-right"></i></div><div class="h2-faq-a">It is a Pen-Paper (OMR) based offline examination held at 4–5 exam centres in Azamgarh, UP.</div></div>
-                <div class="h2-faq"><div class="h2-faq-q">How do I register and participate? <i class="bi bi-chevron-right"></i></div><div class="h2-faq-a">Fill the registration form on this website and send the registration fee via UPI to the number provided on the registration page. After successful verification you will receive your admit card and exam centre details.</div></div>
+                <div class="h2-faq"><div class="h2-faq-q">How do I register and participate? <i class="bi bi-chevron-right"></i></div><div class="h2-faq-a">Registration for Season 3 is now closed. Students who already registered can verify their status and download their admit card from this website.</div></div>
             </div>
         </div>
     </div>
@@ -574,9 +572,15 @@
 <!-- ═══════════════════════════════════════════════════
      STICKY MOBILE REGISTER CTA
 ══════════════════════════════════════════════════════ -->
+@* Registration closed for this year
 <a asp-controller="Register" asp-action="Index" class="h2-sticky-cta">
     <span class="h2-sticky-cta-text"><i class="bi bi-pencil-square"></i> Register Now</span>
     <span class="h2-sticky-cta-note">Closes 10 Nov 2026</span>
+</a>
+*@
+<a asp-controller="AdmitCard" asp-action="Index" class="h2-sticky-cta">
+    <span class="h2-sticky-cta-text"><i class="bi bi-card-text"></i> Download Admit Card</span>
+    <span class="h2-sticky-cta-note">Approved students</span>
 </a>
 
 @section Scripts {
@@ -588,7 +592,7 @@
   "@@context": "https://schema.org",
   "@@type": "Event",
   "name": "Allama Shibli Nomani Brainiac Battle Season 3",
-  "description": "Offline OMR quiz for Class 6th–12th students in Azamgarh, Uttar Pradesh. Registration is open 1 October – 10 November 2026.",
+  "description": "Offline OMR quiz for Class 6th–12th students in Azamgarh, Uttar Pradesh. Registration for 2026 is closed.",
   "startDate": "2026-11-21",
   "endDate": "2026-11-22",
   "eventAttendanceMode": "https://schema.org/OfflineEventAttendanceMode",
@@ -620,11 +624,11 @@
   "@@context": "https://schema.org",
   "@@type": "FAQPage",
   "mainEntity": [
-    { "@@type": "Question", "name": "When will the quiz examination happen?", "acceptedAnswer": { "@@type": "Answer", "text": "Season 2 was successfully held in November 2024. Season 3 exam will be held on 21 & 22 November 2026. Registration is open from 01 Oct to 10 Nov 2026." } },
+    { "@@type": "Question", "name": "When will the quiz examination happen?", "acceptedAnswer": { "@@type": "Answer", "text": "Season 2 was successfully held in November 2024. Season 3 exam will be held on 21 & 22 November 2026. Registration for Season 3 closed on 10 Nov 2026." } },
     { "@@type": "Question", "name": "Which class students can participate?", "acceptedAnswer": { "@@type": "Answer", "text": "Students from Class 6th to 12th can participate in the quiz competition." } },
     { "@@type": "Question", "name": "What will be the medium of the paper?", "acceptedAnswer": { "@@type": "Answer", "text": "The exam will be based on English medium following the CBSE pattern." } },
     { "@@type": "Question", "name": "Will it be online or offline?", "acceptedAnswer": { "@@type": "Answer", "text": "It is a Pen-Paper (OMR) based offline examination held at 4-5 exam centres in Azamgarh, UP." } },
-    { "@@type": "Question", "name": "How do I register and participate?", "acceptedAnswer": { "@@type": "Answer", "text": "Fill the registration form on this website and send the registration fee via UPI to the number provided on the registration page. After successful verification you will receive your admit card and exam centre details." } }
+    { "@@type": "Question", "name": "How do I register and participate?", "acceptedAnswer": { "@@type": "Answer", "text": "Registration for Season 3 is now closed. Students who already registered can verify their status and download their admit card from this website." } }
   ]
 }
 </script>

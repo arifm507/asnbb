@@ -16,8 +16,6 @@
             <nav class="ip-breadcrumb">
                 <a asp-controller="Home" asp-action="Index">Home</a>
                 <i class="bi bi-chevron-right"></i>
-                <a asp-controller="Register" asp-action="Index">Register</a>
-                <i class="bi bi-chevron-right"></i>
                 <span>Verify</span>
             </nav>
             <div class="ip-page-title-row">
@@ -74,12 +72,22 @@
                         </div>
                     </form>
 
+                    @* Registration closed for this year
                     <div class="ip-card-note">
                         <i class="bi bi-pencil-square-fill"></i>
                         Not registered yet? &nbsp;
                         <a asp-controller="Register" asp-action="Index"
                            style="color:var(--ip-green);font-weight:700">
                             Register here →
+                        </a>
+                    </div>
+                    *@
+                    <div class="ip-card-note">
+                        <i class="bi bi-card-text"></i>
+                        Registration approved? &nbsp;
+                        <a asp-controller="AdmitCard" asp-action="Index"
+                           style="color:var(--ip-green);font-weight:700">
+                            Download Admit Card →
                         </a>
                     </div>
 

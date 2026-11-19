@@ -13,6 +13,10 @@ namespace AllamaShibliQuiz.Controllers
         private readonly AsnbbDBContext _context;
 
         private readonly AppMapper _mapper;
+
+        // Flip to true when registration opens again next season.
+        private static readonly bool IsRegistrationOpen = false;
+
         public RegisterController(AsnbbDBContext context, AppMapper mapper)
         {
             _context = context;
@@ -21,7 +25,10 @@ namespace AllamaShibliQuiz.Controllers
         // GET: RegisterController
         public async Task<ActionResult> IndexAsync()
         {
-            // return Redirect("/");
+            if (!IsRegistrationOpen)
+            {
+                return Redirect("/");
+            }
             await LoadRegisterPageData();
             return View();
         }
@@ -40,6 +47,10 @@ namespace AllamaShibliQuiz.Controllers
         [ValidateAntiForgeryToken]
         public async Task<ActionResult> Index(StudentViewModel studentViewModel)
         {
+            if (!IsRegistrationOpen)
+            {
+                return Redirect("/");
+            }
             try
             {
                 var isValid = await IsValidDataAsync(studentViewModel);

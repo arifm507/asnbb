@@ -217,7 +217,7 @@
   position: relative; z-index: 3;
 }
 .h2-action-grid {
-  display: grid; grid-template-columns: repeat(4,1fr); gap: 14px;
+  display: grid; grid-template-columns: repeat(3,1fr); gap: 14px;
 }
 .h2-action-item {
   display: flex; align-items: center; gap: 14px;

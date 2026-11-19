@@ -259,6 +259,7 @@
     background: #10b981;
     color: #ffffff;
     border: 2px solid #10b981;
+    white-space: nowrap;
 }
 
 .header .btn-getstarted:hover,
